@@ -81,34 +81,27 @@ class NetworkAccessManager(QNetworkAccessManager):
             else:
                 common.logger.debug(common.to_unicode(request.url().toString()).encode('utf-8'))
         
-        #print request.url().toString(), operation
-        #XXX request.setAttribute(QNetworkRequest.CacheLoadControlAttribute, QNetworkRequest.PreferCache)
+        request.setAttribute(QNetworkRequest.CacheLoadControlAttribute, QNetworkRequest.PreferCache)
         reply = QNetworkAccessManager.createRequest(self, operation, request, data)
         reply.error.connect(self.catch_error)
         self.active_requests.append(reply)
         reply.destroyed.connect(self.active_requests.remove)
+        reply.orig_request = request
+        reply.data = data if data is None else data.peek(2**20)
+        reply.content = ''
+        def save_content(r):
+            def _save_content():
+                r.content += r.peek(r.size())
+            return _save_content
+        reply.readyRead.connect(save_content(reply))
         return reply
         
-        # add Base-Url header, then we can get it from QWebView
-        """if isinstance(request.originatingObject(), QWebFrame):
-            try:
-                reply.setRawHeader(QByteArray('Base-Url'), QByteArray('').append(request.originatingObject().page().mainFrame().baseUrl().toString()))
-            except Exception, e:
-                common.logger.debug(e)
-        """
-        custom_reply = NetworkReply(self, reply, data)
-        custom_reply.orig_request = request
-        if data:
-            import pdb
-            #pdb.set_trace()
-        return custom_reply
-
     def is_forbidden(self, request):
         """Returns whether this request is permitted by checking URL extension and regex
         XXX head request for mime?
         """
         forbidden = False
-        url = common.to_unicode(request.url().toString()).encode('utf-8')
+        url = common.to_unicode(request.url().toString())
         if self.forbidden_extensions and common.get_extension(url) in self.forbidden_extensions:
             forbidden = True
         elif re.match(self.allowed_regex, url) is None:
@@ -153,93 +146,6 @@ def sslErrorHandler(reply, errors):
     print errors
     reply.ignoreSslErrors() 
 
-
-class NetworkReply(QNetworkReply):
-    """Override QNetworkReply so can save the original data
-    """
-    def __init__(self, parent, reply, data):
-        super(NetworkReply, self).__init__(parent)
-        self.reply = reply # reply to proxy
-        if data is not None:
-            self.data = data.peek(2*20)#data.readAll()
-        else:
-            self.data = None
-        self.response = '' # contains downloaded data
-        self.offset = 0 # 
-        self.setOpenMode(QNetworkReply.ReadOnly | QNetworkReply.Unbuffered)
-        #print dir(reply)
-        
-        # connect signal from proxy reply
-        reply.metaDataChanged.connect(self.applyMetaData)
-        reply.readyRead.connect(self.readInternal)
-        reply.finished.connect(self.finished)
-        reply.uploadProgress.connect(self.uploadProgress)
-        reply.downloadProgress.connect(self.downloadProgress)
-        reply.aboutToClose.connect(self.aboutToClose)
-        reply.bytesWritten.connect(self.bytesWritten)
-        reply.readChannelFinished.connect(self.readChannelFinished)
-        reply.destroyed.connect(self.destroyed)
-        reply.sslErrors.connect(self.sslErrors)
-        reply.error.connect(self.error)
-        #reply.ignoreSslErrors()
-
-    
-    def __getattribute__(self, attr):
-        """Send undefined methods straight through to proxied reply
-        """
-        # send these attributes through to proxy reply 
-        if attr in ('operation', 'request', 'url', 'abort', 'close'):#, 'isSequential'):
-            value = self.reply.__getattribute__(attr)
-        else:
-            value = QNetworkReply.__getattribute__(self, attr)
-        return value
-    
-    def abort(self):
-        pass # qt requires that this be defined
-    
-    def isSequential(self):
-        return True
-
-    def applyMetaData(self):
-        for header in self.reply.rawHeaderList():
-            self.setRawHeader(header, self.reply.rawHeader(header))
-
-        self.setHeader(QNetworkRequest.ContentTypeHeader, self.reply.header(QNetworkRequest.ContentTypeHeader))
-        self.setHeader(QNetworkRequest.ContentLengthHeader, self.reply.header(QNetworkRequest.ContentLengthHeader))
-        self.setHeader(QNetworkRequest.LocationHeader, self.reply.header(QNetworkRequest.LocationHeader))
-        self.setHeader(QNetworkRequest.LastModifiedHeader, self.reply.header(QNetworkRequest.LastModifiedHeader))
-        self.setHeader(QNetworkRequest.SetCookieHeader, self.reply.header(QNetworkRequest.SetCookieHeader))
-
-        self.setAttribute(QNetworkRequest.HttpStatusCodeAttribute, self.reply.attribute(QNetworkRequest.HttpStatusCodeAttribute))
-        self.setAttribute(QNetworkRequest.HttpReasonPhraseAttribute, self.reply.attribute(QNetworkRequest.HttpReasonPhraseAttribute))
-        self.setAttribute(QNetworkRequest.RedirectionTargetAttribute, self.reply.attribute(QNetworkRequest.RedirectionTargetAttribute))
-        self.setAttribute(QNetworkRequest.ConnectionEncryptedAttribute, self.reply.attribute(QNetworkRequest.ConnectionEncryptedAttribute))
-        self.setAttribute(QNetworkRequest.CacheLoadControlAttribute, self.reply.attribute(QNetworkRequest.CacheLoadControlAttribute))
-        self.setAttribute(QNetworkRequest.CacheSaveControlAttribute, self.reply.attribute(QNetworkRequest.CacheSaveControlAttribute))
-        self.setAttribute(QNetworkRequest.SourceIsFromCacheAttribute, self.reply.attribute(QNetworkRequest.SourceIsFromCacheAttribute))
-        # attribute is undefined
-        #self.setAttribute(QNetworkRequest.DoNotBufferUploadDataAttribute, self.reply.attribute(QNetworkRequest.DoNotBufferUploadDataAttribute))
-        self.metaDataChanged.emit()
-
-    def bytesAvailable(self):
-        """How many bytes in the buffer are available to be read
-        """
-        return len(self.response) - self.offset + QNetworkReply.bytesAvailable(self)
-
-    def readInternal(self):
-        """New data available to read
-        """
-        s = self.reply.readAll()
-        self.response += s
-        self.readyRead.emit()
-
-    def readData(self, size):
-        """Return up to size bytes from buffer
-        """
-        end = min(self.offset + size, len(self.response))
-        content = self.response[self.offset:end]
-        self.offset = end
-        return (str(content))
 
 
 class WebPage(QWebPage):

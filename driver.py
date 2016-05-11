@@ -70,19 +70,20 @@ class AjaxBrowser(webkit.Browser):
             print 'Reply'
             for header in reply.rawHeaderList():
                 print header, ':', reply.rawHeader(header)
-            open('test.html', 'w').write(reply.response)
+            print reply.content
+            open('test.html', 'w').write(reply.content)
         return
-        if not reply.response:
+        if not reply.content:
             return # no response so reply is not of interest
 
         content_type = reply.header(QNetworkRequest.ContentTypeHeader).toString().lower()
         # main page has loaded
         #response = common.to_unicode(
-        response = common.to_unicode(str(reply.response))#.lower()
+        content = common.to_unicode(str(reply.content))#.lower()
 
         if reply.url() == self.view.url():
             # wait for AJAX events to load
-            self.orig_html = response
+            self.orig_html = content
             self.replies = []
             #self.wait_quiet()
             #self.inputs = self.parse_form()
@@ -90,7 +91,7 @@ class AjaxBrowser(webkit.Browser):
             # XXX check if updates interface?
             #self.matches_input(reply)
             if self.orig_html:
-                js = parser.parse(response)
+                js = parser.parse(content)
                 if js is not None:
                     # XXX need to parse in callback after rendered
                     values = [common.to_unicode(value) for value in js_values(js) if value]#.lower()
@@ -134,7 +135,7 @@ class AjaxBrowser(webkit.Browser):
             for key, value in reply.url().queryItems():
                 for text_parser in text_parsers:
                     if text_parser(input_value) == value:
-                        print url, key, ':', value, len(reply.response), len(reply.data or '')
+                        print url, key, ':', value, len(reply.content), len(reply.data or '')
                         matches.append((GET, key, text_parser, input_value))
                         break
         # XXX need to also check POST data
