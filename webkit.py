@@ -17,11 +17,8 @@ from PyQt4.QtNetwork import QNetworkAccessManager, QNetworkProxy, QNetworkReques
 import agent
 import common
 
-"""
-TODO
-textbox for jquery input
-    http://www.rkblog.rk.edu.pl/w/p/webkit-pyqt-rendering-web-pages/
-"""
+# maximum number of bytes to read from a POST request
+MAX_POST_SIZE = 2 ** 25
 
 
 class NetworkAccessManager(QNetworkAccessManager):
@@ -72,7 +69,7 @@ class NetworkAccessManager(QNetworkAccessManager):
                 proxy = None
 
 
-    def createRequest(self, operation, request, data):
+    def createRequest(self, operation, request, post):
         if operation == self.GetOperation:
             if self.is_forbidden(request):
                 # deny GET request for banned media type by setting dummy URL
@@ -82,20 +79,29 @@ class NetworkAccessManager(QNetworkAccessManager):
                 common.logger.debug(common.to_unicode(request.url().toString()).encode('utf-8'))
         
         request.setAttribute(QNetworkRequest.CacheLoadControlAttribute, QNetworkRequest.PreferCache)
-        reply = QNetworkAccessManager.createRequest(self, operation, request, data)
+        reply = QNetworkAccessManager.createRequest(self, operation, request, post)
         reply.error.connect(self.catch_error)
         self.active_requests.append(reply)
         reply.destroyed.connect(self.active_requests.remove)
         reply.orig_request = request
-        reply.data = data if data is None else data.peek(2**20)
+        reply.data = self.parse_data(post)
         reply.content = ''
         def save_content(r):
+            # save copy of content before is lost
             def _save_content():
                 r.content += r.peek(r.size())
             return _save_content
         reply.readyRead.connect(save_content(reply))
         return reply
-        
+       
+    def parse_data(self, post):
+        """Parse this posted data into a list of key/value pairs
+        """
+        url = QUrl('')
+        if post is not None:
+            url.setEncodedQuery(post.peek(MAX_POST_SIZE))
+        return url.queryItems()
+
     def is_forbidden(self, request):
         """Returns whether this request is permitted by checking URL extension and regex
         XXX head request for mime?
@@ -111,7 +117,6 @@ class NetworkAccessManager(QNetworkAccessManager):
     def catch_error(self, eid):
         """Interpret the HTTP error ID received
         """
-        #self.active_requests -= 1
         if eid not in (5, 301):
             errors = {
                 0 : 'no error condition. Note: When the HTTP protocol returns a redirect no error will be reported. You can check if there is a redirect with the QNetworkRequest::RedirectionTargetAttribute attribute.',
@@ -210,7 +215,6 @@ class WebView(QWebView):
         #self.settings().setAttribute(QWebSettings.LocalContentCanAccessFileUrls, True)
 
 
-
 class UrlInput(QLineEdit):
     def __init__(self, view):
         super(UrlInput, self).__init__()
@@ -304,7 +308,7 @@ class Browser(QWidget):
     def current_html(self):
         """Return current rendered HTML
         """
-        return unicode(self.view.page().mainFrame().toHtml())
+        return common.to_unicode(str(self.view.page().mainFrame().toHtml()))
 
 
     def get(self, url=None, html=None, num_retries=1):
