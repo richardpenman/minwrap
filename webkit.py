@@ -94,12 +94,12 @@ class NetworkAccessManager(QNetworkAccessManager):
         reply.readyRead.connect(save_content(reply))
         return reply
        
-    def parse_data(self, post):
+    def parse_data(self, data):
         """Parse this posted data into a list of key/value pairs
         """
         url = QUrl('')
-        if post is not None:
-            url.setEncodedQuery(post.peek(MAX_POST_SIZE))
+        if data is not None:
+            url.setEncodedQuery(data.peek(MAX_POST_SIZE))
         return url.queryItems()
 
     def is_forbidden(self, request):

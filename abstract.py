@@ -5,10 +5,12 @@ import csv, glob, operator, collections
 
 class Abstraction:
     def __init__(self):
-        self.type_data = {}
+        self.type_data = collections.defaultdict(list)
         # load training data
         for filename in glob.glob('types/*.csv'):
-            self.type_data[filename] = [row for row in csv.reader(open(filename))]
+            for row in csv.reader(open(filename)):
+                for i, v in enumerate(row):
+                    self.type_data['{}_{}'.format(filename, i)].append(v.lower())
             # XXX index each row; bag of words?
  
     def __call__(self, examples):
@@ -17,13 +19,14 @@ class Abstraction:
         else:
             scores = collections.defaultdict(int)
             for example in examples:
-                for filename, rows in self.type_data.items():
-                    for row in rows:
-                        # use overlap? XXX
-                        if example in row:
-                            scores[filename] += 1
+                example = example.lower()
+                for label, values in self.type_data.items():
+                    for value in values:
+                        # use overlap? ignore case XXX
+                        if example == value:
+                            scores[label] += 1
                             break
-            print 'scores:', scores
+            #print 'scores:', scores
             if scores:
                 best_type = get_max_key(scores)
                 return self.type_data[best_type]

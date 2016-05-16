@@ -63,9 +63,6 @@ class AjaxBrowser(webkit.Browser):
             return # no response so reply is not of interest
 
         """
-        if reply.data:
-            print
-            print 'Request', reply.url().toString(), reply.data
             for header in reply.orig_request.rawHeaderList():
                 print header, ':', reply.orig_request.rawHeader(header)
             print 'Reply'
@@ -76,9 +73,11 @@ class AjaxBrowser(webkit.Browser):
         """
 
         content_type = reply.header(QNetworkRequest.ContentTypeHeader).toString().lower()
+        #print 'Request', reply.url().toString(), reply.data, content_type
         # main page has loaded
         content = common.to_unicode(str(reply.content))
-        if reply.url() == self.view.url():
+        # XXX how to properly determine when main page is being loaded
+        if reply.url() == self.view.url() and not reply.data:
             # wait for AJAX events to load
             self.orig_html = content
             self.transitions = []
@@ -86,7 +85,9 @@ class AjaxBrowser(webkit.Browser):
             # have found a response that can potentially be parsed
             if self.orig_html:
                 js = parser.parse(content)
-                if js is not None:
+                if js is None:
+                    print 'failed to parse:', reply.url().toString(), reply.data
+                else:
                     # were able to parse response
                     # save for checking later once interface has been updated
                     values = [common.to_unicode(value) for value in js_values(js) if value]
@@ -158,7 +159,7 @@ class TransitionModel:
         """Add this transition to the model
         """
         if not self._used:
-            print 'add reply'
+            print 'add reply', transition
             self.transitions.append(transition)
             self.build()
        
@@ -184,16 +185,16 @@ class TransitionModel:
         """Generate a request modifying the transitions for this model with the provided parameters
         """
         transition = self.transitions[0]
-        url = QUrl(transition)
-        qs_items = transition.qs.copy()
-        data_items = transition.data.copy()
+        url = QUrl(transition.url)
+        qs_items = transition.qs
+        data_items = transition.data
 
-        if qs_case is not None:
+        if qs_value is not None:
             # need to properly encode XXX
-            qs_items = [(key, qs_case if key == qs_key else value) for (key, value) in qs_items]
+            qs_items = [(key, qs_value if key == qs_key else value) for (key, value) in qs_items]
             url.setEncodedQueryItems(qs_items)
-        if post_case is not None:
-            data_items = [(key, post_case if key == post_key else value) for (key, value) in data_items]
+        if post_value is not None:
+            data_items = [(key, post_value if key == post_key else value) for (key, value) in data_items]
         return url, self.to_data(data_items)
 
 
@@ -225,6 +226,7 @@ class TransitionModel:
         for key, _ in kvs[0]:
             values = [kvdict[key] for kvdict in kvdicts]
             if not all(value == values[0] for value in values):
+                # found a key with differing values
                 model.append((key, values))
         return model
 
@@ -248,8 +250,13 @@ class Transition:
         self.js = js
 
     def key(self):
+        """A unique key to represent this transition
+        """
         get_keys = lambda es: tuple(k for (k,v) in es)
         return self.host, self.path, get_keys(self.qs), get_keys(self.data)
+
+    def __str__(self):
+        return '{} {}'.format(self.url.toString(), self.data)
 
 
 class AjaxEror(Exception):
@@ -287,13 +294,15 @@ def run(inputs, callback):
                     prop_changed = num_changed / float(total_changed)
                     print '{} / {} ({})'.format(num_changed, total_changed, prop_changed)
                     #399 / 2712
-                    if num_changed > 50:
+                    # XXX specific to each website - use std outside the mean?
+                    if num_changed > 1:
                         key = transition.key()
                         if key in models:
                             model = models[key]
                         else:
                             models[key] = model = TransitionModel()
                         model.add(transition)
+                        # XXX start new thread window
                         for url, data in model.run():
                             print url, data
                         #print values
