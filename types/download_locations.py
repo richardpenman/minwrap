@@ -9,7 +9,7 @@ def download_locations():
     index_url = 'http://download.geonames.org/export/zip/'
     index_html = D.get(index_url)
     for link in xpath.search(index_html, '//pre/a/@href'):
-        if link.endswith('.zip'):
+        if link.endswith('.zip') and '_full' not in link and 'allCountries' not in link:
             download_html = D.get(urlparse.urljoin(index_url, link))
             input_zip = StringIO.StringIO()
             input_zip.write(download_html)
@@ -17,14 +17,13 @@ def download_locations():
 
             output_filename = link.replace('.zip', '_locations.csv')
             writer = csv.writer(open(output_filename, 'w'))
-            writer.writerow(['Zip code', 'Longitude', 'Latitude'])
             found = set()
             for row in csv.reader(tsv_data.splitlines(), delimiter='\t'):
-                zip_code = row[1].split('-')[0]
+                zip_code = row[1] = row[1].split('-')[0]
                 lat, lng = row[9:11]
                 if lat and lng and zip_code not in found:
                     found.add(zip_code)
-                    writer.writerow([zip_code, lng, lat])
+                    writer.writerow(row)
             print 'Downloaded to', output_filename
 
 

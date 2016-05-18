@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 __doc__ = 'Common web scraping related functions'
 
-import os, re, urllib
+import os, re, urllib, string, htmlentitydefs, urlparse
 import logging, logging.handlers
 try:
     import json
 except ImportError:
     import simplejson as json
-
+import sip
+sip.setapi('QString', 2)
+from PyQt4.QtCore import QUrl
 
 class WebScrapingError(Exception):
     pass
@@ -64,6 +66,15 @@ def to_float(s, default=0.0):
         except ValueError:
             pass # input does not contain a number
     return result
+
+
+def most_common(l):
+    """Returns the most common element in this list
+
+    >>> most_common([1,2,3,4,5,3,2,2,4,5,4,2,2,1,1,1,1,1,1])
+    1
+    """
+    return max(set(l), key=l.count)
 
     
 def to_unicode(obj, encoding='utf-8'):
@@ -197,37 +208,6 @@ def same_domain(url1, url2):
     return server1 and server2 and (server1 in server2 or server2 in server1)
 
 
-def parse_proxy(proxy):
-    """Parse a proxy into its fragments
-    Returns a dict with username, password, host, and port
-
-    >>> f = parse_proxy('login:pw@66.197.208.200:8080')
-    >>> f.username
-    'login'
-    >>> f.password
-    'pw'
-    >>> f.host
-    '66.197.208.200'
-    >>> f.port
-    '8080'
-    >>> f = parse_proxy('66.197.208.200')
-    >>> f.username == f.password == f.port == ''
-    True
-    >>> f.host
-    '66.197.208.200'
-    """
-    fragments = adt.Bag()
-    if isinstance(proxy, basestring):
-        match = re.match('((?P<username>\w+):(?P<password>\w+)@)?(?P<host>\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})(:(?P<port>\d+))?', proxy)
-        if match:
-            groups = match.groupdict()
-            fragments.username = groups.get('username') or ''
-            fragments.password = groups.get('password') or ''
-            fragments.host = groups.get('host')
-            fragments.port = groups.get('port') or ''
-    return fragments
-
-
 def read_list(file):
     """Return file as list if exists
     """
@@ -258,6 +238,17 @@ class ConsoleHandler(logging.StreamHandler):
         else:
             self.stream = sys.stdout
         logging.StreamHandler.emit(self, record)
+
+
+def list_to_qs(items):
+    """Convert these items into a string of data
+    """
+    if items:
+        url = QUrl('')
+        url.setEncodedQueryItems(items)
+        return str(url.toString())[1:]
+    else:
+        return ''
 
 
 def get_logger(output_file, level=logging.INFO, maxbytes=0):

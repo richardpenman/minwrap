@@ -1,13 +1,74 @@
 <html>
 <head>
     <title>Contents</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        td, th {
+            border: 1px solid #aaa; 
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
-<ul>
-    <li><a href="http://www.fiat.co.uk/find-dealer">Fiat</a></li>
-    <li><a href="http://www.peugeot.nl/zoek-een-dealer/">Peugeot</a></li>
-    <li><a href="http://www.ford.co.uk/SBE/DealerLocator">Ford</a></li>
-    <li><a href="http://www.lufthansa.com/uk/en/Homepage">Lufthansa</a></li>
+<table>
+    <tr>
+        <th>Website</th>
+        <th>Input</th>
+        <th>HTTP method</th>
+        <th>Response format</th>
+        <th>Output</th>
+        <th>Status</th>
+    </tr>
+    <tr>
+        <td><a href="http://www.britishairways.com/travel/home/public/en_gb">British Airways</a></td>
+        <td>Prefix of location</td>
+        <td>GET</td>
+        <td>JavaScript</td>
+        <td>Matching locations</td>
+        <td>JavaScript content loaded with type text/plain and then modified before being inserted into document</td>
+    </tr>
+    <tr>
+        <td><a href="http://www.delta.com/">Delta</a></td>
+        <td>Prefix of location</td>
+        <td>POST</td>
+        <td>JavaScript</td>
+        <td>Matching locations</td>
+        <td>Request has 2 parameters - the prefix and a query counter</td>
+    </tr>
+    <tr>
+        <td><a href="http://www.fiat.co.uk/find-dealer">Fiat</a></td>
+        <td>UK postcodes</td>
+        <td>GET</td>
+        <td>JSONP</td>
+        <td>UK car dealers</th>
+        <td>Successfully abstract and parse</td>
+    </tr>
+    <tr>
+        <td><a href="http://www.ford.co.uk/SBE/DealerLocator">Ford</a></td>
+        <td>Location &#8594; lat / lng</td>
+        <td>GET</td>
+        <td>JSONP</td>
+        <td>UK car dealers</td>
+        <td>Multiple jumps not yet supported</td>
+    </tr>
+    <tr>
+        <td><a href="http://www.lufthansa.com/uk/en/Homepage">Lufthansa</a></td>
+        <td>Location prefixes</td>
+        <td>POST</td>
+        <td>JSON</td>
+        <td>Matching locations</td>
+        <td>Successfully abstract and parse</td>
+    </tr>
+    <tr>
+        <td><a href="http://www.peugeot.nl/zoek-een-dealer/">Peugeot</a></td>
+        <td>Dutch locations</td>
+        <td>POST</td>
+        <td>JSON</td>
+        <td>Dutch car dealers</td>
+        <td>Successfully abstract but fail to parse HTML results</td>
+    </tr>
     <!--<li><a href=""></a></li>-->
 </ul>
 </body>

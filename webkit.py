@@ -9,7 +9,7 @@ from datetime import datetime
 # for using native Python strings
 import sip
 sip.setapi('QString', 2)
-from PyQt4.QtGui import QApplication, QDesktopServices, QImage, QPainter, QGridLayout, QLineEdit, QWidget, QWidget, QShortcut, QKeySequence
+from PyQt4.QtGui import QApplication, QDesktopServices, QImage, QPainter, QGridLayout, QLineEdit, QWidget, QWidget, QShortcut, QKeySequence, QTableWidget, QTableWidgetItem
 from PyQt4.QtCore import QByteArray, QUrl, QTimer, QEventLoop, QIODevice, QObject, Qt
 from PyQt4.QtWebKit import QWebFrame, QWebView, QWebElement, QWebPage, QWebSettings, QWebInspector
 from PyQt4.QtNetwork import QNetworkAccessManager, QNetworkProxy, QNetworkRequest, QNetworkReply, QNetworkDiskCache
@@ -258,33 +258,62 @@ class Browser(QWidget):
         page = WebPage(user_agent or agent.rand_agent())
         page.setNetworkAccessManager(manager)
         self.view = WebView(page, enable_plugins, load_images)
-        """self.inspector = QWebInspector()
-        self.inspector.setPage(page)
-        self.inspector.setVisible(True)"""
         self.timeout = timeout
         self.delay = delay
 
-        grid = QGridLayout()
+        self.grid = QGridLayout()
         self.url_input = UrlInput(self.view)
         # url_input at row 1 column 0 of our grid
-        grid.addWidget(self.url_input, 1, 0)
+        self.grid.addWidget(self.url_input, 1, 0)
         # browser frame at row 2 column 0 of our grid
-        grid.addWidget(self.view, 2, 0)
-        self.setLayout(grid)
-        # add shortcuts
-        QShortcut(QKeySequence(Qt.Key_Escape), self, self.close)
+        self.grid.addWidget(self.view, 2, 0)
+        self.table = None
+        self.table_row_hashes = set()
+
+        self.setLayout(self.grid)
+        self.add_shortcuts()
+        if gui: 
+            self.show()
+            self.raise_() # raise this window
+
+
+    def add_shortcuts(self):
+        """Define shortcuts for convenient interaction
+        """
+        #QShortcut(QKeySequence(Qt.Key_Escape), self, self.close)
         QShortcut(QKeySequence.Close, self, self.close)
         QShortcut(QKeySequence.Quit, self, self.close)
         QShortcut(QKeySequence.Back, self, self.view.back)
         QShortcut(QKeySequence.Forward, self, self.view.forward)
         QShortcut(QKeySequence.Save, self, self.save)
-        if gui: 
-            #self.showMaximized() 
-            self.show()
-            self.raise_() # raise this window
+        QShortcut(QKeySequence.New, self, self.home)
+        QShortcut(QKeySequence(Qt.CTRL + Qt.Key_F), self, self.fullscreen)
 
+
+    def set_table(self, fields, rows=None):
+        # status table at row 3
+        if self.table is None:
+            self.table = QTableWidget()
+            self.table.setColumnCount(len(fields))
+            self.table.setHorizontalHeaderLabels(fields)
+            self.grid.addWidget(self.table, 3, 0)
+        #self.table.clear()
+        #self.table.setRowCount(0)
+        for row in rows or []:
+            self.add_table_row(row)
+
+    def add_table_row(self, cols):
+        key = hash(tuple(cols))
+        if key not in self.table_row_hashes:
+            self.table_row_hashes.add(key)
+            num_rows = self.table.rowCount()
+            self.table.insertRow(num_rows)
+            for i, col in enumerate(cols):
+                self.table.setItem(num_rows, i, QTableWidgetItem(col))
 
     def save(self):
+        """Save the current HTML
+        """
         html = self.current_html()
         for i in itertools.count(1):
             filename = 'data/test{}.html'.format(i)
@@ -292,6 +321,21 @@ class Browser(QWidget):
                 open(filename, 'w').write(common.to_unicode(html))
                 print 'save', filename
                 break
+
+    def home(self):
+        """Go back to initial page in history
+        """
+        history = self.view.history()
+        history.goToItem(history.itemAt(0))
+
+    def fullscreen(self):
+        """Alternate fullscreen mode
+        """
+        if self.isMaximized():
+            self.showNormal()
+        else:
+            self.showMaximized() 
+
 
     def __del__(self):
         # not sure why, but to avoid seg fault need to release the QWebPage manually
@@ -310,17 +354,25 @@ class Browser(QWidget):
         """
         return common.to_unicode(str(self.view.page().mainFrame().toHtml()))
 
+    def current_text(self):
+        """Return current rendered HTML
+        """
+        return common.to_unicode(str(self.view.page().mainFrame().toPlainText()))
 
-    def get(self, url=None, html=None, num_retries=1):
+    def load(self, url=None, html=None, headers=None, data=None, num_retries=1):
         """Load given url in webkit and return html when loaded
 
-        url:
-            the URL to load
-        html: 
-            optional HTML to set instead of downloading
-        num_retries:
-            how many times to try downloading this URL
+        url: the URL to load
+        html: optional HTML to set instead of downloading
+        headers: the headers to attach to the request
+        data: the data to POST
+        num_retries: how many times to try downloading this URL
         """
+        if not self.running:
+            return
+        if isinstance(url, basestring):
+            # convert string to Qt URL object
+            url = QUrl(url)
         t1 = time()
         loop = QEventLoop()
         timer = QTimer()
@@ -328,10 +380,23 @@ class Browser(QWidget):
         timer.timeout.connect(loop.quit)
         self.view.loadFinished.connect(loop.quit)
         if url:
+            self.update_address(url)
             if html:
-                self.view.setHtml(html, QUrl(url))
-            else: 
-                self.view.load(QUrl(url))
+                # load pre downloaded HTML
+                self.view.setContent(data=html, baseUrl=url)
+            else:
+                # need to make network request
+                request = QNetworkRequest(url)
+                if headers:
+                    # add headers to request when defined
+                    for header, value in headers:
+                        request.setRawHeader(header, value)
+                if data:
+                    # POST request
+                    self.view.load(request, QNetworkAccessManager.PostOperation, data)
+                else:
+                    # GET request
+                    self.view.load(request)
         timer.start(self.timeout * 1000)
         loop.exec_() # delay here until download finished or timeout
     
@@ -468,7 +533,11 @@ class Browser(QWidget):
         """
         #self.view.page().networkAccessManager().active_requests -= 1
         if reply.url() == self.view.url():
-            self.url_input.setText(reply.url().toString())
+            self.update_address(reply.url())
+
+
+    def update_address(self, url):
+        self.url_input.setText(url.toString())# + ' ' + common.list_to_qs(reply.data))
         
 
     def screenshot(self, output_file):
