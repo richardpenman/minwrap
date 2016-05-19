@@ -123,14 +123,18 @@ def main():
                             models[key] = model = abstract.TransitionModel()
                         model.add(transition)
                         # XXX start new thread window
-                        for url, headers, data in model.run():
+                        for event_i, (url, headers, data) in enumerate(model.run()):
                             if browser.running:
+                                if event_i == 0:
+                                    # initialize the transitions in table
+                                    for transition in model.transitions:
+                                        browser.update_table(*json_to_list(transition.js))
+                                        
                                 common.logger.debug('Calling abstraction: {} {}'.format(url.toString(), data))
                                 browser.load(url=url, headers=headers, data=data)
                                 js = parser.parse(browser.current_text())
                                 if js:
-                                    header, entries = json_to_list(js)
-                                    browser.update_table(header, entries)
+                                    browser.update_table(*json_to_list(js))
                             else:
                                 break
 
