@@ -1,6 +1,6 @@
 __doc__ = 'Interface to qt webkit for parsing JavaScript dependent webpages'
 
-import sys, os, re, urllib2, random, itertools
+import sys, os, re, urllib2, random, itertools, csv
 reload(sys)
 sys.setdefaultencoding('utf-8')
 from time import time, sleep
@@ -269,6 +269,7 @@ class Browser(QWidget):
         self.grid.addWidget(self.view, 2, 0)
         self.table = None
         self.table_row_hashes = set()
+        self.table_writer = csv.writer(open('data.csv', 'w'))
 
         self.setLayout(self.grid)
         self.add_shortcuts()
@@ -290,13 +291,15 @@ class Browser(QWidget):
         QShortcut(QKeySequence(Qt.CTRL + Qt.Key_F), self, self.fullscreen)
 
 
-    def set_table(self, fields, rows=None):
+    def update_table(self, fields, rows=None):
         # status table at row 3
         if self.table is None:
             self.table = QTableWidget()
             self.table.setColumnCount(len(fields))
             self.table.setHorizontalHeaderLabels(fields)
             self.grid.addWidget(self.table, 3, 0)
+            self.table_writer.writerow(fields)
+            self.app.processEvents()
         #self.table.clear()
         #self.table.setRowCount(0)
         for row in rows or []:
@@ -310,6 +313,7 @@ class Browser(QWidget):
             self.table.insertRow(num_rows)
             for i, col in enumerate(cols):
                 self.table.setItem(num_rows, i, QTableWidgetItem(col))
+            self.table_writer.writerow(cols)
 
     def save(self):
         """Save the current HTML
@@ -409,7 +413,7 @@ class Browser(QWidget):
             # did not download in time
             if num_retries > 0:
                 common.logger.debug('Timeout - retrying')
-                parsed_html = self.get(url, num_retries=num_retries-1)
+                parsed_html = self.load(url, num_retries=num_retries-1)
             else:
                 common.logger.debug('Timed out')
                 parsed_html = ''
@@ -465,6 +469,25 @@ class Browser(QWidget):
         for e in es:
             e.evaluateJavaScript("var evObj = document.createEvent('MouseEvents'); evObj.initEvent('click', true, true); this.dispatchEvent(evObj);")
         return len(es)
+
+    def keydown(self, key):
+        self.js("""
+var character = "%s";
+var evt = document.createEvent("KeyboardEvent");
+  (evt.initKeyEvent || evt.initKeyboardEvent)("keypress", true, true, window,
+                    0, 0, 0, 0,
+                    0, character.charCodeAt(0)) 
+  var canceled = !body.dispatchEvent(evt);
+  if(canceled) {
+    // A handler called preventDefault
+    alert("canceled");
+  } else {
+    // None of the handlers called preventDefault
+    alert("not canceled");
+  }
+}
+        """ % key)
+
 
     def attr(self, pattern, name, value=None):
         """Set attribute if value is defined, else get
@@ -566,7 +589,7 @@ if __name__ == '__main__':
     # once script is working you can disable the gui
     w = Browser(gui=True) 
     # load webpage
-    w.get('http://duckduckgo.com')
+    w.load('http://duckduckgo.com')
     # fill search textbox 
     #w.fill('input[id=search_form_input_homepage]', 'web scraping')
     # take screenshot of webpage

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 __doc__ = 'Common web scraping related functions'
 
-import os, re, urllib, string, htmlentitydefs, urlparse
+import sys, os, re, urllib, string, htmlentitydefs, urlparse
 import logging, logging.handlers
 try:
     import json

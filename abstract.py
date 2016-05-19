@@ -22,7 +22,6 @@ class TransitionModel:
         """Add this transition to the model
         """
         if not self._used:
-            #print 'add reply', transition
             self.transitions.append(transition)
             self.build()
 
@@ -36,8 +35,6 @@ class TransitionModel:
             # abstract the example cases
             qs_abstraction = [(key, self.abstraction(examples)) for (key, examples) in qs_diffs]
             post_abstraction = [(key, self.abstraction(examples)) for (key, examples) in post_diffs]
-            print 'qs diffs:', qs_diffs, qs_abstraction
-            print 'post diffs:', post_diffs, post_abstraction
             
             for qs_key, qs_cases in qs_abstraction or default:
                 for qs_case in qs_cases or default_cases:
@@ -75,7 +72,7 @@ class TransitionModel:
                 self.model = qs_diffs, post_diffs
             else:
                 # remove the duplicate transition
-                print 'duplicate requests'
+                common.logger.debug('Duplicate requests')
                 self.transitions = self.transitions[:1]
 
 
@@ -117,34 +114,34 @@ class AbstractCases:
                 for i, v in enumerate(row):
                     if v:
                         AbstractCases.type_data['{}-field{}'.format(filename, i)][self.hash_key(v)] = v
-        #print 'Loaded:', len(AbstractCases.type_data.keys())
 
 
     def __call__(self, examples):
         """Attempt abstacting these examples
         If successful return a list of similar entities else None"""
-        print 'attempt abstracting:', examples
         if examples is not None:
             scores = collections.defaultdict(int)
             template, examples = self.strip_surroundings(examples)
-            print 'template:', template, examples
+            common.logger.info('Abstraction template: {} {}'.format(template, examples))
             for example in examples:
                 for label, hash_dict in AbstractCases.type_data.items():
                     # use overlap? XXX
                     if self.hash_key(example) in hash_dict:
                         scores[label] += 1
-            #print 'scores:', scores
+            
             if scores:
                 label = self.get_max_key(scores)
                 if label is not None:
-                    print 'use types:', label
-                    values = AbstractCases.type_data[label].values()
-                    for value in values:
-                        print template, value
-                        yield template.format(value)
+                    if scores[label] == len(examples):
+                        common.logger.info('Using types: {}'.format(label))
+                        values = AbstractCases.type_data[label].values()
+                        for value in values:
+                            yield template.format(value)
+                    else:
+                        common.logger.debug('Partially matched: {}'.format(label))
             else:
                 # XXX return None ?
-                print 'Insufficient data to abstract: {}'.format(examples)
+                common.logger.info('Insufficient data to abstract: {}'.format(examples))
 
 
     def strip_surroundings(self, examples):
@@ -187,7 +184,7 @@ class AbstractCases:
         if scores.values().count(count) == 1:
             return label
         else:
-            print 'Multiple keys with same count "{}": {}'.format(count, [key for key in scores if scores[key] == count])
+            common.logger.info('Multiple keys with same count "{}": {}'.format(count, [key for key in scores if scores[key] == count]))
 
 
 #class AbstractionError(Exception):

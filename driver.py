@@ -26,6 +26,8 @@ class AjaxBrowser(webkit.Browser):
         self.orig_html = ''
         # keep track of the potentially useful transitions
         self.transitions = []
+        self.view.page().setLinkDelegationPolicy(2)
+        self.view.linkClicked.connect(self.link_clicked)
 
     def finished(self, reply):
         super(AjaxBrowser, self).finished(reply)
@@ -46,14 +48,25 @@ class AjaxBrowser(webkit.Browser):
             if self.orig_html:
                 js = parser.parse(content, content_type)
                 if js is None:
-                    common.debug('failed to parse: {} {}'.format(reply.url().toString(), reply.data))
+                    common.logger.debug('failed to parse: {} {}'.format(reply.url().toString(), reply.data))
                 else:
                     # were able to parse response
                     # save for checking later once interface has been updated
                     values = [common.to_unicode(value) for value in parser.json_values(js) if value]
-                    common.logger.info('able to parse: {} {} {}'.format(reply.url().toString(), reply.data, len(values)))
+                    common.logger.debug('Successfully parsed response: {} {} {}'.format(reply.url().toString(), reply.data, values))
                     self.transitions.append((Transition(reply, js), values))
 
+    def link_clicked(self, url):
+        link = url.toString()
+        if link.endswith('/runfiat'):
+            fiat(self)
+        elif link.endswith('/runlufthansa'):
+            lufthansa(self)
+        elif link.endswith('/runpeugeot'):
+            peugeot(self)
+        else:
+            # load the link
+            self.view.load(url)
 
 
 class Transition:
@@ -80,10 +93,7 @@ class Transition:
         return '{} {}'.format(self.url.toString(), self.data)
 
 
-def run(inputs, callback):
-    """
-    callback takes an AjaxBrowser instance and input parameter and executes the workflow for that input
-    """
+def main():
     browser = AjaxBrowser(gui=True)
     browser.view.setUrl(QUrl.fromLocalFile(os.path.abspath('start.html')))
 
@@ -101,7 +111,7 @@ def run(inputs, callback):
                     if value in cur_html and value not in orig_html:
                         num_changed += 1
 
-                common.logger.info('transition updates: {} {} / {}'.format(transition.url.toString(), num_changed, prop_changed))
+                common.logger.info('Transition updates DOM: {} {} {} / {}'.format(transition.url.toString(), common.list_to_qs(transition.data), num_changed, total_changed))
                 if num_changed > 0:
                     #399 / 2712
                     # XXX specific to each website - use std outside the mean?
@@ -115,32 +125,14 @@ def run(inputs, callback):
                         # XXX start new thread window
                         for url, headers, data in model.run():
                             if browser.running:
-                                print 'Run:', url, data
+                                common.logger.debug('Calling abstraction: {} {}'.format(url.toString(), data))
                                 browser.load(url=url, headers=headers, data=data)
                                 js = parser.parse(browser.current_text())
                                 if js:
                                     header, entries = json_to_list(js)
-                                    print header
-                                    #print entries
-                                    browser.set_table(header, entries)
+                                    browser.update_table(header, entries)
                             else:
                                 break
-                        #print values
-                        #open('test_cur.html', 'w').write(common.to_ascii(cur_html))
-                        #open('test_orig.html', 'w').write(common.to_ascii(orig_html))
-    #browser.run()
-    return
-
-    for input_parameter in inputs:
-        if abstraction.run(input_parameter):
-            pass
-            # XXX set browser interface to show download
-        else:
-            # XXX do this implicitly from form values?
-            browser.input_parameter = input_parameter
-            callback(browser, input_parameter)
-            browser.wait_quiet()
-            abstraction.update(browser.transitions)
 
 
 # XXX move to specialist browser
@@ -149,36 +141,39 @@ def json_to_list(js):
     num_entries = common.most_common([len(values) for values in counter.values()])
     # get the fields with the correct number of entries
     fields = sorted(key for key in counter.keys() if len(counter[key]) == num_entries)
-    print 'num:', num_entries
     results = zip(*[counter[field] for field in fields])
-    return fields, results
+    return [field.title() for field in fields], results
     
     
 
 
-def main():
-    postcodes = 'OX1', 'CB1'
-    run(postcodes, fiat)
-    #run(peugeot)
-    searches = 'vie', 'aus'
-    #run(searches, lufthunsa)
-
-def fiat(browser, input_parameter):
+def fiat(browser):
+    postcodes = 'OX1', 'CB2'
     browser.load('http://www.fiat.co.uk/find-dealer')
-    browser.fill('div.input_text input', input_parameter)
-    browser.click('div.input_text button')
+    for postcode in postcodes:
+        browser.fill('div.input_text input', postcode)
+        browser.click('div.input_text button')
+        browser.wait_quiet()
 
-def peugeot(browser, input_parameter):
+def lufthansa(browser):
+    searches = 'vie', 'aus'
+    browser.load('http://www.lufthansa.com/uk/en/Homepage')
+    for search in searches:
+        browser.click('input#flightmanagerFlightsFormOrigin')
+        for letter in search:
+            browser.keydown(letter)
+        #browser.fill('input#flightmanagerFlightsFormOrigin', search)
+        browser.wait(3)
+        browser.wait_load('div.rw-popup')
+
+def peugeot(browser):
+    locations = 'amsterdam', 'leiden'
     browser.load('http://www.peugeot.nl/zoek-een-dealer/')
     print browser.wait_load('div.main_search')
-    print browser.fill('div.main_search input#dl_main_search', input_parameter)
-    print browser.click('div.main_search input[type=submit]')
-
-def lufthunsa(browser, input_parameter):
-    browser.load('http://www.lufthansa.com/uk/en/Homepage')
-    print browser.fill('input#flightmanagerFlightsFormOrigin', input_parameter)
-
-#delta
+    for location in locations:
+        print browser.fill('div.main_search input#dl_main_search', location)
+        print browser.click('div.main_search input[type=submit]')
+        browser.wait_quiet()
 
 
 if __name__ == '__main__':
