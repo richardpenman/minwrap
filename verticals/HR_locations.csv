@@ -1,0 +1,979 @@
+HR,10000,Zagreb-dio,Zagrebačka,,,,Zagreb,,45.7333,15.9667,
+HR,10010,Buzin,Zagrebačka,,,,Zagreb-Sloboština,,45.75,16,4
+HR,10020,Strmec,Zagrebačka,,,,Zagreb-Novi Zagreb,,45.7,15.9167,4
+HR,10040,Zagreb-dio,Zagrebačka,,,,Zagreb-Dubrava,,45.7333,15.9667,
+HR,10090,Zagreb-dio,Zagrebačka,,,,Zagreb-Susedgrad,,45.7333,15.9667,
+HR,10110,Zagreb-Trešnjevka,Zagrebačka,,,,Zagreb,,45.7769,16.068,
+HR,10250,Ježdovec,Zagrebačka,,,,Lučko,,45.7833,15.85,4
+HR,10251,Demerje,Zagrebačka,,,,Hrvatski Leskovac,,45.7419,15.9075,
+HR,10253,Markuševec Turopoljski,Zagrebačka,,,,Donji Dragonožec,,45.6667,15.95,4
+HR,10255,Obrež Stupnički,Zagrebačka,,,,Gornji Stupnik,,45.7167,15.9333,4
+HR,10257,Brebernica,Zagrebačka,,,,Brezovica,,45.6667,15.8833,4
+HR,10290,Šibice,Zagrebačka,,,,Zaprešić,,45.8517,15.8196,
+HR,10291,Savski Marof,Zagrebačka,,,,Prigorje Brdovečko,,45.8642,15.7219,4
+HR,10292,Donji Laduč,Zagrebačka,,,,Šenkovec,,45.8833,15.7333,4
+HR,10293,Pologi,Zagrebačka,,,,Dubravica,,45.95,15.7278,
+HR,10294,Gornja Pušća,Zagrebačka,,,,Donja Pušća,,45.9333,15.7833,4
+HR,10295,Merenje,Zagrebačka,,,,Kupljenovo,,45.9333,15.8167,
+HR,10296,Krajska Vas,Zagrebačka,,,,Luka,,45.9667,15.8167,
+HR,10297,Kraljev Vrh,Zagrebačka,,,,Jakovlje,,45.95,15.9167,4
+HR,10298,Oborovo Bistransko,Zagrebačka,,,,Donja Bistra,,45.8945,15.868,
+HR,10299,Kraj Donji,Zagrebačka,,,,Marija Gorica,,45.9167,15.7333,
+HR,10310,Tarno,Zagrebačka,,,,Ivanić-Grad,,45.7333,16.3667,4
+HR,10311,Topolje,Zagrebačka,,,,Posavski Bregi,,45.6508,16.3503,4
+HR,10312,Čemernica Lonjska,Zagrebačka,,,,Kloštar Ivanić,,45.7667,16.4167,4
+HR,10313,Caginec,Zagrebačka,,,,Graberje Ivaničko,,45.7069,16.4746,
+HR,10314,Šušnjari,Zagrebačka,,,,Križ,,45.693,16.5327,4
+HR,10315,Konšćani,Zagrebačka,,,,Novoselec,,45.6667,16.55,4
+HR,10316,Lijevi Dubrovčak,Zagrebačka,,,,Lijevi Dubrovčak,,45.6517,16.3456,4
+HR,10340,Prilesje,Zagrebačka,,,,Vrbovec,,45.85,16.4167,4
+HR,10341,Dulepska,Zagrebačka,,,,Lonjica,,45.8723,16.3374,
+HR,10342,Zgališće,Zagrebačka,,,,Dubrava,,45.8219,16.5336,
+HR,10343,Stari Glog,Zagrebačka,,,,Nova Kapela,,45.9,16.55,4
+HR,10344,Ivančani,Zagrebačka,,,,Farkaševac,,45.8667,16.6167,4
+HR,10345,Remetinec,Zagrebačka,,,,Gradec,,46.1853,16.3278,4
+HR,10346,Žunci,Zagrebačka,,,,Preseka,,45.95,16.4333,4
+HR,10347,Dropčevec,Zagrebačka,,,,Rakovec,,45.8893,16.2376,
+HR,10360,Kućanec,Zagrebačka,,,,Sesvete,,45.8586,16.1289,
+HR,10361,Čista Mlaka,Zagrebačka,,,,Sesvete-Kraljevec,,45.7644,16.1961,4
+HR,10362,Blaguša,Zagrebačka,,,,Kašina,,45.9286,16.1281,4
+HR,10363,Adamovec,Zagrebačka,,,,Belovar,,45.9039,16.1719,4
+HR,10370,Prečec,Zagrebačka,,,,Dugo Selo,,45.7667,16.3667,4
+HR,10372,Novaki Oborovski,Zagrebačka,,,,Oborovo,,45.7167,16.2167,4
+HR,10373,Hruščica,Zagrebačka,,,,Ivanja Reka,,45.7833,16.15,4
+HR,10380,Šalovec,Zagrebačka,,,,Sveti Ivan Zelina,,45.9803,16.2639,4
+HR,10381,Bosna,Zagrebačka,,,,Bedenica,,46.04,16.2392,4
+HR,10382,Bukevje,Zagrebačka,,,,Donja Zelina,,45.7167,16.2167,4
+HR,10383,Radoišće,Zagrebačka,,,,Komin,,46.0186,16.3306,4
+HR,10408,Velika Mlaka,Zagrebačka,,,,Velika Mlaka,,45.7364,16.0311,4
+HR,10410,Gradići,Zagrebačka,,,,Velika Gorica,,45.7,16.05,4
+HR,10411,Drnek,Zagrebačka,,,,Orle,,45.6759,16.2468,
+HR,10412,Donja Lomnica,Zagrebačka,,,,Donja Lomnica,,45.7119,16.0269,4
+HR,10413,Mala Buna,Zagrebačka,,,,Kravarsko,,45.6333,16.0667,4
+HR,10414,Opatija,Zagrebačka,,,,Pokupsko,,45.5667,16,4
+HR,10415,Donje Podotočje,Zagrebačka,,,,Novo Čiče,,45.7,16.1333,4
+HR,10417,Buševec,Zagrebačka,,,,Buševec,,45.6344,16.1197,4
+HR,10418,Petrovec,Zagrebačka,,,,Dubranec,,45.5,16.2667,4
+HR,10419,Vukovina,Zagrebačka,,,,Vukovina,,45.6833,16.1167,4
+HR,10430,Rude,Zagrebačka,,,,Samobor,,45.7667,15.6667,4
+HR,10431,Jagnjić Dol,Zagrebačka,,,,Sveta Nedjelja,,45.7829,15.791,
+HR,10432,Velika Jazbina,Zagrebačka,,,,Bregana,,45.818,15.6095,
+HR,10434,Orešje,Zagrebačka,,,,Strmec Samoborski,,45.8167,15.8,4
+HR,10435,Dolec Podokićki,Zagrebačka,,,,Sveti Martin pod Okićem,,45.75,15.7417,
+HR,10436,Rakov Potok,Zagrebačka,,,,Rakov Potok,,45.7381,15.7972,4
+HR,10437,Rakitje,Zagrebačka,,,,Bestovje,,45.7939,15.8222,4
+HR,10450,Malunje,Zagrebačka,,,,Jastrebarsko,,45.7,15.6167,4
+HR,10451,Selsko Brdo,Zagrebačka,,,,Pisarovina,,45.55,15.9,4
+HR,10453,Grabarak,Zagrebačka,,,,Gorica Svetojanska,,45.7492,15.7196,
+HR,10454,Gračac Slavetički,Zagrebačka,,,,Krašić,,45.7333,15.5167,4
+HR,10455,Stupe,Zagrebačka,,,,Kostanjevac,,45.7081,15.4465,
+HR,10456,Staničići Žumberački,Zagrebačka,,,,Kalje,,45.6714,15.2297,
+HR,10457,Sopote,Zagrebačka,,,,Sošice,,45.735,15.3848,
+HR,20000,Dubrovnik,Dubrovačko-Neretvanska,,,,Dubrovnik,,42.6506,18.0914,4
+HR,20205,Topolo,Dubrovačko-Neretvanska,,,,Topolo,,42.9097,17.7047,4
+HR,20207,Brašina,Dubrovačko-Neretvanska,,,,Mlini,,42.6267,18.1983,4
+HR,20210,Jasenice,Dubrovačko-Neretvanska,,,,Cavtat,,42.5836,18.2112,4
+HR,20213,Čilipi,Dubrovačko-Neretvanska,,,,Čilipi,,42.5531,18.2761,4
+HR,20215,Popovići,Dubrovačko-Neretvanska,,,,Gruda,,42.5228,18.3186,4
+HR,20216,Dubravka,Dubrovačko-Neretvanska,,,,Dubravka,,42.5353,18.4244,4
+HR,20217,Pridvorje,Dubrovačko-Neretvanska,,,,Pridvorje,,42.5514,18.3469,4
+HR,20218,Pločice,Dubrovačko-Neretvanska,,,,Pločice,,42.4933,18.4114,4
+HR,20221,Koločep,Dubrovačko-Neretvanska,,,,Koločep,,42.6761,18.0097,4
+HR,20222,Lopud,Dubrovačko-Neretvanska,,,,Lopud,,42.6928,17.9469,4
+HR,20223,Šipanjska Luka,Dubrovačko-Neretvanska,,,,Šipanjska Luka,,42.7289,17.8672,4
+HR,20224,Prožurska Luka,Dubrovačko-Neretvanska,,,,Maranovići,,42.7213,17.6742,
+HR,20225,Babino Polje,Dubrovačko-Neretvanska,,,,Babino Polje,,42.7333,17.5619,4
+HR,20226,Babine Kuće,Dubrovačko-Neretvanska,,,,Goveđari,,42.8931,17.486,
+HR,20230,Hodilje,Dubrovačko-Neretvanska,,,,Ston,,42.8569,17.6894,4
+HR,20231,Doli,Dubrovačko-Neretvanska,,,,Doli,,42.8197,17.7803,4
+HR,20232,Majkovi,Dubrovačko-Neretvanska,,,,Slano,,42.8124,17.8616,
+HR,20233,Trsteno,Dubrovačko-Neretvanska,,,,Trsteno,,42.7172,17.9803,4
+HR,20234,Dubravica,Dubrovačko-Neretvanska,,,,Orašac,,42.7461,17.9428,4
+HR,20235,Zaton,Dubrovačko-Neretvanska,,,,Zaton Veliki,,42.6908,18.0381,4
+HR,20236,Gornje Obuljeno,Dubrovačko-Neretvanska,,,,Mokošica,,42.673,18.1127,
+HR,20240,Gornja Vrućica,Dubrovačko-Neretvanska,,,,Trpanj,,42.9972,17.2717,4
+HR,20242,Donja Banda,Dubrovačko-Neretvanska,,,,Oskorušno,,42.9836,17.3069,
+HR,20243,Kuna Pelješka,Dubrovačko-Neretvanska,,,,Kuna,,42.9667,17.35,4
+HR,20244,Potomje,Dubrovačko-Neretvanska,,,,Potomje,,42.9425,17.3383,4
+HR,20245,Trstenik,Dubrovačko-Neretvanska,,,,Trstenik,,42.9183,17.3978,4
+HR,20246,Drače,Dubrovačko-Neretvanska,,,,Janjina,,42.9325,17.4486,4
+HR,20247,Žuljana,Dubrovačko-Neretvanska,,,,Žuljana,,42.8936,17.4561,4
+HR,20248,Brijesta,Dubrovačko-Neretvanska,,,,Putniković,,42.9061,17.5353,4
+HR,20250,Podgorje,Dubrovačko-Neretvanska,,,,Orebić,,42.9856,17.1747,
+HR,20260,Korčula,Dubrovačko-Neretvanska,,,,Korčula,,42.9622,17.1369,4
+HR,20263,Lumbarda,Dubrovačko-Neretvanska,,,,Lumbarda,,42.9228,17.1672,4
+HR,20264,Račišće,Dubrovačko-Neretvanska,,,,Račišće,,42.9764,17.0167,4
+HR,20267,Kućište,Dubrovačko-Neretvanska,,,,Kućište,,42.9783,17.1378,4
+HR,20269,Lovište,Dubrovačko-Neretvanska,,,,Lovište,,43.0217,17.0353,4
+HR,20270,Potirna,Dubrovačko-Neretvanska,,,,Vela Luka,,42.9331,16.6703,4
+HR,20271,Blato,Dubrovačko-Neretvanska,,,,Blato,,43.1703,17.1917,4
+HR,20272,Smokvica,Dubrovačko-Neretvanska,,,,Smokvica,,42.9306,16.8964,4
+HR,20273,Čara,Dubrovačko-Neretvanska,,,,Čara,,42.9383,16.9347,4
+HR,20274,Pupnat,Dubrovačko-Neretvanska,,,,Pupnat,,42.9536,17.0369,4
+HR,20275,Žrnovo,Dubrovačko-Neretvanska,,,,Žrnovo,,42.9511,17.1142,4
+HR,20278,Kobiljača,Dubrovačko-Neretvanska,,,,Nova Sela,,43.1342,17.4797,4
+HR,20290,Glavat,Dubrovačko-Neretvanska,,,,Lastovo,,42.7493,16.8735,
+HR,20340,Plina Jezero,Dubrovačko-Neretvanska,,,,Ploče,,43.0713,17.4197,
+HR,20341,Krvavac I,Dubrovačko-Neretvanska,,,,Kula Norinska,,43.0417,17.6002,
+HR,20342,Otrić Seoci,Dubrovačko-Neretvanska,,,,Otrić Seoci,,43.0616,17.5036,
+HR,20343,Šarić Struga,Dubrovačko-Neretvanska,,,,Rogotin,,43.0492,17.4792,
+HR,20344,Banja,Dubrovačko-Neretvanska,,,,Komin (Dalmacija),,43.0486,17.5086,4
+HR,20345,Staševica,Dubrovačko-Neretvanska,,,,Staševica,,43.1389,17.4256,4
+HR,20350,Krvavac II,Dubrovačko-Neretvanska,,,,Metković,,43.0199,17.6563,
+HR,20352,Vid,Dubrovačko-Neretvanska,,,,Vid,,43.0803,17.6258,4
+HR,20353,Badžula,Dubrovačko-Neretvanska,,,,Mlinište,,42.965,17.6111,4
+HR,20355,Vlaka/lij.ob.Male Neretve/,Dubrovačko-Neretvanska,,,,Opuzen,,43.0118,17.5599,
+HR,20356,Komarna,Dubrovačko-Neretvanska,,,,Klek,,42.945,17.5339,4
+HR,20357,Trn,Dubrovačko-Neretvanska,,,,Blace,,43.0011,17.4883,4
+HR,21000,Split,Splitsko-Dalmatinska,,,,Split,,43.5139,16.4558,4
+HR,21201,Trolokve,Splitsko-Dalmatinska,,,,Prgomet,,43.65,16.2333,4
+HR,21202,Brštanovo,Splitsko-Dalmatinska,,,,Lećevica,,43.6667,16.4167,4
+HR,21203,Bračević,Splitsko-Dalmatinska,,,,Donji Muć,,43.75,16.4,4
+HR,21204,Kotlenice,Splitsko-Dalmatinska,,,,Dugopolje,,43.5672,16.6453,4
+HR,21205,Srijane,Splitsko-Dalmatinska,,,,Donji Dolac,,43.5178,16.7281,4
+HR,21206,Velika Milešina,Splitsko-Dalmatinska,,,,Donje Ogorje,,43.7667,16.45,4
+HR,21207,Kostanje,Splitsko-Dalmatinska,,,,Kostanje,,43.45,16.8333,4
+HR,21208,Podašpilje,Splitsko-Dalmatinska,,,,Kučiće,,43.4333,16.7833,
+HR,21209,Mravince,Splitsko-Dalmatinska,,,,Mravince,,43.5333,16.5219,4
+HR,21210,Vranjic,Splitsko-Dalmatinska,,,,Solin,,43.5333,16.4667,4
+HR,21212,Kaštel Sućurac,Splitsko-Dalmatinska,,,,Kaštel Sućurac,,43.5503,16.4264,4
+HR,21213,Kaštel Gomilica,Splitsko-Dalmatinska,,,,Kaštel Gomilica,,43.55,16.4,4
+HR,21214,Kaštel Kambelovac,Splitsko-Dalmatinska,,,,Kaštel Kambelovac,,43.55,16.3833,4
+HR,21215,Kaštel Lukšić,Splitsko-Dalmatinska,,,,Kaštel Lukšić,,43.5553,16.3675,4
+HR,21216,Kaštel Štafilić,Splitsko-Dalmatinska,,,,Kaštel Stari,,43.55,16.3333,4
+HR,21218,Seget Gornji,Splitsko-Dalmatinska,,,,Seget Donji,,43.55,16.2167,4
+HR,21220,Trogir,Splitsko-Dalmatinska,,,,Trogir,,43.5125,16.2517,4
+HR,21222,Pozorac,Splitsko-Dalmatinska,,,,Marina,,43.4624,16.2169,
+HR,21223,Okrug Donji,Splitsko-Dalmatinska,,,,Okrug Gornji,,43.4956,16.2069,4
+HR,21224,Arbanija,Splitsko-Dalmatinska,,,,Slatine,,43.5122,16.2922,4
+HR,21225,Drvenik Mali,Splitsko-Dalmatinska,,,,Drvenik Veliki,,43.4494,16.0886,4
+HR,21226,Vinišće,Splitsko-Dalmatinska,,,,Vinišće,,43.4897,16.1131,4
+HR,21227,Bogdanovići,Splitsko-Dalmatinska,,,,Primorski Dolac,,43.6308,16.1761,
+HR,21228,Vinovac,Splitsko-Dalmatinska,,,,Blizna Donja,,43.5833,16.1056,
+HR,21229,Crivac,Splitsko-Dalmatinska,,,,Crivac,,43.7667,16.3667,4
+HR,21230,Jasensko,Splitsko-Dalmatinska,,,,Sinj,,43.73,16.6544,4
+HR,21231,Veliki Bročanac,Splitsko-Dalmatinska,,,,Klis,,43.6167,16.4833,4
+HR,21232,Bisko,Splitsko-Dalmatinska,,,,Dicmo,,43.5803,16.6819,4
+HR,21233,Maljkovo,Splitsko-Dalmatinska,,,,Hrvace,,43.8169,16.5169,4
+HR,21235,Maovice,Splitsko-Dalmatinska,,,,Otišić,,43.8833,16.3833,4
+HR,21236,Garjak,Splitsko-Dalmatinska,,,,Vrlika,,43.9,16.4833,4
+HR,21238,Korita,Splitsko-Dalmatinska,,,,Otok (Dalmacija),,43.6478,16.5367,4
+HR,21240,Košute,Splitsko-Dalmatinska,,,,Trilj,,43.6308,16.695,4
+HR,21241,Bajagić,Splitsko-Dalmatinska,,,,Obrovac Sinjski,,43.7567,16.6667,4
+HR,21242,Grab,Splitsko-Dalmatinska,,,,Grab,,43.6469,16.7614,4
+HR,21243,Vinine,Splitsko-Dalmatinska,,,,Ugljane,,43.549,16.7554,
+HR,21244,Biorine,Splitsko-Dalmatinska,,,,Cista Velika,,43.5531,16.8292,4
+HR,21245,Rože,Splitsko-Dalmatinska,,,,Tijarica,,43.6575,16.835,4
+HR,21246,Aržano,Splitsko-Dalmatinska,,,,Aržano,,43.5908,16.9844,4
+HR,21247,Neorić,Splitsko-Dalmatinska,,,,Neorić,,43.6806,16.5211,4
+HR,21250,Katuni,Splitsko-Dalmatinska,,,,Šestanovac,,43.4642,16.8969,4
+HR,21251,Gornje Sitno,Splitsko-Dalmatinska,,,,Žrnovnica,,43.5172,16.6103,4
+HR,21252,Naklice,Splitsko-Dalmatinska,,,,Tugare,,43.4849,16.6489,
+HR,21253,Gata,Splitsko-Dalmatinska,,,,Gata,,43.4667,16.7,4
+HR,21254,Nova Sela,Splitsko-Dalmatinska,,,,Blato na Cetini,,43.5269,16.7733,4
+HR,21255,Kraljevac,Splitsko-Dalmatinska,,,,Zadvarje,,43.389,16.9596,
+HR,21256,Svib,Splitsko-Dalmatinska,,,,Cista Provo,,43.5517,16.9631,4
+HR,21257,Opanci,Splitsko-Dalmatinska,,,,Lovreć,,43.4833,16.9833,4
+HR,21260,Glavina Donja,Splitsko-Dalmatinska,,,,Imotski,,43.445,17.1989,4
+HR,21261,Runović,Splitsko-Dalmatinska,,,,Runović,,43.3767,17.2367,4
+HR,21262,Hrščevani,Splitsko-Dalmatinska,,,,Kamenmost,,43.4162,17.1711,
+HR,21263,Poljica,Splitsko-Dalmatinska,,,,Krivodol,,43.4108,17.1419,4
+HR,21264,Postranje,Splitsko-Dalmatinska,,,,Donji Proložac,,43.4735,17.171,
+HR,21265,Studenci,Splitsko-Dalmatinska,,,,Studenci,,43.5306,17.0306,4
+HR,21266,Zmijavci,Splitsko-Dalmatinska,,,,Zmijavci,,43.4108,17.2056,4
+HR,21267,Ričice,Splitsko-Dalmatinska,,,,Ričice,,43.5133,17.1106,4
+HR,21270,Biokovsko Selo,Splitsko-Dalmatinska,,,,Zagvozd,,43.3975,17.0569,
+HR,21271,Medov Dolac,Splitsko-Dalmatinska,,,,Grabovac,,43.4308,16.9867,
+HR,21272,Slivno,Splitsko-Dalmatinska,,,,Slivno,,43.3417,17.2178,4
+HR,21273,Župa Srednja,Splitsko-Dalmatinska,,,,Župa,,43.3564,17.1403,4
+HR,21275,Dragljane,Splitsko-Dalmatinska,,,,Dragljane,,43.2344,17.2414,4
+HR,21276,Banja,Splitsko-Dalmatinska,,,,Vrgorac,,43.2197,17.3811,4
+HR,21277,Podprolog,Splitsko-Dalmatinska,,,,Veliki Prolog,,43.171,17.4078,
+HR,21292,Srinjine,Splitsko-Dalmatinska,,,,Srinjine,,43.4833,16.6,4
+HR,21300,Makarska,Splitsko-Dalmatinska,,,,Makarska,,43.2969,17.0178,4
+HR,21310,Stanići,Splitsko-Dalmatinska,,,,Omiš,,43.4408,17.1308,4
+HR,21311,Stobreč,Splitsko-Dalmatinska,,,,Stobreč,,43.5025,16.5222,4
+HR,21312,Mutogras,Splitsko-Dalmatinska,,,,Podstrana,,44.8665,15.5186,
+HR,21314,Jesenice,Splitsko-Dalmatinska,,,,Jesenice,,43.7622,16.4708,4
+HR,21315,Dugi Rat,Splitsko-Dalmatinska,,,,Dugi Rat,,43.4461,16.6397,4
+HR,21317,Čelina,Splitsko-Dalmatinska,,,,Lokva Rogoznica,,43.7622,16.4708,4
+HR,21318,Pisak,Splitsko-Dalmatinska,,,,Mimice,,43.4,16.85,4
+HR,21320,Promajna,Splitsko-Dalmatinska,,,,Baška Voda,,43.3361,16.9756,4
+HR,21322,Brela,Splitsko-Dalmatinska,,,,Brela,,43.3689,16.9342,4
+HR,21325,Veliko Brdo,Splitsko-Dalmatinska,,,,Tučepi,,43.3197,17.0197,4
+HR,21327,Podgora,Splitsko-Dalmatinska,,,,Podgora,,43.2433,17.0772,4
+HR,21328,Drašnice,Splitsko-Dalmatinska,,,,Drašnice,,43.2203,17.115,4
+HR,21329,Živogošće,Splitsko-Dalmatinska,,,,Igrane,,43.1789,17.1728,4
+HR,21330,Gradac,Splitsko-Dalmatinska,,,,Gradac,,43.1058,17.3417,4
+HR,21333,Drvenik,Splitsko-Dalmatinska,,,,Drvenik,,43.1575,17.2661,4
+HR,21334,Zaostrog,Splitsko-Dalmatinska,,,,Zaostrog,,43.1425,17.2822,4
+HR,21335,Brist,Splitsko-Dalmatinska,,,,Podaca,,43.1181,17.3247,4
+HR,21400,Mirca,Splitsko-Dalmatinska,,,,Supetar,,43.3775,16.5244,4
+HR,21403,Sutivan,Splitsko-Dalmatinska,,,,Sutivan,,43.3858,16.4769,4
+HR,21404,Bobovišća,Splitsko-Dalmatinska,,,,Ložišća,,43.3522,16.4647,4
+HR,21405,Podhumlje,Splitsko-Dalmatinska,,,,Milna,,43.3267,16.4508,
+HR,21410,Splitska,Splitsko-Dalmatinska,,,,Postira,,43.3753,16.6072,4
+HR,21412,Pučišća,Splitsko-Dalmatinska,,,,Pučišća,,43.3478,16.7339,4
+HR,21413,Povlja,Splitsko-Dalmatinska,,,,Povlja,,43.3336,16.8397,4
+HR,21420,Bol,Splitsko-Dalmatinska,,,,Bol,,43.2619,16.655,4
+HR,21423,Nerežišća,Splitsko-Dalmatinska,,,,Nerežišća,,43.3311,16.5786,4
+HR,21424,Gornji Humac,Splitsko-Dalmatinska,,,,Pražnica,,43.2964,16.7211,4
+HR,21425,Selca,Splitsko-Dalmatinska,,,,Selca,,43.2972,16.8508,4
+HR,21426,Sumartin,Splitsko-Dalmatinska,,,,Sumartin,,43.285,16.8756,4
+HR,21430,Maslinica,Splitsko-Dalmatinska,,,,Grohote,,43.3992,16.2075,4
+HR,21432,Gornje Selo,Splitsko-Dalmatinska,,,,Stomorska,,43.3553,16.3411,4
+HR,21450,Hvar,Splitsko-Dalmatinska,,,,Hvar,,43.1725,16.4428,4
+HR,21454,Brusje,Splitsko-Dalmatinska,,,,Brusje,,43.1928,16.4908,4
+HR,21460,Stari Grad,Splitsko-Dalmatinska,,,,Stari Grad,,46.1367,16.8053,4
+HR,21462,Vrbanj,Splitsko-Dalmatinska,,,,Vrbanj,,43.165,16.6456,4
+HR,21463,Vrboska,Splitsko-Dalmatinska,,,,Vrboska,,43.1822,16.6708,4
+HR,21465,Humac,Splitsko-Dalmatinska,,,,Jelsa,,43.1426,16.657,
+HR,21466,Poljica,Splitsko-Dalmatinska,,,,Zastražišće,,43.1489,16.7936,4
+HR,21467,Gdinj,Splitsko-Dalmatinska,,,,Gdinj,,43.1319,16.9286,4
+HR,21468,Selca kod Bogomolja,Splitsko-Dalmatinska,,,,Bogomolje,,43.15,16.9,4
+HR,21469,Sućuraj,Splitsko-Dalmatinska,,,,Sućuraj,,43.1253,17.1861,4
+HR,21480,Marine Zemlje,Splitsko-Dalmatinska,,,,Vis,,43.0653,16.2528,
+HR,21483,Borovik,Splitsko-Dalmatinska,,,,Podšpilje,,43.0333,16.145,4
+HR,21485,Sveti Andrija,Splitsko-Dalmatinska,,,,Komiža,,43.0333,15.75,4
+HR,22000,Dubrava kod Šibenika,Šibensko-Kninska,,,,Šibenik,,43.7543,15.959,
+HR,22010,Krapanj,Šibensko-Kninska,,,,Šibenik-Brodarica,,43.6722,15.9144,4
+HR,22020,Donje Polje,Šibensko-Kninska,,,,Šibenik-Ražine,,43.6981,15.9533,4
+HR,22030,Šibenik/dio-Zablaće/,Šibensko-Kninska,,,,Šibenik-Zablaće,,43.6981,15.9533,
+HR,22202,Kotelja,Šibensko-Kninska,,,,Primošten,,43.7436,16.1117,
+HR,22203,Podorljak,Šibensko-Kninska,,,,Rogoznica,,43.53,16.0336,4
+HR,22204,Vadalj,Šibensko-Kninska,,,,Široke,,43.5711,15.9906,4
+HR,22205,Danilo Gornje,Šibensko-Kninska,,,,Perković,,43.7333,16.1,4
+HR,22206,Boraja,Šibensko-Kninska,,,,Boraja,,43.6167,16.0667,4
+HR,22211,Srima,Šibensko-Kninska,,,,Vodice,,43.7475,15.8058,4
+HR,22212,Tribunj,Šibensko-Kninska,,,,Tribunj,,43.75,15.75,4
+HR,22213,Pirovac,Šibensko-Kninska,,,,Pirovac,,43.8192,15.6728,4
+HR,22214,Čista Velika,Šibensko-Kninska,,,,Čista Velika,,43.8961,15.7672,4
+HR,22215,Gaćelezi,Šibensko-Kninska,,,,Zaton,,43.8417,15.79,4
+HR,22221,Goriš,Šibensko-Kninska,,,,Lozovac,,43.8167,16.0167,4
+HR,22222,Gorice,Šibensko-Kninska,,,,Skradin,,43.8986,15.8789,4
+HR,22223,Međare,Šibensko-Kninska,,,,Bribir(kod Skradina),,43.9095,15.8087,
+HR,22232,Zlarin,Šibensko-Kninska,,,,Zlarin,,43.6975,15.8361,4
+HR,22233,Prvić Luka,Šibensko-Kninska,,,,Prvić Luka,,43.7167,15.8,4
+HR,22234,Prvić Šepurine,Šibensko-Kninska,,,,Prvić Šepurine,,43.7333,15.8,4
+HR,22235,Kaprije,Šibensko-Kninska,,,,Kaprije,,43.6914,15.7117,4
+HR,22236,Žirje,Šibensko-Kninska,,,,Žirje,,43.6589,15.6506,4
+HR,22240,Dazlina,Šibensko-Kninska,,,,Tisno,,43.8667,15.7167,4
+HR,22242,Jezera,Šibensko-Kninska,,,,Jezera,,43.8,15.65,4
+HR,22243,Kornati,Šibensko-Kninska,,,,Murter,,43.8125,15.6061,
+HR,22244,Betina,Šibensko-Kninska,,,,Betina,,43.8167,15.5833,4
+HR,22300,Vrpolje,Šibensko-Kninska,,,,Knin,,44.07,16.2294,4
+HR,22301,Golubić,Šibensko-Kninska,,,,Golubić,,44.0889,16.1983,4
+HR,22302,Polača,Šibensko-Kninska,,,,Polača/kod Knina/,,44.0211,16.3161,4
+HR,22303,Čitluk,Šibensko-Kninska,,,,Oklaj,,43.9628,16.0761,4
+HR,22304,Radučić,Šibensko-Kninska,,,,Radučić,,44.0436,16.0733,4
+HR,22305,Ivoševci,Šibensko-Kninska,,,,Kistanje,,44.0183,15.9722,4
+HR,22306,Ervenik,Šibensko-Kninska,,,,Ervenik,,44.0994,15.9453,4
+HR,22307,Mokro Polje,Šibensko-Kninska,,,,Mokro Polje,,44.0858,16.0306,4
+HR,22310,Cetina,Šibensko-Kninska,,,,Kijevo,,43.9686,16.4331,4
+HR,22311,Strmica,Šibensko-Kninska,,,,Strmica,,44.1706,16.2614,4
+HR,22312,Markovac,Šibensko-Kninska,,,,Kosovo/Zvjerinac/,,43.9667,16.2667,4
+HR,22317,Plavno,Šibensko-Kninska,,,,Plavno,,44.1456,16.1836,4
+HR,22318,Pađene,Šibensko-Kninska,,,,Pađene,,44.0739,16.1267,4
+HR,22319,Đevrske,Šibensko-Kninska,,,,Đevrske,,43.9603,15.8447,4
+HR,22320,Žitnić,Šibensko-Kninska,,,,Drniš,,43.8333,16.1333,4
+HR,22321,Kanjane,Šibensko-Kninska,,,,Siverić,,43.8667,16.25,4
+HR,22322,Umljanovići,Šibensko-Kninska,,,,Ružić,,43.8125,16.3018,
+HR,22323,Mirlović Zagora,Šibensko-Kninska,,,,Unešić,,43.7667,16.1167,4
+HR,22324,Bogatić,Šibensko-Kninska,,,,Drinovci,,43.9167,16,4
+HR,23000,Zadar,Zadarska,,,,Zadar,,44.1197,15.2422,4
+HR,23205,Bibinje,Zadarska,,,,Bibinje,,44.0667,15.3,4
+HR,23206,Sukošan,Zadarska,,,,Sukošan,,44.05,15.3167,4
+HR,23207,Donje Raštane,Zadarska,,,,Sveti Filip i Jakov,,43.9818,15.4269,
+HR,23210,Biograd na moru,Zadarska,,,,Biograd na moru,,43.9433,15.4519,4
+HR,23211,Drage,Zadarska,,,,Pakoštane,,43.8894,15.5408,4
+HR,23212,Kraj,Zadarska,,,,Tkon,,43.9397,15.3903,4
+HR,23222,Galovac,Zadarska,,,,Zemunik,,44.0714,15.3933,4
+HR,23223,Prkos,Zadarska,,,,Škabrnja,,44.0806,15.4278,4
+HR,23226,Pridraga,Zadarska,,,,Pridraga,,44.1667,15.5667,4
+HR,23231,Kožino,Zadarska,,,,Petrčane,,44.1706,15.1956,4
+HR,23232,Nin,Zadarska,,,,Nin,,44.2333,15.1833,4
+HR,23233,Privlaka,Zadarska,,,,Privlaka (Dalmacija),,44.2667,15.1333,4
+HR,23234,Torovi,Zadarska,,,,Vir,,44.3069,15.0721,
+HR,23235,Poljica,Zadarska,,,,Vrsi,,44.2194,15.285,4
+HR,23241,Islam Latinski/dio Rupalj/,Zadarska,,,,Poličnik,,44.1896,15.3611,
+HR,23242,Islam Latinski/dio Podgradina/,Zadarska,,,,Posedarje,,44.2136,15.4767,
+HR,23244,Seline,Zadarska,,,,Starigrad Paklenica,,44.2778,15.4794,4
+HR,23245,Tribanj,Zadarska,,,,Tribanj,,44.3517,15.3183,4
+HR,23247,Vinjerac,Zadarska,,,,Vinjerac,,44.2544,15.4661,4
+HR,23248,Krneza,Zadarska,,,,Ražanac,,44.263,15.34,
+HR,23249,Miškovići,Zadarska,,,,Povljana,,44.3375,15.2306,4
+HR,23250,Košljun,Zadarska,,,,Pag,,44.3997,15.0786,4
+HR,23251,Šimuni,Zadarska,,,,Kolan,,44.4686,14.9614,4
+HR,23262,Pašman,Zadarska,,,,Pašman,,43.9575,15.385,4
+HR,23263,Ždrelac,Zadarska,,,,Ždrelac,,44.0136,15.2692,4
+HR,23264,Mrljane,Zadarska,,,,Neviđane,,43.95,15.3667,4
+HR,23271,Kukljica,Zadarska,,,,Kukljica,,44.0347,15.2456,4
+HR,23272,Kali,Zadarska,,,,Kali,,44.0628,15.2056,4
+HR,23273,Poljana,Zadarska,,,,Preko,,44.0897,15.1808,4
+HR,23274,Lukoran,Zadarska,,,,Lukoran,,44.1031,15.1589,4
+HR,23275,Ugljan,Zadarska,,,,Ugljan,,44.1308,15.1031,4
+HR,23281,Zaglav,Zadarska,,,,Sali,,43.9558,15.1372,4
+HR,23282,Luka,Zadarska,,,,Žman,,43.9803,15.1003,4
+HR,23283,Rava,Zadarska,,,,Rava,,44.0219,15.0667,4
+HR,23284,Mali Iž,Zadarska,,,,Veli Iž,,44.0228,15.1547,4
+HR,23285,Brbinj,Zadarska,,,,Brbinj,,44.0725,15,4
+HR,23286,Božava,Zadarska,,,,Božava,,44.1411,14.9042,4
+HR,23287,Veli Rat,Zadarska,,,,Veli Rat,,44.1397,14.8522,4
+HR,23291,Sestrunj,Zadarska,,,,Sestrunj,,44.1522,15.0011,4
+HR,23292,Brgulje,Zadarska,,,,Molat,,44.2256,14.8525,4
+HR,23293,Ist,Zadarska,,,,Ist,,44.2667,14.7667,4
+HR,23294,Premuda,Zadarska,,,,Premuda,,44.3425,14.6014,4
+HR,23295,Silba,Zadarska,,,,Silba,,44.3764,14.6967,4
+HR,23296,Olib,Zadarska,,,,Olib,,44.375,14.7819,4
+HR,23312,Paljuv,Zadarska,,,,Novigrad (Dalmacija),,44.1667,15.5167,4
+HR,23420,Buković,Zadarska,,,,Benkovac,,44.0333,15.6333,4
+HR,23421,Bjelina,Zadarska,,,,Bjelina,,44.0456,15.8375,4
+HR,23422,Morpolača,Zadarska,,,,Stankovci,,43.9164,15.6949,
+HR,23423,Kakma,Zadarska,,,,Polača,,43.9944,15.4928,4
+HR,23424,Gornje Biljane,Zadarska,,,,Smilčić,,44.1136,15.5478,4
+HR,23440,Kijani,Zadarska,,,,Gračac,,44.3314,15.8886,4
+HR,23441,Bruvno,Zadarska,,,,Bruvno,,44.4011,15.8958,4
+HR,23442,Velika Popina,Zadarska,,,,Otrić,,44.2869,16.0308,4
+HR,23443,Zrmanja Vrelo,Zadarska,,,,Zrmanja,,44.1936,16.0569,4
+HR,23445,Begluci,Zadarska,,,,Srb,,44.3803,16.0984,
+HR,23446,Tiškovac Lički,Zadarska,,,,Kaldrma,,44.2689,16.18,4
+HR,23450,Rovanjska,Zadarska,,,,Obrovac,,44.2478,15.5422,4
+HR,23451,Komazeci,Zadarska,,,,Žegar,,44.1203,15.8361,4
+HR,23452,Donji Karin,Zadarska,,,,Karin,,44.1067,15.6219,4
+HR,31000,Tvrđavica,Osječko-Baranjska,,,,Osijek,,45.5714,18.6758,4
+HR,31204,Bijelo Brdo,Osječko-Baranjska,,,,Bijelo Brdo,,45.5172,18.8708,4
+HR,31205,Aljmaš,Osječko-Baranjska,,,,Aljmaš,,45.5289,18.9506,4
+HR,31206,Erdut,Osječko-Baranjska,,,,Erdut,,45.5264,19.0603,4
+HR,31207,Tenja,Osječko-Baranjska,,,,Tenja,,45.4981,18.7472,4
+HR,31208,Petrijevci,Osječko-Baranjska,,,,Petrijevci,,45.6128,18.5353,4
+HR,31214,Korog,Osječko-Baranjska,,,,Laslovo,,45.4092,18.75,4
+HR,31215,Ernestinovo,Osječko-Baranjska,,,,Ernestinovo,,45.4519,18.6592,4
+HR,31216,Antunovac,Osječko-Baranjska,,,,Antunovac,,45.4908,18.675,4
+HR,31220,Višnjevac,Osječko-Baranjska,,,,Višnjevac,,45.5686,18.6139,4
+HR,31221,Josipovac,Osječko-Baranjska,,,,Josipovac,,45.5828,18.5814,4
+HR,31222,Cerovac,Osječko-Baranjska,,,,Bizovac,,45.5689,18.5108,4
+HR,31223,Brođanci,Osječko-Baranjska,,,,Brođanci,,45.5442,18.4494,4
+HR,31224,Ordanja,Osječko-Baranjska,,,,Koška,,45.5325,18.2806,4
+HR,31225,Ribnjak,Osječko-Baranjska,,,,Breznica Našička,,45.5362,18.1758,
+HR,31226,Dalj,Osječko-Baranjska,,,,Dalj,,45.49,18.9847,4
+HR,31227,Zelčin,Osječko-Baranjska,,,,Zelčin,,45.6164,18.3614,4
+HR,31300,Širine,Osječko-Baranjska,,,,Beli Manastir,,45.7694,18.5614,4
+HR,31301,Branjin Vrh,Osječko-Baranjska,,,,Branjin Vrh,,45.7961,18.61,4
+HR,31302,Kneževo,Osječko-Baranjska,,,,Kneževo,,45.8461,18.6428,4
+HR,31303,Podolje,Osječko-Baranjska,,,,Popovac,,45.815,18.7303,4
+HR,31304,Duboševica,Osječko-Baranjska,,,,Duboševica,,45.8894,18.6967,4
+HR,31305,Gajić,Osječko-Baranjska,,,,Draž,,45.8411,18.7694,4
+HR,31306,Batina,Osječko-Baranjska,,,,Batina,,45.8461,18.85,4
+HR,31307,Zmajevac,Osječko-Baranjska,,,,Zmajevac,,45.7981,18.8014,4
+HR,31308,Suza,Osječko-Baranjska,,,,Suza,,45.7831,18.775,4
+HR,31309,Grabovac,Osječko-Baranjska,,,,Kneževi Vinogradi,,45.6972,18.74,4
+HR,31315,Karanac,Osječko-Baranjska,,,,Karanac,,45.7606,18.6844,4
+HR,31321,Zeleno Polje,Osječko-Baranjska,,,,Petlovac,,45.7697,18.5039,4
+HR,31322,Baranjsko Petrovo Selo,Osječko-Baranjska,,,,Baranjsko Petrovo Selo,,45.7556,18.4703,4
+HR,31323,Majiške Međe,Osječko-Baranjska,,,,Bolman,,45.7381,18.4883,4
+HR,31324,Jagodnjak,Osječko-Baranjska,,,,Jagodnjak,,45.6992,18.5769,4
+HR,31325,Novi Čeminac,Osječko-Baranjska,,,,Čeminac,,45.6758,18.6406,4
+HR,31326,Švajcarnica,Osječko-Baranjska,,,,Darda,,45.6486,18.6806,4
+HR,31327,Vardarac,Osječko-Baranjska,,,,Bilje,,45.6275,18.7706,4
+HR,31328,Lug,Osječko-Baranjska,,,,Lug,,45.6622,18.7758,4
+HR,31400,Budrovci,Osječko-Baranjska,,,,Đakovo,,45.2711,18.4486,4
+HR,31401,Viškovci,Osječko-Baranjska,,,,Viškovci,,45.345,18.4622,4
+HR,31402,Koritna,Osječko-Baranjska,,,,Semeljci,,45.3844,18.5656,4
+HR,31403,Široko Polje,Osječko-Baranjska,,,,Vuka,,45.4053,18.4725,4
+HR,31404,Dopsin,Osječko-Baranjska,,,,Vladislavci,,45.4492,18.5592,4
+HR,31410,Strizivojna,Osječko-Baranjska,,,,Strizivojna,,45.2261,18.4239,4
+HR,31411,Svetoblažje,Osječko-Baranjska,,,,Trnava,,45.2672,18.2972,4
+HR,31415,Selci Đakovački,Osječko-Baranjska,,,,Selci Đakovački,,45.3092,18.3503,4
+HR,31416,Breznica Đakovačka,Osječko-Baranjska,,,,Levanjska Varoš,,45.3306,18.1661,4
+HR,31417,Piškorevci,Osječko-Baranjska,,,,Piškorevci,,45.2553,18.4042,4
+HR,31418,Pridvorje,Osječko-Baranjska,,,,Drenje,,45.3669,18.2672,4
+HR,31421,Gašinci,Osječko-Baranjska,,,,Satnica Đakovačka,,45.3347,18.3164,4
+HR,31422,Gorjani,Osječko-Baranjska,,,,Gorjani,,45.3989,18.3722,4
+HR,31423,Bučje Gorjansko,Osječko-Baranjska,,,,Bračevci,,45.4286,18.2514,4
+HR,31424,Punitovci,Osječko-Baranjska,,,,Punitovci,,45.4331,18.4164,4
+HR,31431,Čokadinci,Osječko-Baranjska,,,,Čepin,,45.5017,18.4444,4
+HR,31432,Poganovci,Osječko-Baranjska,,,,Budimci,,45.4894,18.3989,4
+HR,31433,Kršinci,Osječko-Baranjska,,,,Podgorač,,45.4494,18.1722,4
+HR,31500,Markovac Našički,Osječko-Baranjska,,,,Našice,,45.4939,18.1256,4
+HR,31511,Beljevina,Osječko-Baranjska,,,,Đurđenovac,,45.5644,18.0139,4
+HR,31512,Vučjak Feričanački,Osječko-Baranjska,,,,Feričanci,,45.52,18.0047,4
+HR,31513,Donja Motičina,Osječko-Baranjska,,,,Donja Motičina,,45.4947,18.0242,4
+HR,31530,Podravska Moslavina,Osječko-Baranjska,,,,Podravska Moslavina,,45.8611,17.9772,4
+HR,31531,Viljevo,Osječko-Baranjska,,,,Viljevo,,45.7514,18.0631,4
+HR,31540,Ivanovo,Osječko-Baranjska,,,,Donji Miholjac,,45.7309,18.114,
+HR,31542,Brezovica,Osječko-Baranjska,,,,Magadenovac,,45.6406,18.3289,4
+HR,31543,Radikovci,Osječko-Baranjska,,,,Miholjački Poreč,,45.6939,18.2167,4
+HR,31550,Bocanjevci,Osječko-Baranjska,,,,Valpovo,,45.6411,18.3381,4
+HR,31551,Belišće,Osječko-Baranjska,,,,Belišće,,45.6803,18.4058,4
+HR,31552,Sveti Đurađ,Osječko-Baranjska,,,,Podgajci Podravski,,45.7389,18.2461,4
+HR,31553,Črnkovci,Osječko-Baranjska,,,,Črnkovci,,45.7075,18.295,4
+HR,31554,Veliškovci,Osječko-Baranjska,,,,Gat,,45.6911,18.3217,4
+HR,31555,Marijanski Ivanovci,Osječko-Baranjska,,,,Marijanci,,45.6696,18.2857,
+HR,32000,Vukovar,Vukovarsko-Srijemska,,,,Vukovar,,45.3433,18.9997,4
+HR,32010,Lipovača,Vukovarsko-Srijemska,,,,Vukovar,,45.3886,18.905,4
+HR,32100,Mirkovci,Vukovarsko-Srijemska,,,,Vinkovci,,45.2697,18.8511,4
+HR,32211,Ostrovo,Vukovarsko-Srijemska,,,,Ostrovo,,45.3406,18.7897,4
+HR,32212,Gaboš,Vukovarsko-Srijemska,,,,Gaboš,,45.3531,18.7361,4
+HR,32213,Podrinje,Vukovarsko-Srijemska,,,,Markušica,,45.3914,18.6925,4
+HR,32214,Tordinci,Vukovarsko-Srijemska,,,,Tordinci,,45.3703,18.795,4
+HR,32221,Cerić,Vukovarsko-Srijemska,,,,Nuštar,,45.3114,18.8561,4
+HR,32222,Pačetin,Vukovarsko-Srijemska,,,,Bršadin,,45.3725,18.8478,4
+HR,32224,Vera,Vukovarsko-Srijemska,,,,Trpinja,,45.4578,18.8914,4
+HR,32225,Ćelija,Vukovarsko-Srijemska,,,,Bobota,,45.4119,18.8403,
+HR,32227,Borovo,Vukovarsko-Srijemska,,,,Borovo,,45.3764,18.9669,4
+HR,32229,Petrovci,Vukovarsko-Srijemska,,,,Petrovci,,45.2889,18.9444,4
+HR,32232,Sotin,Vukovarsko-Srijemska,,,,Sotin,,45.2981,19.095,4
+HR,32233,Opatovac,Vukovarsko-Srijemska,,,,Opatovac,,45.2606,19.1708,4
+HR,32234,Šarengrad,Vukovarsko-Srijemska,,,,Šarengrad,,45.2328,19.2803,4
+HR,32235,Bapska,Vukovarsko-Srijemska,,,,Bapska,,45.1975,19.26,4
+HR,32236,Ilok,Vukovarsko-Srijemska,,,,Ilok,,45.2222,19.3769,4
+HR,32237,Lovas,Vukovarsko-Srijemska,,,,Lovas,,45.2264,19.1711,4
+HR,32238,Tompojevci,Vukovarsko-Srijemska,,,,Čakovci,,45.2333,19.0919,4
+HR,32239,Negoslavci,Vukovarsko-Srijemska,,,,Negoslavci,,45.2794,18.9967,4
+HR,32241,Stari Jankovci,Vukovarsko-Srijemska,,,,Stari Jankovci,,45.2619,18.9144,4
+HR,32242,Slakovci,Vukovarsko-Srijemska,,,,Slakovci,,45.2247,18.9503,4
+HR,32243,Berak,Vukovarsko-Srijemska,,,,Orolik,,45.2317,19.0028,4
+HR,32244,Đeletovci,Vukovarsko-Srijemska,,,,Đeletovci,,45.1825,19.0125,4
+HR,32245,Donje Novo Selo,Vukovarsko-Srijemska,,,,Nijemci,,45.1344,18.9997,4
+HR,32246,Apševci,Vukovarsko-Srijemska,,,,Lipovac,,45.0722,19.0728,4
+HR,32247,Vinkovački Banovci,Vukovarsko-Srijemska,,,,Banovci,,45.1794,19.0444,4
+HR,32248,Ilača,Vukovarsko-Srijemska,,,,Ilača,,45.1814,19.0958,4
+HR,32249,Tovarnik,Vukovarsko-Srijemska,,,,Tovarnik,,45.165,19.1519,4
+HR,32251,Privlaka,Vukovarsko-Srijemska,,,,Privlaka,,45.1947,18.8375,4
+HR,32252,Otok,Vukovarsko-Srijemska,,,,Otok,,45.1467,18.8839,4
+HR,32253,Komletinci,Vukovarsko-Srijemska,,,,Komletinci,,45.1497,18.9492,4
+HR,32254,Vrbanja,Vukovarsko-Srijemska,,,,Vrbanja,,44.9814,18.9272,4
+HR,32255,Soljani,Vukovarsko-Srijemska,,,,Soljani,,44.9503,18.9703,4
+HR,32256,Strošinci,Vukovarsko-Srijemska,,,,Strošinci,,44.9164,19.065,4
+HR,32257,Drenovci,Vukovarsko-Srijemska,,,,Drenovci,,44.9206,18.9122,4
+HR,32258,Podgajci Posavski,Vukovarsko-Srijemska,,,,Posavski Podgajci,,44.9506,18.8314,4
+HR,32260,Gunja,Vukovarsko-Srijemska,,,,Gunja,,44.88,18.8533,4
+HR,32261,Rajevo Selo,Vukovarsko-Srijemska,,,,Rajevo Selo,,44.9242,18.7772,4
+HR,32262,Račinovci,Vukovarsko-Srijemska,,,,Račinovci,,44.8639,18.9553,4
+HR,32263,Đurići,Vukovarsko-Srijemska,,,,Đurići,,44.8808,18.9175,4
+HR,32270,Županja,Vukovarsko-Srijemska,,,,Županja,,45.0775,18.6975,4
+HR,32271,Andrijaševci,Vukovarsko-Srijemska,,,,Rokovci Andrijaševci,,45.2247,18.7381,4
+HR,32272,Cerna,Vukovarsko-Srijemska,,,,Cerna,,45.1819,18.6894,4
+HR,32273,Gradište,Vukovarsko-Srijemska,,,,Gradište,,45.1481,18.7067,4
+HR,32274,Štitar,Vukovarsko-Srijemska,,,,Štitar,,45.0956,18.6403,4
+HR,32275,Bošnjaci,Vukovarsko-Srijemska,,,,Bošnjaci,,45.0503,18.7556,4
+HR,32276,Babina Greda,Vukovarsko-Srijemska,,,,Babina Greda,,45.1172,18.5369,4
+HR,32280,Jarmina,Vukovarsko-Srijemska,,,,Jarmina,,45.3181,18.7292,4
+HR,32281,Ivankovo,Vukovarsko-Srijemska,,,,Ivankovo,,45.2886,18.6839,4
+HR,32282,Retkovci,Vukovarsko-Srijemska,,,,Retkovci,,45.2333,18.6531,4
+HR,32283,Novi Mikanovci,Vukovarsko-Srijemska,,,,Vođinci,,45.2872,18.5914,4
+HR,32284,Đurđanci,Vukovarsko-Srijemska,,,,Stari Mikanovci,,45.2933,18.5047,4
+HR,33000,Milanovac,Virovitičko-Podravska,,,,Virovitica,,45.7997,17.3869,4
+HR,33404,Rogovac,Virovitičko-Podravska,,,,Špišić Bukovica,,45.9033,17.3072,4
+HR,33405,Stari Gradac,Virovitičko-Podravska,,,,Pitomača,,45.9244,17.2911,4
+HR,33406,Kapela Dvor,Virovitičko-Podravska,,,,Lukač,,45.8759,17.4331,
+HR,33407,Terezino Polje,Virovitičko-Podravska,,,,Gornje Bazje,,45.9347,17.4589,4
+HR,33410,Gaćište,Virovitičko-Podravska,,,,Suhopolje,,45.8333,17.6,4
+HR,33411,Rušani,Virovitičko-Podravska,,,,Gradina,,45.89,17.5272,4
+HR,33412,Trnava Cabunska,Virovitičko-Podravska,,,,Cabuna,,45.7333,17.5333,4
+HR,33507,Staro Petrovo Polje,Virovitičko-Podravska,,,,Crnac,,45.6752,17.9578,
+HR,33513,Gutmanovci,Virovitičko-Podravska,,,,Zdenci,,45.5991,17.9588,
+HR,33514,Brezovljani Vojlovički,Virovitičko-Podravska,,,,Čačinci,,45.5891,17.8322,
+HR,33515,Crkvari,Virovitičko-Podravska,,,,Orahovica,,45.5167,17.9667,4
+HR,33516,Slatinski Drenovac,Virovitičko-Podravska,,,,Slatinski Drenovac,,45.5531,17.7072,4
+HR,33517,Četekovac,Virovitičko-Podravska,,,,Mikleuš,,45.6167,17.7667,4
+HR,33518,Gornje Viljevo,Virovitičko-Podravska,,,,Nova Bukovica,,45.6975,17.7931,4
+HR,33520,Donji Meljani,Virovitičko-Podravska,,,,Slatina,,45.7333,17.6333,4
+HR,33521,Ćeralije,Virovitičko-Podravska,,,,Ćeralije,,45.6192,17.6858,4
+HR,33522,Gornji Meljani,Virovitičko-Podravska,,,,Voćin,,45.5667,17.6667,4
+HR,33523,Šaševo,Virovitičko-Podravska,,,,Čađavica,,45.7589,17.8349,
+HR,33525,Gornje Predrijevo,Virovitičko-Podravska,,,,Sopje,,45.7897,17.7858,4
+HR,33533,Velika Klisa,Virovitičko-Podravska,,,,Pivnica Slavonska,,45.7,17.4833,4
+HR,34000,Crkveni Vrhovci,Požeško-Slavonska,,,,Požega,,45.2889,17.6531,4
+HR,34308,Cerovac,Požeško-Slavonska,,,,Jakšić,,45.4342,18.4531,4
+HR,34310,Resnik,Požeško-Slavonska,,,,Pleternica,,45.2831,17.8478,
+HR,34311,Kuzmica,Požeško-Slavonska,,,,Kuzmica,,45.3283,17.7567,4
+HR,34312,Ašikovci,Požeško-Slavonska,,,,Sesvete (kod Požege),,45.3253,17.835,4
+HR,34315,Ratkovica,Požeško-Slavonska,,,,Ratkovica,,45.2292,17.7206,4
+HR,34320,Bogdašići,Požeško-Slavonska,,,,Orljavac,,45.4502,17.505,
+HR,34322,Boričevci,Požeško-Slavonska,,,,Brestovac,,45.3603,17.5433,4
+HR,34330,Kantrovci,Požeško-Slavonska,,,,Velika,,45.4624,17.5613,
+HR,34334,Alilovci,Požeško-Slavonska,,,,Kaptol,,45.3967,17.7036,4
+HR,34335,Vetovo,Požeško-Slavonska,,,,Vetovo,,45.4161,17.7944,4
+HR,34340,Kutjevo,Požeško-Slavonska,,,,Kutjevo,,45.4261,17.8825,4
+HR,34343,Gradište,Požeško-Slavonska,,,,Bektež,,45.4042,17.945,4
+HR,34350,Duboka,Požeško-Slavonska,,,,Čaglin,,45.3886,17.9744,4
+HR,34543,Bujevica,Požeško-Slavonska,,,,Poljana,,45.4819,17.0191,
+HR,34550,Kusonje,Požeško-Slavonska,,,,Pakrac,,45.4667,17.2333,4
+HR,34551,Jagma,Požeško-Slavonska,,,,Lipik,,45.3834,17.2016,
+HR,34552,Badljevina,Požeško-Slavonska,,,,Badljevina,,45.5117,17.1928,4
+HR,34553,Kričke,Požeško-Slavonska,,,,Bučje,,45.3642,17.0892,4
+HR,35000,Gromačnik,Brodsko-Posavska,,,,Slavonski Brod,,45.1794,17.9575,4
+HR,35105,Slavonski Brod,Brodsko-Posavska,,,,Slavonski Brod,,45.1603,18.0156,4
+HR,35106,Slavonski Brod,Brodsko-Posavska,,,,Slavonski Brod,,45.1603,18.0156,4
+HR,35107,Podvinje,Brodsko-Posavska,,,,Podvinje,,45.1903,18.0269,4
+HR,35201,Crni Potok,Brodsko-Posavska,,,,Podcrkavlje,,45.2597,17.9871,
+HR,35207,Gornja Vrba,Brodsko-Posavska,,,,Gornja Vrba,,45.1553,18.0656,4
+HR,35208,Klakar,Brodsko-Posavska,,,,Ruščica,,45.0986,18.1322,4
+HR,35209,Bukovlje,Brodsko-Posavska,,,,Bukovlje,,45.1853,18.07,4
+HR,35210,Čajkovci,Brodsko-Posavska,,,,Vrpolje,,45.195,18.3647,4
+HR,35211,Klokočevik,Brodsko-Posavska,,,,Trnjani,,45.2197,18.1503,4
+HR,35212,Bicko Selo,Brodsko-Posavska,,,,Garčin,,45.1669,18.1914,4
+HR,35213,Oprisavci,Brodsko-Posavska,,,,Oprisavci,,45.1511,18.2297,4
+HR,35214,Divoševci,Brodsko-Posavska,,,,Donji Andrijevci,,45.1572,18.3411,4
+HR,35215,Zoljani,Brodsko-Posavska,,,,Svilaj,,45.1319,18.32,4
+HR,35216,Novi Grad,Brodsko-Posavska,,,,Prnjavor,,45.1871,18.12,
+HR,35220,Slavonski Šamac,Brodsko-Posavska,,,,Slavonski Šamac,,45.0667,18.4889,4
+HR,35221,Velika Kopanica,Brodsko-Posavska,,,,Velika Kopanica,,45.1561,18.3931,4
+HR,35222,Gundinci,Brodsko-Posavska,,,,Gundinci,,45.1583,18.4914,4
+HR,35224,Jaruge,Brodsko-Posavska,,,,Sikirevci,,45.1158,18.4203,4
+HR,35250,Radovanje,Brodsko-Posavska,,,,Oriovac,,45.1592,17.7764,4
+HR,35252,Bartolovci,Brodsko-Posavska,,,,Sibinj,,45.1828,17.9308,4
+HR,35253,Stari Slatnik,Brodsko-Posavska,,,,Brodski Stupnik,,45.1786,17.8472,4
+HR,35254,Stupnički Kuti,Brodsko-Posavska,,,,Bebrina,,45.1214,17.8147,4
+HR,35255,Slavonski Kobaš,Brodsko-Posavska,,,,Slavonski Kobaš,,45.1064,17.7456,4
+HR,35257,Malino,Brodsko-Posavska,,,,Lužani,,45.1717,17.7231,4
+HR,35400,Prvča,Brodsko-Posavska,,,,Nova Gradiška,,45.2436,17.3592,4
+HR,35403,Bukovica,Brodsko-Posavska,,,,Rešetari,,45.6647,17.7669,4
+HR,35404,Opatovac,Brodsko-Posavska,,,,Cernik,,45.3333,17.4347,4
+HR,35410,Seoce,Brodsko-Posavska,,,,Nova Kapela,,45.1736,17.6444,4
+HR,35414,Blažević Dol,Brodsko-Posavska,,,,Vrbova,,45.2186,17.5778,
+HR,35420,Vladisovo,Brodsko-Posavska,,,,Staro Petrovo Selo,,45.2594,17.5353,4
+HR,35422,Adžamovci,Brodsko-Posavska,,,,Zapolje,,45.2478,17.465,4
+HR,35423,Visoka Greda,Brodsko-Posavska,,,,Vrbje,,45.2006,17.3314,4
+HR,35424,Orubica,Brodsko-Posavska,,,,Orubica,,45.1478,17.4589,4
+HR,35425,Davor,Brodsko-Posavska,,,,Davor,,45.1153,17.5164,4
+HR,35428,Donji Bogićevci,Brodsko-Posavska,,,,Dragalić,,45.2283,17.2583,4
+HR,35429,Ratkovac,Brodsko-Posavska,,,,Gornji Bogićevci,,45.3629,17.2219,
+HR,35430,Dubovac,Brodsko-Posavska,,,,Okučani,,45.2411,17.205,4
+HR,35432,Medari,Brodsko-Posavska,,,,Medari,,45.2672,17.29,4
+HR,35435,Pivare,Brodsko-Posavska,,,,Stara Gradiška,,45.1947,17.2589,4
+HR,40000,Čakovec,Međimurska,,,,Čakovec,,46.3844,16.4339,4
+HR,40305,Slakovec,Međimurska,,,,Nedelišče,,46.4058,16.3769,4
+HR,40306,Vugrišinec,Međimurska,,,,Macinec,,46.3606,16.3326,
+HR,40311,Knezovec,Međimurska,,,,Lopatinec,,46.4375,16.3867,
+HR,40312,Sveti Urban,Međimurska,,,,Štrigova,,46.4306,16.359,
+HR,40313,Žabnik,Međimurska,,,,Sveti Martin na Muri,,46.3064,16.4483,4
+HR,40314,Zebanec Selo,Međimurska,,,,Selnica,,46.475,16.4053,4
+HR,40315,Peklenica,Međimurska,,,,Mursko Središče,,46.4953,16.4761,4
+HR,40316,Vratišinec,Međimurska,,,,Vratišinec,,46.4781,16.4578,4
+HR,40317,Sivica,Međimurska,,,,Podturen,,46.4494,16.5033,4
+HR,40318,Turčišće,Međimurska,,,,Dekanovec,,46.4122,16.6169,4
+HR,40319,Belica,Međimurska,,,,Belica,,46.4042,16.5183,4
+HR,40320,Palinovec,Međimurska,,,,Donji Kraljevec,,46.3972,16.5958,4
+HR,40321,Sveti Križ,Međimurska,,,,Mala Subotica,,46.1144,16.1775,4
+HR,40322,Vularija,Međimurska,,,,Orehovica,,46.3269,16.4767,4
+HR,40323,Sveti Juraj u Trnju,Međimurska,,,,Prelog,,46.3797,16.6125,4
+HR,40324,Goričan,Međimurska,,,,Goričan,,46.3842,16.6808,4
+HR,40325,Hemuševec,Međimurska,,,,Draškovec,,46.3542,16.6711,4
+HR,40326,Sveta Marija,Međimurska,,,,Sveta Marija,,46.3356,16.7419,4
+HR,40327,Donji Vidovec,Međimurska,,,,Donji Vidovec,,46.3292,16.7867,4
+HR,40328,Donja Dubrava,Međimurska,,,,Donja Dubrava,,46.3147,16.8119,4
+HR,40329,Kotoriba,Međimurska,,,,Kotoriba,,46.355,16.8181,4
+HR,42000,Kućan Marof,Varaždinska,,,,Varaždin,,46.2894,16.3722,4
+HR,42201,Ledinec,Varaždinska,,,,Beretinec,,46.2601,16.309,
+HR,42202,Zamlaka,Varaždinska,,,,Trnovec Bartolovečki,,46.2892,16.4981,4
+HR,42203,Leštakovec,Varaždinska,,,,Jalžabet,,46.25,16.45,4
+HR,42204,Varaždin Breg,Varaždinska,,,,Turčin,,46.2381,16.3678,4
+HR,42205,Papinec,Varaždinska,,,,Vidovec,,46.2854,16.274,
+HR,42206,Strmec Podravski,Varaždinska,,,,Petrijanec,,46.3644,16.2142,4
+HR,42207,Vinica,Varaždinska,,,,Vinica,,46.3361,16.1494,4
+HR,42208,Virje Križovljansko,Varaždinska,,,,Cestica,,46.3836,16.1422,4
+HR,42209,Sračinec,Varaždinska,,,,Sračinec,,46.3294,16.2789,4
+HR,42214,Doljan,Varaždinska,,,,Sveti Ilija,,46.2323,16.3251,
+HR,42220,Sudovec,Varaždinska,,,,Novi Marof,,46.1089,16.3878,4
+HR,42222,Rakovec,Varaždinska,,,,Ljubeščica,,45.9303,16.3225,4
+HR,42223,Pišćanovec,Varaždinska,,,,Varaždinske Toplice,,46.2128,16.4632,
+HR,42224,Đurinovec,Varaždinska,,,,Visoko,,46.0786,16.3419,4
+HR,42225,Butkovec,Varaždinska,,,,Breznički Hum,,46.1014,16.2671,
+HR,42226,Jarek Bisaški,Varaždinska,,,,Bisag,,46.0536,16.275,4
+HR,42230,Segovina,Varaždinska,,,,Ludbreg,,46.2075,16.6572,4
+HR,42231,Martinić,Varaždinska,,,,Mali Bukovec,,46.2461,16.7072,4
+HR,42232,Sudovčina,Varaždinska,,,,Donji Martijanec,,46.2703,16.5226,
+HR,42233,Priles,Varaždinska,,,,Sveti Đurđ,,46.2778,16.6036,4
+HR,42240,Vuglovec,Varaždinska,,,,Ivanec,,46.215,16.0989,4
+HR,42242,Osečka,Varaždinska,,,,Radovan,,46.2108,16.1767,
+HR,42243,Kapelec,Varaždinska,,,,Maruševec,,46.2867,16.1956,4
+HR,42244,Vukovoj,Varaždinska,,,,Klenovnik,,46.2833,16.0667,4
+HR,42245,Slivarsko,Varaždinska,,,,Donja Voća,,46.3171,16.0942,
+HR,42250,Vulišinec,Varaždinska,,,,Lepoglava,,46.2242,16.0333,4
+HR,42253,Meljan,Varaždinska,,,,Bednja,,46.2515,15.9685,
+HR,42254,Trakošćan,Varaždinska,,,,Trakošćan,,46.2583,15.9486,4
+HR,42255,Zalužje,Varaždinska,,,,Donja Višnjica,,46.3167,15.9833,4
+HR,43000,Ždralovi,Bjelovarsko-Bilogorska,,,,Bjelovar,,45.8764,16.875,4
+HR,43202,Zrinski Topolovac,Bjelovarsko-Bilogorska,,,,Zrinski Topolovac,,46.0342,16.7131,4
+HR,43203,Stara Diklenica,Bjelovarsko-Bilogorska,,,,Kapela,,45.9667,16.8667,4
+HR,43211,Lipovčani,Bjelovarsko-Bilogorska,,,,Predavac,,45.7742,16.5492,4
+HR,43212,Tuk,Bjelovarsko-Bilogorska,,,,Rovišće,,45.9167,16.7333,4
+HR,43226,Vrbica,Bjelovarsko-Bilogorska,,,,Veliko Trojstvo,,45.9469,16.9353,
+HR,43227,Šandrovac,Bjelovarsko-Bilogorska,,,,Šandrovac,,45.9056,17.0211,4
+HR,43231,Rastovac,Bjelovarsko-Bilogorska,,,,Ivanska,,45.7833,16.7833,4
+HR,43232,Šimljana,Bjelovarsko-Bilogorska,,,,Berek,,45.6975,16.8247,4
+HR,43233,Veliki Prokop,Bjelovarsko-Bilogorska,,,,Trnovitički Popovac,,45.6613,16.8313,
+HR,43240,Suhaja,Bjelovarsko-Bilogorska,,,,Čazma,,45.7167,16.6333,4
+HR,43245,Siščani,Bjelovarsko-Bilogorska,,,,Gornji Draganec,,45.8086,16.6611,4
+HR,43246,Daskatica,Bjelovarsko-Bilogorska,,,,Štefanje,,45.7958,16.6989,4
+HR,43247,Paljevine,Bjelovarsko-Bilogorska,,,,Narta,,45.8167,16.8167,4
+HR,43251,Gudovac,Bjelovarsko-Bilogorska,,,,Gudovac,,45.8803,16.7808,4
+HR,43252,Prgomelje,Bjelovarsko-Bilogorska,,,,Prgomelje,,45.8908,16.7522,4
+HR,43270,Veliki Grđevac,Bjelovarsko-Bilogorska,,,,Veliki Grđevac,,45.7503,17.0475,4
+HR,43271,Nova Pisanica,Bjelovarsko-Bilogorska,,,,Velika Pisanica,,45.838,17.1048,
+HR,43272,Stara Rača,Bjelovarsko-Bilogorska,,,,Nova Rača,,45.8167,16.95,4
+HR,43273,Babinac,Bjelovarsko-Bilogorska,,,,Bulinac,,45.8333,17.05,4
+HR,43274,Orovac,Bjelovarsko-Bilogorska,,,,Severin,,45.8658,16.9764,4
+HR,43280,Hrastovac,Bjelovarsko-Bilogorska,,,,Garešnica,,45.5531,16.99,4
+HR,43282,Velika Bršljanica,Bjelovarsko-Bilogorska,,,,Veliko Vukovje,,45.5667,16.8667,4
+HR,43283,Malo Vukovje,Bjelovarsko-Bilogorska,,,,Kaniška Iva,,45.5253,16.9108,4
+HR,43284,Velika Trnava,Bjelovarsko-Bilogorska,,,,Hercegovac,,45.6833,17.0333,4
+HR,43285,Velika Trnovitica,Bjelovarsko-Bilogorska,,,,Velika Trnovitica,,45.6825,16.9539,4
+HR,43290,Mala Barna,Bjelovarsko-Bilogorska,,,,Grubišno Polje,,45.7333,17.2333,4
+HR,43293,Veliki Zdenci,Bjelovarsko-Bilogorska,,,,Veliki Zdenci,,45.6733,17.1092,4
+HR,43500,Bijela,Bjelovarsko-Bilogorska,,,,Daruvar,,45.55,17.3167,4
+HR,43504,Turčević Polje,Bjelovarsko-Bilogorska,,,,Ivanovo Selo,,45.6961,17.3169,4
+HR,43505,Končanica,Bjelovarsko-Bilogorska,,,,Končanica,,45.6361,17.1664,4
+HR,43506,Goveđe Polje,Bjelovarsko-Bilogorska,,,,Dežanovac,,45.5211,17.0908,4
+HR,43507,Uljanički Brijeg,Bjelovarsko-Bilogorska,,,,Uljanik,,45.5339,17.0447,
+HR,43531,Mali Miletinac,Bjelovarsko-Bilogorska,,,,Veliki Bastaji,,45.6833,17.3667,4
+HR,43532,Katinac,Bjelovarsko-Bilogorska,,,,Đulovac,,45.6833,17.4291,
+HR,43541,Miljanovac,Bjelovarsko-Bilogorska,,,,Sirač,,45.5333,17.2167,4
+HR,44000,Žabno,Sisačko-Moslavačka,,,,Sisak,,45.5,16.35,4
+HR,44010,Crnac,Sisačko-Moslavačka,,,,Sisak-Caprag,,45.6961,17.9372,4
+HR,44201,Lijeva Luka,Sisačko-Moslavačka,,,,Martinska Ves,,45.6036,16.365,4
+HR,44202,Prelošćica,Sisačko-Moslavačka,,,,Topolovac,,45.445,16.485,4
+HR,44203,Mužilovčica,Sisačko-Moslavačka,,,,Gušće,,45.3936,16.6833,4
+HR,44204,Čuntić,Sisačko-Moslavačka,,,,Jabukovac,,45.3245,16.3037,
+HR,44205,Pecki,Sisačko-Moslavačka,,,,Donja Bačuga,,45.3847,16.2461,4
+HR,44210,Staza,Sisačko-Moslavačka,,,,Sunja,,45.325,16.5942,4
+HR,44211,Blinjska Greda,Sisačko-Moslavačka,,,,Blinjski Kut,,45.3988,16.4602,
+HR,44212,Velika Gradusa,Sisačko-Moslavačka,,,,Mala Gradusa,,45.3314,16.4294,4
+HR,44214,Bobovac,Sisačko-Moslavačka,,,,Bobovac,,45.3733,16.6728,4
+HR,44221,Pobrđani,Sisačko-Moslavačka,,,,Staza,,45.3272,16.5647,
+HR,44222,Jasenovčani,Sisačko-Moslavačka,,,,Šaš,,45.2821,16.6463,
+HR,44231,Moštanica,Sisačko-Moslavačka,,,,Blinja,,45.3661,16.3508,4
+HR,44250,Nova Drenčina,Sisačko-Moslavačka,,,,Petrinja,,45.4179,16.2819,
+HR,44251,Graberje,Sisačko-Moslavačka,,,,Gora,,45.3869,16.1686,4
+HR,44253,Mošćenica,Sisačko-Moslavačka,,,,Mošćenica,,45.4383,16.3611,4
+HR,44271,Šišinec,Sisačko-Moslavačka,,,,Letovanić,,45.4489,16.0847,4
+HR,44272,Dužica,Sisačko-Moslavačka,,,,Lekenik,,45.5381,16.2386,4
+HR,44273,Vratečko,Sisačko-Moslavačka,,,,Sela,,45.4631,16.1139,4
+HR,44316,Grabrov Potok,Sisačko-Moslavačka,,,,Velika Ludina,,45.5978,16.5867,4
+HR,44317,Moslavačka Slatina,Sisačko-Moslavačka,,,,Popovača,,45.6169,16.6736,4
+HR,44318,Donja Gračenica,Sisačko-Moslavačka,,,,Voloder,,45.495,16.6794,4
+HR,44320,Mišinka,Sisačko-Moslavačka,,,,Kutina,,45.4914,16.8222,4
+HR,44321,Janja Lipa,Sisačko-Moslavačka,,,,Banova Jaruga,,45.4486,16.9869,4
+HR,44322,Novi Grabovac,Sisačko-Moslavačka,,,,Lipovljani,,45.4042,16.9947,4
+HR,44323,Rajčići,Sisačko-Moslavačka,,,,Rajić,,45.3333,17.15,4
+HR,44324,Mlaka,Sisačko-Moslavačka,,,,Jasenovac,,45.2375,17.0194,4
+HR,44325,Drenov Bok,Sisačko-Moslavačka,,,,Krapje,,45.2672,16.8278,4
+HR,44330,Stari Grabovac,Sisačko-Moslavačka,,,,Novska,,45.3225,17.0083,4
+HR,44400,Prekopa,Sisačko-Moslavačka,,,,Glina,,45.3675,16.1225,4
+HR,44401,Balinac,Sisačko-Moslavačka,,,,Hajtić,,45.2833,16.0333,4
+HR,44402,Veliki Obljaj,Sisačko-Moslavačka,,,,Mali Obljaj,,45.2264,16.0339,4
+HR,44403,Dabrina,Sisačko-Moslavačka,,,,Maja,,45.2667,16.15,4
+HR,44404,Brubno,Sisačko-Moslavačka,,,,Gornji Klasnić,,45.2006,16.1064,4
+HR,44405,Brestik,Sisačko-Moslavačka,,,,Mali Gradac,,45.2256,16.1919,4
+HR,44406,Bijele Vode,Sisačko-Moslavačka,,,,Vlahović,,45.2833,16.2,4
+HR,44410,Dugo Selo,Sisačko-Moslavačka,,,,Gvozd,,45.4672,15.9147,4
+HR,44412,Zaloj,Sisačko-Moslavačka,,,,Stankovac,,45.4667,16.05,4
+HR,44414,Gornja Trstenica,Sisačko-Moslavačka,,,,Bović,,45.39,15.9469,4
+HR,44415,Ponikvari,Sisačko-Moslavačka,,,,Topusko,,45.2833,15.95,4
+HR,44425,Slatina Pokupska,Sisačko-Moslavačka,,,,Gornja Bučica,,45.4493,15.9819,
+HR,44430,Čukur,Sisačko-Moslavačka,,,,Hrvatska Kostajnica,,45.235,16.5008,4
+HR,44431,Gornji Kukuruzari,Sisačko-Moslavačka,,,,Donji Kukuruzari,,45.2664,16.4833,
+HR,44432,Donji Bjelovac,Sisačko-Moslavačka,,,,Mečenčani,,45.2833,16.4667,4
+HR,44433,Gornja Velešnja,Sisačko-Moslavačka,,,,Majur,,45.2422,16.4592,4
+HR,44434,Gornja Meminska,Sisačko-Moslavačka,,,,Graboštani,,45.3003,16.5947,4
+HR,44435,Unčani,Sisačko-Moslavačka,,,,Divuša,,45.1283,16.4103,4
+HR,44437,Ljeskovac,Sisačko-Moslavačka,,,,Rujevac,,45.1756,16.2544,4
+HR,44440,Ćore,Sisačko-Moslavačka,,,,Dvor,,45.0908,16.3317,4
+HR,44441,Brđani Šamarički,Sisačko-Moslavačka,,,,Brđani Šamarički,,45.1883,16.3353,4
+HR,44443,Donji Žirovac,Sisačko-Moslavačka,,,,Donji Žirovac,,45.1539,16.1219,4
+HR,44450,Hrvatska Dubica,Sisačko-Moslavačka,,,,Hrvatska Dubica,,45.1911,16.8003,4
+HR,47000,Vodostaj,Karlovačka,,,,Karlovac,,45.5056,15.58,4
+HR,47201,Draganići,Karlovačka,,,,Draganići,,45.6,15.6,4
+HR,47203,Zamršje,Karlovačka,,,,Rečica,,45.5167,15.7,4
+HR,47204,Blatnica Pokupska,Karlovačka,,,,Šišljavić,,45.5167,15.75,
+HR,47205,Vukmanić,Karlovačka,,,,Vukmanić,,45.425,15.6475,4
+HR,47206,Banski Kovačevac,Karlovačka,,,,Lasinja,,45.5,15.7833,4
+HR,47211,Utinja,Karlovačka,,,,Utinja,,45.3992,15.7303,4
+HR,47212,Slunjski Moravci,Karlovačka,,,,Skakavac,,45.4733,15.6943,
+HR,47213,Donji Sjeničak,Karlovačka,,,,Sjeničak Lasinjski,,45.4333,15.7667,4
+HR,47220,Loskunja,Karlovačka,,,,Vojnić,,45.3431,15.6742,4
+HR,47221,Prisjeka,Karlovačka,,,,Krstinja,,45.2422,15.7111,4
+HR,47222,Cetinski Varoš,Karlovačka,,,,Cetingrad,,45.135,15.72,4
+HR,47240,Pavlovac,Karlovačka,,,,Slunj,,44.5153,15.5314,4
+HR,47241,Zimić,Karlovačka,,,,Tušilović,,45.3869,15.6158,
+HR,47242,Grabovac Krnjački,Karlovačka,,,,Krnjak,,45.1956,15.652,
+HR,47243,Grobnik,Karlovačka,,,,Veljun,,45.2097,15.5896,
+HR,47244,Mjesto Primišlje,Karlovačka,,,,Primišlje,,45.2167,15.4667,
+HR,47245,Brajdić Selo,Karlovačka,,,,Rakovica,,45.0046,15.6592,
+HR,47246,Drežnik Grad,Karlovačka,,,,Drežnik Grad,,44.9492,15.6742,4
+HR,47250,Belaj,Karlovačka,,,,Duga Resa,,45.4333,15.55,4
+HR,47251,Soline,Karlovačka,,,,Bosiljevo,,45.1464,14.6047,4
+HR,47252,Žabljak,Karlovačka,,,,Barilović,,45.3636,15.4928,4
+HR,47253,Novi Dol,Karlovačka,,,,Perjasica,,45.2697,15.4825,
+HR,47261,Venac Mrežnički,Karlovačka,,,,Zvečaj,,45.3905,15.4214,
+HR,47262,Lešće,Karlovačka,,,,Generalski Stol,,45.6833,15.3167,4
+HR,47263,Mirići,Karlovačka,,,,Gornje Dubrave,,44.7172,15.6272,4
+HR,47264,Potok Tounjski,Karlovačka,,,,Tounj,,45.2833,15.35,4
+HR,47271,Kolenovac,Karlovačka,,,,Netretić,,45.5333,15.4167,4
+HR,47272,Gornja Stranica,Karlovačka,,,,Ribnik,,45.5585,15.3504,
+HR,47273,Vukova Gorica,Karlovačka,,,,Srednje Prilišće,,45.4481,15.3375,4
+HR,47276,Donji Bukovac Žakanjski,Karlovačka,,,,Žakanje,,45.6031,15.3184,
+HR,47280,Podgraj,Karlovačka,,,,Ozalj,,45.6159,15.4664,
+HR,47281,Vrbanska Draga,Karlovačka,,,,Mali Erjavec,,45.5786,15.45,
+HR,47282,Rujevo,Karlovačka,,,,Kamanje,,45.636,15.4018,
+HR,47283,Lović Prekriški,Karlovačka,,,,Vivodina,,45.6751,15.4134,
+HR,47284,Brašljevica,Karlovačka,,,,Kašt,,45.7083,15.3667,
+HR,47285,Goleši Žumberački,Karlovačka,,,,Radatovići,,45.7033,15.31,
+HR,47286,Goršćaki,Karlovačka,,,,Mahično,,45.5716,15.5314,
+HR,47300,Marković Selo,Karlovačka,,,,Ogulin,,45.2522,15.2707,
+HR,47302,Skradnik,Karlovačka,,,,Oštarije,,45.2167,15.3181,4
+HR,47303,Istočni Trojvrh,Karlovačka,,,,Josipdol,,45.1577,15.3026,
+HR,47304,Međeđak,Karlovačka,,,,Plaški,,45.0919,15.3803,4
+HR,47305,Lička Jesenica,Karlovačka,,,,Lička Jesenica,,44.995,15.4453,4
+HR,47306,Saborsko,Karlovačka,,,,Saborsko,,44.9833,15.4781,4
+HR,47307,Dujmić Selo,Karlovačka,,,,Gornje Zagorje,,45.2,15.2389,
+HR,47313,Trbovići,Karlovačka,,,,Drežnica,,45.15,15.0833,4
+HR,47314,Jasenak,Karlovačka,,,,Jasenak,,45.2328,15.0442,4
+HR,48000,Reka,Koprivničko-Križevačka,,,,Koprivnica,,46.1303,16.7669,4
+HR,48213,Cepidlak,Koprivničko-Križevačka,,,,Cirkvena,,45.9667,16.6667,4
+HR,48214,Predavec Križevački,Koprivničko-Križevačka,,,,Sveti Ivan Žabno,,45.9333,16.6,4
+HR,48260,Erdovec,Koprivničko-Križevačka,,,,Križevci,,46.0325,16.4797,4
+HR,48264,Stari Bošnjani,Koprivničko-Križevačka,,,,Kloštar Vojakovački,,46.0956,16.6364,4
+HR,48265,Sela Ravenska,Koprivničko-Križevačka,,,,Raven,,45.9929,16.4654,
+HR,48267,Mirkovec,Koprivničko-Križevačka,,,,Orehovec,,46.05,15.9333,4
+HR,48268,Pofuki,Koprivničko-Križevačka,,,,Gornja Rijeka,,46.0811,16.3828,
+HR,48269,Hižanovec,Koprivničko-Križevačka,,,,Kalnik,,46.1149,16.4745,
+HR,48306,Grdak,Koprivničko-Križevačka,,,,Sokolovac,,46.1283,16.6969,4
+HR,48311,Botinovec,Koprivničko-Križevačka,,,,Kunovec,,46.2108,16.7731,4
+HR,48312,Veliki Grabičani,Koprivničko-Križevačka,,,,Rasinja,,46.15,16.65,4
+HR,48314,Koprivnički Ivanec,Koprivničko-Križevačka,,,,Koprivnički Ivanec,,46.2333,16.7983,
+HR,48316,Zablatje,Koprivničko-Križevačka,,,,Đelekovec,,46.2667,16.8167,4
+HR,48317,Antolovec,Koprivničko-Križevačka,,,,Legrad,,46.2692,16.7717,4
+HR,48321,Peteranec,Koprivničko-Križevačka,,,,Peteranec,,46.1922,16.8917,4
+HR,48322,Botovo,Koprivničko-Križevačka,,,,Drnje,,46.2219,16.9167,4
+HR,48323,Hlebine,Koprivničko-Križevačka,,,,Hlebine,,46.1569,16.9628,4
+HR,48324,Borovljani,Koprivničko-Križevačka,,,,Koprivnički Bregi,,46.1271,16.8901,
+HR,48325,Plavšinac,Koprivničko-Križevačka,,,,Novigrad Podravski,,46.0931,16.9156,4
+HR,48326,Donje Zdjelice,Koprivničko-Križevačka,,,,Virje,,46.056,16.9703,
+HR,48327,Molve,Koprivničko-Križevačka,,,,Molve,,46.1092,17.0317,4
+HR,48331,Gola,Koprivničko-Križevačka,,,,Gola,,46.1958,17.0581,4
+HR,48332,Ždala,Koprivničko-Križevačka,,,,Ždala,,46.1731,17.1444,4
+HR,48350,Sveta Ana,Koprivničko-Križevačka,,,,Đurđevac,,46.0036,16.9986,4
+HR,48355,Novo Virje,Koprivničko-Križevačka,,,,Novo Virje,,46.0094,17.0439,
+HR,48356,Molvice,Koprivničko-Križevačka,,,,Ferdinandovac,,46.0432,17.1882,
+HR,48361,Kalinovac,Koprivničko-Križevačka,,,,Kalinovac,,46.0294,17.1156,4
+HR,48362,Suha Katalena,Koprivničko-Križevačka,,,,Kloštar Podravski,,45.9628,17.1453,
+HR,48363,Podravske Sesvete,Koprivničko-Križevačka,,,,Podravske Sesvete,,46.005,17.2117,4
+HR,49000,Lazi Krapinski,Krapinsko-Zagorska,,,,Krapina,,46.1481,15.8652,
+HR,49210,Pavlovec Zabočki,Krapinsko-Zagorska,,,,Zabok,,46.0197,15.8817,4
+HR,49214,Prosenik Gubaševski,Krapinsko-Zagorska,,,,Veliko Trgovišće,,45.9841,15.8228,
+HR,49215,Prosenik,Krapinsko-Zagorska,,,,Tuhelj,,46.0833,15.7333,4
+HR,49216,Jazbina,Krapinsko-Zagorska,,,,Desinić,,46.2833,15.9667,4
+HR,49217,Maturovec,Krapinsko-Zagorska,,,,Krapinske Toplice,,46.0734,15.9492,
+HR,49218,Donja Plemenšćina,Krapinsko-Zagorska,,,,Pregrada,,46.1833,15.75,4
+HR,49221,Križanče,Krapinsko-Zagorska,,,,Bedekovčina,,46.3419,16.0939,4
+HR,49222,Poznanovec,Krapinsko-Zagorska,,,,Poznanovec,,46.0608,16.0358,4
+HR,49223,Štrucljevo,Krapinsko-Zagorska,,,,Sveti Križ Začretje,,46.0578,15.9125,4
+HR,49224,Vidovec Petrovski,Krapinsko-Zagorska,,,,Lepajci,,46.1333,15.85,4
+HR,49225,Prigorje,Krapinsko-Zagorska,,,,Đurmanec,,46.1667,15.8,4
+HR,49228,Pustodol Orehovički,Krapinsko-Zagorska,,,,Brestovec Orehovički,,46.1,15.9833,
+HR,49231,Lupinjak,Krapinsko-Zagorska,,,,Hum na Sutli,,46.2,15.7333,4
+HR,49232,Gorjani Sutinski,Krapinsko-Zagorska,,,,Radoboj,,46.1664,15.9236,
+HR,49233,Brdo Jesenjsko,Krapinsko-Zagorska,,,,Gornje Jesenje,,46.2074,15.8986,
+HR,49234,Stara Ves Petrovska,Krapinsko-Zagorska,,,,Petrovsko,,46.159,15.8287,
+HR,49240,Milekovo Selo,Krapinsko-Zagorska,,,,Donja Stubica,,45.9914,15.9663,
+HR,49243,Mokrice,Krapinsko-Zagorska,,,,Oroslavje,,46.055,16.3819,4
+HR,49244,Pila,Krapinsko-Zagorska,,,,Stubičke Toplice,,45.9667,15.9167,
+HR,49245,Samci,Krapinsko-Zagorska,,,,Gornja Stubica,,45.9833,16.0167,4
+HR,49246,Marija Bistrica,Krapinsko-Zagorska,,,,Marija Bistrica,,46.0061,16.1111,4
+HR,49247,Zlatar-Bistrica,Krapinsko-Zagorska,,,,Zlatar Bistrica,,46.0433,16.0803,
+HR,49250,Ratkovec,Krapinsko-Zagorska,,,,Zlatar,,46.1167,16.0833,4
+HR,49251,Mali Komor,Krapinsko-Zagorska,,,,Mače,,46.1167,16.0167,4
+HR,49252,Gregurovec,Krapinsko-Zagorska,,,,Mihovljan,,46.0308,16.4442,4
+HR,49253,Vinipotok,Krapinsko-Zagorska,,,,Lobor,,46.1528,16.0678,
+HR,49254,Gornja Batina,Krapinsko-Zagorska,,,,Belec,,46.1167,16.1167,4
+HR,49255,Kuzminec/dio/,Krapinsko-Zagorska,,,,Novi Golubovec,,46.1917,16.0167,
+HR,49282,Jelovec,Krapinsko-Zagorska,,,,Konjščina,,46.05,16.1833,4
+HR,49283,Gornji Kraljevec,Krapinsko-Zagorska,,,,Hraščina-Trgovišće,,46.1333,16.2167,4
+HR,49284,Pece,Krapinsko-Zagorska,,,,Budinšćina,,46.2189,16.2458,4
+HR,49290,Tomaševec,Krapinsko-Zagorska,,,,Klanjec,,46,16.3,4
+HR,49294,Gornji Čemehovec,Krapinsko-Zagorska,,,,Kraljevec na Sutli,,45.9902,15.7339,
+HR,49295,Dugnjevec,Krapinsko-Zagorska,,,,Kumrovec,,46.0775,15.6756,
+HR,49296,Miljana,Krapinsko-Zagorska,,,,Zagorska Sela,,46.1258,15.6208,4
+HR,51000,Rijeka,Primorsko-Goranska,,,,Rijeka,,44.3983,15.6233,4
+HR,51211,Kučeli,Primorsko-Goranska,,,,Matulji,,45.3621,14.3097,
+HR,51212,Žejane,Primorsko-Goranska,,,,Vele Mune,,45.4394,14.1953,4
+HR,51213,Mali Brgud,Primorsko-Goranska,,,,Jurdani,,45.4038,14.3021,
+HR,51214,Šapjane,Primorsko-Goranska,,,,Šapjane,,45.4786,14.2578,4
+HR,51215,Spinčići,Primorsko-Goranska,,,,Kastav,,45.3711,14.3483,
+HR,51216,Saršoni,Primorsko-Goranska,,,,Viškovo,,45.3806,14.3917,
+HR,51217,Škalnica,Primorsko-Goranska,,,,Klana,,45.4444,14.3369,4
+HR,51218,Trnovica,Primorsko-Goranska,,,,Dražice,,45.3907,14.4559,4
+HR,51219,Soboli,Primorsko-Goranska,,,,Čavle,,45.37,14.4925,4
+HR,51221,Kostrena Sveta Barbara,Primorsko-Goranska,,,,Kostrena,,45.3011,14.5056,4
+HR,51222,Bakar-dio,Primorsko-Goranska,,,,Bakar,,45.2335,14.578,
+HR,51223,Ponikve,Primorsko-Goranska,,,,Škrljevo,,45.3781,15.2361,4
+HR,51224,Krasica,Primorsko-Goranska,,,,Krasica,,45.3097,14.5556,4
+HR,51225,Praputnjak,Primorsko-Goranska,,,,Praputnjak,,45.2989,14.5736,4
+HR,51226,Meja Gaj,Primorsko-Goranska,,,,Hreljin,,45.2911,14.5878,4
+HR,51241,Križišće,Primorsko-Goranska,,,,Križišće,,45.2689,14.6072,4
+HR,51242,Bačići,Primorsko-Goranska,,,,Drivenik,,43.6701,15.9361,
+HR,51243,Sušik,Primorsko-Goranska,,,,Tribalj,,45.2258,14.675,4
+HR,51244,Marušići,Primorsko-Goranska,,,,Grižane,,45.2321,14.694,
+HR,51250,Povile,Primorsko-Goranska,,,,Novi Vinodolski,,45.1172,14.8236,4
+HR,51251,Donji Zagon,Primorsko-Goranska,,,,Ledenice,,45.1444,14.8211,4
+HR,51252,Luka Krmpotska,Primorsko-Goranska,,,,Klenovica,,45.1047,14.9061,4
+HR,51253,Sveti Vid,Primorsko-Goranska,,,,Bribir,,45.1539,14.7772,4
+HR,51260,Šupera,Primorsko-Goranska,,,,Crikvenica,,45.1817,14.6913,
+HR,51261,Bakarac,Primorsko-Goranska,,,,Bakarac,,45.2814,14.5836,4
+HR,51262,Kraljevica,Primorsko-Goranska,,,,Kraljevica,,45.2697,14.5708,4
+HR,51263,Šmrika,Primorsko-Goranska,,,,Šmrika,,45.2497,14.6017,4
+HR,51264,Smokovo,Primorsko-Goranska,,,,Jadranovo,,45.22,14.6419,4
+HR,51265,Dramalj,Primorsko-Goranska,,,,Dramalj,,45.2177,14.5662,
+HR,51266,Selce,Primorsko-Goranska,,,,Selce,,45.1564,14.7211,4
+HR,51280,Banjol,Primorsko-Goranska,,,,Rab,,44.75,14.7833,4
+HR,51281,Lopar,Primorsko-Goranska,,,,Lopar,,44.8325,14.7303,4
+HR,51300,Marija Trošt,Primorsko-Goranska,,,,Delnice,,45.4178,14.8189,4
+HR,51301,Mala Lešnica,Primorsko-Goranska,,,,Brod na Kupi,,45.45,14.8497,4
+HR,51302,Suhor,Primorsko-Goranska,,,,Kuželj,,45.497,14.7707,
+HR,51303,Okrivje,Primorsko-Goranska,,,,Plešce,,45.5661,14.6678,4
+HR,51304,Gerovo,Primorsko-Goranska,,,,Gerovo,,45.5147,14.6422,4
+HR,51305,Ferbežari,Primorsko-Goranska,,,,Tršće,,45.5641,14.631,
+HR,51306,Čabar,Primorsko-Goranska,,,,Čabar,,45.5958,14.6408,4
+HR,51307,Lautari,Primorsko-Goranska,,,,Prezid,,45.6282,14.5796,
+HR,51311,Veliko Selce,Primorsko-Goranska,,,,Skrad,,45.4317,14.9337,
+HR,51312,Razdrto,Primorsko-Goranska,,,,Brod Moravice,,45.4833,15.0333,4
+HR,51313,Kupjak,Primorsko-Goranska,,,,Kupjak,,45.3922,14.8858,4
+HR,51314,Ravna Gora,Primorsko-Goranska,,,,Ravna Gora,,45.3728,14.9353,4
+HR,51315,Tuk Vojni,Primorsko-Goranska,,,,Mrkopalj,,45.3011,14.8725,4
+HR,51316,Sopač,Primorsko-Goranska,,,,Lokve,,45.3599,14.7383,
+HR,51317,Razloge,Primorsko-Goranska,,,,Crni Lug,,45.4828,14.7014,4
+HR,51321,Slavica,Primorsko-Goranska,,,,Vrata,,45.3314,14.7564,4
+HR,51322,Benkovac Fužinski,Primorsko-Goranska,,,,Fužine,,45.3064,14.6775,4
+HR,51323,Banovina,Primorsko-Goranska,,,,Lič,,45.2844,14.7236,4
+HR,51324,Zlobin,Primorsko-Goranska,,,,Zlobin,,45.2939,14.6528,4
+HR,51325,Žakule,Primorsko-Goranska,,,,Moravice,,44.9328,15.2047,4
+HR,51326,Vrbovsko,Primorsko-Goranska,,,,Vrbovsko,,45.3686,15.0783,4
+HR,51327,Ljubošina,Primorsko-Goranska,,,,Gomirje,,45.3167,15.1667,4
+HR,51328,Blaževci,Primorsko-Goranska,,,,Lukovdol,,45.4506,15.1009,
+HR,51329,Smišljak,Primorsko-Goranska,,,,Severin na Kupi,,45.3764,15.2629,
+HR,51410,Opatija,Primorsko-Goranska,,,,Opatija,,45.1712,14.3878,4
+HR,51414,Vela Učka,Primorsko-Goranska,,,,Ičići,,45.3019,14.1997,4
+HR,51415,Oprič,Primorsko-Goranska,,,,Lovran,,45.2769,14.2603,
+HR,51417,Sveti Anton,Primorsko-Goranska,,,,Mošćenička Draga,,45.0997,14.5219,4
+HR,51418,Brseč,Primorsko-Goranska,,,,Brseč,,45.1783,14.2356,4
+HR,51500,Vrh,Primorsko-Goranska,,,,Krk,,45.3575,13.94,4
+HR,51511,Strilčići,Primorsko-Goranska,,,,Malinska,,45.0953,14.5208,4
+HR,51512,Njivice,Primorsko-Goranska,,,,Njivice,,45.1581,14.5386,4
+HR,51513,Omišalj,Primorsko-Goranska,,,,Omišalj,,45.2089,14.5564,4
+HR,51514,Hlapa,Primorsko-Goranska,,,,Dobrinj,,45.1439,14.6019,
+HR,51515,Županje,Primorsko-Goranska,,,,Šilo,,45.1403,14.6328,4
+HR,51516,Risika,Primorsko-Goranska,,,,Vrbnik,,45.1056,14.6433,4
+HR,51517,Kornić,Primorsko-Goranska,,,,Kornić,,45.0464,14.6081,4
+HR,51521,Stara Baška,Primorsko-Goranska,,,,Punat,,44.9581,14.6917,4
+HR,51522,Draga Bašćanska,Primorsko-Goranska,,,,Draga Bašćanska,,44.9833,14.7167,4
+HR,51523,Jurandvor,Primorsko-Goranska,,,,Baška,,44.98,14.7375,4
+HR,51550,Vele Srakane,Primorsko-Goranska,,,,Mali Lošinj,,44.5767,14.3147,4
+HR,51551,Veli Lošinj,Primorsko-Goranska,,,,Veli Lošinj,,44.5167,14.5167,4
+HR,51552,Ilovik,Primorsko-Goranska,,,,Ilovik,,44.4597,14.5453,4
+HR,51554,Sveti Jakov,Primorsko-Goranska,,,,Nerezine,,44.6403,14.3925,4
+HR,51555,Ustrine,Primorsko-Goranska,,,,Belej,,44.7469,14.4039,4
+HR,51556,Vidovići,Primorsko-Goranska,,,,Martinšćica,,44.8356,14.3483,4
+HR,51557,Vrana,Primorsko-Goranska,,,,Cres,,44.8369,14.4139,4
+HR,51559,Važminec,Primorsko-Goranska,,,,Beli,,45.1325,14.3511,4
+HR,51561,Susak,Primorsko-Goranska,,,,Susak,,44.51,14.3028,4
+HR,51562,Unije,Primorsko-Goranska,,,,Unije,,44.6347,14.2478,4
+HR,51564,Ćunski,Primorsko-Goranska,,,,Ćunski,,44.5886,14.4064,4
+HR,52000,Bazgalji,Istarska,,,,Pazin,,45.2646,13.9148,
+HR,52100,Jadreški,Istarska,,,,Pula,,44.8689,13.9161,4
+HR,52203,Medulin,Istarska,,,,Medulin,,44.8225,13.935,4
+HR,52206,Šarići,Istarska,,,,Marčana,,44.9831,13.9369,4
+HR,52207,Draguzeti,Istarska,,,,Barban,,45.0635,13.9709,
+HR,52208,Pavićini,Istarska,,,,Krnica,,44.949,14.0091,
+HR,52210,Rovinj,Istarska,,,,Rovinj (Rovigno),,45.08,13.64,4
+HR,52211,Bale,Istarska,,,,Bale (Valle),,45.0406,13.7836,4
+HR,52212,Peroj,Istarska,,,,Fažana,,44.9519,13.7969,4
+HR,52215,Gajana,Istarska,,,,Vodnjan (Dignano),,45.0064,13.8322,4
+HR,52216,Galižana,Istarska,,,,Galižana (Gallesano),,44.9317,13.8686,4
+HR,52220,Ripenda Kosi,Istarska,,,,Labin,,45.1518,14.0811,
+HR,52221,Rabac,Istarska,,,,Rabac,,45.0794,14.1575,4
+HR,52222,Brovinje,Istarska,,,,Koromačno,,44.9697,14.1008,4
+HR,52223,Krapan,Istarska,,,,Raša,,45.0883,14.0964,4
+HR,52224,Brgod,Istarska,,,,Trget,,45.0194,14.0606,
+HR,52231,Vrećari,Istarska,,,,Nedešćina,,45.138,14.059,
+HR,52232,Lanišće,Istarska,,,,Kršan,,45.4072,14.1164,4
+HR,52233,Letaj,Istarska,,,,Šušnjevica,,45.2603,14.1206,4
+HR,52234,Stepčići,Istarska,,,,Plomin,,45.1532,14.1895,
+HR,52332,Jakačići,Istarska,,,,Pićan,,45.2061,14.0428,
+HR,52333,Tupljak,Istarska,,,,Podpićan,,45.2124,14.0806,
+HR,52341,Debeljuhi,Istarska,,,,Žminj,,45.1401,13.9179,
+HR,52342,Rapanji,Istarska,,,,Svetvinčenat,,45.0813,13.8779,
+HR,52352,Červari,Istarska,,,,Kanfanar,,45.1151,13.7953,
+HR,52402,Borut,Istarska,,,,Cerovlje,,45.3069,14.0528,4
+HR,52403,Gračišće,Istarska,,,,Gračišće,,45.2189,14.0106,4
+HR,52404,Sveti Petar u šumi,Istarska,,,,Sveti Petar u šumi,,45.1836,13.8683,4
+HR,52420,Ugrini,Istarska,,,,Buzet,,45.3591,14.005,
+HR,52422,Lanišće,Istarska,,,,Lanišće,,45.4072,14.1164,4
+HR,52423,Motovunski Novaki,Istarska,,,,Karojba,,45.2944,13.8519,4
+HR,52424,Motovun,Istarska,,,,Motovun,,45.3367,13.8286,4
+HR,52425,Blatna Vas,Istarska,,,,Roč,,45.3822,14.0314,4
+HR,52426,Brest pod Učkom,Istarska,,,,Lupoglav,,45.3444,14.1175,
+HR,52427,Pirelići,Istarska,,,,Livade,,45.3636,13.8531,
+HR,52428,Čepić,Istarska,,,,Oprtalj (Portole),,45.4167,13.8147,4
+HR,52429,Bijele Zemlje,Istarska,,,,Grožnjan (Grisignana),,45.3661,13.7128,4
+HR,52434,Boljun,Istarska,,,,Boljun,,45.3022,14.1222,4
+HR,52440,Veleniki,Istarska,,,,Poreč,,45.2294,13.6531,4
+HR,52444,Jakovici,Istarska,,,,Tinjan,,45.2112,13.8146,
+HR,52445,Bonaci,Istarska,,,,Baderna,,45.2122,13.7225,4
+HR,52446,Nova Vas,Istarska,,,,Nova Vas,,45.2444,14.1597,4
+HR,52447,Ferenci,Istarska,,,,Vižinada,,45.3136,13.7525,4
+HR,52448,Jurcani,Istarska,,,,Sveti Lovreč,,45.1012,13.8576,
+HR,52449,Bašarinka,Istarska,,,,Červar Porat,,45.2676,13.5949,
+HR,52450,Marasi,Istarska,,,,Vrsar,,45.1492,13.6053,
+HR,52452,Funtana,Istarska,,,,Funtana,,45.1747,13.605,4
+HR,52460,Gamboci,Istarska,,,,Buje (Buie),,45.4286,13.6228,4
+HR,52462,Momjan,Istarska,,,,Momjan (Momiano),,45.4386,13.7111,4
+HR,52463,Rapavel,Istarska,,,,Višnjan,,45.2594,13.7753,4
+HR,52464,Krančići,Istarska,,,,Kaštelir,,45.3304,13.7043,
+HR,52465,Vabriga,Istarska,,,,Tar,,45.2917,13.6133,4
+HR,52466,Mareda,Istarska,,,,Novigrad (Cittanova),,45.3306,13.5716,
+HR,52470,Katoro,Istarska,,,,Umag (Umago),,45.4133,13.5719,
+HR,52474,Radini,Istarska,,,,Brtonigla (Verteneglio),,45.3781,13.5808,4
+HR,52475,Crveni Vrh,Istarska,,,,Savudrija (Salvore),,45.4906,13.5408,4
+HR,53000,Žabica,Ličko-Senjska,,,,Gospić,,44.5292,15.3569,4
+HR,53201,Ostrvica,Ličko-Senjska,,,,Lički Osik,,44.5611,15.4531,4
+HR,53202,Malo Polje,Ličko-Senjska,,,,Perušić,,44.6564,15.3556,4
+HR,53203,Krš,Ličko-Senjska,,,,Kosinj,,44.7292,15.3186,4
+HR,53205,Vrebac,Ličko-Senjska,,,,Medak,,44.5269,15.5056,4
+HR,53206,Rizvanuša,Ličko-Senjska,,,,Brušane,,44.4917,15.3033,4
+HR,53211,Smiljansko Polje,Ličko-Senjska,,,,Smiljan,,44.5847,15.3844,4
+HR,53212,Oteš,Ličko-Senjska,,,,Klanac,,44.6172,15.2831,4
+HR,53213,Kalinovača,Ličko-Senjska,,,,Donje Pazarište,,44.6239,15.1967,4
+HR,53220,Prozor,Ličko-Senjska,,,,Otočac,,44.8428,15.2708,4
+HR,53221,Glavace,Ličko-Senjska,,,,Škare,,44.9142,15.2658,4
+HR,53222,Dabar,Ličko-Senjska,,,,Dabar,,44.955,15.31,4
+HR,53223,Vrhovine,Ličko-Senjska,,,,Vrhovine,,44.8517,15.4192,4
+HR,53224,Sinac,Ličko-Senjska,,,,Ličko Lešće,,44.8294,15.3322,4
+HR,53225,Gorići,Ličko-Senjska,,,,Švica,,44.8547,15.1392,4
+HR,53226,Brlog,Ličko-Senjska,,,,Kompolje,,44.9336,15.1361,4
+HR,53230,Mihaljevac,Ličko-Senjska,,,,Korenica,,44.7647,15.7111,4
+HR,53231,Plitvička Jezera,Ličko-Senjska,,,,Plitvička Jezera,,44.8825,15.6203,4
+HR,53233,Zaklopača,Ličko-Senjska,,,,Ličko Petrovo Selo,,44.8956,15.6661,4
+HR,53234,Kurjak,Ličko-Senjska,,,,Udbina,,44.5,15.7364,4
+HR,53235,Pećane,Ličko-Senjska,,,,Bunić,,44.6469,15.7239,4
+HR,53236,Svračkovo Selo,Ličko-Senjska,,,,Podlapača,,44.6214,15.6225,4
+HR,53244,Smokrić,Ličko-Senjska,,,,Lovinac,,44.3847,15.7431,4
+HR,53250,Dnopolje,Ličko-Senjska,,,,Donji Lapac,,44.5797,15.9211,4
+HR,53251,Nebljusi,Ličko-Senjska,,,,Nebljusi,,44.6594,15.9447,4
+HR,53252,Doljani,Ličko-Senjska,,,,Doljani,,44.4625,16.1056,4
+HR,53260,Brinje,Ličko-Senjska,,,,Brinje,,45,15.1308,4
+HR,53261,Glibodol,Ličko-Senjska,,,,Križpolje,,44.9947,15.3369,4
+HR,53262,Jezerane,Ličko-Senjska,,,,Jezerane,,45.0481,15.2064,4
+HR,53270,Stolac,Ličko-Senjska,,,,Senj,,44.9386,14.9853,4
+HR,53271,Alan,Ličko-Senjska,,,,Krivi Put,,45.0689,14.9333,4
+HR,53273,Vrzići,Ličko-Senjska,,,,Vratnik,,44.9306,15.0517,4
+HR,53274,Krasno,Ličko-Senjska,,,,Krasno,,44.8231,15.0514,4
+HR,53284,Klada,Ličko-Senjska,,,,Sveti Juraj,,44.8167,14.9,4
+HR,53287,Prizna,Ličko-Senjska,,,,Jablanac,,44.6419,15.0111,4
+HR,53288,Konjsko,Ličko-Senjska,,,,Karlobag,,44.5125,15.1444,4
+HR,53289,Barić Draga,Ličko-Senjska,,,,Lukovo Šugarje,,44.3786,15.2686,4
+HR,53291,Potočnica,Ličko-Senjska,,,,Novalja,,44.5779,14.8819,
+HR,53294,Lun,Ličko-Senjska,,,,Lun,,44.6869,14.7503,4
+HR,53296,Kustići,Ličko-Senjska,,,,Zubovići,,44.5306,14.9667,4

@@ -1,4 +1,4 @@
-__doc__ = 'Interface to qt webkit for parsing JavaScript dependent webpages'
+__doc__ = 'Interface to qt webkit for loading and interacting with JavaScript dependent webpages'
 
 import sys, os, re, urllib2, random, itertools, csv
 reload(sys)
@@ -9,51 +9,53 @@ from datetime import datetime
 # for using native Python strings
 import sip
 sip.setapi('QString', 2)
-from PyQt4.QtGui import QApplication, QDesktopServices, QImage, QPainter, QGridLayout, QLineEdit, QWidget, QWidget, QShortcut, QKeySequence, QTableWidget, QTableWidgetItem
+from PyQt4.QtGui import QApplication, QDesktopServices, QImage, QPainter, QVBoxLayout, QLineEdit, QWidget, QWidget, QShortcut, QKeySequence, QTableWidget, QTableWidgetItem
 from PyQt4.QtCore import QByteArray, QUrl, QTimer, QEventLoop, QIODevice, QObject, Qt
 from PyQt4.QtWebKit import QWebFrame, QWebView, QWebElement, QWebPage, QWebSettings, QWebInspector
 from PyQt4.QtNetwork import QNetworkAccessManager, QNetworkProxy, QNetworkRequest, QNetworkReply, QNetworkDiskCache
 
-import agent
 import common
 
 # maximum number of bytes to read from a POST request
 MAX_POST_SIZE = 2 ** 25
 
 
-class NetworkAccessManager(QNetworkAccessManager):
-    """Subclass QNetworkAccessManager for finer control network operations
-    """
 
-    def __init__(self, proxy, forbidden_extensions, allowed_regex, cache_size=100, cache_dir='.webkit_cache'):
-        """
-        See Browser for details of arguments
-    
-        cache_size:
-            the maximum size of the webkit cache (MB)
+class NetworkAccessManager(QNetworkAccessManager):
+    def __init__(self, proxy, cache_size=100, cache_dir='.webkit_cache'):
+        """Subclass QNetworkAccessManager for finer control network operations
+
+        proxy: the string of a proxy to download through
+        cache_size: the maximum size of the webkit cache (MB)
+        cache_dir: where to place the cache
         """
         super(NetworkAccessManager, self).__init__()
         # initialize the manager cache
         QDesktopServices.storageLocation(QDesktopServices.CacheLocation)
         cache = QNetworkDiskCache()
         cache.setCacheDirectory(cache_dir)
-        cache.setMaximumCacheSize(cache_size * 1024 * 1024) # need to convert cache value to bytes
+        cache.setMaximumCacheSize(cache_size * 1024 * 1024) # convert cache value from MB to bytes
         self.setCache(cache)
         # and proxy
         self.setProxy(proxy)
-        self.allowed_regex = allowed_regex
-        self.forbidden_extensions = forbidden_extensions
-        #self.sslErrors.connect(sslErrorHandler)
+        self.sslErrors.connect(self.sslErrorHandler)
+        # the requests that are still active
         self.active_requests = [] # XXX needs to be thread safe?
 
+
     def shutdown(self):
+        """Network is shutting down event
+        """
+        # prevent new requests
         self.setNetworkAccessible(QNetworkAccessManager.NotAccessible)
+        # abort existing requests
         for request in self.active_requests:
             request.abort()
             request.deleteLater()
 
+
     def setProxy(self, proxy):
-        """Allow setting string as proxy
+        """Parse proxy components from proxy
         """
         if proxy:
             fragments = common.parse_proxy(proxy)
@@ -66,34 +68,29 @@ class NetworkAccessManager(QNetworkAccessManager):
                 )
             else:
                 common.logger.info('Invalid proxy: ' + str(proxy))
-                proxy = None
 
 
     def createRequest(self, operation, request, post):
-        if operation == self.GetOperation:
-            if self.is_forbidden(request):
-                # deny GET request for banned media type by setting dummy URL
-                # XXX abort properly
-                request.setUrl(QUrl('forbidden://localhost/'))
-            else:
-                common.logger.debug(common.to_unicode(request.url().toString()).encode('utf-8'))
-        
+        """Override creating a network request
+        """
         request.setAttribute(QNetworkRequest.CacheLoadControlAttribute, QNetworkRequest.PreferCache)
         reply = QNetworkAccessManager.createRequest(self, operation, request, post)
         reply.error.connect(self.catch_error)
         self.active_requests.append(reply)
         reply.destroyed.connect(self.active_requests.remove)
+        # save reference to original request
         reply.orig_request = request
         reply.data = self.parse_data(post)
         reply.content = ''
         def save_content(r):
-            # save copy of content before is lost
+            # save copy of reply content before is lost
             def _save_content():
                 r.content += r.peek(r.size())
             return _save_content
         reply.readyRead.connect(save_content(reply))
         return reply
        
+
     def parse_data(self, data):
         """Parse this posted data into a list of key/value pairs
         """
@@ -102,17 +99,6 @@ class NetworkAccessManager(QNetworkAccessManager):
             url.setEncodedQuery(data.peek(MAX_POST_SIZE))
         return url.queryItems()
 
-    def is_forbidden(self, request):
-        """Returns whether this request is permitted by checking URL extension and regex
-        XXX head request for mime?
-        """
-        forbidden = False
-        url = common.to_unicode(request.url().toString())
-        if self.forbidden_extensions and common.get_extension(url) in self.forbidden_extensions:
-            forbidden = True
-        elif re.match(self.allowed_regex, url) is None:
-            forbidden = True
-        return forbidden
 
     def catch_error(self, eid):
         """Interpret the HTTP error ID received
@@ -147,54 +133,53 @@ class NetworkAccessManager(QNetworkAccessManager):
             common.logger.debug('Error %d: %s (%s)' % (eid, errors.get(eid, 'unknown error'), self.sender().url().toString()))
 
 
-def sslErrorHandler(reply, errors): 
-    print errors
-    reply.ignoreSslErrors() 
+    def sslErrorHandler(self, reply, errors): 
+        common.logger.info('SSL errors: {}'.format(errors))
+        reply.ignoreSslErrors() 
 
 
 
 class WebPage(QWebPage):
-    """Override QWebPage to set User-Agent and JavaScript messages
-
-    user_agent: 
-        the User Agent to submit
-    confirm:
-        default response to confirm dialog boxes
-    """
-
     def __init__(self, user_agent, confirm=True):
+        """Override QWebPage to set User-Agent and JavaScript messages
+
+        user_agent: the User Agent to submit
+        confirm: default response to confirm dialog boxes
+        """
         super(WebPage, self).__init__()
         self.user_agent = user_agent
         self.confirm = confirm
         self.setForwardUnsupportedContent(True)
-        self.unsupportedContent.connect(self.test)
-
-    def test(self, reply):
-        print 'unsupported:', reply.url().toString()
 
     def userAgentForUrl(self, url):
+        """Use same user agent for all URL's
+        """
         return self.user_agent
 
     def javaScriptAlert(self, frame, message):
-        """Override default JavaScript alert popup and print results
+        """Override default JavaScript alert popup and send to log
         """
         common.logger.debug('Alert:' + message)
 
+
     def javaScriptConfirm(self, frame, message):
-        """Override default JavaScript confirm popup and print results
+        """Override default JavaScript confirm popup and send to log
         """
         common.logger.debug('Confirm:' + message)
         return self.confirm
 
+
     def javaScriptPrompt(self, frame, message, default):
-        """Override default JavaScript prompt popup and print results
+        """Override default JavaScript prompt popup and send to log
         """
         common.logger.debug('Prompt:%s%s' % (message, default))
 
+
     def javaScriptConsoleMessage(self, message, line_number, source_id):
-        """Print JavaScript console messages
+        """Override default JavaScript console and send to log
         """
         common.logger.debug('Console:%s%s%s' % (message, line_number, source_id))
+
 
     def shouldInterruptJavaScript(self):
         """Disable javascript interruption dialog box
@@ -202,25 +187,30 @@ class WebPage(QWebPage):
         return True
 
 
+
 class WebView(QWebView):
-    def __init__(self, page, enable_plugins, load_images):
+    def __init__(self, page, enable_plugins, load_images, load_java):
+        """Override QWebView to set which plugins to load
+        """
         super(WebView, self).__init__()
         self.setPage(page)
-        # enable flash plugin etc.
+        # set whether to enable plugins, images, and java
         self.settings().setAttribute(QWebSettings.PluginsEnabled, enable_plugins)
-        self.settings().setAttribute(QWebSettings.JavaEnabled, enable_plugins)
         self.settings().setAttribute(QWebSettings.AutoLoadImages, load_images)
+        self.settings().setAttribute(QWebSettings.JavaEnabled, load_java)
         self.settings().setAttribute(QWebSettings.DeveloperExtrasEnabled, True)
-        #self.settings().setAttribute(QWebSettings.LocalContentCanAccessRemoteUrls, True)
-        #self.settings().setAttribute(QWebSettings.LocalContentCanAccessFileUrls, True)
+
 
 
 class UrlInput(QLineEdit):
+    """Address URL input widget
+    """
     def __init__(self, view):
         super(UrlInput, self).__init__()
         self.view = view
         # add event listener on "enter" pressed
         self.returnPressed.connect(self._return_pressed)
+
 
     def _return_pressed(self):
         url = QUrl(self.text())
@@ -228,60 +218,90 @@ class UrlInput(QLineEdit):
         self.view.load(url)
 
 
+
+class ResultsTable(QTableWidget):
+    def __init__(self):
+        """A table to display results from the scraping
+        """
+        super(ResultsTable, self).__init__()
+        # avoid displaying duplicate rows
+        self.row_hashes = set()
+        # also save data to a CSV file
+        self.writer = csv.writer(open('data.csv', 'w'))
+        self.fields = None
+
+    def add_rows(self, fields, rows=None):
+        """Add these rows to the table and initialize fields if not already
+        """
+        if self.fields is None:
+            self.fields = fields
+            self.setColumnCount(len(fields))
+            self.setHorizontalHeaderLabels(fields)
+            self.writer.writerow(fields)
+        for row in rows or []:
+            self.add_row(row)
+
+    def add_row(self, cols):
+        """Add this row to the table if is not duplicate
+        """
+        key = hash(tuple(cols))
+        if key not in self.row_hashes:
+            self.row_hashes.add(key)
+            num_rows = self.rowCount()
+            self.insertRow(num_rows)
+            for i, col in enumerate(cols):
+                self.setItem(num_rows, i, QTableWidgetItem(col))
+            self.writer.writerow(cols)
+
+
+
 class Browser(QWidget):
-    """Render webpages using webkit
+    def __init__(self, gui=False, user_agent='WebKit', proxy=None, load_images=True, load_java=True, enable_plugins=True, timeout=20, delay=5):
+        """Widget class that contains the address bar, webview for rendering webpages, and a table for displaying results
 
-    gui:
-        whether to show webkit window or run headless
-    user_agent:
-        the user-agent when downloading content
-    proxy:
-        a QNetworkProxy to download through
-    load_images:
-        whether to download images
-    forbidden_extensions
-        a list of extensions to prevent downloading
-    allowed_regex:
-        a regular expressions of URLs to allow
-    timeout:
-        the maximum amount of seconds to wait for a request
-    delay:
-        the minimum amount of seconds to wait between requests
-    """
-
-    def __init__(self, gui=False, user_agent='Webkit', proxy=None, load_images=True, forbidden_extensions=None, allowed_regex='.*?', timeout=20, delay=5, enable_plugins=True):
-        self.running = True
-        self.app = QApplication(sys.argv) # must instantiate first
+        gui: whether to show webkit window or run headless
+        user_agent: the user-agent when downloading content
+        proxy: a QNetworkProxy to download through
+        load_images: whether to download images
+        load_java: whether to enable java
+        enable_plugins: whether to enable browser plugins
+        timeout: the maximum amount of seconds to wait for a request
+        delay: the minimum amount of seconds to wait between requests
+        """
+        # must instantiate the QApplication object before any other Qt objects
+        self.app = QApplication(sys.argv)
         super(Browser, self).__init__()
-        manager = NetworkAccessManager(proxy, forbidden_extensions, allowed_regex)
+        self.running = True
+        manager = NetworkAccessManager(proxy)
         manager.finished.connect(self.finished)
-        page = WebPage(user_agent or agent.rand_agent())
+        page = WebPage(user_agent)
         page.setNetworkAccessManager(manager)
-        self.view = WebView(page, enable_plugins, load_images)
+        self.view = WebView(page, load_images, load_java, enable_plugins)
         self.timeout = timeout
         self.delay = delay
 
-        self.grid = QGridLayout()
+        # use grid layout to hold widgets
+        self.grid = QVBoxLayout()
         self.url_input = UrlInput(self.view)
-        # url_input at row 1 column 0 of our grid
-        self.grid.addWidget(self.url_input, 1, 0)
-        # browser frame at row 2 column 0 of our grid
-        self.grid.addWidget(self.view, 2, 0)
-        self.table = None
-        self.table_row_hashes = set()
-        self.table_writer = csv.writer(open('data.csv', 'w'))
-
+        self.grid.addWidget(self.url_input)
+        self.grid.addWidget(self.view)
+        self.table = ResultsTable()
+        self.grid.addWidget(self.table)
         self.setLayout(self.grid)
         self.add_shortcuts()
         if gui: 
             self.show()
-            self.raise_() # raise this window
+            self.raise_() # give focus to this browser window
+
+
+    def __del__(self):
+        # not sure why, but to avoid seg fault need to release the QWebPage manually
+        self.view.setPage(None)
 
 
     def add_shortcuts(self):
         """Define shortcuts for convenient interaction
         """
-        #QShortcut(QKeySequence(Qt.Key_Escape), self, self.close)
         QShortcut(QKeySequence.Close, self, self.close)
         QShortcut(QKeySequence.Quit, self, self.close)
         QShortcut(QKeySequence.Back, self, self.view.back)
@@ -291,32 +311,8 @@ class Browser(QWidget):
         QShortcut(QKeySequence(Qt.CTRL + Qt.Key_F), self, self.fullscreen)
 
 
-    def update_table(self, fields, rows=None):
-        # status table at row 3
-        if self.table is None:
-            self.table = QTableWidget()
-            self.table.setColumnCount(len(fields))
-            self.table.setHorizontalHeaderLabels(fields)
-            self.grid.addWidget(self.table, 3, 0)
-            self.table_writer.writerow(fields)
-            self.app.processEvents()
-        #self.table.clear()
-        #self.table.setRowCount(0)
-        for row in rows or []:
-            self.add_table_row(row)
-
-    def add_table_row(self, cols):
-        key = hash(tuple(cols))
-        if key not in self.table_row_hashes:
-            self.table_row_hashes.add(key)
-            num_rows = self.table.rowCount()
-            self.table.insertRow(num_rows)
-            for i, col in enumerate(cols):
-                self.table.setItem(num_rows, i, QTableWidgetItem(col))
-            self.table_writer.writerow(cols)
-
     def save(self):
-        """Save the current HTML
+        """Save the current HTML to disk
         """
         html = self.current_html()
         for i in itertools.count(1):
@@ -326,11 +322,13 @@ class Browser(QWidget):
                 print 'save', filename
                 break
 
+
     def home(self):
         """Go back to initial page in history
         """
         history = self.view.history()
         history.goToItem(history.itemAt(0))
+
 
     def fullscreen(self):
         """Alternate fullscreen mode
@@ -341,27 +339,29 @@ class Browser(QWidget):
             self.showMaximized() 
 
 
-    def __del__(self):
-        # not sure why, but to avoid seg fault need to release the QWebPage manually
-        self.view.setPage(None)
-
     def set_proxy(self, proxy):
+        """Shortcut to set the proxy
+        """
         self.view.page().networkAccessManager().setProxy(proxy)
+
 
     def current_url(self):
         """Return current URL
         """
         return str(self.view.url().toString())
 
+
     def current_html(self):
         """Return current rendered HTML
         """
         return common.to_unicode(str(self.view.page().mainFrame().toHtml()))
 
+
     def current_text(self):
-        """Return current rendered HTML
+        """Return text from the current rendered HTML
         """
         return common.to_unicode(str(self.view.page().mainFrame().toPlainText()))
+
 
     def load(self, url=None, html=None, headers=None, data=None, num_retries=1):
         """Load given url in webkit and return html when loaded
@@ -375,7 +375,7 @@ class Browser(QWidget):
         if not self.running:
             return
         if isinstance(url, basestring):
-            # convert string to Qt URL object
+            # convert string to Qt's URL object
             url = QUrl(url)
         t1 = time()
         loop = QEventLoop()
@@ -412,10 +412,10 @@ class Browser(QWidget):
         else:
             # did not download in time
             if num_retries > 0:
-                common.logger.debug('Timeout - retrying')
+                common.logger.debug('Timeout - retrying: {}'.format(url.toString()))
                 parsed_html = self.load(url, num_retries=num_retries-1)
             else:
-                common.logger.debug('Timed out')
+                common.logger.debug('Timed out: {}'.format(url.toString()))
                 parsed_html = ''
         return parsed_html
 
@@ -452,15 +452,18 @@ class Browser(QWidget):
             if self.find(pattern):
                 return True
         return False
- 
+
+
     def js(self, script):
         """Shortcut to execute javascript on current document and return result
         """
         self.app.processEvents()
         return self.view.page().mainFrame().evaluateJavaScript(script).toString()
 
+
     def click(self, pattern='input'):
         """Click all elements that match the pattern.
+        XXX possible to do this with native API rather than JavaScript hack?
 
         Uses standard CSS pattern matching: http://www.w3.org/TR/CSS2/selector.html
         Returns the number of elements clicked
@@ -470,23 +473,11 @@ class Browser(QWidget):
             e.evaluateJavaScript("var evObj = document.createEvent('MouseEvents'); evObj.initEvent('click', true, true); this.dispatchEvent(evObj);")
         return len(es)
 
+
     def keydown(self, key):
-        self.js("""
-var character = "%s";
-var evt = document.createEvent("KeyboardEvent");
-  (evt.initKeyEvent || evt.initKeyboardEvent)("keypress", true, true, window,
-                    0, 0, 0, 0,
-                    0, character.charCodeAt(0)) 
-  var canceled = !body.dispatchEvent(evt);
-  if(canceled) {
-    // A handler called preventDefault
-    alert("canceled");
-  } else {
-    // None of the handlers called preventDefault
-    alert("not canceled");
-  }
-}
-        """ % key)
+        """XXX Need to instantiate this and other native events
+        """
+        raise NotImplementedError('add support for native events')
 
 
     def attr(self, pattern, name, value=None):
@@ -500,7 +491,8 @@ var evt = document.createEvent("KeyboardEvent");
             for e in es:
                 e.setAttribute(name, value)
             return len(es)
-           
+
+
     def fill(self, pattern, value):
         """Set text of these elements to value
         """
@@ -519,8 +511,6 @@ var evt = document.createEvent("KeyboardEvent");
         """Returns whether element matching css pattern exists
         Note this uses CSS syntax, not Xpath
         """
-        # format xpath to webkit style
-        #pattern = re.sub('["\']\]', ']', re.sub('=["\']', '=', pattern.replace('[@', '[')))
         if isinstance(pattern, basestring):
             matches = self.view.page().mainFrame().findAllElements(pattern).toList()
         elif isinstance(pattern, list):
@@ -554,13 +544,12 @@ var evt = document.createEvent("KeyboardEvent");
     def finished(self, reply):
         """Override this method in subclasses to process downloaded urls
         """
-        #self.view.page().networkAccessManager().active_requests -= 1
         if reply.url() == self.view.url():
             self.update_address(reply.url())
 
 
     def update_address(self, url):
-        self.url_input.setText(url.toString())# + ' ' + common.list_to_qs(reply.data))
+        self.url_input.setText(url.toString())
         
 
     def screenshot(self, output_file):
@@ -584,6 +573,7 @@ var evt = document.createEvent("KeyboardEvent");
         self.view.page().networkAccessManager().shutdown()
 
 
+
 if __name__ == '__main__':
     # initiate webkit and show gui
     # once script is working you can disable the gui
@@ -591,11 +581,11 @@ if __name__ == '__main__':
     # load webpage
     w.load('http://duckduckgo.com')
     # fill search textbox 
-    #w.fill('input[id=search_form_input_homepage]', 'web scraping')
+    w.fill('input[id=search_form_input_homepage]', 'web scraping')
     # take screenshot of webpage
-    #w.screenshot('duckduckgo.jpg')
+    w.screenshot('duckduckgo.jpg')
     # click search button 
-    #w.click('input[id=search_button_homepage]')
+    w.click('input[id=search_button_homepage]')
     w.run()
     # show webpage for 10 seconds
-    #w.wait(10)
+    w.wait(10)

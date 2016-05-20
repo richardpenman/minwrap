@@ -3,6 +3,7 @@
 import re, json, numbers, collections
 import xml.etree.ElementTree as ET
 import demjson
+import common
 
 
 def parse_json(s):
@@ -124,6 +125,18 @@ def json_counter(es, result=None):
     return result
 
 
+def json_to_rows(js):
+    """Extract rows from this json object by finding the leaf nodes and taking the nodes with most common counts as the columns
+    """
+    counter = json_counter(js)
+    num_entries = common.most_common([len(values) for values in counter.values()])
+    # get the fields with the correct number of entries
+    fields = sorted(key for key in counter.keys() if len(counter[key]) == num_entries)
+    results = zip(*[counter[field] for field in fields])
+    return [field.title() for field in fields], results
+
+
+
 def main():
     D = download.Download(proxy_file='proxies.txt', num_retries=1, delay=0)
     #writer = common.UnicodeWriter('.csv')
@@ -132,4 +145,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
