@@ -191,15 +191,16 @@ class WebPage(QWebPage):
 
 
 class WebView(QWebView):
-    def __init__(self, page, enable_plugins, load_images, load_java):
+    def __init__(self, page, load_images, load_javascript, load_java, load_plugins):
         """Override QWebView to set which plugins to load
         """
         super(WebView, self).__init__()
         self.setPage(page)
         # set whether to enable plugins, images, and java
-        self.settings().setAttribute(QWebSettings.PluginsEnabled, enable_plugins)
         self.settings().setAttribute(QWebSettings.AutoLoadImages, load_images)
+        self.settings().setAttribute(QWebSettings.JavaScriptEnabled, load_javascript)
         self.settings().setAttribute(QWebSettings.JavaEnabled, load_java)
+        self.settings().setAttribute(QWebSettings.PluginsEnabled, load_plugins)
         self.settings().setAttribute(QWebSettings.DeveloperExtrasEnabled, True)
 
 
@@ -260,15 +261,16 @@ class ResultsTable(QTableWidget):
 
 
 class Browser(QWidget):
-    def __init__(self, gui=False, user_agent='WebKit', proxy=None, load_images=True, load_java=True, enable_plugins=True, timeout=20, delay=5):
+    def __init__(self, gui=False, user_agent='WebKit', proxy=None, load_images=True, load_javascript=True, load_java=True, load_plugins=True, timeout=20, delay=5):
         """Widget class that contains the address bar, webview for rendering webpages, and a table for displaying results
 
         gui: whether to show webkit window or run headless
         user_agent: the user-agent when downloading content
         proxy: a QNetworkProxy to download through
         load_images: whether to download images
+        load_javascript: whether to enable javascript
         load_java: whether to enable java
-        enable_plugins: whether to enable browser plugins
+        load_plugins: whether to enable browser plugins
         timeout: the maximum amount of seconds to wait for a request
         delay: the minimum amount of seconds to wait between requests
         """
@@ -280,7 +282,7 @@ class Browser(QWidget):
         manager.finished.connect(self.finished)
         page = WebPage(user_agent)
         page.setNetworkAccessManager(manager)
-        self.view = WebView(page, load_images, load_java, enable_plugins)
+        self.view = WebView(page, load_images, load_javascript, load_java, load_plugins)
         self.timeout = timeout
         self.delay = delay
 
