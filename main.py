@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+__doc__ = 'Interface to run the ajax browser'
+
 # for using native Python strings
 import sip
 sip.setapi('QString', 2)

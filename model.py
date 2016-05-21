@@ -107,24 +107,23 @@ class Model:
         """Attempt abstacting these examples
         If successful return a list of similar entities else None"""
         if examples is not None:
-            template, examples = self.strip_surroundings(examples)
-            common.logger.info('Abstraction template: {} {}'.format(template, examples))
-            v = verticals.Verticals()
-            all_cases = v.extend(examples) or []
+            #template, examples = self.build_template(examples)
+            #common.logger.info('Abstraction template: {} {}'.format(template, examples))
+            all_cases = verticals.extend(examples) or []
             for case in all_cases:
-                yield template.format(case)
+                #yield template.format(case)
+                yield case
 
 
-    def strip_surroundings(self, examples):
+    def build_template(self, examples):
         """Build a template that removes the common prefix and suffix
 
-        >>> AbstractCases.type_data = {}
-        >>> ac = AbstractCases()
-        >>> ac.get_surroundings(['<div>hello</div>', '<div>world</div>'])
+        >>> m = Model()
+        >>> m.build_template(['<div>hello</div>', '<div>world</div>'])
         ('<div>{}</div>', ['hello', 'world'])
-        >>> ac.get_surroundings(['aba', 'aca'])
+        >>> m.build_template(['aba', 'aca'])
         ('a{}a', ['b', 'c'])
-        >>> ac.get_surroundings(['hello', 'world'])
+        >>> m.build_template(['hello', 'world'])
         ('{}', ['hello', 'world'])
         """
         prefix = ''

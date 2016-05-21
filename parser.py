@@ -134,14 +134,3 @@ def json_to_rows(js):
     fields = sorted(key for key in counter.keys() if len(counter[key]) == num_entries)
     results = zip(*[counter[field] for field in fields])
     return [field.title() for field in fields], results
-
-
-
-def main():
-    D = download.Download(proxy_file='proxies.txt', num_retries=1, delay=0)
-    #writer = common.UnicodeWriter('.csv')
-    #writer.writerow(HEADER)
-
-
-if __name__ == '__main__':
-    main()

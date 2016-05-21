@@ -12,6 +12,7 @@ def fiat(browser):
         browser.wait_quiet()
 
 def lufthansa(browser):
+    # XXX need to simulate keyup event to get working
     searches = 'vie', 'aus'
     browser.load('http://www.lufthansa.com/uk/en/Homepage')
     for search in searches:

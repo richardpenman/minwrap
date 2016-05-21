@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 __doc__ = 'Interface to qt webkit for loading and interacting with JavaScript dependent webpages'
 
 import sys, os, re, urllib2, random, itertools, csv
