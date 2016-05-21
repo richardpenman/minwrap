@@ -18,7 +18,7 @@ parent_dir = os.path.abspath(os.path.pardir)
 if parent_dir not in sys.path:
     sys.path.append(parent_dir)
 
-from unittest.mock import MagicMock
+from mock import MagicMock
 class Mock(MagicMock):
     @classmethod
     def __getattr__(cls, name):
