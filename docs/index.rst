@@ -6,8 +6,6 @@
 AjaxBrowser documentation
 =======================================
 
-Contents:
-
 .. toctree::
 
     reference
