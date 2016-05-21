@@ -8,7 +8,7 @@ Install modules for parsing JSON and HTML:
     pip install demjson lxml
 
 
-Install Qt and Python bindings for Webkit:
+Install Qt and Python bindings for Webkit
 
 Linux:
 
@@ -23,9 +23,16 @@ OSX:
     brew install qt pyqt sip
 
 
+Run
+===
 
-Contents
-========
+.. sourcecode:: bash
+
+    python main.py
+
+
+Files
+=====
 
 \*.py - modules documented at http://ajaxbrowser.readthedocs.io/en/latest/
 

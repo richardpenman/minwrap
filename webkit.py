@@ -198,7 +198,7 @@ class WebView(QWebView):
         self.setPage(page)
         # set whether to enable plugins, images, and java
         self.settings().setAttribute(QWebSettings.AutoLoadImages, load_images)
-        self.settings().setAttribute(QWebSettings.JavaScriptEnabled, load_javascript)
+        self.settings().setAttribute(QWebSettings.JavascriptEnabled, load_javascript)
         self.settings().setAttribute(QWebSettings.JavaEnabled, load_java)
         self.settings().setAttribute(QWebSettings.PluginsEnabled, load_plugins)
         self.settings().setAttribute(QWebSettings.DeveloperExtrasEnabled, True)
@@ -261,7 +261,7 @@ class ResultsTable(QTableWidget):
 
 
 class Browser(QWidget):
-    def __init__(self, gui=False, user_agent='WebKit', proxy=None, load_images=True, load_javascript=True, load_java=True, load_plugins=True, timeout=20, delay=5):
+    def __init__(self, gui=False, user_agent='WebKit', proxy=None, load_images=True, load_javascript=True, load_java=True, load_plugins=True, timeout=20, delay=5, app=None):
         """Widget class that contains the address bar, webview for rendering webpages, and a table for displaying results
 
         gui: whether to show webkit window or run headless
@@ -275,7 +275,7 @@ class Browser(QWidget):
         delay: the minimum amount of seconds to wait between requests
         """
         # must instantiate the QApplication object before any other Qt objects
-        self.app = QApplication(sys.argv)
+        self.app = app or QApplication(sys.argv)
         super(Browser, self).__init__()
         self.running = True
         manager = NetworkAccessManager(proxy)
