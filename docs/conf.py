@@ -18,10 +18,13 @@ parent_dir = os.path.abspath(os.path.pardir)
 if parent_dir not in sys.path:
     sys.path.append(parent_dir)
 
-import mock
+from unittest.mock import MagicMock
+class Mock(MagicMock):
+    @classmethod
+    def __getattr__(cls, name):
+            return Mock()
 MOCK_MODULES = ['sip', 'PyQt4.QtGui', 'PyQt4.QtCore', 'PyQt4.QtWebKit', 'PyQt4.QtNetwork', 'demjson', 'lxml']
-for mod_name in MOCK_MODULES:
-    sys.modules[mod_name] = mock.Mock()
+sys.modules.update((mod_name, Mock()) for mod_name in MOCK_MODULES)
 
 import shlex
 
