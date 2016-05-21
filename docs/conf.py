@@ -18,10 +18,10 @@ parent_dir = os.path.abspath(os.path.pardir)
 if parent_dir not in sys.path:
     sys.path.append(parent_dir)
 
-#import mock
-#MOCK_MODULES = ['sip', 'PyQt4.QtGui', 'PyQt4.QtCore', 'PyQt4.QtWebKit', 'PyQt4.QtNetwork', 'demjson', 'lxml']
-#for mod_name in MOCK_MODULES:
-#    sys.modules[mod_name] = mock.Mock()
+import mock
+MOCK_MODULES = ['sip', 'PyQt4.QtGui', 'PyQt4.QtCore', 'PyQt4.QtWebKit', 'PyQt4.QtNetwork', 'demjson', 'lxml']
+for mod_name in MOCK_MODULES:
+    sys.modules[mod_name] = mock.Mock()
 
 import shlex
 

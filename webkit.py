@@ -231,11 +231,13 @@ class ResultsTable(QTableWidget):
         # also save data to a CSV file
         self.writer = csv.writer(open('data.csv', 'w'))
         self.fields = None
+        self.hide()
 
     def add_rows(self, fields, rows=None):
         """Add these rows to the table and initialize fields if not already
         """
         if self.fields is None:
+            self.show()
             self.fields = fields
             self.setColumnCount(len(fields))
             self.setHorizontalHeaderLabels(fields)
