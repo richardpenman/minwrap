@@ -24,7 +24,7 @@ MAX_POST_SIZE = 2 ** 25
 
 
 class NetworkAccessManager(QNetworkAccessManager):
-    def __init__(self, proxy, cache_size=100, cache_dir='.webkit_cache'):
+    def __init__(self, proxy):
         """Subclass QNetworkAccessManager for finer control network operations
 
         proxy: the string of a proxy to download through
@@ -32,13 +32,6 @@ class NetworkAccessManager(QNetworkAccessManager):
         cache_dir: where to place the cache
         """
         super(NetworkAccessManager, self).__init__()
-        # initialize the manager cache
-        QDesktopServices.storageLocation(QDesktopServices.CacheLocation)
-        cache = QNetworkDiskCache()
-        cache.setCacheDirectory(cache_dir)
-        cache.setMaximumCacheSize(cache_size * 1024 * 1024) # convert cache value from MB to bytes
-        self.setCache(cache)
-        # and proxy
         self.setProxy(proxy)
         self.sslErrors.connect(self.sslErrorHandler)
         # the requests that are still active
@@ -54,6 +47,7 @@ class NetworkAccessManager(QNetworkAccessManager):
         for request in self.active_requests:
             request.abort()
             request.deleteLater()
+        self.active_requests = []
 
 
     def setProxy(self, proxy):
@@ -75,11 +69,10 @@ class NetworkAccessManager(QNetworkAccessManager):
     def createRequest(self, operation, request, post):
         """Override creating a network request
         """
-        request.setAttribute(QNetworkRequest.CacheLoadControlAttribute, QNetworkRequest.PreferCache)
         reply = QNetworkAccessManager.createRequest(self, operation, request, post)
         reply.error.connect(self.catch_error)
         self.active_requests.append(reply)
-        reply.destroyed.connect(self.active_requests.remove)
+        reply.destroyed.connect(self.remove_inactive)
         # save reference to original request
         reply.orig_request = request
         reply.data = self.parse_data(post)
@@ -90,17 +83,30 @@ class NetworkAccessManager(QNetworkAccessManager):
                 r.content += r.peek(r.size())
             return _save_content
         reply.readyRead.connect(save_content(reply))
+        if request.url().toString().endswith('.ttf'):
+            # block fonts
+            #request.setUrl(QUrl('forbidden://localhost/'))
+            reply.abort()
+        else:
+            common.logger.debug('Request: {} {}'.format(request.url().toString(), post))
         return reply
-       
+
+
+    def remove_inactive(self, request):
+        try:
+            self.active_requests.remove(request)
+        except ValueError:
+            pass
+
 
     def parse_data(self, data):
         """Parse this posted data into a list of key/value pairs
         """
-        url = QUrl('')
         if data is not None:
+            url = QUrl('')
             url.setEncodedQuery(data.peek(MAX_POST_SIZE))
-        return url.queryItems()
-
+            return url.queryItems()
+        return []
 
     def catch_error(self, eid):
         """Interpret the HTTP error ID received
@@ -153,34 +159,36 @@ class WebPage(QWebPage):
         self.confirm = confirm
         self.setForwardUnsupportedContent(True)
 
+
     def userAgentForUrl(self, url):
         """Use same user agent for all URL's
         """
         return self.user_agent
 
+
     def javaScriptAlert(self, frame, message):
         """Override default JavaScript alert popup and send to log
         """
-        common.logger.debug('Alert:' + message)
+        common.logger.debug('Alert: ' + message)
 
 
     def javaScriptConfirm(self, frame, message):
         """Override default JavaScript confirm popup and send to log
         """
-        common.logger.debug('Confirm:' + message)
+        common.logger.debug('Confirm: ' + message)
         return self.confirm
 
 
     def javaScriptPrompt(self, frame, message, default):
         """Override default JavaScript prompt popup and send to log
         """
-        common.logger.debug('Prompt:%s%s' % (message, default))
+        common.logger.debug('Prompt: %s %s' % (message, default))
 
 
     def javaScriptConsoleMessage(self, message, line_number, source_id):
         """Override default JavaScript console and send to log
         """
-        common.logger.debug('Console:%s%s%s' % (message, line_number, source_id))
+        common.logger.debug('Console: %s %s %s' % (message, line_number, source_id))
 
 
     def shouldInterruptJavaScript(self):
@@ -393,7 +401,7 @@ class Browser(QWidget):
             self.update_address(url)
             if html:
                 # load pre downloaded HTML
-                self.view.setContent(data=html, baseUrl=url)
+                self.view.setContent(html, baseUrl=url)
             else:
                 # need to make network request
                 request = QNetworkRequest(url)
@@ -433,7 +441,7 @@ class Browser(QWidget):
         while time() < deadline:
             sleep(0)
             self.app.processEvents()
-
+    
 
     def wait_quiet(self, timeout=20):
         """Wait until all requests have completed
@@ -445,6 +453,9 @@ class Browser(QWidget):
         while time() < deadline and manager.active_requests:
             sleep(0)
             self.app.processEvents()
+        # abort any outstanding requests
+        for request in manager.active_requests:
+            request.abort()
 
 
     def wait_load(self, pattern, timeout=60):
