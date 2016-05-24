@@ -132,13 +132,12 @@ def test_performance(website):
 
     t0 = time()
     html, bag['status'] = download(website)
+    bag['static_ms'] = time() - t0
 
     if html:
-        tree = lxml.html.fromstring(html)
-        bag['lxml_ms'] = time() - t0
-        bag['lxml_nodes'] = num_nodes(html)
-        bag['lxml_requests'] = 1
-        bag['lxml_size'] = len(html)
+        bag['static_nodes'] = num_nodes(html)
+        bag['static_requests'] = 1
+        bag['static_size'] = len(html)
 
         for images in (False, True):
             for js in (False, True):
@@ -161,6 +160,7 @@ def test_performance(website):
                     print 'completed'
                 b.wait_quiet()
                 if not rendered_html:
+                    print 'no html'
                     return
         return bag
     else:
@@ -184,7 +184,7 @@ def main():
     cache = pdict.PersistentDict('.render.db')
 
     fields = ['website', 'status']
-    for render in ('lxml', 'no_js_no_images_render', 'no_js_images_render', 'js_no_images_render', 'js_images_render'):
+    for render in ('static', 'no_js_no_images_render', 'no_js_images_render', 'js_no_images_render', 'js_images_render'):
         for suffix in ('ms', 'nodes', 'requests', 'size'):
             fields.append(render + '_' + suffix)
     fp = open('RenderStats.csv', 'w')
@@ -192,7 +192,7 @@ def main():
     writer.writerow([field.replace('_', ' ') for field in fields])
 
     for i, website in enumerate(alexa()):
-        if website not in cache:# or not cache[website]:
+        if website not in cache or not cache[website]:
             print website
             cache[website] = []
             bags = [bag for bag in test_n_times(website, 10)]
@@ -205,7 +205,7 @@ def main():
 
         for bag in bags:
             valid = True
-            for render in ('lxml', 'no_js_no_images_render', 'no_js_images_render', 'js_no_images_render', 'js_images_render'):
+            for render in ('static', 'no_js_no_images_render', 'no_js_images_render', 'js_no_images_render', 'js_images_render'):
                 if not bag.get(render + '_nodes') or not bag.get(render + '_size'):
                     valid = False
                     #print 'deleting:', website
@@ -215,7 +215,7 @@ def main():
                 row = [bag.get(field) for field in fields]
                 writer.writerow(row)
             fp.flush()
-        if i >= 3:
+        if i >= 5:
             break
     
 

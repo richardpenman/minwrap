@@ -83,7 +83,7 @@ class NetworkAccessManager(QNetworkAccessManager):
                 r.content += r.peek(r.size())
             return _save_content
         reply.readyRead.connect(save_content(reply))
-        if request.url().toString().endswith('.ttf'):
+        if str(request.url().path()).endswith('.ttf'):
             # block fonts
             #request.setUrl(QUrl('forbidden://localhost/'))
             reply.abort()
