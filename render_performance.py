@@ -197,10 +197,15 @@ def main():
     while progress:
         progress = False    
         for i, website in enumerate(alexa()):
-            if website not in cache:
-                cache[website] = []
-            results = cache[website]
+            try:
+                results = cache[website]
+                if not results:
+                    print 'skipping:', website
+                    continue
+            except KeyError:
+                cache[website] = results = []
             if not written.get(website):
+                # write previously scraped records to CSV
                 written[website] = True
                 for bag in results:
                     row = [bag.get(field) for field in fields]
