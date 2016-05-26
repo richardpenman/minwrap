@@ -4,8 +4,8 @@ import sys, csv, re, json, urlparse, os, urllib2, socket
 socket.setdefaulttimeout(10)
 from zipfile import ZipFile
 from StringIO import StringIO
-from time import time
-import lxml.html
+from time import time, sleep
+#import lxml.html
 
 import webkit
 import common
@@ -117,14 +117,6 @@ class NetworkAccessManager(QNetworkAccessManager):
 
 b = RenderBrowser(app=app, gui=False, user_agent=USER_AGENT, delay=0, timeout=10, load_plugins=False, load_java=False)
 #b = RenderBrowser2(app)
-def test_n_times(website, num_retries):
-    download(website)
-    for _ in range(num_retries):
-        bag = test_performance(website)
-        if bag:
-            print bag
-            yield bag
-
 
 def test_performance(website):
     bag = {}
@@ -149,18 +141,26 @@ def test_performance(website):
                 b.reset()
                 t0 = time()
                 #b.get(website)
-                rendered_html = b.load(url=website, num_retries=0)
-                bag[key + '_ms'] = time() - t0
-                #rendered_html = common.to_unicode(b.page().mainFrame().toHtml())
-                if rendered_html:
-                    bag[key + '_nodes'] = num_nodes(rendered_html)
-                    bag[key + '_requests'] = b.num_requests
-                    bag[key + '_size'] = b.reply_size
-                    print b.reply_size
-                    print 'completed'
-                b.wait_quiet()
-                if not rendered_html:
-                    print 'no html'
+                b.load(url=website, num_retries=0)
+                if b.wait_quiet():
+                    bag[key + '_ms'] = time() - t0
+                    rendered_html = b.current_html()
+                    if rendered_html:
+                        bag[key + '_nodes'] = num_nodes(rendered_html)
+                        if bag.get(key + '_nodes') == 0:
+                            return
+                        bag[key + '_requests'] = b.num_requests
+                        if b.reply_size == 0:
+                            return
+                        else:
+                            bag[key + '_size'] = b.reply_size
+                        print b.reply_size
+                        print 'completed'
+                    else:
+                        print 'no html'
+                        return
+                else:
+                    print 'no wait'
                     return
         return bag
     else:
@@ -191,33 +191,36 @@ def main():
     writer = csv.writer(fp)
     writer.writerow([field.replace('_', ' ') for field in fields])
 
-    for i, website in enumerate(alexa()):
-        if website not in cache or not cache[website]:
-            print website
-            cache[website] = []
-            bags = [bag for bag in test_n_times(website, 10)]
-            cache[website] = bags
-        else:
-            bags = cache[website]
-            #if not bag.get('no_js_images_render_size'):
-            #    print 'deleting:', website
-            #    del cache[website]
+    written = {}
+    repeats = 10
+    progress = True
+    while progress:
+        progress = False    
+        for i, website in enumerate(alexa()):
+            if website not in cache:
+                cache[website] = []
+            results = cache[website]
+            if not written.get(website):
+                written[website] = True
+                for bag in results:
+                    row = [bag.get(field) for field in fields]
+                    writer.writerow(row)
+                    fp.flush()
+                    
+            if len(results) < repeats:
+                print website
+                bag = test_performance(website)
+                if bag:
+                    results.append(bag)
+                    cache[website] = results
+                    progress = True
 
-        for bag in bags:
-            valid = True
-            for render in ('static', 'no_js_no_images_render', 'no_js_images_render', 'js_no_images_render', 'js_images_render'):
-                if not bag.get(render + '_nodes') or not bag.get(render + '_size'):
-                    valid = False
-                    #print 'deleting:', website
-                    #del cache[website]
-                    break
-            if valid:
-                row = [bag.get(field) for field in fields]
-                writer.writerow(row)
-            fp.flush()
-        if i >= 5:
-            break
-    
+                    row = [bag.get(field) for field in fields]
+                    writer.writerow(row)
+                    fp.flush()
+            if i >= 100:
+                break
+        
 
 if __name__ == '__main__':
     main()

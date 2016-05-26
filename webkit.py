@@ -454,8 +454,11 @@ class Browser(QWidget):
             sleep(0)
             self.app.processEvents()
         # abort any outstanding requests
+        inactive = True
         for request in manager.active_requests:
             request.abort()
+            inactive = False
+        return inactive
 
 
     def wait_load(self, pattern, timeout=60):
