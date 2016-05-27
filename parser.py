@@ -51,15 +51,24 @@ def parse_xml(t):
 
 
 def parse_js(t):
-    words = [word.strip() for word in re.findall('[=:]\s*"([^<>\[\]{}=|@#^\*]*?)"', t) if word.strip()]
-    print 'JS:', words
-    return words or None
+    """Parse the key/value pairs from this JavaScript
+
+    >>> text = r'var s0=[];var s1={};var s4=[];var s2={};var s5=[];var s3={};var s6=[];s0[0]=s1;s0[1]=s2;s0[2]=s3; s1.airportCode="MEL";s1.airportFullName="Melbourne, Australia (MEL)";s1.airportName="Tullamarine";s1.aliases=s4;s1.cityCode="MEL";s1.cityName="Melbourne";s1.countryCode="AU";s1.region="Australia"; s4[0]="Melbourne, Australia (MEL)";s4[1]="Tullamarine";s4[2]="Australia"; s2.airportCode="MLB";s2.airportFullName="Melbourne, FL (MLB)";s2.airportName="Melbourne Intl";s2.aliases=s5;s2.cityCode="MLB";s2.cityName="Melbourne";s2.countryCode="US";s2.region="FL"; s5[0]="Melbourne, FL (MLB)";s5[1]="Melbourne Intl";s5[2]="Florida"; s3.airportCode="DOM";s3.airportFullName="Marigot, Dominica (DOM)";s3.airportName="Melville Hall Arpt";s3.aliases=s6;s3.cityCode="DOM";s3.cityName="Marigot";s3.countryCode="DM";s3.region="Dominica"; s6[0]="Marigot, Dominica (DOM)";s6[1]="Melville Hall Arpt";s6[2]="Dominica"; dwr.engine._remoteHandleCallback("3","0",{citiesDWR:s0,code:"mel"});'
+    >>> parse_js(text)
+    [{'airportCode': 'MEL'}, {'airportFullName': 'Melbourne, Australia (MEL)'}, {'airportName': 'Tullamarine'}, {'cityCode': 'MEL'}, {'cityName': 'Melbourne'}, {'countryCode': 'AU'}, {'region': 'Australia'}, {'airportCode': 'MLB'}, {'airportFullName': 'Melbourne, FL (MLB)'}, {'airportName': 'Melbourne Intl'}, {'cityCode': 'MLB'}, {'cityName': 'Melbourne'}, {'countryCode': 'US'}, {'region': 'FL'}, {'airportCode': 'DOM'}, {'airportFullName': 'Marigot, Dominica (DOM)'}, {'airportName': 'Melville Hall Arpt'}, {'cityCode': 'DOM'}, {'cityName': 'Marigot'}, {'countryCode': 'DM'}, {'region': 'Dominica'}]
+    >>> text = r'var s0={};var s1="Melbourne, Melbourne (MEL), Australia";s0["MEL"]=s1;var s2="Melilla, Melilla (MLN), Spain";s0["MLN"]=s2; DWREngine._handleResponse("null", s0);'
+    >>> parse_js(text)
+    [{'s1': 'Melbourne, Melbourne (MEL), Australia'}, {'s2': 'Melilla, Melilla (MLN), Spain'}]
+    """
+    matches = re.findall('\W(\w+)\s*=\s*"([^<>\[\]{}=|@#^\*]*?)"', t) + re.findall("\W(\w+)\s*=\s*'(.*?)'", t)
+    js = [{key : value.strip()} for (key, value) in matches if value.strip()]
+    return js or None
 
 
 def parse(text, content_type=''):
     """Try all parsers on this input
     """
-    for fn in parse_json, parse_jsonp, parse_xml:
+    for fn in parse_json, parse_jsonp, parse_xml, parse_js:
         result = fn(text)
         if result is not None:
             return result
@@ -70,36 +79,12 @@ def parse(text, content_type=''):
 
 
 # text parsers to test
-text_parsers = [
-    lambda s: s, # original string
-    lambda s: s.replace(' ', '+'), # plus encoding
-    lambda s: s.replace(' ', '%20'), # space encoding
-    lambda s: urllib.quote(s), # percent encoding
-]
-
-
-def json_values(es):
-    """Parse values from this json dict
-
-    >>> list(json_values({'name': 'bob', 'children': ['alice', 'sarah']}))
-    ['bob', 'alice', 'sarah']
-    """
-    if isinstance(es, dict):
-        for e in es.values():
-            for result in json_values(e):
-                yield result
-    elif isinstance(es, list):
-        for e in es:
-            for result in json_values(e):
-                yield result
-    elif isinstance(es, basestring):
-        yield es
-    elif isinstance(es, numbers.Number):
-        yield str(es)
-    elif es is None:
-        pass
-    else:
-        print 'unknown type:', type(es)
+#text_parsers = [
+#    lambda s: s, # original string
+#    lambda s: s.replace(' ', '+'), # plus encoding
+#    lambda s: s.replace(' ', '%20'), # space encoding
+#    lambda s: urllib.quote(s), # percent encoding
+#]
 
 
 def json_counter(es, result=None):

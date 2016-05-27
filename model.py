@@ -57,7 +57,7 @@ class Model:
         data_items = transition.data
 
         if qs_value is not None:
-            qs_items = [(key, urllib.quote_plus(qs_value) if key == qs_key else value) for (key, value) in qs_items]
+            qs_items = [(key, urllib.quote_plus(qs_value.encode('utf-8')) if key == qs_key else value) for (key, value) in qs_items]
             url.setEncodedQueryItems(qs_items)
         if post_value is not None:
             # need to properly encode POST? XXX
@@ -84,6 +84,7 @@ class Model:
             post_diffs = self.find_diffs([t.data for t in self.transitions])
             if qs_diffs or post_diffs:
                 self.model = qs_diffs, post_diffs
+                print 'model:', self.model
             else:
                 # remove the duplicate transition
                 common.logger.debug('Duplicate requests')
@@ -107,12 +108,18 @@ class Model:
         """Attempt abstacting these examples
         If successful return a list of similar entities else None"""
         if examples is not None:
-            #template, examples = self.build_template(examples)
-            #common.logger.info('Abstraction template: {} {}'.format(template, examples))
-            all_cases = verticals.extend(examples) or []
+            all_cases = verticals.extend(examples)
+            if all_cases:
+                common.logger.info('Abstraction template: {} {}'.format(examples, len(all_cases)))
+                template = u'{}'
+            else:
+                # try abstracting the template in case the changing part is a substring
+                template, examples = self.build_template(examples)
+                all_cases = verticals.extend(examples) or []
+                common.logger.info('Abstraction template: {} {} {}'.format(template, examples, len(all_cases)))
+
             for case in all_cases:
-                #yield template.format(case)
-                yield case
+                yield template.format(case)
 
 
     def build_template(self, examples):
@@ -139,7 +146,7 @@ class Model:
                         break
                 break
         escape_brackets = lambda v: v.replace('{', '{{').replace('}', '}}')
-        return escape_brackets(prefix) + '{}' + escape_brackets(suffix), [example[len(prefix) : len(example) - len(suffix)] for example in examples]
+        return escape_brackets(prefix) + u'{}' + escape_brackets(suffix), [example[len(prefix) : len(example) - len(suffix)] for example in examples]
 
 
     def ready(self):

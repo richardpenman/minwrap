@@ -1,37 +1,40 @@
 # -*- coding: utf-8 -*-
 
-import csv, string
+import csv, string, glob, collections
 
-
-"""
-def all_combinations():
-    for max_depth in (2, 3):
-        fp = open('combinations{}.csv'.format(max_depth), 'w')
-        for result in combinations(max_depth=max_depth):
-            fp.write(result + '\n')
-
-def combinations(prefix='', cur_depth=0, max_depth=3):
-    if cur_depth == max_depth:
-        yield prefix
-    else:
-        for letter in string.lowercase:
-            for result in combinations(prefix + letter, cur_depth+1, max_depth):
-                yield result
-"""
 
 def city_combinations():
-    cities = set()
-    for row in csv.reader(open('world_cities.csv')):
-        city = row[1]
-        cities.add(city[:3].lower())
-    print sorted(cities)
+    cities = collections.defaultdict(int)
+    for filename in glob.glob('[A-Z]*_locations.csv'):
+        for row in csv.reader(open(filename)):
+            city = row[2][:3]
+            if is_ascii(city):
+                cities[city.lower()] += 1
+
+    top_cities = sorted(cities.items(), key=lambda x: x[1], reverse=True)
+    print top_cities
     writer = csv.writer(open('city_prefixes.csv', 'w'))
-    for prefix in sorted(cities):
+    for prefix, count in top_cities:
         writer.writerow([prefix])
+
+
+def is_ascii(s):
+    for c in s:
+        if ord(c) >= 128:
+            return False
+    return True
+
+
+def counter():
+    fp = open('count.txt', 'w')
+    for i in xrange(10000):
+        fp.write('{}\n'.format(i))
 
 
 def main():
     city_combinations()
+    counter()
+
 
 if __name__ == '__main__':
     main()

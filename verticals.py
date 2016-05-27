@@ -22,7 +22,7 @@ def load_data():
         for row in csv.reader(open(filename)):
             for i, v in enumerate(row):
                 if v:
-                    vertical_data['{}-field{}'.format(filename, i)][hash_key(v)] = v
+                    vertical_data['{}-field{}'.format(filename, i)][hash_key(v)] = common.to_unicode(v)
     common.logger.debug('Completed loading verticals data')
 # load vertical data in background thread
 threading.Thread(target=load_data, args=()).start()
