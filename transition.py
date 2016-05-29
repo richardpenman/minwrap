@@ -2,7 +2,6 @@
 
 
 import numbers
-import common
 
 
 class Transition:
@@ -18,7 +17,6 @@ class Transition:
         #self.content = common.to_unicode(str(reply.content))
         self.js = js
         self.values = [value for value in json_values(js) if value] # XXX need to convert unicode?
-        common.logger.info('Successfully parsed response: {} {} {}'.format(reply.url().toString(), reply.data, self.values))
         request = reply.orig_request
         self.headers = [(header, request.rawHeader(header)) for header in request.rawHeaderList()]
 

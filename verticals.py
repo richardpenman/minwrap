@@ -51,7 +51,7 @@ def extend(examples):
             common.logger.debug('Partially matched: {}'.format(label))
         else:
             # found multiple categories perfectly matched, so need more examples
-            common.logger.info('Multiple keys match all examples: {}'.format([key for key in scores if scores[key] == count]))
+            common.logger.info('Multiple keys match all examples: {}'.format([key for key in scores if scores[key] == len(examples)]))
 
     else:
         # no matches to examples

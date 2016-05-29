@@ -1,1323 +1,1323 @@
-BD,1000,Dhaka GPO,,,Dhaka,,Dhaka GPO,,23.729,90.4112,
-BD,1100,Dhaka Main PO,,,Dhaka,,Dhaka Main PO,,23.9996,90.4222,
-BD,1203,Wari TSO,,,Dhaka,,Dhaka Sadar,,23.7415,90.4276,
-BD,1204,Gendaria TSO,,,Dhaka,,Dhaka Sadar,,23.7011,90.4263,
-BD,1205,New Market TSO,,,Dhaka,,Dhaka Sadar,,23.7433,90.3841,
-BD,1206,Dhaka CantonmentTSO,,,Dhaka,,Dhaka Sadar,,23.8179,90.4103,
-BD,1207,Mohammadpur Housing,,,Dhaka,,Dhaka Sadar,,23.7701,90.3628,
-BD,1208,Dhaka Politechnic,,,Dhaka,,Dhaka Sadar,,23.7591,90.4003,
-BD,1209,Jigatala TSO,,,Dhaka,,Dhaka Sadar,,23.7552,90.3731,
-BD,1211,Posta TSO,,,Dhaka,,Dhaka Sadar,,23.8196,90.364,
-BD,1212,Gulshan Model Town,,,Dhaka,,Dhaka Sadar,,23.7916,90.4152,
-BD,1213,Banani TSO,,,Dhaka,,Dhaka Sadar,,23.7931,90.4048,
-BD,1214,Basabo TSO,,,Dhaka,,Dhaka Sadar,,23.7418,90.4277,
-BD,1215,Tejgaon TSO,,,Dhaka,,Dhaka Sadar,,23.7687,90.3901,
-BD,1217,Shantinagr TSO,,,Dhaka,,Dhaka Sadar,,23.726,90.4251,
-BD,1218,Mirpur TSO,,,Dhaka,,Dhaka Sadar,,23.8236,90.3661,
-BD,1219,KhilgaonTSO,,,Dhaka,,Dhaka Sadar,,23.7518,90.4254,
-BD,1222,BangabhabanTSO,,,Dhaka,,Dhaka Sadar,,23.9072,90.4599,
-BD,1223,DilkushaTSO,,,Dhaka,,Dhaka Sadar,,23.8822,90.4576,
-BD,1225,Sangsad BhabanTSO,,,Dhaka,,Dhaka Sadar,,23.7617,90.3784,
-BD,1229,KhilkhetTSO,,,Dhaka,,Dhaka Sadar,,23.8515,90.403,
-BD,1231,Uttara Model TwonTSO,,,Dhaka,,Dhaka Sadar,,23.8732,90.3883,
-BD,1232,Dhania TSO,,,Dhaka,,Dhaka Sadar,,23.7117,90.4463,
-BD,1310,Keraniganj,,,Dhaka,,Keraniganj,,23.725,90.3167,1
-BD,1311,Dhaka Jute Mills,,,Dhaka,,Keraniganj,,23.725,90.3167,1
-BD,1312,Ati,,,Dhaka,,Keraniganj,,23.7167,90.35,4
-BD,1313,Kalatia,,,Dhaka,,Keraniganj,,23.7333,90.2833,4
-BD,1320,Nawabganj,,,Dhaka,,Nawabganj,,23.6608,90.1644,4
-BD,1321,Hasnabad,,,Dhaka,,Nawabganj,,23.65,90.1167,4
-BD,1322,Daudpur,,,Dhaka,,Nawabganj,,23.8833,90.5333,4
-BD,1323,Agla,,,Dhaka,,Nawabganj,,23.6497,90.22,4
-BD,1324,Khalpar,,,Dhaka,,Nawabganj,,23.6333,90.3,4
-BD,1325,Churain,,,Dhaka,,Nawabganj,,23.6167,90.2167,4
-BD,1330,Joypara,,,Dhaka,,Joypara,,23.6189,90.1261,4
-BD,1331,Palamganj,,,Dhaka,,Joypara,,23.5428,90.2547,1
-BD,1332,Narisha,,,Dhaka,,Joypara,,23.5428,90.2547,1
-BD,1333,Haridia,,,Munshiganj,,Lohajong,,23.4667,90.3833,4
-BD,1334,Gouragonj,,,Munshiganj,,Lohajong,,23.5428,90.2547,1
-BD,1335,Madini Mandal,,,Munshiganj,,Lohajong,,23.5428,90.2547,1
-BD,1340,Savar,,,Dhaka,,Savar,,23.8442,90.2511,4
-BD,1341,Dairy Farm,,,Dhaka,,Savar,,24.3137,89.6089,1
-BD,1342,Jahangirnagar Univer,,,Dhaka,,Savar,,24.3137,89.6089,1
-BD,1343,Saver P.A.T.C,,,Dhaka,,Savar,,24.3137,89.6089,1
-BD,1344,Savar Canttonment,,,Dhaka,,Savar,,24.3137,89.6089,1
-BD,1345,Shimulia,,,Dhaka,,Savar,,24.7833,88.9667,4
-BD,1346,Kashem Cotton Mills,,,Dhaka,,Savar,,24.3137,89.6089,1
-BD,1347,Rajphulbaria,,,Dhaka,,Savar,,24.3137,89.6089,1
-BD,1348,Amin Bazar,,,Dhaka,,Savar,,24.3137,89.6089,1
-BD,1349,EPZ,,,Dhaka,,Savar,,24.3137,89.6089,1
-BD,1350,Dhamrai,,,Dhaka,,Dhamrai,,23.9122,90.2683,4
-BD,1351,Kamalpur,,,Dhaka,,Dhamrai,,24,90.8167,4
-BD,1360,Demra,,,Dhaka,,Demra,,24.0333,90.6333,4
-BD,1361,Sarulia,,,Dhaka,,Demra,,23.8333,90.3333,4
-BD,1362,Matuail,,,Dhaka,,Demra,,23.7167,90.4667,4
-BD,1400,Narayanganj Sadar,,,Narayanganj,,Narayanganj Sadar,,23.7219,90.5789,1
-BD,1410,Bandar,,,Narayanganj,,Bandar,,23.6,90.5333,4
-BD,1411,D.C Mills,,,Narayanganj,,Bandar,,23.6,90.5278,1
-BD,1412,Nabiganj,,,Narayanganj,,Bandar,,23.6167,90.5167,4
-BD,1413,BIDS,,,Narayanganj,,Bandar,,23.6,90.5278,1
-BD,1414,Madanganj,,,Narayanganj,,Bandar,,23.5833,90.5333,4
-BD,1420,Fatullah,,,Narayanganj,,Fatullah,,23.7219,90.5789,1
-BD,1421,Fatulla Bazar,,,Narayanganj,,Fatullah,,23.7219,90.5789,1
-BD,1430,Siddirganj,,,Narayanganj,,Siddirganj,,23.7219,90.5789,1
-BD,1431,Adamjeenagar,,,Narayanganj,,Siddirganj,,23.7219,90.5789,1
-BD,1432,LN Mills,,,Narayanganj,,Siddirganj,,23.7219,90.5789,1
-BD,1440,Baidder Bazar,,,Narayanganj,,Baidder Bazar,,23.7219,90.5789,1
-BD,1441,Bara Nagar,,,Narayanganj,,Baidder Bazar,,23.7219,90.5789,1
-BD,1442,Barodi,,,Narayanganj,,Baidder Bazar,,23.7219,90.5789,1
-BD,1450,Araihazar,,,Narayanganj,,Araihazar,,23.7917,90.6644,4
-BD,1451,Gopaldi,,,Narayanganj,,Araihazar,,23.7833,90.7,4
-BD,1460,Rupganj,,,Narayanganj,,Rupganj,,23.8,90.5611,1
-BD,1461,Kanchan,,,Narayanganj,,Rupganj,,23.8333,90.5667,4
-BD,1462,Bhulta,,,Narayanganj,,Rupganj,,23.7833,90.5667,4
-BD,1463,Nagri,,,Narayanganj,,Rupganj,,23.8,90.5611,1
-BD,1464,Murapara,,,Narayanganj,,Rupganj,,23.7833,90.55,4
-BD,1500,Munshiganj Sadar,,,Munshiganj,,Munshiganj Sadar,,23.55,90.4167,1
-BD,1501,Rikabibazar,,,Munshiganj,,Munshiganj Sadar,,23.55,90.4167,1
-BD,1502,Mirkadim,,,Munshiganj,,Munshiganj Sadar,,23.55,90.4167,4
-BD,1503,Kathakhali,,,Munshiganj,,Munshiganj Sadar,,23.55,90.4167,1
-BD,1510,Gajaria,,,Munshiganj,,Gajaria,,23.8167,90.4833,4
-BD,1511,Hossendi,,,Munshiganj,,Gajaria,,23.675,90.55,1
-BD,1512,Rasulpur,,,Munshiganj,,Gajaria,,23.5333,90.6167,4
-BD,1520,Tangibari,,,Munshiganj,,Tangibari,,23.5167,90.4667,4
-BD,1521,Betkahat,,,Munshiganj,,Tangibari,,23.4556,90.4667,1
-BD,1522,Baligao,,,Munshiganj,,Tangibari,,23.4556,90.4667,1
-BD,1523,Bajrajugini,,,Munshiganj,,Tangibari,,23.4556,90.4667,1
-BD,1524,Hasail,,,Munshiganj,,Tangibari,,23.4333,90.45,4
-BD,1525,Dighirpar,,,Munshiganj,,Tangibari,,23.4167,90.4833,4
-BD,1526,Pura EDSO,,,Munshiganj,,Tangibari,,23.4556,90.4667,1
-BD,1527,Pura,,,Munshiganj,,Tangibari,,23.4556,90.4667,1
-BD,1530,Lohajang,,,Munshiganj,,Lohajong,,23.45,90.35,4
-BD,1531,Korhati,,,Munshiganj,,Lohajong,,23.45,90.3,4
-BD,1532,Haldia SO,,,Munshiganj,,Lohajong,,23.45,90.325,1
-BD,1533,Haridia DESO,,,Munshiganj,,Lohajong,,23.45,90.325,1
-BD,1534,Gouragonj,,,Munshiganj,,Lohajong,,23.45,90.325,1
-BD,1535,Medini Mandal EDSO,,,Munshiganj,,Lohajong,,23.45,90.325,1
-BD,1540,Sirajdikhan,,,Munshiganj,,Sirajdikhan,,22.9864,89.0054,1
-BD,1541,Kola,,,Munshiganj,,Sirajdikhan,,23,89.1,4
-BD,1542,Ichapur,,,Munshiganj,,Sirajdikhan,,22.9728,88.9108,4
-BD,1543,Malkha Nagar,,,Munshiganj,,Sirajdikhan,,22.9864,89.0054,1
-BD,1544,Shekher Nagar,,,Munshiganj,,Sirajdikhan,,22.9864,89.0054,1
-BD,1550,Srinagar,,,Munshiganj,,Srinagar,,23.8167,89.8333,4
-BD,1551,Barikhal,,,Munshiganj,,Srinagar,,23.6583,89.8875,1
-BD,1552,Mazpara,,,Munshiganj,,Srinagar,,23.6583,89.8875,1
-BD,1553,Hashara,,,Munshiganj,,Srinagar,,23.6583,89.8875,1
-BD,1554,Kolapara,,,Munshiganj,,Srinagar,,23.5,90.25,4
-BD,1555,Kumarbhog,,,Munshiganj,,Srinagar,,23.7833,89.2667,4
-BD,1556,Vaggyakul SO,,,Munshiganj,,Srinagar,,23.6583,89.8875,1
-BD,1557,Baghra,,,Munshiganj,,Srinagar,,23.5333,90.2,4
-BD,1558,Bhaggyakul,,,Munshiganj,,Srinagar,,23.6583,89.8875,1
-BD,1600,Narshingdi Sadar,,,Narshingdi,,Narshingdi Sadar,,23.9278,90.6944,1
-BD,1601,UMC Jute Mills,,,Narshingdi,,Narshingdi Sadar,,23.9278,90.6944,1
-BD,1602,Narshingdi College,,,Narshingdi,,Narshingdi Sadar,,23.9278,90.6944,1
-BD,1603,Panchdona,,,Narshingdi,,Narshingdi Sadar,,23.9,90.65,4
-BD,1604,Madhabdi,,,Narshingdi,,Narshingdi Sadar,,24,90.7,4
-BD,1605,Karimpur,,,Narshingdi,,Narshingdi Sadar,,23.8833,90.7333,4
-BD,1610,Palash,,,Narshingdi,,Palash,,23.9333,90.6333,1
-BD,1611,Ghorashal Urea Facto,,,Narshingdi,,Palash,,23.9333,90.6333,1
-BD,1612,Char Sindhur,,,Narshingdi,,Palash,,23.9333,90.6333,1
-BD,1613,Ghorashal,,,Narshingdi,,Palash,,23.9333,90.6333,4
-BD,1620,Shibpur,,,Narshingdi,,Shibpur,,24.0333,90.7333,4
-BD,1630,Raypura,,,Narshingdi,,Raypura,,22.7,90.4167,4
-BD,1631,Bazar Hasnabad,,,Narshingdi,,Raypura,,22.7,90.4167,1
-BD,1632,Radhaganj bazar,,,Narshingdi,,Raypura,,22.7,90.4167,1
-BD,1640,Belabo,,,Narshingdi,,Belabo,,24.1,90.8667,4
-BD,1650,Monohordi,,,Narshingdi,,Monohordi,,24.125,90.7333,1
-BD,1651,Hatirdia,,,Narshingdi,,Monohordi,,24.1,90.7,4
-BD,1652,Katabaria,,,Narshingdi,,Monohordi,,24.15,90.7667,4
-BD,1700,Gazipur Sadar,,,Gazipur,,Gazipur Sadar,,23.9833,90.4,1
-BD,1701,B.R.R,,,Gazipur,,Gazipur Sadar,,23.9833,90.4,1
-BD,1702,Chandna,,,Gazipur,,Gazipur Sadar,,23.9833,90.4,4
-BD,1703,B.O.F,,,Gazipur,,Gazipur Sadar,,23.9833,90.4,1
-BD,1704,National University,,,Gazipur,,Gazipur Sadar,,23.9833,90.4,1
-BD,1710,Monnunagar,,,Gazipur,,Monnunagar,,24.0907,90.4878,1
-BD,1711,Nishat Nagar,,,Gazipur,,Monnunagar,,24.0907,90.4878,1
-BD,1712,Ershad Nagar,,,Gazipur,,Monnunagar,,24.0907,90.4878,1
-BD,1720,Kaliganj,,,Gazipur,,Kaliganj,,23.9181,90.5647,4
-BD,1721,Pubail,,,Gazipur,,Kaliganj,,23.9333,90.4833,4
-BD,1722,Santanpara,,,Gazipur,,Kaliganj,,23.9167,90.6,4
-BD,1723,Vaoal Jamalpur,,,Gazipur,,Kaliganj,,23.9227,90.5494,1
-BD,1730,kapashia,,,Gazipur,,Kapashia,,24.0907,90.4878,1
-BD,1740,Shipur,,,Gazipur,,Shipur,,24.425,90.5417,1
-BD,1741,Rajendrapur,,,Gazipur,,Sripur,,24.6167,90.5833,4
-BD,1742,Rajendrapur Canttome,,,Gazipur,,Sripur,,24.425,90.5417,1
-BD,1743,Barmi,,,Gazipur,,Shipur,,24.425,90.5417,1
-BD,1744,Satkhamair,,,Gazipur,,Shipur,,24.2333,90.5,4
-BD,1745,Kawraid,,,Gazipur,,Shipur,,24.425,90.5417,1
-BD,1747,Bashamur,,,Gazipur,,Shipur,,24.425,90.5417,1
-BD,1748,Boubi,,,Gazipur,,Shipur,,24.425,90.5417,1
-BD,1750,Kaliakaar,,,Gazipur,,Kaliakaar,,24.0333,90.2833,1
-BD,1751,Safipur,,,Gazipur,,Kaliakaar,,24.0333,90.2833,4
-BD,1800,Manikganj Sadar,,,Manikganj,,Manikganj Sadar,,23.3722,89.3222,1
-BD,1801,Manikganj Bazar,,,Manikganj,,Manikganj Sadar,,23.3722,89.3222,1
-BD,1802,Gorpara,,,Manikganj,,Manikganj Sadar,,23.1333,88.9667,4
-BD,1803,Mahadebpur,,,Manikganj,,Manikganj Sadar,,23.15,89.1333,4
-BD,1804,Barangail,,,Manikganj,,Manikganj Sadar,,23.8333,89.8667,4
-BD,1810,Saturia,,,Manikganj,,Saturia,,23.8833,89.7667,4
-BD,1811,Baliati,,,Manikganj,,Saturia,,23.9833,90.05,4
-BD,1820,Singair,,,Manikganj,,Singari,,24.3333,90.0333,4
-BD,1821,Baira,,,Manikganj,,Singari,,24.3,90.5167,4
-BD,1822,joymantop,,,Manikganj,,Singari,,24.3167,90.275,1
-BD,1830,Lechhraganj,,,Manikganj,,Lechhraganj,,23.9037,89.85,1
-BD,1831,Jhitka,,,Manikganj,,Lechhraganj,,23.9037,89.85,1
-BD,1840,Gheor,,,Manikganj,,Gheor,,23.9037,89.85,1
-BD,1850,Shibaloy,,,Manikganj,,Shibloya,,23.8167,89.7667,1
-BD,1851,Aricha,,,Manikganj,,Shibloya,,23.8167,89.7667,4
-BD,1852,Tewta,,,Manikganj,,Shibloya,,23.8167,89.7667,1
-BD,1853,Uthli,,,Manikganj,,Shibloya,,23.8167,89.7667,1
-BD,1860,Doulatpur,,,Manikganj,,Doulatpur,,24.7,90.55,4
-BD,1900,Tangail Sadar,,,Tangail,,Tangail Sadar,,23.9833,88.825,1
-BD,1901,Kagmari,,,Tangail,,Tangail Sadar,,23.15,89.0167,4
-BD,1902,Santosh,,,Tangail,,Tangail Sadar,,24.8167,88.6333,4
-BD,1903,Korotia,,,Tangail,,Tangail Sadar,,23.9833,88.825,1
-BD,1904,Purabari,,,Tangail,,Tangail Sadar,,23.9833,88.825,1
-BD,1910,Delduar,,,Tangail,,Delduar,,24.15,89.9667,4
-BD,1911,Jangalia,,,Tangail,,Delduar,,23.9833,90.0667,4
-BD,1912,Patharail,,,Tangail,,Delduar,,23.8667,89.95,4
-BD,1913,Elasin,,,Tangail,,Delduar,,24.1333,89.9,4
-BD,1914,Hinga Nagar,,,Tangail,,Delduar,,24.0333,89.9708,1
-BD,1915,Lowhati,,,Tangail,,Delduar,,24.0333,89.9708,1
-BD,1920,Basail,,,Tangail,,Basail,,23.8667,89.7833,4
-BD,1930,Kashkawlia,,,Tangail,,Kashkaolia,,23.7083,90.7167,1
-BD,1936,Nagarpur,,,Tangail,,Nagarpur,,23.6667,90.6333,4
-BD,1937,Dhuburia,,,Tangail,,Nagarpur,,23.7083,90.7167,1
-BD,1938,Salimabad,,,Tangail,,Nagarpur,,23.75,90.8,4
-BD,1940,Mirzapur,,,Tangail,,Mirzapur,,24.1,90.1,4
-BD,1941,Gorai,,,Tangail,,Mirzapur,,24.1,90.1667,4
-BD,1942,M.C. College,,,Tangail,,Mirzapur,,24.1,90.1333,1
-BD,1943,Warri paikpara,,,Tangail,,Mirzapur,,24.1,90.1333,1
-BD,1944,Jarmuki,,,Tangail,,Mirzapur,,24.1,90.1333,1
-BD,1945,Mohera,,,Tangail,,Mirzapur,,24.1,90.1333,1
-BD,1950,Sakhipur,,,Tangail,,Sakhipur,,24.3,90.1833,4
-BD,1951,Kochua,,,Tangail,,Sakhipur,,24.6667,88.8833,4
-BD,1960,Bhuapur,,,Tangail,,Bhuapur,,24.2908,89.9675,1
-BD,1970,Kalihati,,,Tangail,,Kalihati,,24.3083,90.4,1
-BD,1971,Rajafair,,,Tangail,,Kalihati,,24.4,90.0333,4
-BD,1972,Nagbari,,,Tangail,,Kalihati,,24.35,90.05,4
-BD,1973,Ballabazar,,,Tangail,,Kalihati,,24.0833,91.6,4
-BD,1974,Elinga,,,Tangail,,Kalihati,,24.3083,90.4,1
-BD,1975,Palisha,,,Tangail,,Kalihati,,24.3083,90.4,1
-BD,1976,Nagarbari SO,,,Tangail,,Kalihati,,24.3083,90.4,1
-BD,1977,Nagarbari,,,Tangail,,Kalihati,,24.4,89.9167,4
-BD,1980,Ghatial,,,Tangail,,Ghatail,,24.8833,90.85,1
-BD,1981,Zahidganj,,,Tangail,,Ghatail,,24.8833,90.85,1
-BD,1982,D. Pakutia,,,Tangail,,Ghatail,,24.8833,90.85,1
-BD,1983,Dhalapara,,,Tangail,,Ghatail,,24.8833,90.85,4
-BD,1984,Lohani,,,Tangail,,Ghatail,,24.8833,90.85,1
-BD,1990,Gopalpur,,,Tangail,,Gopalpur,,25.4667,89.15,4
-BD,1991,Jhowail,,,Tangail,,Gopalpur,,25.575,89.4083,1
-BD,1992,Hemnagar,,,Tangail,,Gopalpur,,25.575,89.4083,1
-BD,1996,Madhupur,,,Tangail,,Madhupur,,25.6833,89.6667,4
-BD,1997,Dhobari,,,Tangail,,Madhupur,,25.575,89.4083,1
-BD,2000,Jamalpur,,,Jamalpur,,Jamalpur,,24.9167,89.9333,4
-BD,2001,Nandina,,,Jamalpur,,Jamalpur,,24.8667,90.0667,4
-BD,2002,Narundi,,,Jamalpur,,Jamalpur,,24.8667,90.1333,4
-BD,2010,Malandah,,,Jamalpur,,Malandah,,23.7,89.7444,1
-BD,2011,Jamalpur,,,Jamalpur,,Malandah,,23.6833,89.3833,4
-BD,2012,Malancha,,,Jamalpur,,Malandah,,23.85,90.0167,4
-BD,2013,Mahmoodpur,,,Jamalpur,,Malandah,,23.5667,89.8333,4
-BD,2020,Islampur,,,Jamalpur,,Islampur,,24.6833,89.9667,4
-BD,2021,Durmoot,,,Jamalpur,,Islampur,,24.5917,90.0167,1
-BD,2022,Gilabari,,,Jamalpur,,Islampur,,24.5,90.0667,4
-BD,2030,Dewangonj,,,Jamalpur,,Dewangonj,,24.4283,89.8967,1
-BD,2031,Dewangonj S. Mills,,,Jamalpur,,Dewangonj,,24.4283,89.8967,1
-BD,2040,Mathargonj,,,Jamalpur,,Mathargonj,,24.4283,89.8967,1
-BD,2041,Balijhuri,,,Jamalpur,,Mathargonj,,24.4283,89.8967,1
-BD,2050,Shorishabari,,,Jamalpur,,Shorishabari,,24.675,89.7833,1
-BD,2051,Gunerbari,,,Jamalpur,,Shorishabari,,24.8167,89.7833,4
-BD,2052,Bausee,,,Jamalpur,,Shorishabari,,24.675,89.7833,1
-BD,2053,Jagannath Ghat,,,Jamalpur,,Shorishabari,,24.675,89.7833,1
-BD,2054,Pingna,,,Jamalpur,,Shorishabari,,24.5333,89.7833,4
-BD,2055,Jamuna Sar Karkhana,,,Jamalpur,,Shorishabari,,24.675,89.7833,1
-BD,2100,Sherpur Shadar,,,Sherpur,,Sherpur Shadar,,25.0583,90.1167,1
-BD,2110,Nalitabari,,,Sherpur,,Nalitabari,,25.1333,90.0667,1
-BD,2111,Hatibandha,,,Sherpur,,Nalitabari,,25.1333,90.0667,4
-BD,2120,Jhinaigati,,,Sherpur,,Jhinaigati,,25.0583,90.1167,1
-BD,2130,Shribardi,,,Sherpur,,Shribardi,,25.0583,90.1167,1
-BD,2140,Bakshigonj,,,Sherpur,,Bakshigonj,,25.0583,90.1167,1
-BD,2150,Nakla,,,Sherpur,,Nakla,,24.9833,90.1667,4
-BD,2151,Gonopaddi,,,Sherpur,,Nakla,,24.9833,90.1667,1
-BD,2200,Mymensingh Sadar,,,Mymensingh,,Mymensingh Sadar,,23.1833,90.1333,1
-BD,2201,Kawatkhali,,,Mymensingh,,Mymensingh Sadar,,23.1833,90.1333,1
-BD,2202,Agriculture Universi,,,Mymensingh,,Mymensingh Sadar,,23.1833,90.1333,1
-BD,2203,Shombhuganj,,,Mymensingh,,Mymensingh Sadar,,23.1833,90.1333,1
-BD,2204,Biddyaganj,,,Mymensingh,,Mymensingh Sadar,,23.1833,90.1333,1
-BD,2205,Pearpur,,,Mymensingh,,Mymensingh Sadar,,23.1833,90.1333,4
-BD,2210,Muktagachha,,,Mymensingh,,Muktagachha,,24.7667,90.2333,4
-BD,2216,Fulbaria,,,Mymensingh,,Fulbaria,,24.0667,90.6167,4
-BD,2220,Trishal,,,Mymensingh,,Trishal,,24.5333,90.5,1
-BD,2221,Ahmadbad,,,Mymensingh,,Trishal,,24.5333,90.5,1
-BD,2222,Ram Amritaganj,,,Mymensingh,,Trishal,,24.5333,90.5,1
-BD,2223,Dhala,,,Mymensingh,,Trishal,,24.5333,90.5,4
-BD,2230,Gaforgaon,,,Mymensingh,,Gaforgaon,,24.6917,89.9583,1
-BD,2231,Shibganj,,,Mymensingh,,Gaforgaon,,25.0167,89.3167,4
-BD,2232,Usti,,,Mymensingh,,Gaforgaon,,24.6917,89.9583,1
-BD,2233,Kandipara,,,Mymensingh,,Gaforgaon,,24.3667,90.6,4
-BD,2234,Duttarbazar,,,Mymensingh,,Gaforgaon,,24.6917,89.9583,1
-BD,2240,Bhaluka,,,Mymensingh,,Bhaluka,,23.8,89.2167,4
-BD,2250,Phulpur,,,Mymensingh,,Phulpur,,24.95,90.25,4
-BD,2251,Beltia,,,Mymensingh,,Phulpur,,24.9667,90.4167,4
-BD,2252,Tarakanda,,,Mymensingh,,Phulpur,,24.95,90.4667,4
-BD,2260,Haluaghat,,,Mymensingh,,Haluaghat,,24.9,90.6,1
-BD,2261,Dhara,,,Mymensingh,,Haluaghat,,24.9,90.6,4
-BD,2262,Munshirhat,,,Mymensingh,,Haluaghat,,24.9,90.6,1
-BD,2270,Gouripur,,,Mymensingh,,Gouripur,,24.7667,90.5667,4
-BD,2271,Ramgopalpur,,,Mymensingh,,Gouripur,,24.7167,90.55,4
-BD,2280,Isshwargonj,,,Mymensingh,,Isshwargonj,,24.6583,90.7,1
-BD,2281,Sohagi,,,Mymensingh,,Isshwargonj,,24.7,90.6667,4
-BD,2282,Atharabari,,,Mymensingh,,Isshwargonj,,24.6167,90.7333,4
-BD,2290,Nandail,,,Mymensingh,,Nandail,,24.5833,90.7667,1
-BD,2291,Gangail,,,Mymensingh,,Nandail,,24.5833,90.7667,4
-BD,2300,Kishoreganj Sadar,,,Kishoreganj,,Kishoreganj Sadar,,23.45,90.5667,1
-BD,2301,Kishoreganj S.Mills,,,Kishoreganj,,Kishoreganj Sadar,,23.45,90.5667,1
-BD,2302,Maizhati,,,Kishoreganj,,Kishoreganj Sadar,,24.3333,90.75,4
-BD,2303,Nilganj,,,Kishoreganj,,Kishoreganj Sadar,,22.5667,90.3833,4
-BD,2310,Karimganj,,,Kishoreganj,,Karimganj,,24.4667,90.8667,4
-BD,2316,Tarial,,,Kishoreganj,,Tarial,,24.4667,90.8667,1
-BD,2320,Hossenpur,,,Kishoreganj,,Hossenpur,,23.2667,90.7,4
-BD,2326,Pakundia,,,Kishoreganj,,Pakundia,,23.2667,90.7,1
-BD,2330,Katiadi,,,Kishoreganj,,Katiadi,,23.4833,89.7417,1
-BD,2331,Gochhihata,,,Kishoreganj,,Katiadi,,23.4833,89.7417,1
-BD,2336,Bajitpur,,,Kishoreganj,,Bajitpur,,23.4333,89.7167,4
-BD,2337,Sararchar,,,Kishoreganj,,Bajitpur,,23.4833,89.7417,1
-BD,2338,Laksmipur,,,Kishoreganj,,Bajitpur,,23.5333,89.7667,4
-BD,2340,Kuliarchar,,,Kishoreganj,,Kuliarchar,,23.6537,90.5648,1
-BD,2341,Chhoysuti,,,Kishoreganj,,Kuliarchar,,23.6537,90.5648,1
-BD,2350,Bhairab,,,Kishoreganj,,Bhairob,,23.6537,90.5648,1
-BD,2360,Nikli,,,Kishoreganj,,Nikli,,24.3333,90.95,4
-BD,2370,MIthamoin,,,Kishoreganj,,Mithamoin,,22.9667,91.1667,1
-BD,2371,Abdullahpur,,,Kishoreganj,,Mithamoin,,22.9667,91.1667,4
-BD,2380,Ostagram,,,Kishoreganj,,Ostagram,,23.6537,90.5648,1
-BD,2390,Itna,,,Kishoreganj,,Itna,,23.9833,90.7833,4
-BD,2400,Netrakona Sadar,,,Netrakona,,Netrakona Sadar,,24.8619,90.8405,1
-BD,2401,Baikherhati,,,Netrakona,,Netrakona Sadar,,24.8619,90.8405,1
-BD,2410,Purbadhola,,,Netrakona,,Purbadhola,,25.0833,90.5167,1
-BD,2411,Shamgonj,,,Netrakona,,Purbadhola,,25.0833,90.5167,1
-BD,2412,Jaria Jhanjhail,,,Netrakona,,Purbadhola,,25.0833,90.5167,1
-BD,2416,Dhobaura,,,Netrakona,,Dhobaura,,25.0833,90.5167,4
-BD,2417,Sakoai,,,Netrakona,,Dhobaura,,25.0833,90.5167,1
-BD,2420,Susnng Durgapur,,,Netrakona,,Susung Durgapur,,24.8619,90.8405,1
-BD,2430,Kalmakanda,,,Netrakona,,Kalmakanda,,25,90.8167,4
-BD,2440,Barhatta,,,Netrakona,,Barhatta,,24.8833,90.8667,4
-BD,2446,Mohanganj,,,Netrakona,,Mohanganj,,24.9,90.9833,4
-BD,2450,Dharampasha,,,Netrakona,,Dharmapasha,,24.8619,90.8405,1
-BD,2456,Moddoynagar,,,Netrakona,,Moddhynagar,,24.8619,90.8405,1
-BD,2460,Khaliajhri,,,Netrakona,,Khaliajuri,,24.8619,90.8405,1
-BD,2462,Shaldigha,,,Netrakona,,Khaliajuri,,24.8619,90.8405,1
-BD,2470,Atpara,,,Netrakona,,Atpara,,24.8,90.8667,4
-BD,2480,Kendua,,,Netrakona,,Kendua,,24.6667,90.8667,4
-BD,2490,Madan,,,Netrakona,,Madan,,24.7,90.9667,4
-BD,3000,Sunamganj Sadar,,,Sunamganj,,Sunamganj Sadar,,24.475,90.6333,1
-BD,3001,Pagla,,,Sunamganj,,Sunamganj Sadar,,24.3167,90.5667,4
-BD,3002,Patharia,,,Sunamganj,,Sunamganj Sadar,,24.6333,90.7,4
-BD,3010,Bishamsapur,,,Sunamganj,,Bishamsarpur,,24.4019,91.0963,1
-BD,3020,Sachna,,,Sunamganj,,Sachna,,25.0167,91.2333,4
-BD,3030,Tahirpur,,,Sunamganj,,Tahirpur,,23.0667,90.85,4
-BD,3040,Dhirai Chandpur,,,Sunamganj,,Dhirai Chandpur,,24.4333,90.7,1
-BD,3041,Jagdal,,,Sunamganj,,Dhirai Chandpur,,24.4333,90.7,4
-BD,3050,Ghungiar,,,Sunamganj,,Ghungiar,,24.4019,91.0963,1
-BD,3060,Jagnnathpur,,,Sunamganj,,Jagnnathpur,,24.4019,91.0963,1
-BD,3061,Syedpur,,,Sunamganj,,Jagnnathpur,,24.4019,91.0963,1
-BD,3062,Atuajan,,,Sunamganj,,Jagnnathpur,,24.4019,91.0963,1
-BD,3063,Hasan Fatemapur,,,Sunamganj,,Jagnnathpur,,24.4019,91.0963,1
-BD,3064,Rasulganj,,,Sunamganj,,Jagnnathpur,,24.4019,91.0963,1
-BD,3065,Shiramsi,,,Sunamganj,,Jagnnathpur,,24.4019,91.0963,1
-BD,3070,Duara bazar,,,Sunamganj,,Duara bazar,,24.4019,91.0963,1
-BD,3080,Chhatak,,,Sunamganj,,Chhatak,,25.0333,91.6667,4
-BD,3081,Chhatak Cement Facto,,,Sunamganj,,Chhatak,,24.5375,91.4542,1
-BD,3082,Chhatak Paper Mills,,,Sunamganj,,Chhatak,,24.5375,91.4542,1
-BD,3083,Gabindaganj,,,Sunamganj,,Chhatak,,24.5375,91.4542,1
-BD,3084,Gabindaganj Natun Ba,,,Sunamganj,,Chhatak,,24.5375,91.4542,1
-BD,3085,Khurma,,,Sunamganj,,Chhatak,,24.8667,91.7833,4
-BD,3086,Moinpur,,,Sunamganj,,Chhatak,,24.5375,91.4542,1
-BD,3087,jahidpur,,,Sunamganj,,Chhatak,,24.8333,91.65,4
-BD,3088,Islamabad,,,Sunamganj,,Chhatak,,23.4167,90.7167,4
-BD,3100,Sylhe Sadar,,,Sylhet,,Sylhet Sadar,,23.6833,91.025,1
-BD,3101,Sylhet Cadet Col,,,Sylhet,,Sylhet Sadar,,23.6833,91.025,1
-BD,3102,Sylhet Biman Bondar,,,Sylhet,,Sylhet Sadar,,23.6833,91.025,1
-BD,3103,Khadimnagar,,,Sylhet,,Sylhet Sadar,,23.6833,91.025,1
-BD,3104,Jamalpur Cantoment,,,Sylhet,,Sylhet Sadar,,23.6833,91.025,1
-BD,3105,Silam,,,Sylhet,,Sylhet Sadar,,23.6833,91.025,1
-BD,3106,Birahimpur,,,Sylhet,,Sylhet Sadar,,23.3,91.1333,4
-BD,3107,Jalalabad,,,Sylhet,,Sylhet Sadar,,24.0667,90.9167,4
-BD,3108,Mogla,,,Sylhet,,Sylhet Sadar,,23.6833,91.025,1
-BD,3109,Ranga Hajiganj,,,Sylhet,,Sylhet Sadar,,23.6833,91.025,1
-BD,3111,Kadamtali,,,Sylhet,,Sylhet Sadar,,24.7833,90.4833,4
-BD,3112,Kamalbazer,,,Sylhet,,Sylhet Sadar,,24.7417,91.2167,1
-BD,3113,Lalbazar,,,Sylhet,,Sylhet Sadar,,24.7417,91.2167,1
-BD,3114,Shahajalal Science &,,,Sylhet,,Sylhet Sadar,,24.7417,91.2167,1
-BD,3116,Fenchuganj,,,Sylhet,,Fenchuganj,,24.7,91.95,4
-BD,3117,Fenchuganj SareKarkh,,,Sylhet,,Fenchuganj,,24.7417,91.2167,1
-BD,3120,Balaganj,,,Sylhet,,Balaganj,,24.0667,91.8333,4
-BD,3121,Karua,,,Sylhet,,Balaganj,,23.0576,91.4226,1
-BD,3122,Brahman Shashon,,,Sylhet,,Balaganj,,23.0576,91.4226,1
-BD,3123,Tajpur,,,Sylhet,,Balaganj,,23.65,90.6,4
-BD,3124,Goala Bazar,,,Sylhet,,Balaganj,,23.0576,91.4226,1
-BD,3125,Begumpur,,,Sylhet,,Balaganj,,23.0576,91.4226,1
-BD,3126,Omarpur,,,Sylhet,,Balaganj,,22.9833,91.3167,4
-BD,3127,Kathal Khair,,,Sylhet,,Balaganj,,23.0576,91.4226,1
-BD,3128,Gaharpur,,,Sylhet,,Balaganj,,23.0576,91.4226,1
-BD,3129,Natun Bazar,,,Sylhet,,Balaganj,,21.5306,91.9403,4
-BD,3130,Bishwanath,,,Sylhet,,Bishwanath,,23.7514,91.1949,1
-BD,3131,Dashghar,,,Sylhet,,Bishwanath,,23.7514,91.1949,1
-BD,3132,Doulathpur,,,Sylhet,,Bishwanath,,23.7514,91.1949,1
-BD,3133,Deokalas,,,Sylhet,,Bishwanath,,23.7514,91.1949,1
-BD,3134,Singer kanch,,,Sylhet,,Bishwanath,,23.7514,91.1949,1
-BD,3140,Kompanyganj,,,Sylhet,,Kompanyganj,,23.7514,91.1949,1
-BD,3150,Goainhat,,,Sylhet,,Goainhat,,23.7514,91.1949,1
-BD,3151,Jaflong,,,Sylhet,,Goainhat,,23.7514,91.1949,1
-BD,3152,Chiknagul,,,Sylhet,,Goainhat,,23.7514,91.1949,1
-BD,3156,Jainthapur,,,Sylhet,,Jaintapur,,23.7514,91.1949,1
-BD,3160,Gopalgannj,,,Sylhet,,Gopalganj,,23.2161,91.3569,1
-BD,3161,Dhaka Dakkhin,,,Sylhet,,Gopalganj,,23.2161,91.3569,1
-BD,3162,Dakkhin Bhadashore,,,Sylhet,,Gopalganj,,23.2161,91.3569,1
-BD,3163,Ranaping,,,Sylhet,,Gopalganj,,23.2161,91.3569,1
-BD,3164,banigram,,,Sylhet,,Gopalganj,,22.3156,91.8972,4
-BD,3165,Chandanpur,,,Sylhet,,Gopalganj,,24.1167,90.8167,4
-BD,3170,Bianibazar,,,Sylhet,,Bianibazar,,24.8167,92.1167,1
-BD,3171,jaldup,,,Sylhet,,Bianibazar,,24.8167,92.1167,1
-BD,3172,Mathiura,,,Sylhet,,Bianibazar,,24.8167,92.1167,4
-BD,3173,Kurar bazar,,,Sylhet,,Bianibazar,,24.8167,92.1167,1
-BD,3174,Salia bazar,,,Sylhet,,Bianibazar,,24.8167,92.1167,1
-BD,3175,Churkai,,,Sylhet,,Bianibazar,,24.8167,92.1167,1
-BD,3180,Kanaighat,,,Sylhet,,Kanaighat,,23.8553,90.0125,1
-BD,3181,Chatulbazar,,,Sylhet,,Kanaighat,,23.8553,90.0125,1
-BD,3182,Manikganj,,,Sylhet,,Kanaighat,,23.8553,90.0125,4
-BD,3183,Gachbari,,,Sylhet,,Kanaighat,,23.8553,90.0125,1
-BD,3190,Jakiganj,,,Sylhet,,Jakiganj,,24.5833,90.5167,1
-BD,3191,Ichhamati,,,Sylhet,,Jakiganj,,24.5833,90.5167,4
-BD,3200,Moulvibazar Sadar,,,Moulvibazar,,Moulvibazar Sadar,,24.6593,91.611,1
-BD,3201,Barakapan,,,Moulvibazar,,Moulvibazar Sadar,,24.6593,91.611,1
-BD,3202,Monumukh,,,Moulvibazar,,Moulvibazar Sadar,,24.6593,91.611,1
-BD,3203,Afrozganj,,,Moulvibazar,,Moulvibazar Sadar,,24.6593,91.611,1
-BD,3210,Srimangal,,,Moulvibazar,,Srimangal,,24.8833,91.5667,1
-BD,3211,Narain Chora,,,Moulvibazar,,Srimangal,,24.8833,91.5667,1
-BD,3212,Kalighat,,,Moulvibazar,,Srimangal,,24.8833,91.5667,1
-BD,3213,Khejurichhara,,,Moulvibazar,,Srimangal,,24.8833,91.5667,1
-BD,3214,Satgaon,,,Moulvibazar,,Srimangal,,24.8833,91.5667,4
-BD,3220,Kamalganj,,,Moulvibazar,,Kamalganj,,24.3833,91.9167,1
-BD,3221,Keramatnaga,,,Moulvibazar,,Kamalganj,,24.3833,91.9167,1
-BD,3222,Patrakhola,,,Moulvibazar,,Kamalganj,,24.3833,91.9167,1
-BD,3223,Shamsher Nagar,,,Moulvibazar,,Kamalganj,,24.3833,91.9167,4
-BD,3224,Munshibazar,,,Moulvibazar,,Kamalganj,,24.3833,91.9167,1
-BD,3230,Kulaura,,,Moulvibazar,,Kulaura,,24.5333,92.05,4
-BD,3231,Tillagaon,,,Moulvibazar,,Kulaura,,24.5667,91.35,1
-BD,3232,Langla,,,Moulvibazar,,Kulaura,,24.5667,91.35,1
-BD,3233,Prithimpasha,,,Moulvibazar,,Kulaura,,24.5667,91.35,1
-BD,3234,Kajaldhara,,,Moulvibazar,,Kulaura,,24.5667,91.35,1
-BD,3235,Karimpur,,,Moulvibazar,,Kulaura,,24.6,90.65,4
-BD,3237,Baramchal,,,Moulvibazar,,Kulaura,,24.5667,91.35,1
-BD,3240,Rajnagar,,,Moulvibazar,,Rajnagar,,24.8967,91.8717,4
-BD,3250,Baralekha,,,Moulvibazar,,Baralekha,,24.6593,91.611,1
-BD,3251,Juri,,,Moulvibazar,,Baralekha,,24.6593,91.611,1
-BD,3252,Dhakkhinbag,,,Moulvibazar,,Baralekha,,24.6593,91.611,1
-BD,3253,Purbashahabajpur,,,Moulvibazar,,Baralekha,,24.6593,91.611,1
-BD,3300,Hobiganj Sadar,,,Hobiganj,,Hobiganj Sadar,,24.3833,91.4167,4
-BD,3301,Shaestaganj,,,Hobiganj,,Hobiganj Sadar,,24.3833,91.4167,1
-BD,3302,Gopaya,,,Hobiganj,,Hobiganj Sadar,,24.3833,91.4167,1
-BD,3310,Bahubal,,,Hobiganj,,Bahubal,,24.37,91.54,1
-BD,3320,Chunarughat,,,Hobiganj,,Chunarughat,,24.2,91.5167,4
-BD,3321,Chandpurbagan,,,Hobiganj,,Chunarughat,,24.225,91.1083,1
-BD,3322,Narapati,,,Hobiganj,,Chunarughat,,24.25,90.7,4
-BD,3330,Madhabpur,,,Hobiganj,,Madhabpur,,24.6167,91.55,4
-BD,3331,Itakhola,,,Hobiganj,,Madhabpur,,24.15,91.3667,4
-BD,3332,Shahajibazar,,,Hobiganj,,Madhabpur,,24.3833,91.4583,1
-BD,3333,Saihamnagar,,,Hobiganj,,Madhabpur,,24.3833,91.4583,1
-BD,3340,Kalauk,,,Hobiganj,,Kalauk,,23.35,90.3333,1
-BD,3341,Lakhai,,,Hobiganj,,Kalauk,,23.35,90.3333,4
-BD,3350,Baniachang,,,Hobiganj,,Baniachang,,24.5167,91.3667,4
-BD,3351,Jatrapasha,,,Hobiganj,,Baniachang,,24.5167,91.3667,1
-BD,3352,Kadirganj,,,Hobiganj,,Baniachang,,24.5167,91.3667,1
-BD,3360,Azmireeganj,,,Hobiganj,,Azmireeganj,,24.2981,91.2593,1
-BD,3370,Nabiganj,,,Hobiganj,,Nabiganj,,24.5667,91.5167,4
-BD,3371,Goplarbazar,,,Hobiganj,,Nabiganj,,24.6083,91.5417,1
-BD,3372,Golduba,,,Hobiganj,,Nabiganj,,24.6083,91.5417,1
-BD,3373,Digalbak,,,Hobiganj,,Nabiganj,,24.6083,91.5417,1
-BD,3374,Inathganj,,,Hobiganj,,Nabiganj,,24.65,91.5667,4
-BD,3400,Brahamanbaria Sadar,,,Brahmanbaria,,Brahamanbaria Sadar,,24.0333,91.0167,1
-BD,3401,Talshahar,,,Brahmanbaria,,Brahamanbaria Sadar,,24.0333,91.0167,1
-BD,3402,Ashuganj,,,Brahmanbaria,,Brahamanbaria Sadar,,24.0333,91.0167,4
-BD,3403,Ashuganj Share,,,Brahmanbaria,,Brahamanbaria Sadar,,24.0333,91.0167,1
-BD,3404,Poun,,,Brahmanbaria,,Brahamanbaria Sadar,,24.0333,91.0167,1
-BD,3410,Nabinagar,,,Brahmanbaria,,Nabinagar,,23.8917,90.9733,4
-BD,3411,Laubfatehpur,,,Brahmanbaria,,Nabinagar,,24.0194,90.9244,1
-BD,3412,Rasullabad,,,Brahmanbaria,,Nabinagar,,24.0194,90.9244,1
-BD,3413,Shamgram,,,Brahmanbaria,,Nabinagar,,24.0194,90.9244,1
-BD,3414,Ratanpur,,,Brahmanbaria,,Nabinagar,,24.2,90.9667,4
-BD,3415,Shahapur,,,Brahmanbaria,,Nabinagar,,23.9667,90.8333,4
-BD,3417,Kaitala,,,Brahmanbaria,,Nabinagar,,24.0194,90.9244,1
-BD,3418,Salimganj,,,Brahmanbaria,,Nabinagar,,24.0194,90.9244,1
-BD,3419,Jibanganj,,,Brahmanbaria,,Nabinagar,,24.0194,90.9244,1
-BD,3420,Banchharampur,,,Brahmanbaria,,Banchharampur,,24.0165,91.0416,1
-BD,3430,Sarial,,,Brahmanbaria,,Sarail,,24.05,91.2333,1
-BD,3431,Shahbajpur,,,Brahmanbaria,,Sarail,,24.05,91.2333,1
-BD,3432,Chandura,,,Brahmanbaria,,Sarail,,24.05,91.2333,4
-BD,3440,Nasirnagar,,,Brahmanbaria,,Nasirnagar,,24.0165,91.0416,1
-BD,3441,Fandauk,,,Brahmanbaria,,Nasirnagar,,24.0165,91.0416,1
-BD,3450,Akhaura,,,Brahmanbaria,,Akhaura,,23.8617,91.2189,4
-BD,3451,Azampur,,,Brahmanbaria,,Akhaura,,24.8333,90.9833,4
-BD,3452,Gangasagar,,,Brahmanbaria,,Akhaura,,23.8333,91.2167,4
-BD,3460,Kasba,,,Brahmanbaria,,Kasba,,24.1667,90.7833,4
-BD,3461,Kuti,,,Brahmanbaria,,Kasba,,23.795,91.1158,4
-BD,3462,Chandidar,,,Brahmanbaria,,Kasba,,23.8372,91.0053,1
-BD,3463,Chargachh,,,Brahmanbaria,,Kasba,,23.8372,91.0053,1
-BD,3464,Gopinathpur,,,Brahmanbaria,,Kasba,,23.55,91.1167,4
-BD,3500,Comilla Sadar,,,Comilla,,Comilla Sadar,,23.3207,91.0973,1
-BD,3501,Comilla Contoment,,,Comilla,,Comilla Sadar,,23.3207,91.0973,1
-BD,3502,Halimanagar,,,Comilla,,Comilla Sadar,,23.3207,91.0973,1
-BD,3503,Courtbari,,,Comilla,,Comilla Sadar,,23.3207,91.0973,1
-BD,3504,Suaganj,,,Comilla,,Comilla Sadar,,23.3207,91.0973,1
-BD,3510,Chandia,,,Comilla,,Chandina,,22.8025,91.4108,4
-BD,3511,Madhaiabazar,,,Comilla,,Chandina,,23.2897,90.9814,1
-BD,3516,Daudkandi,,,Comilla,,Daudkandi,,23.5333,90.7167,4
-BD,3517,Gouripur,,,Comilla,,Daudkandi,,23.5333,90.8167,4
-BD,3518,Dashpara,,,Comilla,,Daudkandi,,23.2897,90.9814,1
-BD,3519,Eliotganj,,,Comilla,,Daudkandi,,23.2897,90.9814,1
-BD,3520,Burichang,,,Comilla,,Burichang,,23.5981,91.1308,4
-BD,3521,Maynamoti bazar,,,Comilla,,Burichang,,23.6421,91.1251,1
-BD,3526,Brahmanpara,,,Comilla,,Brahmanpara,,23.6861,91.1194,4
-BD,3530,Davidhar,,,Comilla,,Davidhar,,23.3207,91.0973,1
-BD,3531,Gangamandal,,,Comilla,,Davidhar,,23.3207,91.0973,1
-BD,3532,Barashalghar,,,Comilla,,Davidhar,,23.3207,91.0973,1
-BD,3533,Dhamtee,,,Comilla,,Davidhar,,23.3207,91.0973,1
-BD,3540,Muradnagar,,,Comilla,,Muradnagar,,23.4833,90.8833,4
-BD,3541,Ramchandarpur,,,Comilla,,Muradnagar,,23.475,90.8167,1
-BD,3542,Companyganj,,,Comilla,,Muradnagar,,23.475,90.8167,1
-BD,3543,Bangra,,,Comilla,,Muradnagar,,23.475,90.8167,1
-BD,3544,Sonakanda,,,Comilla,,Muradnagar,,23.4667,90.75,4
-BD,3545,Pantibazar,,,Comilla,,Muradnagar,,23.475,90.8167,1
-BD,3546,Homna,,,Comilla,,Homna,,23.475,90.8167,1
-BD,3550,Chouddagram,,,Comilla,,Chouddagram,,23.2536,91.3047,4
-BD,3551,Batisa,,,Comilla,,Chouddagram,,23.2,91.3167,4
-BD,3552,Chiora,,,Comilla,,Chouddagram,,23.2268,91.3107,1
-BD,3560,Barura,,,Comilla,,Barura,,23.3858,91.1206,4
-BD,3561,Poyalgachha,,,Comilla,,Barura,,23.3858,91.1206,1
-BD,3562,Murdafarganj,,,Comilla,,Barura,,23.3858,91.1206,1
-BD,3570,Laksam,,,Comilla,,Laksam,,23.2472,91.1425,4
-BD,3571,Lakshamanpur,,,Comilla,,Laksam,,23.1653,91.1213,1
-BD,3572,Bipulasar,,,Comilla,,Laksam,,23.0833,91.1,4
-BD,3580,Langalkot,,,Comilla,,Langalkot,,23.1083,91.275,1
-BD,3581,Dhalua,,,Comilla,,Langalkot,,23.1167,91.2333,4
-BD,3582,Chhariabazar,,,Comilla,,Langalkot,,23.1083,91.275,1
-BD,3583,Gunabati,,,Comilla,,Langalkot,,23.1,91.3167,4
-BD,3700,Lakshimpur Sadar,,,Lakshmipur,,Lakshimpur Sadar,,23.925,89.7833,1
-BD,3701,Dalal Bazar,,,Lakshmipur,,Lakshimpur Sadar,,23.925,89.7833,1
-BD,3702,Bhabaniganj,,,Lakshmipur,,Lakshimpur Sadar,,24.5833,88.8167,4
-BD,3703,Mandari,,,Lakshmipur,,Lakshimpur Sadar,,23.2667,90.75,4
-BD,3704,Keramatganj,,,Lakshmipur,,Lakshimpur Sadar,,23.925,89.7833,1
-BD,3705,Rupchara,,,Lakshmipur,,Lakshimpur Sadar,,23.925,89.7833,1
-BD,3706,Duttapara,,,Lakshmipur,,Lakshimpur Sadar,,23.925,89.7833,1
-BD,3707,Choupalli,,,Lakshmipur,,Lakshimpur Sadar,,23.925,89.7833,1
-BD,3708,Chandraganj,,,Lakshmipur,,Lakshimpur Sadar,,23.925,89.7833,1
-BD,3709,Amani Lakshimpur,,,Lakshmipur,,Lakshimpur Sadar,,23.925,89.7833,1
-BD,3710,Raypur,,,Lakshmipur,,Raypur,,23.6667,90.0333,4
-BD,3711,Rakhallia,,,Lakshmipur,,Raypur,,23.6667,90.0333,1
-BD,3712,Nagerdighirpar,,,Lakshmipur,,Raypur,,23.6667,90.0333,1
-BD,3713,Haydarganj,,,Lakshmipur,,Raypur,,23.6667,90.0333,1
-BD,3714,Bhuabari,,,Lakshmipur,,Raypur,,23.6667,90.0333,1
-BD,3720,Ramganj,,,Lakshmipur,,Ramganj,,23.1,90.85,4
-BD,3721,Alipur,,,Lakshmipur,,Ramganj,,23.1,90.2833,4
-BD,3722,Panpara,,,Lakshmipur,,Ramganj,,23.8167,90.25,4
-BD,3723,Kanchanpur,,,Lakshmipur,,Ramganj,,23.0167,90.7833,4
-BD,3724,Naagmud,,,Lakshmipur,,Ramganj,,23.2583,90.5417,1
-BD,3725,Dolta,,,Lakshmipur,,Ramganj,,23.2583,90.5417,1
-BD,3730,Char Alexgander,,,Lakshmipur,,Char Alexgander,,23.5071,90.2524,1
-BD,3731,Hajirghat,,,Lakshmipur,,Char Alexgander,,23.5071,90.2524,1
-BD,3732,Ramgatirhat,,,Lakshmipur,,Char Alexgander,,23.5071,90.2524,1
-BD,3800,Noakhali Sadar,,,Noakhali,,Noakhali Sadar,,23.2333,90.9667,1
-BD,3801,Noakhali College,,,Noakhali,,Noakhali Sadar,,23.2333,90.9667,1
-BD,3802,Sonapur,,,Noakhali,,Noakhali Sadar,,23.2333,90.9667,4
-BD,3803,Din Monir Hat,,,Noakhali,,Noakhali Sadar,,23.2333,90.9667,1
-BD,3804,Pak Kishoreganj,,,Noakhali,,Noakhali Sadar,,23.2333,90.9667,1
-BD,3806,Mriddarhat,,,Noakhali,,Noakhali Sadar,,23.2333,90.9667,1
-BD,3807,Kabirhat,,,Noakhali,,Noakhali Sadar,,23.2333,90.9667,1
-BD,3808,Khalifar Hat,,,Noakhali,,Noakhali Sadar,,23.2333,90.9667,1
-BD,3809,Charam Tua,,,Noakhali,,Noakhali Sadar,,23.2333,90.9667,1
-BD,3811,Chaprashir Hat,,,Noakhali,,Noakhali Sadar,,23.1841,90.9157,1
-BD,3812,Char Jabbar,,,Noakhali,,Noakhali Sadar,,23.1841,90.9157,1
-BD,3820,Begumganj,,,Noakhali,,Begumganj,,23.0225,91.0747,4
-BD,3821,Choumohani,,,Noakhali,,Begumganj,,23.4631,90.9416,1
-BD,3822,Banglabazar,,,Noakhali,,Begumganj,,23.4631,90.9416,1
-BD,3823,Mir Owarishpur,,,Noakhali,,Begumganj,,23.4631,90.9416,1
-BD,3824,Bazra,,,Noakhali,,Begumganj,,24.15,90.9,4
-BD,3825,Jamidar Hat,,,Noakhali,,Begumganj,,23.4631,90.9416,1
-BD,3827,Sonaimuri,,,Noakhali,,Begumganj,,23.2167,90.85,4
-BD,3828,Gopalpur,,,Noakhali,,Begumganj,,23.4631,90.9416,1
-BD,3829,Joynarayanpur,,,Noakhali,,Begumganj,,23.4631,90.9416,1
-BD,3831,Alaiarpur,,,Noakhali,,Begumganj,,22.95,91.3,4
-BD,3832,Tangirpar,,,Noakhali,,Begumganj,,23.2667,90.9167,4
-BD,3833,Khalafat Bazar,,,Noakhali,,Begumganj,,23.0297,91.0969,1
-BD,3834,Rajganj,,,Noakhali,,Begumganj,,22.8725,91.0742,4
-BD,3835,Oachhekpur,,,Noakhali,,Begumganj,,23.0297,91.0969,1
-BD,3837,Bhabani Jibanpur,,,Noakhali,,Begumganj,,23.0297,91.0969,1
-BD,3838,Maheshganj,,,Noakhali,,Begumganj,,23.0297,91.0969,1
-BD,3839,Nadona,,,Noakhali,,Begumganj,,23.0297,91.0969,1
-BD,3841,Nandiapara,,,Noakhali,,Begumganj,,23.3551,90.523,1
-BD,3842,Khalishpur,,,Noakhali,,Begumganj,,23.5,89.7333,4
-BD,3843,Dauti,,,Noakhali,,Begumganj,,23.3551,90.523,1
-BD,3844,Joyag,,,Noakhali,,Begumganj,,23.0819,91.0689,4
-BD,3845,Thanar Hat,,,Noakhali,,Begumganj,,23.3551,90.523,1
-BD,3847,Amisha Para,,,Noakhali,,Begumganj,,23.3551,90.523,1
-BD,3848,Durgapur,,,Noakhali,,Begumganj,,23.4833,90.7667,4
-BD,3850,Basur Hat,,,Noakhali,,Basurhat,,23.1841,90.9157,1
-BD,3851,Charhajari,,,Noakhali,,Basurhat,,23.1841,90.9157,1
-BD,3860,Senbag,,,Noakhali,,Senbag,,23.0156,91.2233,4
-BD,3861,Kallyandi,,,Noakhali,,Senbag,,23.0156,91.2233,1
-BD,3862,Beezbag,,,Noakhali,,Senbag,,23.0156,91.2233,1
-BD,3863,Kankirhat,,,Noakhali,,Senbag,,23.0156,91.2233,1
-BD,3864,Chatarpaia,,,Noakhali,,Senbag,,23.0156,91.2233,1
-BD,3865,T.P. Lamua,,,Noakhali,,Senbag,,23.0156,91.2233,1
-BD,3870,Chatkhil,,,Noakhali,,Chatkhil,,23.1333,90.95,1
-BD,3871,Palla,,,Noakhali,,Chatkhil,,23.0833,90.9833,4
-BD,3872,Khilpara,,,Noakhali,,Chatkhil,,23.3167,90.8167,4
-BD,3873,Bodalcourt,,,Noakhali,,Chatkhil,,23.1333,90.95,1
-BD,3874,Rezzakpur,,,Noakhali,,Chatkhil,,23.1333,90.95,1
-BD,3875,Solla,,,Noakhali,,Chatkhil,,23.1,91,4
-BD,3877,Karihati,,,Noakhali,,Chatkhil,,23.0333,91,4
-BD,3878,Dosh Gharia,,,Noakhali,,Chatkhil,,23.1333,90.95,1
-BD,3879,Bansa Bazar,,,Noakhali,,Chatkhil,,23.1333,90.95,1
-BD,3881,Sahapur,,,Noakhali,,Chatkhil,,23.4,90.7667,4
-BD,3882,Sampara,,,Noakhali,,Chatkhil,,23.4,90.7667,1
-BD,3883,Shingbahura,,,Noakhali,,Chatkhil,,23.4,90.7667,1
-BD,3890,Hatiya,,,Noakhali,,Hatiya,,22.4044,91.1253,4
-BD,3891,Afazia,,,Noakhali,,Hatiya,,22.4044,91.1253,1
-BD,3892,Tamoraddi,,,Noakhali,,Hatiya,,22.4044,91.1253,1
-BD,3893,Chourangi Bazar,,,Sunamganj,,Chhatak,,22.4044,91.1253,1
-BD,3900,Feni Sadar,,,Feni,,Feni Sadar,,23.2667,91.15,1
-BD,3901,Fazilpur,,,Feni,,Feni Sadar,,23.2667,91.15,4
-BD,3902,Sharshadie,,,Feni,,Feni Sadar,,23.2667,91.15,1
-BD,3903,Laskarhat,,,Feni,,Feni Sadar,,23.2667,91.15,1
-BD,3910,Chhagalnaia,,,Feni,,Chhagalnaia,,23.03,91.5069,4
-BD,3911,Maharajganj,,,Feni,,Chhagalnaia,,23.03,91.5069,1
-BD,3912,Daraga Hat,,,Feni,,Chhagalnaia,,23.03,91.5069,1
-BD,3913,Puabashimulia,,,Feni,,Chhagalnaia,,23.03,91.5069,1
-BD,3920,Dagondhuia,,,Feni,,Dagonbhuia,,23.4667,91.15,1
-BD,3921,Dudmukha,,,Feni,,Dagonbhuia,,23.4667,91.15,1
-BD,3922,Chhilonia,,,Feni,,Dagonbhuia,,23.4667,91.15,1
-BD,3923,Rajapur,,,Feni,,Dagonbhuia,,23.4667,91.15,4
-BD,3930,Sonagazi,,,Feni,,Sonagazi,,22.8606,91.4428,4
-BD,3931,Motiganj,,,Feni,,Sonagazi,,22.8606,91.4428,1
-BD,3932,Ahmadpur,,,Feni,,Sonagazi,,22.8606,91.4428,1
-BD,3933,Kazirhat,,,Feni,,Sonagazi,,22.8606,91.4428,1
-BD,3940,Pashurampur,,,Feni,,Pashurampur,,22.8701,91.6644,1
-BD,3941,Shuarbazar,,,Feni,,Pashurampur,,22.8701,91.6644,1
-BD,3942,Fulgazi,,,Feni,,Pashurampur,,23.1181,91.4797,4
-BD,3943,Munshirhat,,,Feni,,Pashurampur,,22.6222,91.8492,4
-BD,4000,Chittagong GPO,,,Chittagong,,Chittagong Sadar,,22.3455,91.8342,
-BD,4100,Chittagong Bandar,,,Chittagong,,Chittagong Sadar,,22.2225,91.8412,
-BD,4202,Pahartoli,,,Chittagong,,Chittagong Sadar,,23.975,90.625,1
-BD,4203,Chawkbazar,,,Chittagong,,Chittagong Sadar,,23.975,90.625,1
-BD,4204,Patenga,,,Chittagong,,Chittagong Sadar,,23.975,90.625,1
-BD,4205,Chittagong Airport,,,Chittagong,,Chittagong Sadar,,23.975,90.625,1
-BD,4206,Jaldia Merine Accade,,,Chittagong,,Chittagong Sadar,,23.975,90.625,1
-BD,4207,Firozshah,,,Chittagong,,Chittagong Sadar,,23.975,90.625,1
-BD,4208,Mohard,,,Chittagong,,Chittagong Sadar,,23.975,90.625,1
-BD,4209,Chitt. Politechnic In,,,Chittagong,,Chittagong Sadar,,23.975,90.625,1
-BD,4210,Bayezid Bostami,,,Chittagong,,Chittagong Sadar,,23.975,90.625,1
-BD,4211,Amin Jute Mills,,,Chittagong,,Chittagong Sadar,,23.975,90.625,1
-BD,4212,Chandgaon,,,Chittagong,,Chittagong Sadar,,23.8833,90.3333,4
-BD,4213,Wazedia,,,Chittagong,,Chittagong Sadar,,23.975,90.625,1
-BD,4214,Jalalabad,,,Chittagong,,Chittagong Sadar,,24.0667,90.9167,4
-BD,4215,Anandabazar,,,Chittagong,,Chittagong Sadar,,23.975,90.625,1
-BD,4216,Halishahar,,,Chittagong,,Chittagong Sadar,,23.975,90.625,1
-BD,4217,North Katuli,,,Chittagong,,Chittagong Sadar,,23.975,90.625,1
-BD,4218,Chitt. Sailers Colon,,,Chittagong,,Chittagong Sadar,,23.975,90.625,1
-BD,4219,Chitt. Customs Acca,,,Chittagong,,Chittagong Sadar,,23.975,90.625,1
-BD,4220,Chitt. Cantonment,,,Chittagong,,Chittagong Sadar,,23.975,90.625,1
-BD,4221,Al- Amin Baria Madra,,,Chittagong,,Chittagong Sadar,,23.975,90.625,1
-BD,4222,Middle Patenga,,,Chittagong,,Chittagong Sadar,,23.975,90.625,1
-BD,4223,Export Processing,,,Chittagong,,Chittagong Sadar,,23.975,90.625,1
-BD,4224,Rampura TSO,,,Chittagong,,Chittagong Sadar,,23.975,90.625,1
-BD,4225,Halishshar,,,Chittagong,,Chittagong Sadar,,23.975,90.625,1
-BD,4226,North Halishahar,,,Chittagong,,Chittagong Sadar,,23.975,90.625,1
-BD,4300,Sandwip,,,Chittagong,,Sandwip,,22.4678,91.4561,4
-BD,4301,Shiberhat,,,Chittagong,,Sandwip,,22.4678,91.4561,1
-BD,4302,Urirchar,,,Chittagong,,Sandwip,,22.4678,91.4561,1
-BD,4310,Sitakunda,,,Chittagong,,Sitakunda,,22.62,91.6578,4
-BD,4311,Baroidhala,,,Chittagong,,Sitakunda,,22.5047,91.7091,1
-BD,4312,Barabkunda,,,Chittagong,,Sitakunda,,22.5808,91.6842,4
-BD,4313,Bawashbaria,,,Chittagong,,Sitakunda,,22.5047,91.7091,1
-BD,4314,Kumira,,,Chittagong,,Sitakunda,,22.5128,91.7058,4
-BD,4315,Bhatiari,,,Chittagong,,Sitakunda,,22.4233,91.7403,4
-BD,4316,Fouzdarhat,,,Chittagong,,Sitakunda,,22.5047,91.7091,1
-BD,4317,Jafrabad,,,Chittagong,,Sitakunda,,22.3867,91.7572,4
-BD,4320,Mirsharai,,,Chittagong,,Mirsharai,,22.8647,91.5664,4
-BD,4321,Abutorab,,,Chittagong,,Mirsharai,,22.8574,91.5332,1
-BD,4322,Darrogahat,,,Chittagong,,Mirsharai,,22.8574,91.5332,1
-BD,4323,Bharawazhat,,,Chittagong,,Mirsharai,,22.8574,91.5332,1
-BD,4324,Joarganj,,,Chittagong,,Mirsharai,,22.8574,91.5332,1
-BD,4325,Azampur,,,Chittagong,,Mirsharai,,22.85,91.5,4
-BD,4327,Korerhat,,,Chittagong,,Mirsharai,,22.8574,91.5332,1
-BD,4328,Mohazanhat,,,Chittagong,,Mirsharai,,22.8574,91.5332,1
-BD,4330,Hathazari,,,Chittagong,,Hathazari,,22.5053,91.8111,4
-BD,4331,Chitt.University,,,Chittagong,,Hathazari,,22.5053,91.8111,1
-BD,4332,Gorduara,,,Chittagong,,Hathazari,,22.5053,91.8111,1
-BD,4333,Katirhat,,,Chittagong,,Hathazari,,22.5053,91.8111,1
-BD,4334,Mirzapur,,,Chittagong,,Hathazari,,22.5053,91.8111,1
-BD,4335,Fatahabad,,,Chittagong,,Hathazari,,22.5053,91.8111,1
-BD,4337,Nuralibari,,,Chittagong,,Hathazari,,22.5053,91.8111,1
-BD,4338,Yunus Nagar,,,Chittagong,,Hathazari,,22.5053,91.8111,1
-BD,4339,Madrasa,,,Chittagong,,Hathazari,,22.5053,91.8111,1
-BD,4340,Rouzan,,,Chittagong,,Rouzan,,22.9547,91.4851,1
-BD,4341,Beenajuri,,,Chittagong,,Rouzan,,22.9547,91.4851,1
-BD,4342,Kundeshwari,,,Chittagong,,Rouzan,,22.9547,91.4851,1
-BD,4343,Gahira,,,Chittagong,,Rouzan,,22.5178,91.8747,4
-BD,4344,jagannath Hat,,,Chittagong,,Rouzan,,22.5631,91.8972,4
-BD,4345,Fatepur,,,Chittagong,,Rouzan,,23.7833,90.6833,4
-BD,4346,Guzra Noapara,,,Chittagong,,Rouzan,,22.9547,91.4851,1
-BD,4347,Dewanpur,,,Chittagong,,Rouzan,,22.9547,91.4851,1
-BD,4348,Mohamuni,,,Chittagong,,Rouzan,,22.9547,91.4851,1
-BD,4349,B.I.T Post Office,,,Chittagong,,Rouzan,,22.9547,91.4851,1
-BD,4350,Fatikchhari,,,Chittagong,,Fatikchhari,,22.725,91.7675,4
-BD,4351,Nanupur,,,Chittagong,,Fatikchhari,,22.6269,91.8372,4
-BD,4352,Bhandar Sharif,,,Chittagong,,Fatikchhari,,22.676,91.8024,1
-BD,4353,Najirhat,,,Chittagong,,Fatikchhari,,22.676,91.8024,1
-BD,4354,Harualchhari,,,Chittagong,,Fatikchhari,,22.676,91.8024,1
-BD,4355,Narayanhat,,,Chittagong,,Fatikchhari,,22.676,91.8024,1
-BD,4360,Rangunia,,,Chittagong,,Rangunia,,22.4672,92.0611,4
-BD,4361,Dhamair,,,Chittagong,,Rangunia,,22.3966,91.9589,1
-BD,4363,Kanungopara,,,Chittagong,,Boalkhali,,22.3966,91.9589,1
-BD,4364,Saroatoli,,,Chittagong,,Boalkhali,,22.3966,91.9589,1
-BD,4365,Iqbal Park,,,Chittagong,,Boalkhali,,22.3966,91.9589,1
-BD,4366,Boalkhali,,,Chittagong,,Boalkhali,,22.3419,91.9189,4
-BD,4367,Sakpura,,,Chittagong,,Boalkhali,,22.3581,91.9211,4
-BD,4368,Kadurkhal,,,Chittagong,,Boalkhali,,22.3966,91.9589,1
-BD,4369,Charandwip,,,Chittagong,,Boalkhali,,22.4192,91.9344,4
-BD,4370,Patia Head Office,,,Chittagong,,Patia Head Office,,22.2465,91.8842,1
-BD,4371,Budhpara,,,Chittagong,,Patia Head Office,,22.2778,91.9208,4
-BD,4376,Anowara,,,Chittagong,,Anawara,,22.2433,91.88,4
-BD,4377,Paroikora,,,Chittagong,,Anawara,,22.2465,91.8842,1
-BD,4378,Battali,,,Chittagong,,Anawara,,22.2183,91.8517,4
-BD,4380,East Joara,,,Chittagong,,East Joara,,22.0756,92.0514,1
-BD,4381,Gachbaria,,,Chittagong,,East Joara,,22.0756,92.0514,1
-BD,4382,Dohazari,,,Chittagong,,East Joara,,22.0756,92.0514,1
-BD,4383,Barma,,,Chittagong,,East Joara,,22.0756,92.0514,1
-BD,4386,Satkania,,,Chittagong,,Satkania,,22.0756,92.0514,4
-BD,4387,Baitul Ijjat,,,Chittagong,,Satkania,,22.0756,92.0514,1
-BD,4388,Bazalia,,,Chittagong,,Satkania,,22.0756,92.0514,1
-BD,4390,Jaldi,,,Chittagong,,Jaldi,,21.9928,91.9533,4
-BD,4391,Khan Bahadur,,,Chittagong,,Jaldi,,22.0927,91.9964,1
-BD,4392,Gunagari,,,Chittagong,,Jaldi,,22.0897,91.9264,4
-BD,4393,Banigram,,,Chittagong,,Jaldi,,22.3156,91.8972,4
-BD,4396,Lohagara,,,Chittagong,,Lohagara,,22.0122,92.0956,4
-BD,4397,Padua,,,Chittagong,,Lohagara,,22.0533,92.1094,4
-BD,4398,Chunti,,,Chittagong,,Lohagara,,22.0927,91.9964,1
-BD,4400,Khagrachari Sadar,,,Khagrachari,,Khagrachari Sadar,,22.8961,92.0429,1
-BD,4410,Panchhari,,,Khagrachari,,Panchhari,,22.6833,92.4167,4
-BD,4420,Diginala,,,Khagrachari,,Diginala,,22.8961,92.0429,1
-BD,4430,Mahalchhari,,,Khagrachari,,Mahalchhari,,22.9167,92.0333,4
-BD,4440,Ramghar Head Office,,,Khagrachari,,Ramghar Head Office,,22.8961,92.0429,1
-BD,4450,Matiranga,,,Khagrachari,,Matiranga,,23.1219,91.8767,4
-BD,4460,Manikchhari,,,Khagrachari,,Manikchhari,,22.8625,91.845,4
-BD,4470,Laxmichhari,,,Khagrachari,,Laxmichhari,,22.8961,92.0429,1
-BD,4500,Rangamati Sadar,,,Rangamati,,Rangamati Sadar,,22.5066,92.1597,1
-BD,4510,Kalampati,,,Rangamati,,Kalampati,,22.545,91.9369,4
-BD,4511,Betbunia,,,Rangamati,,Kalampati,,22.545,91.9369,1
-BD,4520,Nanichhar,,,Rangamati,,Naniachhar,,22.5066,92.1597,1
-BD,4530,Kaptai,,,Rangamati,,kaptai,,22.4889,92.2306,4
-BD,4531,Chandraghona,,,Rangamati,,kaptai,,22.4758,92.1381,4
-BD,4532,Kaptai Project,,,Rangamati,,kaptai,,22.4824,92.1843,1
-BD,4533,Kaptai Nuton Bazar,,,Rangamati,,kaptai,,22.4824,92.1843,1
-BD,4540,Rajsthali,,,Rangamati,,Rajsthali,,22.5066,92.1597,1
-BD,4550,Bilaichhari,,,Rangamati,,Bilaichhari,,22.5167,92.3333,4
-BD,4560,Jarachhari,,,Rangamati,,Jarachhari,,22.5066,92.1597,1
-BD,4570,Barakal,,,Rangamati,,Barakal,,22.5066,92.1597,1
-BD,4580,Longachh,,,Rangamati,,Longachh,,22.5066,92.1597,1
-BD,4590,Marishya,,,Rangamati,,Marishya,,22.5066,92.1597,1
-BD,4600,Bandarban Sadar,,,Bandarban,,Bandarban Sadar,,21.9121,92.3119,1
-BD,4610,Roanchhari,,,Bandarban,,Roanchhari,,21.9121,92.3119,1
-BD,4620,Ruma,,,Bandarban,,Ruma,,22.05,92.4,4
-BD,4630,Thanchi,,,Bandarban,,Thanchi,,21.9121,92.3119,1
-BD,4641,Lama,,,Bandarban,,Thanchi,,21.7742,92.2239,4
-BD,4650,Alikadam,,,Bandarban,,Alikadam,,21.9121,92.3119,1
-BD,4660,Naikhong,,,Bandarban,,Naikhong,,21.9121,92.3119,1
-BD,4700,Coxs Bazar Sadar,,,Cox’s Bazar,,Coxs Bazar Sadar,,21.3394,92.0991,1
-BD,4701,Zhilanja,,,Cox’s Bazar,,Coxs Bazar Sadar,,21.3394,92.0991,1
-BD,4702,Eidga,,,Cox’s Bazar,,Coxs Bazar Sadar,,21.3394,92.0991,1
-BD,4710,Gorakghat,,,Cox’s Bazar,,Gorakghat,,21.3394,92.0991,1
-BD,4720,Kutubdia,,,Cox’s Bazar,,Kutubdia,,21.8144,91.8542,4
-BD,4730,Ramu,,,Cox’s Bazar,,Ramu,,21.4314,92.105,4
-BD,4740,Chiringga,,,Cox’s Bazar,,Chiringga,,21.3394,92.0991,1
-BD,4741,Chiringga S.O,,,Cox’s Bazar,,Chiringga,,21.3394,92.0991,1
-BD,4742,Badarkali,,,Cox’s Bazar,,Chiringga,,21.3394,92.0991,1
-BD,4743,Malumghat,,,Cox’s Bazar,,Chiringga,,21.3394,92.0991,1
-BD,4750,Ukhia,,,Cox’s Bazar,,Ukhia,,21.245,92.1372,4
-BD,4760,Teknaf,,,Cox’s Bazar,,Teknaf,,20.8667,92.3,4
-BD,4761,Hnila,,,Cox’s Bazar,,Teknaf,,20.8667,92.3,1
-BD,4762,St.Martin,,,Cox’s Bazar,,Teknaf,,20.8667,92.3,1
-BD,5000,Panchagar Sadar,,,Panchagarh,,Panchagra Sadar,,24.275,88.75,1
-BD,5010,Boda,,,Panchagarh,,Boda,,24.275,88.75,1
-BD,5020,Dabiganj,,,Panchagarh,,Dabiganj,,24.275,88.75,1
-BD,5030,Tetulia,,,Panchagarh,,Tetulia,,24.4667,88.5667,4
-BD,5040,Chotto Dab,,,Panchagarh,,Chotto Dab,,24.0833,88.9333,1
-BD,5041,Mirjapur,,,Panchagarh,,Chotto Dab,,24.0833,88.9333,4
-BD,5100,Thakurgaon Sadar,,,Thakurgaon,,Thakurgaon Sadar,,25.0167,89.3167,1
-BD,5101,Thakurgaon Road,,,Thakurgaon,,Thakurgaon Sadar,,25.0167,89.3167,1
-BD,5102,Shibganj,,,Thakurgaon,,Thakurgaon Sadar,,25.0167,89.3167,4
-BD,5103,Ruhia,,,Thakurgaon,,Thakurgaon Sadar,,25.0167,89.3167,1
-BD,5110,Pirganj,,,Thakurgaon,,Pirganj,,25.8667,88.3667,4
-BD,5120,Rani Sankail,,,Thakurgaon,,Rani Sankail,,24.8792,89.625,1
-BD,5121,Nekmarad,,,Thakurgaon,,Rani Sankail,,24.8792,89.625,1
-BD,5130,Jibanpur,,,Thakurgaon,,Jibanpur,,24.9167,90.9333,4
-BD,5140,Baliadangi,,,Thakurgaon,,Baliadangi,,23.7167,89.8833,4
-BD,5141,Lahiri,,,Thakurgaon,,Baliadangi,,23.7167,89.8833,1
-BD,5200,Dinajpur Sadar,,,Dinajpur,,Dinajpur Sadar,,24.6333,89.5125,1
-BD,5201,Dinajpur Rajbari,,,Dinajpur,,Dinajpur Sadar,,24.6333,89.5125,1
-BD,5210,Biral,,,Dinajpur,,Biral,,24.6333,89.5125,1
-BD,5216,Setabganj,,,Dinajpur,,Setabganj,,24.6333,89.5125,1
-BD,5220,Birganj,,,Dinajpur,,Birganj,,25.85,88.6667,4
-BD,5226,Maharajganj,,,Dinajpur,,Maharajganj,,25.85,88.6667,1
-BD,5230,Khansama,,,Dinajpur,,Khansama,,24.6333,89.5125,1
-BD,5231,Pakarhat,,,Dinajpur,,Khansama,,24.6333,89.5125,1
-BD,5240,Chrirbandar,,,Dinajpur,,Chrirbandar,,24.6333,89.5125,1
-BD,5241,Ranirbandar,,,Dinajpur,,Chrirbandar,,24.6333,89.5125,1
-BD,5250,Parbatipur,,,Dinajpur,,Parbatipur,,24.8167,88.9833,4
-BD,5260,Phulbari,,,Dinajpur,,Phulbari,,24.4333,90.0167,4
-BD,5266,Birampur,,,Dinajpur,,Birampur,,24.9833,90.4667,4
-BD,5270,Bangla Hili,,,Dinajpur,,Bangla Hili,,24.6333,89.5125,1
-BD,5280,Nababganj,,,Dinajpur,,Nababganj,,25.4333,89.1333,1
-BD,5281,Daudpur,,,Dinajpur,,Nababganj,,25.4,89.1167,4
-BD,5282,Gopalpur,,,Dinajpur,,Nababganj,,25.4667,89.15,4
-BD,5290,Osmanpur,,,Dinajpur,,Osmanpur,,23.2333,89.2167,4
-BD,5291,Ghoraghat,,,Dinajpur,,Osmanpur,,22.8833,90.4833,4
-BD,5300,Nilphamari Sadar,,,Nilphamari,,Nilphamari Sadar,,25.4278,89.1667,1
-BD,5301,Nilphamari Sugar Mil,,,Nilphamari,,Nilphamari Sadar,,25.4278,89.1667,1
-BD,5310,Syedpur,,,Nilphamari,,Syedpur,,25.4278,89.1667,1
-BD,5311,Syedpur Upashahar,,,Nilphamari,,Syedpur,,25.4278,89.1667,1
-BD,5320,Kishoriganj,,,Nilphamari,,Kishoriganj,,25.4278,89.1667,1
-BD,5330,Jaldhaka,,,Nilphamari,,Jaldhaka,,25.4278,89.1667,1
-BD,5340,Domar,,,Nilphamari,,Domar,,23.9167,89.7833,4
-BD,5341,Chilahati,,,Nilphamari,,Domar,,26.2333,88.8,4
-BD,5350,Dimla,,,Nilphamari,,Dimla,,26.1333,88.9167,4
-BD,5351,Ghaga Kharibari,,,Nilphamari,,Dimla,,26.1333,88.9167,1
-BD,5400,Rangpur Sadar,,,Rangpur,,Rangpur Sadar,,25.1333,89.6083,1
-BD,5401,Rangpur Upa-Shahar,,,Rangpur,,Rangpur Sadar,,25.1333,89.6083,1
-BD,5402,Alamnagar,,,Rangpur,,Rangpur Sadar,,24.5333,89.9167,4
-BD,5403,Mahiganj,,,Rangpur,,Rangpur Sadar,,25.7333,89.3,4
-BD,5404,Rangpur Cadet Colleg,,,Rangpur,,Rangpur Sadar,,25.1333,89.6083,1
-BD,5405,Rangpur Carmiecal Col,,,Rangpur,,Rangpur Sadar,,25.1333,89.6083,1
-BD,5410,Gangachara,,,Rangpur,,Gangachara,,25.2093,89.6093,1
-BD,5420,Taraganj,,,Rangpur,,Taraganj,,24.8667,90.0833,4
-BD,5430,Badarganj,,,Rangpur,,Badarganj,,25.6667,89.05,4
-BD,5431,Shyampur,,,Rangpur,,Badarganj,,24.85,90.8667,4
-BD,5440,Kaunia,,,Rangpur,,Kaunia,,24.85,90.2333,4
-BD,5441,Haragachh,,,Rangpur,,Kaunia,,24.85,90.2333,1
-BD,5450,Pirgachha,,,Rangpur,,Pirgachha,,24.95,89.4,4
-BD,5460,Mithapukur,,,Rangpur,,Mithapukur,,25.5667,89.2667,4
-BD,5470,Pirganj,,,Thakurgaon,,Pirganj,,25.8667,88.3667,4
-BD,5500,Lalmonirhat Sadar,,,Lalmonirhat,,Lalmonirhat Sadar,,25.7733,89.1967,1
-BD,5501,Moghalhat,,,Lalmonirhat,,Lalmonirhat Sadar,,25.7733,89.1967,1
-BD,5502,Kulaghat SO,,,Lalmonirhat,,Lalmonirhat Sadar,,25.7733,89.1967,1
-BD,5510,Aditmari,,,Lalmonirhat,,Aditmari,,25.7733,89.1967,1
-BD,5520,Tushbhandar,,,Lalmonirhat,,Tushbhandar,,25.9667,89.2,4
-BD,5530,Hatibandha,,,Lalmonirhat,,Hatibandha,,24.85,89.5,4
-BD,5540,Patgram,,,Lalmonirhat,,Patgram,,25.4,89.2667,4
-BD,5541,Baura,,,Lalmonirhat,,Patgram,,26.25,89.0833,4
-BD,5542,Burimari,,,Lalmonirhat,,Patgram,,26.4,88.9333,4
-BD,5600,Kurigram Sadar,,,Kurigram,,Kurigram Sadar,,25.7167,89.5833,1
-BD,5601,Pandul,,,Kurigram,,Kurigram Sadar,,25.7167,89.5833,4
-BD,5610,Rajarhat,,,Kurigram,,Rajarhat,,25.2389,89.8194,1
-BD,5611,Nazimkhan,,,Kurigram,,Rajarhat,,25.2389,89.8194,1
-BD,5620,Ulipur,,,Kurigram,,Ulipur,,24.9,89.4,4
-BD,5621,Bazarhat,,,Kurigram,,Ulipur,,24.9,89.4,1
-BD,5630,Chilmari,,,Kurigram,,Chilmari,,25.55,89.7167,4
-BD,5631,Jorgachh,,,Kurigram,,Chilmari,,25.55,89.7167,1
-BD,5640,Roumari,,,Kurigram,,Roumari,,25.2389,89.8194,1
-BD,5650,Rajibpur,,,Kurigram,,Rajibpur,,24.7167,90.5167,4
-BD,5660,Nageshwar,,,Kurigram,,Nageshwar,,25.2389,89.8194,1
-BD,5670,Bhurungamari,,,Kurigram,,Bhurungamari,,26.1167,89.6833,4
-BD,5680,Phulbari,,,Kurigram,,Kurigram Sadar,,24.4333,90.0167,4
-BD,5700,Gaibandha Sadar,,,Gaibandha,,Gaibandha Sadar,,25.0688,89.3917,1
-BD,5710,Saadullapur,,,Gaibandha,,Saadullapur,,25,89.0333,1
-BD,5711,Naldanga,,,Gaibandha,,Saadullapur,,25,89.0333,4
-BD,5720,Sundarganj,,,Gaibandha,,Sundarganj,,25.5667,89.5167,4
-BD,5721,Bamandanga,,,Gaibandha,,Sundarganj,,24.4,88.9167,4
-BD,5730,Palashbari,,,Gaibandha,,Palashbari,,24.9333,89.3333,4
-BD,5740,Gobindhaganj,,,Gaibandha,,Gobindaganj,,25.0688,89.3917,1
-BD,5741,Mahimaganj,,,Gaibandha,,Gobindaganj,,25.0688,89.3917,1
-BD,5750,Bonarpara,,,Gaibandha,,Bonarpara,,25.1833,89.5333,4
-BD,5751,saghata,,,Gaibandha,,Bonarpara,,25.1167,89.5833,4
-BD,5760,Phulchhari,,,Gaibandha,,Phulchhari,,25.1833,89.6167,4
-BD,5761,Bharatkhali,,,Gaibandha,,Phulchhari,,25.1667,89.6,4
-BD,5800,Bogra Sadar,,,Bogra,,Bogra Sadar,,24.785,89.445,1
-BD,5801,Bogra Canttonment,,,Bogra,,Bogra Sadar,,24.785,89.445,1
-BD,5810,Shibganj,,,Bogra,,Shibganj,,25.0167,89.3167,4
-BD,5820,Gabtoli,,,Bogra,,Gabtoli,,24.9333,89.5,1
-BD,5821,Sukhanpukur,,,Bogra,,Gabtoli,,24.9333,89.5,4
-BD,5826,Sonatola,,,Bogra,,Sonatola,,24.9333,89.5,1
-BD,5830,Sariakandi,,,Bogra,,Sariakandi,,24.8833,89.5667,4
-BD,5831,Chandan Baisha,,,Bogra,,Sariakandi,,24.8833,89.5667,1
-BD,5840,Sherpur,,,Bogra,,Sherpur,,25.0167,90.0167,4
-BD,5841,Chandaikona,,,Bogra,,Sherpur,,24.55,89.5167,4
-BD,5842,Palli Unnyan Accadem,,,Bogra,,Sherpur,,24.7833,89.7667,1
-BD,5850,Dhunat,,,Bogra,,Dhunat,,24.6833,89.55,4
-BD,5851,Gosaibari,,,Bogra,,Dhunat,,24.6333,90.0167,4
-BD,5860,Nandigram,,,Bogra,,Nandigram,,24.5,88.8,4
-BD,5870,Kahalu,,,Bogra,,Kahalu,,24.785,89.445,1
-BD,5880,Dupchachia,,,Bogra,,Dupchachia,,24.8333,89.1833,1
-BD,5881,Talora,,,Bogra,,Dupchachia,,24.8333,89.1833,4
-BD,5890,Adamdighi,,,Bogra,,Alamdighi,,24.8,88.9833,1
-BD,5891,Santahar,,,Bogra,,Alamdighi,,24.8,88.9833,4
-BD,5892,Nasharatpur,,,Bogra,,Alamdighi,,24.8,88.9833,1
-BD,5900,Joypurhat Sadar,,,Joypurhat,,Joypurhat Sadar,,24.9,89.1,1
-BD,5910,Panchbibi,,,Joypurhat,,panchbibi,,24.9,89.1,1
-BD,5920,Khetlal,,,Joypurhat,,Khetlal,,24.9,89.1,1
-BD,5930,kalai,,,Joypurhat,,kalai,,24.9,89.2,4
-BD,5940,Akklepur,,,Joypurhat,,Akkelpur,,24.9,89,1
-BD,5941,jamalganj,,,Joypurhat,,Akkelpur,,24.9,89,1
-BD,5942,Tilakpur,,,Joypurhat,,Akkelpur,,24.9,89,4
-BD,6000,Rajshahi Sadar,,,Rajshahi,,Rajshahi Sadar,,24.3644,88.6049,
-BD,6100,Ghuramara,,,Rajshahi,,Rajshahi Sadar,,24.3663,88.605,
-BD,6201,Rajshahi Court,,,Rajshahi,,Rajshahi Sadar,,25.1667,89.45,1
-BD,6202,Rajshahi Canttonment,,,Rajshahi,,Rajshahi Sadar,,25.1667,89.45,1
-BD,6203,Sapura,,,Rajshahi,,Rajshahi Sadar,,25.1667,89.45,1
-BD,6204,Kazla,,,Rajshahi,,Rajshahi Sadar,,25.1667,89.45,4
-BD,6205,Rajshahi University,,,Rajshahi,,Rajshahi Sadar,,25.1667,89.45,1
-BD,6206,Binodpur Bazar,,,Rajshahi,,Rajshahi Sadar,,25.1667,89.45,1
-BD,6210,Lalitganj,,,Rajshahi,,Lalitganj,,23.8167,88.7,1
-BD,6211,Rajshahi Sugar Mills,,,Rajshahi,,Lalitganj,,23.8167,88.7,1
-BD,6212,Shyampur,,,Rajshahi,,Lalitganj,,23.8167,88.7,4
-BD,6220,Khodmohanpur,,,Rajshahi,,Khod Mohanpur,,24.4,88.8524,1
-BD,6230,Tanor,,,Rajshahi,,Tanor,,24.6,88.5833,4
-BD,6240,Durgapur,,,Rajshahi,,Durgapur,,24.4,88.8524,1
-BD,6250,Bhabaniganj,,,Rajshahi,,Bhabaniganj,,24.5833,88.8167,4
-BD,6251,Taharpur,,,Rajshahi,,Bhabaniganj,,24.5833,88.8167,1
-BD,6260,Putia,,,Rajshahi,,Putia,,23.8833,89.2167,4
-BD,6270,Charghat,,,Rajshahi,,Charghat,,24.4,88.8524,1
-BD,6271,Sarda,,,Rajshahi,,Charghat,,24.4,88.8524,1
-BD,6280,Bagha,,,Rajshahi,,Bagha,,24.2833,88.8667,1
-BD,6281,Arani,,,Rajshahi,,Bagha,,24.2833,88.8667,4
-BD,6290,Godagari,,,Rajshahi,,Godagari,,24.4667,88.3333,4
-BD,6291,Premtoli,,,Rajshahi,,Godagari,,24.4667,88.3333,1
-BD,6300,Chapinawbganj Sadar,,,Chapinawabganj,,Chapinawabganj Sadar,,24.5222,88.5222,1
-BD,6301,Rajarampur,,,Chapinawabganj,,Chapinawabganj Sadar,,24.5333,88.4833,4
-BD,6302,Ramchandrapur,,,Chapinawabganj,,Chapinawabganj Sadar,,24.4167,88.6667,4
-BD,6303,Amnura,,,Chapinawabganj,,Chapinawabganj Sadar,,24.6167,88.4167,4
-BD,6310,Nachol,,,Chapinawabganj,,Nachol,,24.7333,88.4167,4
-BD,6311,Mandumala,,,Chapinawabganj,,Nachol,,24.7333,88.4167,1
-BD,6320,Rohanpur,,,Chapinawabganj,,Rohanpur,,24.8167,88.3333,4
-BD,6321,Gomashtapur,,,Chapinawabganj,,Rohanpur,,24.8167,88.3333,1
-BD,6330,Bholahat,,,Chapinawabganj,,Bholahat,,24.95,88.2,4
-BD,6340,Shibganj U.P.O,,,Chapinawabganj,,Shibganj U.P.O,,24.6778,88.4194,1
-BD,6341,Kansart,,,Chapinawabganj,,Shibganj U.P.O,,24.6778,88.4194,1
-BD,6342,Manaksha,,,Chapinawabganj,,Shibganj U.P.O,,24.6778,88.4194,1
-BD,6400,Natore Sadar,,,Natore,,Natore Sadar,,24.6375,89.8,1
-BD,6401,Digapatia,,,Natore,,Natore Sadar,,24.6375,89.8,1
-BD,6402,Baiddyabal Gharia,,,Natore,,Natore Sadar,,24.6375,89.8,1
-BD,6403,Madhnagar,,,Natore,,Natore Sadar,,24.6375,89.8,1
-BD,6410,Laxman,,,Natore,,Laxman,,24.6375,89.8,1
-BD,6420,Gopalpur U.P.O,,,Natore,,Gopalpur UPO,,24.25,88.9833,1
-BD,6421,Lalpur S.O,,,Natore,,Gopalpur UPO,,24.25,88.9833,1
-BD,6422,Abdulpur,,,Natore,,Gopalpur UPO,,24.25,88.9833,4
-BD,6430,Harua,,,Natore,,Harua,,24.65,90.6167,4
-BD,6431,Dayarampur,,,Natore,,Harua,,24.7833,90.5,4
-BD,6432,Baraigram,,,Natore,,Harua,,24.7167,90.5583,1
-BD,6440,Hatgurudaspur,,,Natore,,Hatgurudaspur,,24.6375,89.8,1
-BD,6450,Singra,,,Natore,,Singra,,24.8667,89.1,4
-BD,6500,Naogaon Sadar,,,Naogaon,,Naogaon Sadar,,24.7083,88.8181,1
-BD,6510,Prasadpur,,,Naogaon,,Prasadpur,,24.7667,88.7167,4
-BD,6511,Manda,,,Naogaon,,Prasadpur,,24.7833,88.7,4
-BD,6512,Balihar,,,Naogaon,,Prasadpur,,24.2167,88.8333,4
-BD,6520,Niamatpur,,,Naogaon,,Niamatpur,,24.8333,88.5667,4
-BD,6530,Mahadebpur,,,Naogaon,,Mahadebpur,,24.9333,88.75,4
-BD,6540,Patnitala,,,Naogaon,,Patnitala,,25.05,88.7667,4
-BD,6550,Nitpur,,,Naogaon,,Nitpur,,25.0333,88.45,4
-BD,6551,Porsa,,,Naogaon,,Nitpur,,25.0333,88.45,4
-BD,6552,Panguria,,,Naogaon,,Nitpur,,25.0333,88.45,1
-BD,6560,Sapahar,,,Naogaon,,Sapahar,,25.1167,88.6833,4
-BD,6561,Moduhil,,,Naogaon,,Sapahar,,25.1167,88.6833,1
-BD,6570,Badalgachhi,,,Naogaon,,Badalgachhi,,24.95,88.9,4
-BD,6580,Dhamuirhat,,,Naogaon,,Dhamuirhat,,24.7083,88.8181,1
-BD,6590,Raninagar,,,Naogaon,,Raninagar,,23.9,89.8167,4
-BD,6591,Kashimpur,,,Naogaon,,Raninagar,,23.8833,89.1833,4
-BD,6596,Ahsanganj,,,Naogaon,,Ahsanganj,,23.8917,89.5,1
-BD,6597,Bandai,,,Naogaon,,Ahsanganj,,23.8917,89.5,1
-BD,6600,Pabna Sadar,,,Pabna,,Pabna Sadar,,23.8967,89.61,1
-BD,6601,Kaliko Cotton Mills,,,Pabna,,Pabna Sadar,,23.8967,89.61,1
-BD,6602,Hamayetpur,,,Pabna,,Pabna Sadar,,23.8967,89.61,1
-BD,6610,Debottar,,,Pabna,,Debottar,,23.8967,89.61,1
-BD,6620,Ishwardi,,,Pabna,,Ishwardi,,23.6167,89.7667,1
-BD,6621,Dhapari,,,Pabna,,Ishwardi,,23.6167,89.7667,1
-BD,6622,Pakshi,,,Pabna,,Ishwardi,,23.6167,89.7667,1
-BD,6623,Rajapur,,,Pabna,,Ishwardi,,23.6167,89.7667,4
-BD,6630,Chatmohar,,,Pabna,,Chatmohar,,23.8967,89.61,1
-BD,6640,Bhangura,,,Pabna,,Bhangura,,23.8967,89.61,1
-BD,6650,Banwarinagar,,,Pabna,,Banwarinagar,,23.8967,89.61,1
-BD,6660,Sujanagar,,,Pabna,,Sujanagar,,23.7833,89.3833,4
-BD,6661,Sagarkandi,,,Pabna,,Sujanagar,,23.7833,89.3833,1
-BD,6670,Sathia,,,Pabna,,Sathia,,23.8967,89.61,1
-BD,6680,Bera,,,Pabna,,Bera,,24.0833,89.6167,4
-BD,6681,Nakalia,,,Pabna,,Bera,,24.0333,89.6667,4
-BD,6682,Kashinathpur,,,Pabna,,Bera,,23.9667,89.6167,4
-BD,6683,Puran Bharenga,,,Pabna,,Bera,,24.0278,89.6333,1
-BD,6700,Sirajganj Sadar,,,Sirajganj,,Sirajganj Sadar,,23.7333,89.4833,1
-BD,6701,Raipur,,,Sirajganj,,Sirajganj Sadar,,23.7333,89.4833,4
-BD,6702,Rashidabad,,,Sirajganj,,Sirajganj Sadar,,23.7333,89.4833,1
-BD,6710,Kazipur,,,Sirajganj,,Kazipur,,23.9167,90.2167,4
-BD,6711,Shuvgachha,,,Sirajganj,,Kazipur,,23.9167,90.2167,1
-BD,6712,Gandail,,,Sirajganj,,Kazipur,,23.9167,90.2167,1
-BD,6720,Dhangora,,,Sirajganj,,Dhangora,,24.1551,89.9449,1
-BD,6721,Malonga,,,Sirajganj,,Dhangora,,24.1551,89.9449,1
-BD,6730,Baiddya Jam Toil,,,Sirajganj,,Baiddya Jam Toil,,24.1551,89.9449,1
-BD,6740,Belkuchi,,,Sirajganj,,Belkuchi,,24.2833,89.7167,4
-BD,6741,Sohagpur,,,Sirajganj,,Belkuchi,,24.5833,90.8333,4
-BD,6742,Rajapur,,,Sirajganj,,Belkuchi,,24.5,90.5833,4
-BD,6751,Enayetpur,,,Sirajganj,,Belkuchi,,23.9167,90.25,4
-BD,6752,Sthal,,,Sirajganj,,Belkuchi,,24.2,89.7333,4
-BD,6760,Ullapara,,,Sirajganj,,Ullapara,,24.3167,89.5667,4
-BD,6761,Ullapara R.S,,,Sirajganj,,Ullapara,,24.3,89.6,1
-BD,6762,Lahiri Mohanpur,,,Sirajganj,,Ullapara,,24.3,89.6,1
-BD,6763,Salap,,,Sirajganj,,Ullapara,,24.2833,89.6333,4
-BD,6770,Shahjadpur,,,Sirajganj,,Shahjadpur,,23.9556,89.9667,1
-BD,6771,Porjana,,,Sirajganj,,Shahjadpur,,24.15,89.65,4
-BD,6772,Jamirta,,,Sirajganj,,Shahjadpur,,23.7667,90.2,4
-BD,6773,Kaijuri,,,Sirajganj,,Shahjadpur,,23.95,90.05,4
-BD,6780,Tarash,,,Sirajganj,,Tarash,,24.4167,89.3667,4
-BD,7000,Kustia Sadar,,,Kustia,,Kustia Sadar,,23.9,89.1,1
-BD,7001,Kushtia Mohini,,,Kustia,,Kustia Sadar,,23.9,89.1,1
-BD,7002,Jagati,,,Kustia,,Kustia Sadar,,23.9,89.1,4
-BD,7003,Islami University,,,Kustia,,Kustia Sadar,,23.9,89.1,1
-BD,7010,Kumarkhali,,,Kustia,,Kumarkhali,,23.4667,89.7,4
-BD,7011,Panti,,,Kustia,,Kumarkhali,,23.7667,89.2167,4
-BD,7020,Janipur,,,Kustia,,Janipur,,23.8,89.2833,4
-BD,7021,Khoksa,,,Kustia,,Janipur,,24.45,88.8833,4
-BD,7030,Mirpur,,,Kustia,,Mirpur,,23.9333,88.9833,4
-BD,7031,Poradaha,,,Kustia,,Mirpur,,23.85,89.0167,4
-BD,7032,Amla Sadarpur,,,Kustia,,Mirpur,,23.8917,89,1
-BD,7040,Bheramara,,,Kustia,,Bheramara,,24.0333,88.9667,4
-BD,7041,Ganges Bheramara,,,Kustia,,Bheramara,,24.0333,88.9667,1
-BD,7042,Allardarga,,,Kustia,,Bheramara,,24.0333,88.9667,1
-BD,7050,Rafayetpur,,,Kustia,,Rafayetpur,,23.9,89.1438,1
-BD,7051,Taragunia,,,Kustia,,Rafayetpur,,23.9,89.1438,1
-BD,7052,Khasmathurapur,,,Kustia,,Rafayetpur,,23.9,89.1438,1
-BD,7100,Meherpur Sadar,,,Meherpur,,Meherpur Sadar,,23.75,88.7,1
-BD,7101,Amjhupi,,,Meherpur,,Meherpur Sadar,,23.75,88.7,4
-BD,7102,Mujib Nagar Complex,,,Meherpur,,Meherpur Sadar,,23.75,88.7,1
-BD,7110,Gangni,,,Meherpur,,Gangni,,23.7333,88.85,4
-BD,7152,Amjhupi,,,Meherpur,,Meherpur Sadar,,23.75,88.7,4
-BD,7200,Chuadanga Sadar,,,Chuadanga,,Chuadanga Sadar,,23.7167,88.9167,1
-BD,7201,Munshiganj,,,Chuadanga,,Chuadanga Sadar,,23.7167,88.9167,4
-BD,7210,Alamdanga,,,Chuadanga,,Alamdanga,,23.6833,89.3833,4
-BD,7211,Hardi,,,Chuadanga,,Alamdanga,,23.7833,88.9,4
-BD,7220,Damurhuda,,,Chuadanga,,Damurhuda,,23.4833,88.8833,1
-BD,7221,Darshana,,,Chuadanga,,Damurhuda,,23.4833,88.8833,1
-BD,7222,Andulbaria,,,Chuadanga,,Damurhuda,,23.4833,88.8833,4
-BD,7230,Doulatganj,,,Chuadanga,,Doulatganj,,23.6667,89.0208,1
-BD,7300,Jinaidaha Sadar,,,Jinaidaha,,Jinaidaha Sadar,,23.4667,89.1389,1
-BD,7301,Jinaidaha Cadet College,,,Jinaidaha,,Jinaidaha Sadar,,23.4667,89.1389,1
-BD,7310,Harinakundu,,,Jinaidaha,,Harinakundu,,23.4667,89.1389,1
-BD,7320,Shailakupa,,,Jinaidaha,,Shailakupa,,23.6167,89.3167,1
-BD,7321,Kumiradaha,,,Jinaidaha,,Shailakupa,,23.6167,89.3167,4
-BD,7330,Kotchandpur,,,Jinaidaha,,Kotchandpur,,23.4667,89.1389,1
-BD,7340,Maheshpur,,,Jinaidaha,,Maheshpur,,23.35,88.9167,4
-BD,7350,Naldanga,,,Jinaidaha,,Naldanga,,23.4333,89.1833,4
-BD,7351,Hatbar Bazar,,,Jinaidaha,,Naldanga,,23.4333,89.1833,1
-BD,7400,Jessore Sadar,,,Jessore,,Jessore Sadar,,23.1542,89.2625,1
-BD,7401,Jessore Upa-Shahar,,,Jessore,,Jessore Sadar,,23.1542,89.2625,1
-BD,7402,Chanchra,,,Jessore,,Jessore Sadar,,23.1333,89.2167,4
-BD,7403,Jessore canttonment,,,Jessore,,Jessore Sadar,,23.1542,89.2625,1
-BD,7404,Jessore Airbach,,,Jessore,,Jessore Sadar,,23.1542,89.2625,1
-BD,7405,Rupdia,,,Jessore,,Jessore Sadar,,23.1333,89.3,4
-BD,7406,Basundia,,,Jessore,,Jessore Sadar,,23.1167,89.3833,4
-BD,7407,Churamankathi,,,Jessore,,Jessore Sadar,,23.2333,89.15,4
-BD,7410,Chougachha,,,Jessore,,Chaugachha,,23.1083,89.15,1
-BD,7420,Jhikargachha,,,Jessore,,Jhikargachha,,23.1167,89.1167,4
-BD,7430,Sarsa,,,Jessore,,Sarsa,,23.0667,88.95,4
-BD,7431,Benapole,,,Jessore,,Sarsa,,23.05,88.9,4
-BD,7432,Jadabpur,,,Jessore,,Sarsa,,23.05,89,4
-BD,7433,Bag Achra,,,Jessore,,Sarsa,,22.9667,88.9667,4
-BD,7440,Monirampur,,,Jessore,,Monirampur,,23.0167,89.2333,4
-BD,7450,Keshobpur,,,Jessore,,Keshabpur,,23.1083,89.15,1
-BD,7460,Noapara,,,Jessore,,Noapara,,23.1833,89.2333,4
-BD,7461,Rajghat,,,Jessore,,Noapara,,23.1833,89.2333,1
-BD,7462,Bhugilhat,,,Jessore,,Noapara,,23.1833,89.2333,1
-BD,7470,Bagharpara,,,Jessore,,Bagharpara,,23.2333,89.35,4
-BD,7471,Gouranagar,,,Jessore,,Bagharpara,,23.2333,89.35,1
-BD,7500,Narail Sadar,,,Narail,,Narail Sadar,,24.3333,90.0667,1
-BD,7501,Ratanganj,,,Narail,,Narail Sadar,,24.3333,90.0667,4
-BD,7510,Laxmipasha,,,Narail,,Laxmipasha,,23.85,90.2333,1
-BD,7511,Lohagora,,,Narail,,Laxmipasha,,23.85,90.2333,1
-BD,7512,Itna,,,Narail,,Laxmipasha,,23.9833,90.7833,4
-BD,7513,Naldi,,,Narail,,Laxmipasha,,23.7,90.1,4
-BD,7514,Baradia,,,Narail,,Laxmipasha,,23.8667,89.8167,4
-BD,7520,Kalia,,,Narail,,Kalia,,24.25,90.0667,4
-BD,7521,Mohajan,,,Narail,,Mohajan,,24.25,90.0667,1
-BD,7600,Magura Sadar,,,Magura,,Magura Sadar,,23.6833,89.1033,1
-BD,7610,Shripur,,,Magura,,Shripur,,24.7333,88.4167,1
-BD,7611,Langalbadh,,,Magura,,Shripur,,24.7333,88.4167,1
-BD,7612,Nachol,,,Magura,,Shripur,,24.7333,88.4167,4
-BD,7620,Arpara,,,Magura,,Arpara,,23.75,89.0333,4
-BD,7630,Mohammadpur,,,Magura,,Mohammadpur,,23.1667,89.05,4
-BD,7631,Binodpur,,,Magura,,Mohammadpur,,23.4333,89.5,4
-BD,7632,Nahata,,,Magura,,Mohammadpur,,23.3333,89.5167,4
-BD,7700,Rajbari Sadar,,,Rajbari,,Rajbari Sadar,,23.7139,89.6139,1
-BD,7710,Goalanda,,,Rajbari,,Rajbari Sadar,,23.7167,89.7667,4
-BD,7711,Khankhanapur,,,Rajbari,,Rajbari Sadar,,23.6833,89.7,4
-BD,7720,Pangsha,,,Rajbari,,Pangsha,,23.7833,89.4333,1
-BD,7721,Ramkol,,,Rajbari,,Pangsha,,23.8,89.3667,4
-BD,7722,Ratandia,,,Rajbari,,Pangsha,,23.7667,89.5,4
-BD,7723,Mrigibazar,,,Rajbari,,Pangsha,,23.7833,89.4333,1
-BD,7730,Baliakandi,,,Rajbari,,Baliakandi,,23.7167,89.7167,4
-BD,7731,Nalia,,,Rajbari,,Baliakandi,,23.6,89.6333,4
-BD,7800,Faridpursadar,,,Faridpur,,Faridpur Sadar,,23.1917,90.1583,1
-BD,7801,Kanaipur,,,Faridpur,,Faridpur Sadar,,23.55,89.7833,4
-BD,7802,Ambikapur,,,Faridpur,,Faridpur Sadar,,22.8333,90.5333,4
-BD,7803,Baitulaman Politecni,,,Faridpur,,Faridpur Sadar,,23.1917,90.1583,1
-BD,7804,Shriangan,,,Faridpur,,Shriangan,,23.1917,90.1583,1
-BD,7810,Charbadrashan,,,Faridpur,,Charbhadrasan,,23.2714,89.8071,1
-BD,7820,Sadarpur,,,Faridpur,,Sadarpur,,23.8833,89.95,4
-BD,7821,Hat Krishapur,,,Faridpur,,Sadarpur,,23.8833,89.95,1
-BD,7822,Bishwa jaker Manjil,,,Faridpur,,Sadarpur,,23.8833,89.95,1
-BD,7830,Bhanga,,,Faridpur,,Bhanga,,23.2714,89.8071,1
-BD,7840,Nagarkanda,,,Faridpur,,Nagarkanda,,23.2833,89.6833,4
-BD,7841,Talma,,,Faridpur,,Nagarkanda,,23.4833,89.9,4
-BD,7850,Madukhali,,,Faridpur,,Madukhali,,23.2714,89.8071,1
-BD,7851,Kamarkali,,,Faridpur,,Madukhali,,23.2714,89.8071,1
-BD,7860,Boalmari,,,Faridpur,,Boalmari,,22.5667,89.1,4
-BD,7861,Rupatpat,,,Faridpur,,Boalmari,,22.5667,89.1,1
-BD,7870,Alfadanga,,,Faridpur,,Alfadanga,,23.3,89.7,4
-BD,7900,Madaripur Sadar,,,Madaripur,,Madaripur Sadar,,23.6667,90.7611,1
-BD,7901,Charmugria,,,Madaripur,,Madaripur Sadar,,23.6667,90.7611,1
-BD,7902,Kulpaddi,,,Madaripur,,Madaripur Sadar,,23.15,90.2167,4
-BD,7903,Habiganj,,,Madaripur,,Madaripur Sadar,,24.3833,91.4167,4
-BD,7904,Mustafapur,,,Madaripur,,Madaripur Sadar,,23.4667,90.65,4
-BD,7910,Rajoir,,,Madaripur,,Rajoir,,23.1989,90.0533,4
-BD,7911,Khalia,,,Madaripur,,Rajoir,,23.2167,90.0167,4
-BD,7920,Kalkini,,,Madaripur,,kalkini,,23.1,90.2667,4
-BD,7921,Sahabrampur,,,Madaripur,,kalkini,,23.1,90.2667,1
-BD,7930,Barhamganj,,,Madaripur,,Barhamganj,,23.6667,89.7083,1
-BD,7931,Nilaksmibandar,,,Madaripur,,Barhamganj,,23.6667,89.7083,1
-BD,7932,Bahadurpur,,,Madaripur,,Barhamganj,,23.9167,89.8833,4
-BD,7933,Umedpur,,,Madaripur,,Barhamganj,,23.4167,89.5333,4
-BD,8000,Shariatpur Sadar,,,Shariatpur,,Shariatpur Sadar,,22.9917,90.3917,1
-BD,8001,Angaria,,,Shariatpur,,Shariatpur Sadar,,22.7167,90.4667,4
-BD,8002,Chikandi,,,Shariatpur,,Shariatpur Sadar,,23.2667,90.3167,4
-BD,8010,Jajira,,,Shariatpur,,Jajira,,24.9,89.1333,4
-BD,8013,Chandradighalia,,,Gopalganj,,Gopalganj Sadar,,24.9,89.1333,1
-BD,8020,Naria,,,Shariatpur,,Naria,,23.25,90.475,1
-BD,8021,Bhozeshwar,,,Shariatpur,,Naria,,23.25,90.475,1
-BD,8022,Gharisar,,,Shariatpur,,Naria,,23.2667,90.4833,4
-BD,8023,Upshi,,,Shariatpur,,Naria,,23.25,90.475,1
-BD,8024,Kartikpur,,,Shariatpur,,Naria,,23.2333,90.4667,4
-BD,8030,Bhedorganj,,,Shariatpur,,Bhedorganj,,23.4139,90.2205,1
-BD,8040,Damudhya,,,Shariatpur,,Damudhya,,23.4139,90.2205,1
-BD,8050,Gosairhat,,,Shariatpur,,Gosairhat,,23.1003,90.4561,4
-BD,8100,Gopalganj Sadar,,,Gopalganj,,Gopalganj Sadar,,23.0667,89.8333,1
-BD,8101,Ulpur,,,Gopalganj,,Gopalganj Sadar,,23.0667,89.8333,4
-BD,8102,Barfa,,,Gopalganj,,Gopalganj Sadar,,23.0667,89.8333,1
-BD,8110,Kotalipara,,,Gopalganj,,Kotalipara,,23.1472,89.9083,1
-BD,8120,Tungipara,,,Gopalganj,,Tungipara,,22.9,89.9167,4
-BD,8121,Patgati,,,Gopalganj,,Tungipara,,22.8833,89.9167,4
-BD,8130,Kashiani,,,Gopalganj,,Kashiani,,23.2333,89.75,4
-BD,8131,Ramdia College,,,Gopalganj,,Kashiani,,23.2333,89.75,1
-BD,8132,Ratoil,,,Gopalganj,,Kashiani,,23.2333,89.75,1
-BD,8133,Jonapur,,,Gopalganj,,Kashiani,,23.2333,89.75,1
-BD,8140,Maksudpur,,,Gopalganj,,Maksudpur,,23.5333,90.1667,4
-BD,8141,Batkiamari,,,Gopalganj,,Maksudpur,,23.4,90.0167,1
-BD,8142,Khandarpara,,,Gopalganj,,Maksudpur,,23.2667,89.8667,4
-BD,8200,Barishal Sadar,,,Barishal,,Barishal Sadar,,22.8667,90.4056,1
-BD,8201,Bukhainagar,,,Barishal,,Barishal Sadar,,22.75,90.45,4
-BD,8202,Saheberhat,,,Barishal,,Barishal Sadar,,22.8667,90.4056,1
-BD,8203,Sugandia,,,Barishal,,Barishal Sadar,,22.8667,90.4056,1
-BD,8204,Patang,,,Barishal,,Barishal Sadar,,22.6667,90.4667,4
-BD,8205,Kashipur,,,Barishal,,Barishal Sadar,,23.1833,90.3,4
-BD,8206,Jaguarhat,,,Barishal,,Barishal Sadar,,22.8667,90.4056,1
-BD,8210,Babuganj,,,Barishal,,Babuganj,,22.8167,90.3333,4
-BD,8211,Rahamatpur,,,Barishal,,Babuganj,,23.6333,90.5833,4
-BD,8212,Chandpasha,,,Barishal,,Babuganj,,23.225,90.4583,1
-BD,8213,Madhabpasha,,,Barishal,,Babuganj,,23.225,90.4583,1
-BD,8214,Thakur Mallik,,,Barishal,,Babuganj,,23.225,90.4583,1
-BD,8215,Nizamuddin College,,,Barishal,,Babuganj,,23.225,90.4583,1
-BD,8216,Barishal Cadet,,,Barishal,,Babuganj,,23.225,90.4583,1
-BD,8220,Uzirpur,,,Barishal,,Uzirpur,,22.8333,90.25,4
-BD,8221,Dhamura,,,Barishal,,Uzirpur,,22.8833,90.2,4
-BD,8222,Jugirkanda,,,Barishal,,Uzirpur,,22.85,90.1667,4
-BD,8223,Dakuarhat,,,Barishal,,Uzirpur,,22.9875,90.4292,1
-BD,8224,Shikarpur,,,Barishal,,Uzirpur,,23.3833,91.1,4
-BD,8230,Gouranadi,,,Barishal,,Gouranadi,,22.9,90.2667,1
-BD,8231,Tarki Bandar,,,Barishal,,Gouranadi,,22.9,90.2667,1
-BD,8232,Kashemabad,,,Barishal,,Gouranadi,,22.9,90.2667,1
-BD,8233,Batajor,,,Barishal,,Gouranadi,,22.9,90.2667,4
-BD,8240,Agailzhara,,,Barishal,,Agailzhara,,22.95,90.1833,1
-BD,8241,Gaila,,,Barishal,,Agailzhara,,22.95,90.1833,4
-BD,8242,Paisarhat,,,Barishal,,Agailzhara,,22.95,90.1833,1
-BD,8250,Muladi,,,Barishal,,Muladi,,22.951,90.425,1
-BD,8251,Kazirchar,,,Barishal,,Muladi,,22.951,90.425,1
-BD,8252,Charkalekhan,,,Barishal,,Muladi,,22.951,90.425,1
-BD,8260,Barajalia,,,Barishal,,Barajalia,,22.951,90.425,1
-BD,8261,Osman Manjil,,,Barishal,,Barajalia,,22.951,90.425,1
-BD,8270,Mahendiganj,,,Barishal,,Mahendiganj,,22.9222,90.4611,1
-BD,8271,Laskarpur,,,Barishal,,Mahendiganj,,23.05,90.1333,4
-BD,8272,Ulania,,,Barishal,,Mahendiganj,,22.85,90.6,4
-BD,8273,Nalgora,,,Barishal,,Mahendiganj,,22.8667,90.65,4
-BD,8274,Langutia,,,Barishal,,Mahendiganj,,22.9222,90.4611,1
-BD,8280,Sahebganj,,,Barishal,,Sahebganj,,23.0833,90.7667,4
-BD,8281,Charamandi,,,Barishal,,Sahebganj,,22.8,90.5583,1
-BD,8282,Padri Shibpur,,,Barishal,,Sahebganj,,22.8,90.5583,1
-BD,8283,Shialguni,,,Barishal,,Sahebganj,,22.8,90.5583,1
-BD,8284,kalaskati,,,Barishal,,Sahebganj,,22.5167,90.35,4
-BD,8300,Bhola Sadar,,,Bhola,,Bhola Sadar,,23.3833,91.0167,1
-BD,8301,Joynagar,,,Bhola,,Bhola Sadar,,23.3833,91.0167,4
-BD,8310,Doulatkhan,,,Bhola,,Doulatkhan,,22.9167,91.15,1
-BD,8311,Hajipur,,,Bhola,,Doulatkhan,,22.9167,91.15,4
-BD,8320,Borhanuddin UPO,,,Bhola,,Borhanuddin UPO,,22.4833,90.8,1
-BD,8321,Mirzakalu,,,Bhola,,Borhanuddin UPO,,22.4833,90.8,4
-BD,8330,Lalmohan UPO,,,Bhola,,Lalmohan UPO,,23.0925,90.7436,1
-BD,8331,Daurihat,,,Bhola,,Lalmohan UPO,,23.0925,90.7436,1
-BD,8332,Gazaria,,,Bhola,,Lalmohan UPO,,23.0925,90.7436,4
-BD,8340,Charfashion,,,Bhola,,Charfashion,,22.969,90.9276,1
-BD,8341,Dularhat,,,Bhola,,Charfashion,,22.969,90.9276,1
-BD,8342,Keramatganj,,,Bhola,,Charfashion,,22.969,90.9276,1
-BD,8350,Hatshoshiganj,,,Bhola,,Hatshoshiganj,,22.969,90.9276,1
-BD,8360,Hajirhat,,,Bhola,,Hajirhat,,22.969,90.9276,1
-BD,8400,Jhalokathi Sadar,,,Jhalokathi,,Jhalokathi Sadar,,22.7417,90.2,1
-BD,8401,Nabagram,,,Jhalokathi,,Jhalokathi Sadar,,22.7167,90.2333,4
-BD,8402,Baukathi,,,Jhalokathi,,Jhalokathi Sadar,,22.7417,90.2,1
-BD,8403,Gabha,,,Jhalokathi,,Jhalokathi Sadar,,22.7667,90.1667,4
-BD,8404,Shekherhat,,,Jhalokathi,,Jhalokathi Sadar,,22.7417,90.2,1
-BD,8410,Rajapur,,,Jhalokathi,,Rajapur,,23.65,90.0333,4
-BD,8420,Nalchhiti,,,Jhalokathi,,Nalchhiti,,22.6333,90.2833,4
-BD,8421,Beerkathi,,,Jhalokathi,,Nalchhiti,,22.6333,90.2833,1
-BD,8430,Kathalia,,,Jhalokathi,,Kathalia,,22.4167,90.1333,4
-BD,8431,Amua,,,Jhalokathi,,Kathalia,,22.3833,90.0833,4
-BD,8432,Niamatee,,,Jhalokathi,,Kathalia,,22.4,90.1083,1
-BD,8433,Shoulajalia,,,Jhalokathi,,Kathalia,,22.4,90.1083,1
-BD,8500,Pirojpur Sadar,,,Pirojpur,,Pirojpur Sadar,,22.4967,90.1717,1
-BD,8501,Hularhat,,,Pirojpur,,Pirojpur Sadar,,22.4967,90.1717,1
-BD,8502,Parerhat,,,Pirojpur,,Pirojpur Sadar,,22.4967,90.1717,1
-BD,8510,Kaukhali,,,Pirojpur,,kaukhali,,22.6333,90.0667,4
-BD,8511,Keundia,,,Pirojpur,,kaukhali,,22.6333,90.0667,1
-BD,8512,Joykul,,,Pirojpur,,kaukhali,,22.6333,90.0667,1
-BD,8513,Jolagati,,,Pirojpur,,kaukhali,,22.6333,90.0667,1
-BD,8520,Swarupkathi,,,Pirojpur,,Swarupkathi,,22.6833,90.1,1
-BD,8521,Darus Sunnat,,,Pirojpur,,Swarupkathi,,22.6833,90.1,1
-BD,8522,Kaurikhara,,,Pirojpur,,Swarupkathi,,22.6833,90.1,1
-BD,8523,Jalabari,,,Pirojpur,,Swarupkathi,,22.6833,90.1,4
-BD,8530,Banaripara,,,Pirojpur,,Banaripara,,22.8,90.1667,4
-BD,8531,Chakhar,,,Pirojpur,,Banaripara,,22.8,90.1667,1
-BD,8540,Nazirpur,,,Pirojpur,,Nazirpur,,22.4167,90.7167,4
-BD,8541,Sriramkathi,,,Pirojpur,,Nazirpur,,22.4167,90.7167,1
-BD,8550,Bhandaria,,,Pirojpur,,Bhandaria,,22.4833,90.0667,4
-BD,8551,Kanudashkathi,,,Pirojpur,,Bhandaria,,22.4667,90.0583,1
-BD,8552,Dhaoa,,,Pirojpur,,Bhandaria,,22.45,90.05,4
-BD,8560,Mathbaria,,,Pirojpur,,Mathbaria,,22.3,89.95,4
-BD,8561,Tushkhali,,,Pirojpur,,Mathbaria,,22.3667,89.9333,4
-BD,8562,Halta,,,Pirojpur,,Mathbaria,,22.6,90.4,4
-BD,8563,Gulishakhali,,,Pirojpur,,Mathbaria,,22.2333,90.2667,4
-BD,8564,Tiarkhali,,,Pirojpur,,Mathbaria,,22.375,90.1375,1
-BD,8565,Betmor Natun Hat,,,Pirojpur,,Mathbaria,,22.375,90.1375,1
-BD,8566,Shilarganj,,,Pirojpur,,Mathbaria,,22.375,90.1375,1
-BD,8600,Patuakhali Sadar,,,Patuakhali,,Patuakhali Sadar,,22.75,89.2667,1
-BD,8601,Moukaran,,,Patuakhali,,Patuakhali Sadar,,22.75,89.2667,1
-BD,8602,Dumkee,,,Patuakhali,,Patuakhali Sadar,,22.75,89.2667,1
-BD,8603,Rahimabad,,,Patuakhali,,Patuakhali Sadar,,22.75,89.2667,4
-BD,8610,Subidkhali,,,Patuakhali,,Subidkhali,,22.5833,90.1778,1
-BD,8620,Bauphal,,,Patuakhali,,Bauphal,,22.4167,90.55,4
-BD,8621,Bagabandar,,,Patuakhali,,Bauphal,,22.4,90.575,1
-BD,8622,Birpasha,,,Patuakhali,,Bauphal,,22.4,90.575,1
-BD,8623,Kalishari,,,Patuakhali,,Bauphal,,22.4,90.575,1
-BD,8624,Kalaia,,,Patuakhali,,Bauphal,,22.3833,90.6,4
-BD,8630,Dashmina,,,Patuakhali,,Dashmina,,22.5833,90.1778,1
-BD,8640,Galachipa,,,Patuakhali,,Galachipa,,24.1,90.3,4
-BD,8641,Gazipur Bandar,,,Patuakhali,,Galachipa,,24.1,90.3,1
-BD,8650,Khepupara,,,Patuakhali,,Khepupara,,21.9833,90.2167,4
-BD,8651,Mahipur,,,Patuakhali,,Khepupara,,21.8667,90.1333,4
-BD,8700,Barguna Sadar,,,Barguna,,Barguna Sadar,,22.2588,90.4376,1
-BD,8701,Nali Bandar,,,Barguna,,Barguna Sadar,,22.2588,90.4376,1
-BD,8710,Amtali,,,Barguna,,Amtali,,22.3,90.1,4
-BD,8720,Patharghata,,,Barguna,,Patharghata,,22.0333,89.9667,4
-BD,8721,Kakchira,,,Barguna,,Patharghata,,22.2167,90.05,4
-BD,8730,Bamna,,,Barguna,,Bamna,,22.3167,90.1,4
-BD,8740,Betagi,,,Barguna,,Betagi,,22.4272,91.9711,4
-BD,8741,Darul Ulam,,,Barguna,,Betagi,,22.4272,91.9711,1
-BD,9000,Khulna G.P.O,,,Khulna,,Khulna Sadar,,22.8404,89.5392,
-BD,9100,Khula Sadar,,,Khulna,,Khulna Sadar,,22.8174,89.5648,
-BD,9201,Khulna Shipyard,,,Khulna,,Khulna Sadar,,22.7667,89.4192,1
-BD,9202,Doulatpur,,,Khulna,,Khulna Sadar,,22.7667,89.4192,1
-BD,9203,BIT Khulna,,,Khulna,,Khulna Sadar,,22.7667,89.4192,1
-BD,9204,Siramani,,,Khulna,,Khulna Sadar,,22.7667,89.4192,1
-BD,9205,Jahanabad Canttonmen,,,Khulna,,Khulna Sadar,,22.7667,89.4192,1
-BD,9206,Sonali Jute Mills,,,Khulna,,Khulna Sadar,,22.7667,89.4192,1
-BD,9207,Atra Shilpa Area,,,Khulna,,Khulna Sadar,,22.7667,89.4192,1
-BD,9208,Khulna University,,,Khulna,,Khulna Sadar,,22.7667,89.4192,1
-BD,9210,Phultala,,,Khulna,,Phultala,,22.7,89.5167,4
-BD,9220,Digalia,,,Khulna,,Digalia,,22.9417,89.5583,1
-BD,9221,Chandni Mahal,,,Khulna,,Digalia,,22.9417,89.5583,1
-BD,9222,Senhati,,,Khulna,,Digalia,,22.8833,89.55,4
-BD,9223,Ghoshghati,,,Khulna,,Digalia,,22.9417,89.5583,1
-BD,9224,Gazirhat,,,Khulna,,Digalia,,23,89.5667,4
-BD,9230,Terakhada,,,Khulna,,Terakhada,,22.9333,89.6667,4
-BD,9231,Pak Barasat,,,Khulna,,Terakhada,,22.9333,89.6667,1
-BD,9240,Alaipur,,,Khulna,,Alaipur,,23.5167,89.3333,4
-BD,9241,Rupsha,,,Khulna,,Alaipur,,23.5167,89.3333,1
-BD,9242,Belphulia,,,Khulna,,Alaipur,,23.5167,89.3333,1
-BD,9250,Sajiara,,,Khulna,,Sajiara,,22.8167,89.4333,4
-BD,9251,Ghonabanda,,,Khulna,,Sajiara,,22.7444,89.3111,1
-BD,9252,Chuknagar,,,Khulna,,Sajiara,,22.8333,89.3,4
-BD,9253,Shahapur,,,Khulna,,Sajiara,,22.5833,89.2,4
-BD,9260,Batiaghat,,,Khulna,,Batiaghat,,22.7667,89.4192,1
-BD,9261,Surkalee,,,Khulna,,Batiaghat,,22.7667,89.4192,1
-BD,9270,Chalna Bazar,,,Khulna,,Chalna Bazar,,22.4833,89.5167,1
-BD,9271,Dakup,,,Khulna,,Chalna Bazar,,22.4833,89.5167,1
-BD,9272,Bajua,,,Khulna,,Chalna Bazar,,22.5333,89.5833,4
-BD,9273,Nalian,,,Khulna,,Chalna Bazar,,22.4333,89.45,4
-BD,9280,Paikgachha,,,Khulna,,Paikgachha,,22.5833,89.3333,4
-BD,9281,Godaipur,,,Khulna,,Paikgachha,,22.5778,89.2833,1
-BD,9282,Kapilmoni,,,Khulna,,Paikgachha,,22.5778,89.2833,1
-BD,9283,Katipara,,,Khulna,,Paikgachha,,22.6333,89.2667,4
-BD,9284,Chandkhali,,,Khulna,,Paikgachha,,22.5167,89.25,4
-BD,9285,Garaikhali,,,Khulna,,Paikgachha,,22.5778,89.2833,1
-BD,9290,Madinabad,,,Khulna,,Madinabad,,22.7667,89.4192,1
-BD,9291,Amadee,,,Khulna,,Madinabad,,22.7667,89.4192,1
-BD,9300,Bagerhat Sadar,,,IBH WAs Here,,Bagerhat Sadar,,22.8521,89.8,1
-BD,9301,P.C College,,,IBH WAs Here,,Bagerhat Sadar,,22.8521,89.8,1
-BD,9302,Rangdia,,,IBH WAs Here,,Bagerhat Sadar,,22.8521,89.8,1
-BD,9310,Kachua,,,IBH WAs Here,,Kachua UPO,,22.8833,90.2167,4
-BD,9311,Sonarkola,,,IBH WAs Here,,Kachua UPO,,22.8833,90.2167,1
-BD,9320,Morelganj,,,IBH WAs Here,,Morelganj,,22.8521,89.8,1
-BD,9321,Sannasi Bazar,,,IBH WAs Here,,Morelganj,,22.8521,89.8,1
-BD,9322,Telisatee,,,IBH WAs Here,,Morelganj,,22.8521,89.8,1
-BD,9330,Rayenda,,,IBH WAs Here,,Rayenda,,22.8521,89.8,1
-BD,9340,Rampal,,,IBH WAs Here,,Rampal,,23.5333,90.5167,4
-BD,9341,Foylahat,,,IBH WAs Here,,Rampal,,23.1,90.075,1
-BD,9342,Sonatunia,,,IBH WAs Here,,Rampal,,22.6667,89.6333,4
-BD,9343,Gourambha,,,IBH WAs Here,,Rampal,,23.1,90.075,1
-BD,9350,Chalna Ankorage,,,IBH WAs Here,,Chalna Ankorage,,22.8521,89.8,1
-BD,9351,Mongla Port,,,IBH WAs Here,,Chalna Ankorage,,22.8521,89.8,1
-BD,9360,Chitalmari,,,IBH WAs Here,,Chitalmari,,22.85,89.8667,1
-BD,9361,Barabaria,,,IBH WAs Here,,Chitalmari,,22.85,89.8667,4
-BD,9370,Fakirhat,,,IBH WAs Here,,Fakirhat,,22.7833,89.7333,4
-BD,9371,Mansa,,,IBH WAs Here,,Fakirhat,,22.8,89.6833,4
-BD,9372,Bhanganpar Bazar,,,IBH WAs Here,,Fakirhat,,22.7917,89.7083,1
-BD,9380,Mollahat,,,IBH WAs Here,,Mollahat,,22.65,89.375,1
-BD,9381,Kahalpur,,,IBH WAs Here,,Mollahat,,22.65,89.375,1
-BD,9382,Dariala,,,IBH WAs Here,,Mollahat,,22.4167,89.0167,4
-BD,9383,Charkulia,,,IBH WAs Here,,Mollahat,,22.65,89.375,1
-BD,9384,Nagarkandi,,,IBH WAs Here,,Mollahat,,22.8833,89.7333,4
-BD,9385,Pak Gangni,,,IBH WAs Here,,Mollahat,,22.65,89.375,1
-BD,9400,Satkhira Sadar,,,Satkhira,,Satkhira Sadar,,22.8403,89.1972,1
-BD,9401,Satkhira Islamia Acc,,,Satkhira,,Satkhira Sadar,,22.8403,89.1972,1
-BD,9402,Gunakar kati,,,Satkhira,,Satkhira Sadar,,22.8403,89.1972,1
-BD,9403,Budhhat,,,Satkhira,,Satkhira Sadar,,22.8403,89.1972,1
-BD,9410,kalaroa,,,Satkhira,,kalaroa,,22.8667,89.0333,4
-BD,9411,Murarikati,,,Satkhira,,kalaroa,,22.3,89.05,4
-BD,9412,Jhaudanga,,,Satkhira,,kalaroa,,22.8167,89.05,4
-BD,9413,Hamidpur,,,Satkhira,,kalaroa,,23.15,89.25,4
-BD,9414,Khordo,,,Satkhira,,kalaroa,,23.1,89.0633,1
-BD,9415,Chandanpur,,,Satkhira,,kalaroa,,24.3667,88.9333,4
-BD,9420,Taala,,,Satkhira,,Taala,,22.7667,89.1667,1
-BD,9421,Patkelghata,,,Satkhira,,Taala,,22.7667,89.1667,4
-BD,9430,Debbhata,,,Satkhira,,Debbhata,,22.8403,89.1972,1
-BD,9431,Gurugram,,,Satkhira,,Debbhata,,22.8403,89.1972,1
-BD,9440,Kaliganj UPO,,,Satkhira,,Kaliganj UPO,,23.6333,88.6333,1
-BD,9441,Nalta Mubaroknagar,,,Satkhira,,Kaliganj UPO,,23.6333,88.6333,1
-BD,9442,Ratanpur,,,Satkhira,,Kaliganj UPO,,23.6333,88.6333,4
-BD,9450,Nakipur,,,Satkhira,,Nakipur,,22.3333,89.1167,4
-BD,9451,Noornagar,,,Satkhira,,Nakipur,,22.4167,89.5042,1
-BD,9452,Naobeki,,,Satkhira,,Nakipur,,22.4167,89.5042,1
-BD,9453,Buri Goalini,,,Satkhira,,Nakipur,,22.2833,89.2167,4
-BD,9454,Gabura,,,Satkhira,,Nakipur,,22.2833,89.2833,4
-BD,9455,Habinagar,,,Satkhira,,Nakipur,,22.7667,90.4,4
-BD,9460,Ashashuni,,,Satkhira,,Ashashuni,,22.5167,89.2333,1
-BD,9461,Baradal,,,Satkhira,,Ashashuni,,22.5167,89.2333,4
+Dhaka GPO,1000,23.729,90.4112
+Dhaka Main PO,1100,23.9996,90.4222
+Wari TSO,1203,23.7415,90.4276
+Gendaria TSO,1204,23.7011,90.4263
+New Market TSO,1205,23.7433,90.3841
+Dhaka CantonmentTSO,1206,23.8179,90.4103
+Mohammadpur Housing,1207,23.7701,90.3628
+Dhaka Politechnic,1208,23.7591,90.4003
+Jigatala TSO,1209,23.7552,90.3731
+Posta TSO,1211,23.8196,90.364
+Gulshan Model Town,1212,23.7916,90.4152
+Banani TSO,1213,23.7931,90.4048
+Basabo TSO,1214,23.7418,90.4277
+Tejgaon TSO,1215,23.7687,90.3901
+Shantinagr TSO,1217,23.726,90.4251
+Mirpur TSO,1218,23.8236,90.3661
+KhilgaonTSO,1219,23.7518,90.4254
+BangabhabanTSO,1222,23.9072,90.4599
+DilkushaTSO,1223,23.8822,90.4576
+Sangsad BhabanTSO,1225,23.7617,90.3784
+KhilkhetTSO,1229,23.8515,90.403
+Uttara Model TwonTSO,1231,23.8732,90.3883
+Dhania TSO,1232,23.7117,90.4463
+Keraniganj,1310,23.725,90.3167
+Dhaka Jute Mills,1311,23.725,90.3167
+Ati,1312,23.7167,90.35
+Kalatia,1313,23.7333,90.2833
+Nawabganj,1320,23.6608,90.1644
+Hasnabad,1321,23.65,90.1167
+Daudpur,1322,23.8833,90.5333
+Agla,1323,23.6497,90.22
+Khalpar,1324,23.6333,90.3
+Churain,1325,23.6167,90.2167
+Joypara,1330,23.6189,90.1261
+Palamganj,1331,23.5428,90.2547
+Narisha,1332,23.5428,90.2547
+Haridia,1333,23.4667,90.3833
+Gouragonj,1334,23.5428,90.2547
+Madini Mandal,1335,23.5428,90.2547
+Savar,1340,23.8442,90.2511
+Dairy Farm,1341,24.3137,89.6089
+Jahangirnagar Univer,1342,24.3137,89.6089
+Saver P.A.T.C,1343,24.3137,89.6089
+Savar Canttonment,1344,24.3137,89.6089
+Shimulia,1345,24.7833,88.9667
+Kashem Cotton Mills,1346,24.3137,89.6089
+Rajphulbaria,1347,24.3137,89.6089
+Amin Bazar,1348,24.3137,89.6089
+EPZ,1349,24.3137,89.6089
+Dhamrai,1350,23.9122,90.2683
+Kamalpur,1351,24.0,90.8167
+Demra,1360,24.0333,90.6333
+Sarulia,1361,23.8333,90.3333
+Matuail,1362,23.7167,90.4667
+Narayanganj Sadar,1400,23.7219,90.5789
+Bandar,1410,23.6,90.5333
+D.C Mills,1411,23.6,90.5278
+Nabiganj,1412,23.6167,90.5167
+BIDS,1413,23.6,90.5278
+Madanganj,1414,23.5833,90.5333
+Fatullah,1420,23.7219,90.5789
+Fatulla Bazar,1421,23.7219,90.5789
+Siddirganj,1430,23.7219,90.5789
+Adamjeenagar,1431,23.7219,90.5789
+LN Mills,1432,23.7219,90.5789
+Baidder Bazar,1440,23.7219,90.5789
+Bara Nagar,1441,23.7219,90.5789
+Barodi,1442,23.7219,90.5789
+Araihazar,1450,23.7917,90.6644
+Gopaldi,1451,23.7833,90.7
+Rupganj,1460,23.8,90.5611
+Kanchan,1461,23.8333,90.5667
+Bhulta,1462,23.7833,90.5667
+Nagri,1463,23.8,90.5611
+Murapara,1464,23.7833,90.55
+Munshiganj Sadar,1500,23.55,90.4167
+Rikabibazar,1501,23.55,90.4167
+Mirkadim,1502,23.55,90.4167
+Kathakhali,1503,23.55,90.4167
+Gajaria,1510,23.8167,90.4833
+Hossendi,1511,23.675,90.55
+Rasulpur,1512,23.5333,90.6167
+Tangibari,1520,23.5167,90.4667
+Betkahat,1521,23.4556,90.4667
+Baligao,1522,23.4556,90.4667
+Bajrajugini,1523,23.4556,90.4667
+Hasail,1524,23.4333,90.45
+Dighirpar,1525,23.4167,90.4833
+Pura EDSO,1526,23.4556,90.4667
+Pura,1527,23.4556,90.4667
+Lohajang,1530,23.45,90.35
+Korhati,1531,23.45,90.3
+Haldia SO,1532,23.45,90.325
+Haridia DESO,1533,23.45,90.325
+Gouragonj,1534,23.45,90.325
+Medini Mandal EDSO,1535,23.45,90.325
+Sirajdikhan,1540,22.9864,89.0054
+Kola,1541,23.0,89.1
+Ichapur,1542,22.9728,88.9108
+Malkha Nagar,1543,22.9864,89.0054
+Shekher Nagar,1544,22.9864,89.0054
+Srinagar,1550,23.8167,89.8333
+Barikhal,1551,23.6583,89.8875
+Mazpara,1552,23.6583,89.8875
+Hashara,1553,23.6583,89.8875
+Kolapara,1554,23.5,90.25
+Kumarbhog,1555,23.7833,89.2667
+Vaggyakul SO,1556,23.6583,89.8875
+Baghra,1557,23.5333,90.2
+Bhaggyakul,1558,23.6583,89.8875
+Narshingdi Sadar,1600,23.9278,90.6944
+UMC Jute Mills,1601,23.9278,90.6944
+Narshingdi College,1602,23.9278,90.6944
+Panchdona,1603,23.9,90.65
+Madhabdi,1604,24.0,90.7
+Karimpur,1605,23.8833,90.7333
+Palash,1610,23.9333,90.6333
+Ghorashal Urea Facto,1611,23.9333,90.6333
+Char Sindhur,1612,23.9333,90.6333
+Ghorashal,1613,23.9333,90.6333
+Shibpur,1620,24.0333,90.7333
+Raypura,1630,22.7,90.4167
+Bazar Hasnabad,1631,22.7,90.4167
+Radhaganj bazar,1632,22.7,90.4167
+Belabo,1640,24.1,90.8667
+Monohordi,1650,24.125,90.7333
+Hatirdia,1651,24.1,90.7
+Katabaria,1652,24.15,90.7667
+Gazipur Sadar,1700,23.9833,90.4
+B.R.R,1701,23.9833,90.4
+Chandna,1702,23.9833,90.4
+B.O.F,1703,23.9833,90.4
+National University,1704,23.9833,90.4
+Monnunagar,1710,24.0907,90.4878
+Nishat Nagar,1711,24.0907,90.4878
+Ershad Nagar,1712,24.0907,90.4878
+Kaliganj,1720,23.9181,90.5647
+Pubail,1721,23.9333,90.4833
+Santanpara,1722,23.9167,90.6
+Vaoal Jamalpur,1723,23.9227,90.5494
+kapashia,1730,24.0907,90.4878
+Shipur,1740,24.425,90.5417
+Rajendrapur,1741,24.6167,90.5833
+Rajendrapur Canttome,1742,24.425,90.5417
+Barmi,1743,24.425,90.5417
+Satkhamair,1744,24.2333,90.5
+Kawraid,1745,24.425,90.5417
+Bashamur,1747,24.425,90.5417
+Boubi,1748,24.425,90.5417
+Kaliakaar,1750,24.0333,90.2833
+Safipur,1751,24.0333,90.2833
+Manikganj Sadar,1800,23.3722,89.3222
+Manikganj Bazar,1801,23.3722,89.3222
+Gorpara,1802,23.1333,88.9667
+Mahadebpur,1803,23.15,89.1333
+Barangail,1804,23.8333,89.8667
+Saturia,1810,23.8833,89.7667
+Baliati,1811,23.9833,90.05
+Singair,1820,24.3333,90.0333
+Baira,1821,24.3,90.5167
+joymantop,1822,24.3167,90.275
+Lechhraganj,1830,23.9037,89.85
+Jhitka,1831,23.9037,89.85
+Gheor,1840,23.9037,89.85
+Shibaloy,1850,23.8167,89.7667
+Aricha,1851,23.8167,89.7667
+Tewta,1852,23.8167,89.7667
+Uthli,1853,23.8167,89.7667
+Doulatpur,1860,24.7,90.55
+Tangail Sadar,1900,23.9833,88.825
+Kagmari,1901,23.15,89.0167
+Santosh,1902,24.8167,88.6333
+Korotia,1903,23.9833,88.825
+Purabari,1904,23.9833,88.825
+Delduar,1910,24.15,89.9667
+Jangalia,1911,23.9833,90.0667
+Patharail,1912,23.8667,89.95
+Elasin,1913,24.1333,89.9
+Hinga Nagar,1914,24.0333,89.9708
+Lowhati,1915,24.0333,89.9708
+Basail,1920,23.8667,89.7833
+Kashkawlia,1930,23.7083,90.7167
+Nagarpur,1936,23.6667,90.6333
+Dhuburia,1937,23.7083,90.7167
+Salimabad,1938,23.75,90.8
+Mirzapur,1940,24.1,90.1
+Gorai,1941,24.1,90.1667
+M.C. College,1942,24.1,90.1333
+Warri paikpara,1943,24.1,90.1333
+Jarmuki,1944,24.1,90.1333
+Mohera,1945,24.1,90.1333
+Sakhipur,1950,24.3,90.1833
+Kochua,1951,24.6667,88.8833
+Bhuapur,1960,24.2908,89.9675
+Kalihati,1970,24.3083,90.4
+Rajafair,1971,24.4,90.0333
+Nagbari,1972,24.35,90.05
+Ballabazar,1973,24.0833,91.6
+Elinga,1974,24.3083,90.4
+Palisha,1975,24.3083,90.4
+Nagarbari SO,1976,24.3083,90.4
+Nagarbari,1977,24.4,89.9167
+Ghatial,1980,24.8833,90.85
+Zahidganj,1981,24.8833,90.85
+D. Pakutia,1982,24.8833,90.85
+Dhalapara,1983,24.8833,90.85
+Lohani,1984,24.8833,90.85
+Gopalpur,1990,25.4667,89.15
+Jhowail,1991,25.575,89.4083
+Hemnagar,1992,25.575,89.4083
+Madhupur,1996,25.6833,89.6667
+Dhobari,1997,25.575,89.4083
+Jamalpur,2000,24.9167,89.9333
+Nandina,2001,24.8667,90.0667
+Narundi,2002,24.8667,90.1333
+Malandah,2010,23.7,89.7444
+Jamalpur,2011,23.6833,89.3833
+Malancha,2012,23.85,90.0167
+Mahmoodpur,2013,23.5667,89.8333
+Islampur,2020,24.6833,89.9667
+Durmoot,2021,24.5917,90.0167
+Gilabari,2022,24.5,90.0667
+Dewangonj,2030,24.4283,89.8967
+Dewangonj S. Mills,2031,24.4283,89.8967
+Mathargonj,2040,24.4283,89.8967
+Balijhuri,2041,24.4283,89.8967
+Shorishabari,2050,24.675,89.7833
+Gunerbari,2051,24.8167,89.7833
+Bausee,2052,24.675,89.7833
+Jagannath Ghat,2053,24.675,89.7833
+Pingna,2054,24.5333,89.7833
+Jamuna Sar Karkhana,2055,24.675,89.7833
+Sherpur Shadar,2100,25.0583,90.1167
+Nalitabari,2110,25.1333,90.0667
+Hatibandha,2111,25.1333,90.0667
+Jhinaigati,2120,25.0583,90.1167
+Shribardi,2130,25.0583,90.1167
+Bakshigonj,2140,25.0583,90.1167
+Nakla,2150,24.9833,90.1667
+Gonopaddi,2151,24.9833,90.1667
+Mymensingh Sadar,2200,23.1833,90.1333
+Kawatkhali,2201,23.1833,90.1333
+Agriculture Universi,2202,23.1833,90.1333
+Shombhuganj,2203,23.1833,90.1333
+Biddyaganj,2204,23.1833,90.1333
+Pearpur,2205,23.1833,90.1333
+Muktagachha,2210,24.7667,90.2333
+Fulbaria,2216,24.0667,90.6167
+Trishal,2220,24.5333,90.5
+Ahmadbad,2221,24.5333,90.5
+Ram Amritaganj,2222,24.5333,90.5
+Dhala,2223,24.5333,90.5
+Gaforgaon,2230,24.6917,89.9583
+Shibganj,2231,25.0167,89.3167
+Usti,2232,24.6917,89.9583
+Kandipara,2233,24.3667,90.6
+Duttarbazar,2234,24.6917,89.9583
+Bhaluka,2240,23.8,89.2167
+Phulpur,2250,24.95,90.25
+Beltia,2251,24.9667,90.4167
+Tarakanda,2252,24.95,90.4667
+Haluaghat,2260,24.9,90.6
+Dhara,2261,24.9,90.6
+Munshirhat,2262,24.9,90.6
+Gouripur,2270,24.7667,90.5667
+Ramgopalpur,2271,24.7167,90.55
+Isshwargonj,2280,24.6583,90.7
+Sohagi,2281,24.7,90.6667
+Atharabari,2282,24.6167,90.7333
+Nandail,2290,24.5833,90.7667
+Gangail,2291,24.5833,90.7667
+Kishoreganj Sadar,2300,23.45,90.5667
+Kishoreganj S.Mills,2301,23.45,90.5667
+Maizhati,2302,24.3333,90.75
+Nilganj,2303,22.5667,90.3833
+Karimganj,2310,24.4667,90.8667
+Tarial,2316,24.4667,90.8667
+Hossenpur,2320,23.2667,90.7
+Pakundia,2326,23.2667,90.7
+Katiadi,2330,23.4833,89.7417
+Gochhihata,2331,23.4833,89.7417
+Bajitpur,2336,23.4333,89.7167
+Sararchar,2337,23.4833,89.7417
+Laksmipur,2338,23.5333,89.7667
+Kuliarchar,2340,23.6537,90.5648
+Chhoysuti,2341,23.6537,90.5648
+Bhairab,2350,23.6537,90.5648
+Nikli,2360,24.3333,90.95
+MIthamoin,2370,22.9667,91.1667
+Abdullahpur,2371,22.9667,91.1667
+Ostagram,2380,23.6537,90.5648
+Itna,2390,23.9833,90.7833
+Netrakona Sadar,2400,24.8619,90.8405
+Baikherhati,2401,24.8619,90.8405
+Purbadhola,2410,25.0833,90.5167
+Shamgonj,2411,25.0833,90.5167
+Jaria Jhanjhail,2412,25.0833,90.5167
+Dhobaura,2416,25.0833,90.5167
+Sakoai,2417,25.0833,90.5167
+Susnng Durgapur,2420,24.8619,90.8405
+Kalmakanda,2430,25.0,90.8167
+Barhatta,2440,24.8833,90.8667
+Mohanganj,2446,24.9,90.9833
+Dharampasha,2450,24.8619,90.8405
+Moddoynagar,2456,24.8619,90.8405
+Khaliajhri,2460,24.8619,90.8405
+Shaldigha,2462,24.8619,90.8405
+Atpara,2470,24.8,90.8667
+Kendua,2480,24.6667,90.8667
+Madan,2490,24.7,90.9667
+Sunamganj Sadar,3000,24.475,90.6333
+Pagla,3001,24.3167,90.5667
+Patharia,3002,24.6333,90.7
+Bishamsapur,3010,24.4019,91.0963
+Sachna,3020,25.0167,91.2333
+Tahirpur,3030,23.0667,90.85
+Dhirai Chandpur,3040,24.4333,90.7
+Jagdal,3041,24.4333,90.7
+Ghungiar,3050,24.4019,91.0963
+Jagnnathpur,3060,24.4019,91.0963
+Syedpur,3061,24.4019,91.0963
+Atuajan,3062,24.4019,91.0963
+Hasan Fatemapur,3063,24.4019,91.0963
+Rasulganj,3064,24.4019,91.0963
+Shiramsi,3065,24.4019,91.0963
+Duara bazar,3070,24.4019,91.0963
+Chhatak,3080,25.0333,91.6667
+Chhatak Cement Facto,3081,24.5375,91.4542
+Chhatak Paper Mills,3082,24.5375,91.4542
+Gabindaganj,3083,24.5375,91.4542
+Gabindaganj Natun Ba,3084,24.5375,91.4542
+Khurma,3085,24.8667,91.7833
+Moinpur,3086,24.5375,91.4542
+jahidpur,3087,24.8333,91.65
+Islamabad,3088,23.4167,90.7167
+Sylhe Sadar,3100,23.6833,91.025
+Sylhet Cadet Col,3101,23.6833,91.025
+Sylhet Biman Bondar,3102,23.6833,91.025
+Khadimnagar,3103,23.6833,91.025
+Jamalpur Cantoment,3104,23.6833,91.025
+Silam,3105,23.6833,91.025
+Birahimpur,3106,23.3,91.1333
+Jalalabad,3107,24.0667,90.9167
+Mogla,3108,23.6833,91.025
+Ranga Hajiganj,3109,23.6833,91.025
+Kadamtali,3111,24.7833,90.4833
+Kamalbazer,3112,24.7417,91.2167
+Lalbazar,3113,24.7417,91.2167
+Shahajalal Science &,3114,24.7417,91.2167
+Fenchuganj,3116,24.7,91.95
+Fenchuganj SareKarkh,3117,24.7417,91.2167
+Balaganj,3120,24.0667,91.8333
+Karua,3121,23.0576,91.4226
+Brahman Shashon,3122,23.0576,91.4226
+Tajpur,3123,23.65,90.6
+Goala Bazar,3124,23.0576,91.4226
+Begumpur,3125,23.0576,91.4226
+Omarpur,3126,22.9833,91.3167
+Kathal Khair,3127,23.0576,91.4226
+Gaharpur,3128,23.0576,91.4226
+Natun Bazar,3129,21.5306,91.9403
+Bishwanath,3130,23.7514,91.1949
+Dashghar,3131,23.7514,91.1949
+Doulathpur,3132,23.7514,91.1949
+Deokalas,3133,23.7514,91.1949
+Singer kanch,3134,23.7514,91.1949
+Kompanyganj,3140,23.7514,91.1949
+Goainhat,3150,23.7514,91.1949
+Jaflong,3151,23.7514,91.1949
+Chiknagul,3152,23.7514,91.1949
+Jainthapur,3156,23.7514,91.1949
+Gopalgannj,3160,23.2161,91.3569
+Dhaka Dakkhin,3161,23.2161,91.3569
+Dakkhin Bhadashore,3162,23.2161,91.3569
+Ranaping,3163,23.2161,91.3569
+banigram,3164,22.3156,91.8972
+Chandanpur,3165,24.1167,90.8167
+Bianibazar,3170,24.8167,92.1167
+jaldup,3171,24.8167,92.1167
+Mathiura,3172,24.8167,92.1167
+Kurar bazar,3173,24.8167,92.1167
+Salia bazar,3174,24.8167,92.1167
+Churkai,3175,24.8167,92.1167
+Kanaighat,3180,23.8553,90.0125
+Chatulbazar,3181,23.8553,90.0125
+Manikganj,3182,23.8553,90.0125
+Gachbari,3183,23.8553,90.0125
+Jakiganj,3190,24.5833,90.5167
+Ichhamati,3191,24.5833,90.5167
+Moulvibazar Sadar,3200,24.6593,91.611
+Barakapan,3201,24.6593,91.611
+Monumukh,3202,24.6593,91.611
+Afrozganj,3203,24.6593,91.611
+Srimangal,3210,24.8833,91.5667
+Narain Chora,3211,24.8833,91.5667
+Kalighat,3212,24.8833,91.5667
+Khejurichhara,3213,24.8833,91.5667
+Satgaon,3214,24.8833,91.5667
+Kamalganj,3220,24.3833,91.9167
+Keramatnaga,3221,24.3833,91.9167
+Patrakhola,3222,24.3833,91.9167
+Shamsher Nagar,3223,24.3833,91.9167
+Munshibazar,3224,24.3833,91.9167
+Kulaura,3230,24.5333,92.05
+Tillagaon,3231,24.5667,91.35
+Langla,3232,24.5667,91.35
+Prithimpasha,3233,24.5667,91.35
+Kajaldhara,3234,24.5667,91.35
+Karimpur,3235,24.6,90.65
+Baramchal,3237,24.5667,91.35
+Rajnagar,3240,24.8967,91.8717
+Baralekha,3250,24.6593,91.611
+Juri,3251,24.6593,91.611
+Dhakkhinbag,3252,24.6593,91.611
+Purbashahabajpur,3253,24.6593,91.611
+Hobiganj Sadar,3300,24.3833,91.4167
+Shaestaganj,3301,24.3833,91.4167
+Gopaya,3302,24.3833,91.4167
+Bahubal,3310,24.37,91.54
+Chunarughat,3320,24.2,91.5167
+Chandpurbagan,3321,24.225,91.1083
+Narapati,3322,24.25,90.7
+Madhabpur,3330,24.6167,91.55
+Itakhola,3331,24.15,91.3667
+Shahajibazar,3332,24.3833,91.4583
+Saihamnagar,3333,24.3833,91.4583
+Kalauk,3340,23.35,90.3333
+Lakhai,3341,23.35,90.3333
+Baniachang,3350,24.5167,91.3667
+Jatrapasha,3351,24.5167,91.3667
+Kadirganj,3352,24.5167,91.3667
+Azmireeganj,3360,24.2981,91.2593
+Nabiganj,3370,24.5667,91.5167
+Goplarbazar,3371,24.6083,91.5417
+Golduba,3372,24.6083,91.5417
+Digalbak,3373,24.6083,91.5417
+Inathganj,3374,24.65,91.5667
+Brahamanbaria Sadar,3400,24.0333,91.0167
+Talshahar,3401,24.0333,91.0167
+Ashuganj,3402,24.0333,91.0167
+Ashuganj Share,3403,24.0333,91.0167
+Poun,3404,24.0333,91.0167
+Nabinagar,3410,23.8917,90.9733
+Laubfatehpur,3411,24.0194,90.9244
+Rasullabad,3412,24.0194,90.9244
+Shamgram,3413,24.0194,90.9244
+Ratanpur,3414,24.2,90.9667
+Shahapur,3415,23.9667,90.8333
+Kaitala,3417,24.0194,90.9244
+Salimganj,3418,24.0194,90.9244
+Jibanganj,3419,24.0194,90.9244
+Banchharampur,3420,24.0165,91.0416
+Sarial,3430,24.05,91.2333
+Shahbajpur,3431,24.05,91.2333
+Chandura,3432,24.05,91.2333
+Nasirnagar,3440,24.0165,91.0416
+Fandauk,3441,24.0165,91.0416
+Akhaura,3450,23.8617,91.2189
+Azampur,3451,24.8333,90.9833
+Gangasagar,3452,23.8333,91.2167
+Kasba,3460,24.1667,90.7833
+Kuti,3461,23.795,91.1158
+Chandidar,3462,23.8372,91.0053
+Chargachh,3463,23.8372,91.0053
+Gopinathpur,3464,23.55,91.1167
+Comilla Sadar,3500,23.3207,91.0973
+Comilla Contoment,3501,23.3207,91.0973
+Halimanagar,3502,23.3207,91.0973
+Courtbari,3503,23.3207,91.0973
+Suaganj,3504,23.3207,91.0973
+Chandia,3510,22.8025,91.4108
+Madhaiabazar,3511,23.2897,90.9814
+Daudkandi,3516,23.5333,90.7167
+Gouripur,3517,23.5333,90.8167
+Dashpara,3518,23.2897,90.9814
+Eliotganj,3519,23.2897,90.9814
+Burichang,3520,23.5981,91.1308
+Maynamoti bazar,3521,23.6421,91.1251
+Brahmanpara,3526,23.6861,91.1194
+Davidhar,3530,23.3207,91.0973
+Gangamandal,3531,23.3207,91.0973
+Barashalghar,3532,23.3207,91.0973
+Dhamtee,3533,23.3207,91.0973
+Muradnagar,3540,23.4833,90.8833
+Ramchandarpur,3541,23.475,90.8167
+Companyganj,3542,23.475,90.8167
+Bangra,3543,23.475,90.8167
+Sonakanda,3544,23.4667,90.75
+Pantibazar,3545,23.475,90.8167
+Homna,3546,23.475,90.8167
+Chouddagram,3550,23.2536,91.3047
+Batisa,3551,23.2,91.3167
+Chiora,3552,23.2268,91.3107
+Barura,3560,23.3858,91.1206
+Poyalgachha,3561,23.3858,91.1206
+Murdafarganj,3562,23.3858,91.1206
+Laksam,3570,23.2472,91.1425
+Lakshamanpur,3571,23.1653,91.1213
+Bipulasar,3572,23.0833,91.1
+Langalkot,3580,23.1083,91.275
+Dhalua,3581,23.1167,91.2333
+Chhariabazar,3582,23.1083,91.275
+Gunabati,3583,23.1,91.3167
+Lakshimpur Sadar,3700,23.925,89.7833
+Dalal Bazar,3701,23.925,89.7833
+Bhabaniganj,3702,24.5833,88.8167
+Mandari,3703,23.2667,90.75
+Keramatganj,3704,23.925,89.7833
+Rupchara,3705,23.925,89.7833
+Duttapara,3706,23.925,89.7833
+Choupalli,3707,23.925,89.7833
+Chandraganj,3708,23.925,89.7833
+Amani Lakshimpur,3709,23.925,89.7833
+Raypur,3710,23.6667,90.0333
+Rakhallia,3711,23.6667,90.0333
+Nagerdighirpar,3712,23.6667,90.0333
+Haydarganj,3713,23.6667,90.0333
+Bhuabari,3714,23.6667,90.0333
+Ramganj,3720,23.1,90.85
+Alipur,3721,23.1,90.2833
+Panpara,3722,23.8167,90.25
+Kanchanpur,3723,23.0167,90.7833
+Naagmud,3724,23.2583,90.5417
+Dolta,3725,23.2583,90.5417
+Char Alexgander,3730,23.5071,90.2524
+Hajirghat,3731,23.5071,90.2524
+Ramgatirhat,3732,23.5071,90.2524
+Noakhali Sadar,3800,23.2333,90.9667
+Noakhali College,3801,23.2333,90.9667
+Sonapur,3802,23.2333,90.9667
+Din Monir Hat,3803,23.2333,90.9667
+Pak Kishoreganj,3804,23.2333,90.9667
+Mriddarhat,3806,23.2333,90.9667
+Kabirhat,3807,23.2333,90.9667
+Khalifar Hat,3808,23.2333,90.9667
+Charam Tua,3809,23.2333,90.9667
+Chaprashir Hat,3811,23.1841,90.9157
+Char Jabbar,3812,23.1841,90.9157
+Begumganj,3820,23.0225,91.0747
+Choumohani,3821,23.4631,90.9416
+Banglabazar,3822,23.4631,90.9416
+Mir Owarishpur,3823,23.4631,90.9416
+Bazra,3824,24.15,90.9
+Jamidar Hat,3825,23.4631,90.9416
+Sonaimuri,3827,23.2167,90.85
+Gopalpur,3828,23.4631,90.9416
+Joynarayanpur,3829,23.4631,90.9416
+Alaiarpur,3831,22.95,91.3
+Tangirpar,3832,23.2667,90.9167
+Khalafat Bazar,3833,23.0297,91.0969
+Rajganj,3834,22.8725,91.0742
+Oachhekpur,3835,23.0297,91.0969
+Bhabani Jibanpur,3837,23.0297,91.0969
+Maheshganj,3838,23.0297,91.0969
+Nadona,3839,23.0297,91.0969
+Nandiapara,3841,23.3551,90.523
+Khalishpur,3842,23.5,89.7333
+Dauti,3843,23.3551,90.523
+Joyag,3844,23.0819,91.0689
+Thanar Hat,3845,23.3551,90.523
+Amisha Para,3847,23.3551,90.523
+Durgapur,3848,23.4833,90.7667
+Basur Hat,3850,23.1841,90.9157
+Charhajari,3851,23.1841,90.9157
+Senbag,3860,23.0156,91.2233
+Kallyandi,3861,23.0156,91.2233
+Beezbag,3862,23.0156,91.2233
+Kankirhat,3863,23.0156,91.2233
+Chatarpaia,3864,23.0156,91.2233
+T.P. Lamua,3865,23.0156,91.2233
+Chatkhil,3870,23.1333,90.95
+Palla,3871,23.0833,90.9833
+Khilpara,3872,23.3167,90.8167
+Bodalcourt,3873,23.1333,90.95
+Rezzakpur,3874,23.1333,90.95
+Solla,3875,23.1,91.0
+Karihati,3877,23.0333,91.0
+Dosh Gharia,3878,23.1333,90.95
+Bansa Bazar,3879,23.1333,90.95
+Sahapur,3881,23.4,90.7667
+Sampara,3882,23.4,90.7667
+Shingbahura,3883,23.4,90.7667
+Hatiya,3890,22.4044,91.1253
+Afazia,3891,22.4044,91.1253
+Tamoraddi,3892,22.4044,91.1253
+Chourangi Bazar,3893,22.4044,91.1253
+Feni Sadar,3900,23.2667,91.15
+Fazilpur,3901,23.2667,91.15
+Sharshadie,3902,23.2667,91.15
+Laskarhat,3903,23.2667,91.15
+Chhagalnaia,3910,23.03,91.5069
+Maharajganj,3911,23.03,91.5069
+Daraga Hat,3912,23.03,91.5069
+Puabashimulia,3913,23.03,91.5069
+Dagondhuia,3920,23.4667,91.15
+Dudmukha,3921,23.4667,91.15
+Chhilonia,3922,23.4667,91.15
+Rajapur,3923,23.4667,91.15
+Sonagazi,3930,22.8606,91.4428
+Motiganj,3931,22.8606,91.4428
+Ahmadpur,3932,22.8606,91.4428
+Kazirhat,3933,22.8606,91.4428
+Pashurampur,3940,22.8701,91.6644
+Shuarbazar,3941,22.8701,91.6644
+Fulgazi,3942,23.1181,91.4797
+Munshirhat,3943,22.6222,91.8492
+Chittagong GPO,4000,22.3455,91.8342
+Chittagong Bandar,4100,22.2225,91.8412
+Pahartoli,4202,23.975,90.625
+Chawkbazar,4203,23.975,90.625
+Patenga,4204,23.975,90.625
+Chittagong Airport,4205,23.975,90.625
+Jaldia Merine Accade,4206,23.975,90.625
+Firozshah,4207,23.975,90.625
+Mohard,4208,23.975,90.625
+Chitt. Politechnic In,4209,23.975,90.625
+Bayezid Bostami,4210,23.975,90.625
+Amin Jute Mills,4211,23.975,90.625
+Chandgaon,4212,23.8833,90.3333
+Wazedia,4213,23.975,90.625
+Jalalabad,4214,24.0667,90.9167
+Anandabazar,4215,23.975,90.625
+Halishahar,4216,23.975,90.625
+North Katuli,4217,23.975,90.625
+Chitt. Sailers Colon,4218,23.975,90.625
+Chitt. Customs Acca,4219,23.975,90.625
+Chitt. Cantonment,4220,23.975,90.625
+Al- Amin Baria Madra,4221,23.975,90.625
+Middle Patenga,4222,23.975,90.625
+Export Processing,4223,23.975,90.625
+Rampura TSO,4224,23.975,90.625
+Halishshar,4225,23.975,90.625
+North Halishahar,4226,23.975,90.625
+Sandwip,4300,22.4678,91.4561
+Shiberhat,4301,22.4678,91.4561
+Urirchar,4302,22.4678,91.4561
+Sitakunda,4310,22.62,91.6578
+Baroidhala,4311,22.5047,91.7091
+Barabkunda,4312,22.5808,91.6842
+Bawashbaria,4313,22.5047,91.7091
+Kumira,4314,22.5128,91.7058
+Bhatiari,4315,22.4233,91.7403
+Fouzdarhat,4316,22.5047,91.7091
+Jafrabad,4317,22.3867,91.7572
+Mirsharai,4320,22.8647,91.5664
+Abutorab,4321,22.8574,91.5332
+Darrogahat,4322,22.8574,91.5332
+Bharawazhat,4323,22.8574,91.5332
+Joarganj,4324,22.8574,91.5332
+Azampur,4325,22.85,91.5
+Korerhat,4327,22.8574,91.5332
+Mohazanhat,4328,22.8574,91.5332
+Hathazari,4330,22.5053,91.8111
+Chitt.University,4331,22.5053,91.8111
+Gorduara,4332,22.5053,91.8111
+Katirhat,4333,22.5053,91.8111
+Mirzapur,4334,22.5053,91.8111
+Fatahabad,4335,22.5053,91.8111
+Nuralibari,4337,22.5053,91.8111
+Yunus Nagar,4338,22.5053,91.8111
+Madrasa,4339,22.5053,91.8111
+Rouzan,4340,22.9547,91.4851
+Beenajuri,4341,22.9547,91.4851
+Kundeshwari,4342,22.9547,91.4851
+Gahira,4343,22.5178,91.8747
+jagannath Hat,4344,22.5631,91.8972
+Fatepur,4345,23.7833,90.6833
+Guzra Noapara,4346,22.9547,91.4851
+Dewanpur,4347,22.9547,91.4851
+Mohamuni,4348,22.9547,91.4851
+B.I.T Post Office,4349,22.9547,91.4851
+Fatikchhari,4350,22.725,91.7675
+Nanupur,4351,22.6269,91.8372
+Bhandar Sharif,4352,22.676,91.8024
+Najirhat,4353,22.676,91.8024
+Harualchhari,4354,22.676,91.8024
+Narayanhat,4355,22.676,91.8024
+Rangunia,4360,22.4672,92.0611
+Dhamair,4361,22.3966,91.9589
+Kanungopara,4363,22.3966,91.9589
+Saroatoli,4364,22.3966,91.9589
+Iqbal Park,4365,22.3966,91.9589
+Boalkhali,4366,22.3419,91.9189
+Sakpura,4367,22.3581,91.9211
+Kadurkhal,4368,22.3966,91.9589
+Charandwip,4369,22.4192,91.9344
+Patia Head Office,4370,22.2465,91.8842
+Budhpara,4371,22.2778,91.9208
+Anowara,4376,22.2433,91.88
+Paroikora,4377,22.2465,91.8842
+Battali,4378,22.2183,91.8517
+East Joara,4380,22.0756,92.0514
+Gachbaria,4381,22.0756,92.0514
+Dohazari,4382,22.0756,92.0514
+Barma,4383,22.0756,92.0514
+Satkania,4386,22.0756,92.0514
+Baitul Ijjat,4387,22.0756,92.0514
+Bazalia,4388,22.0756,92.0514
+Jaldi,4390,21.9928,91.9533
+Khan Bahadur,4391,22.0927,91.9964
+Gunagari,4392,22.0897,91.9264
+Banigram,4393,22.3156,91.8972
+Lohagara,4396,22.0122,92.0956
+Padua,4397,22.0533,92.1094
+Chunti,4398,22.0927,91.9964
+Khagrachari Sadar,4400,22.8961,92.0429
+Panchhari,4410,22.6833,92.4167
+Diginala,4420,22.8961,92.0429
+Mahalchhari,4430,22.9167,92.0333
+Ramghar Head Office,4440,22.8961,92.0429
+Matiranga,4450,23.1219,91.8767
+Manikchhari,4460,22.8625,91.845
+Laxmichhari,4470,22.8961,92.0429
+Rangamati Sadar,4500,22.5066,92.1597
+Kalampati,4510,22.545,91.9369
+Betbunia,4511,22.545,91.9369
+Nanichhar,4520,22.5066,92.1597
+Kaptai,4530,22.4889,92.2306
+Chandraghona,4531,22.4758,92.1381
+Kaptai Project,4532,22.4824,92.1843
+Kaptai Nuton Bazar,4533,22.4824,92.1843
+Rajsthali,4540,22.5066,92.1597
+Bilaichhari,4550,22.5167,92.3333
+Jarachhari,4560,22.5066,92.1597
+Barakal,4570,22.5066,92.1597
+Longachh,4580,22.5066,92.1597
+Marishya,4590,22.5066,92.1597
+Bandarban Sadar,4600,21.9121,92.3119
+Roanchhari,4610,21.9121,92.3119
+Ruma,4620,22.05,92.4
+Thanchi,4630,21.9121,92.3119
+Lama,4641,21.7742,92.2239
+Alikadam,4650,21.9121,92.3119
+Naikhong,4660,21.9121,92.3119
+Coxs Bazar Sadar,4700,21.3394,92.0991
+Zhilanja,4701,21.3394,92.0991
+Eidga,4702,21.3394,92.0991
+Gorakghat,4710,21.3394,92.0991
+Kutubdia,4720,21.8144,91.8542
+Ramu,4730,21.4314,92.105
+Chiringga,4740,21.3394,92.0991
+Chiringga S.O,4741,21.3394,92.0991
+Badarkali,4742,21.3394,92.0991
+Malumghat,4743,21.3394,92.0991
+Ukhia,4750,21.245,92.1372
+Teknaf,4760,20.8667,92.3
+Hnila,4761,20.8667,92.3
+St.Martin,4762,20.8667,92.3
+Panchagar Sadar,5000,24.275,88.75
+Boda,5010,24.275,88.75
+Dabiganj,5020,24.275,88.75
+Tetulia,5030,24.4667,88.5667
+Chotto Dab,5040,24.0833,88.9333
+Mirjapur,5041,24.0833,88.9333
+Thakurgaon Sadar,5100,25.0167,89.3167
+Thakurgaon Road,5101,25.0167,89.3167
+Shibganj,5102,25.0167,89.3167
+Ruhia,5103,25.0167,89.3167
+Pirganj,5110,25.8667,88.3667
+Rani Sankail,5120,24.8792,89.625
+Nekmarad,5121,24.8792,89.625
+Jibanpur,5130,24.9167,90.9333
+Baliadangi,5140,23.7167,89.8833
+Lahiri,5141,23.7167,89.8833
+Dinajpur Sadar,5200,24.6333,89.5125
+Dinajpur Rajbari,5201,24.6333,89.5125
+Biral,5210,24.6333,89.5125
+Setabganj,5216,24.6333,89.5125
+Birganj,5220,25.85,88.6667
+Maharajganj,5226,25.85,88.6667
+Khansama,5230,24.6333,89.5125
+Pakarhat,5231,24.6333,89.5125
+Chrirbandar,5240,24.6333,89.5125
+Ranirbandar,5241,24.6333,89.5125
+Parbatipur,5250,24.8167,88.9833
+Phulbari,5260,24.4333,90.0167
+Birampur,5266,24.9833,90.4667
+Bangla Hili,5270,24.6333,89.5125
+Nababganj,5280,25.4333,89.1333
+Daudpur,5281,25.4,89.1167
+Gopalpur,5282,25.4667,89.15
+Osmanpur,5290,23.2333,89.2167
+Ghoraghat,5291,22.8833,90.4833
+Nilphamari Sadar,5300,25.4278,89.1667
+Nilphamari Sugar Mil,5301,25.4278,89.1667
+Syedpur,5310,25.4278,89.1667
+Syedpur Upashahar,5311,25.4278,89.1667
+Kishoriganj,5320,25.4278,89.1667
+Jaldhaka,5330,25.4278,89.1667
+Domar,5340,23.9167,89.7833
+Chilahati,5341,26.2333,88.8
+Dimla,5350,26.1333,88.9167
+Ghaga Kharibari,5351,26.1333,88.9167
+Rangpur Sadar,5400,25.1333,89.6083
+Rangpur Upa-Shahar,5401,25.1333,89.6083
+Alamnagar,5402,24.5333,89.9167
+Mahiganj,5403,25.7333,89.3
+Rangpur Cadet Colleg,5404,25.1333,89.6083
+Rangpur Carmiecal Col,5405,25.1333,89.6083
+Gangachara,5410,25.2093,89.6093
+Taraganj,5420,24.8667,90.0833
+Badarganj,5430,25.6667,89.05
+Shyampur,5431,24.85,90.8667
+Kaunia,5440,24.85,90.2333
+Haragachh,5441,24.85,90.2333
+Pirgachha,5450,24.95,89.4
+Mithapukur,5460,25.5667,89.2667
+Pirganj,5470,25.8667,88.3667
+Lalmonirhat Sadar,5500,25.7733,89.1967
+Moghalhat,5501,25.7733,89.1967
+Kulaghat SO,5502,25.7733,89.1967
+Aditmari,5510,25.7733,89.1967
+Tushbhandar,5520,25.9667,89.2
+Hatibandha,5530,24.85,89.5
+Patgram,5540,25.4,89.2667
+Baura,5541,26.25,89.0833
+Burimari,5542,26.4,88.9333
+Kurigram Sadar,5600,25.7167,89.5833
+Pandul,5601,25.7167,89.5833
+Rajarhat,5610,25.2389,89.8194
+Nazimkhan,5611,25.2389,89.8194
+Ulipur,5620,24.9,89.4
+Bazarhat,5621,24.9,89.4
+Chilmari,5630,25.55,89.7167
+Jorgachh,5631,25.55,89.7167
+Roumari,5640,25.2389,89.8194
+Rajibpur,5650,24.7167,90.5167
+Nageshwar,5660,25.2389,89.8194
+Bhurungamari,5670,26.1167,89.6833
+Phulbari,5680,24.4333,90.0167
+Gaibandha Sadar,5700,25.0688,89.3917
+Saadullapur,5710,25.0,89.0333
+Naldanga,5711,25.0,89.0333
+Sundarganj,5720,25.5667,89.5167
+Bamandanga,5721,24.4,88.9167
+Palashbari,5730,24.9333,89.3333
+Gobindhaganj,5740,25.0688,89.3917
+Mahimaganj,5741,25.0688,89.3917
+Bonarpara,5750,25.1833,89.5333
+saghata,5751,25.1167,89.5833
+Phulchhari,5760,25.1833,89.6167
+Bharatkhali,5761,25.1667,89.6
+Bogra Sadar,5800,24.785,89.445
+Bogra Canttonment,5801,24.785,89.445
+Shibganj,5810,25.0167,89.3167
+Gabtoli,5820,24.9333,89.5
+Sukhanpukur,5821,24.9333,89.5
+Sonatola,5826,24.9333,89.5
+Sariakandi,5830,24.8833,89.5667
+Chandan Baisha,5831,24.8833,89.5667
+Sherpur,5840,25.0167,90.0167
+Chandaikona,5841,24.55,89.5167
+Palli Unnyan Accadem,5842,24.7833,89.7667
+Dhunat,5850,24.6833,89.55
+Gosaibari,5851,24.6333,90.0167
+Nandigram,5860,24.5,88.8
+Kahalu,5870,24.785,89.445
+Dupchachia,5880,24.8333,89.1833
+Talora,5881,24.8333,89.1833
+Adamdighi,5890,24.8,88.9833
+Santahar,5891,24.8,88.9833
+Nasharatpur,5892,24.8,88.9833
+Joypurhat Sadar,5900,24.9,89.1
+Panchbibi,5910,24.9,89.1
+Khetlal,5920,24.9,89.1
+kalai,5930,24.9,89.2
+Akklepur,5940,24.9,89.0
+jamalganj,5941,24.9,89.0
+Tilakpur,5942,24.9,89.0
+Rajshahi Sadar,6000,24.3644,88.6049
+Ghuramara,6100,24.3663,88.605
+Rajshahi Court,6201,25.1667,89.45
+Rajshahi Canttonment,6202,25.1667,89.45
+Sapura,6203,25.1667,89.45
+Kazla,6204,25.1667,89.45
+Rajshahi University,6205,25.1667,89.45
+Binodpur Bazar,6206,25.1667,89.45
+Lalitganj,6210,23.8167,88.7
+Rajshahi Sugar Mills,6211,23.8167,88.7
+Shyampur,6212,23.8167,88.7
+Khodmohanpur,6220,24.4,88.8524
+Tanor,6230,24.6,88.5833
+Durgapur,6240,24.4,88.8524
+Bhabaniganj,6250,24.5833,88.8167
+Taharpur,6251,24.5833,88.8167
+Putia,6260,23.8833,89.2167
+Charghat,6270,24.4,88.8524
+Sarda,6271,24.4,88.8524
+Bagha,6280,24.2833,88.8667
+Arani,6281,24.2833,88.8667
+Godagari,6290,24.4667,88.3333
+Premtoli,6291,24.4667,88.3333
+Chapinawbganj Sadar,6300,24.5222,88.5222
+Rajarampur,6301,24.5333,88.4833
+Ramchandrapur,6302,24.4167,88.6667
+Amnura,6303,24.6167,88.4167
+Nachol,6310,24.7333,88.4167
+Mandumala,6311,24.7333,88.4167
+Rohanpur,6320,24.8167,88.3333
+Gomashtapur,6321,24.8167,88.3333
+Bholahat,6330,24.95,88.2
+Shibganj U.P.O,6340,24.6778,88.4194
+Kansart,6341,24.6778,88.4194
+Manaksha,6342,24.6778,88.4194
+Natore Sadar,6400,24.6375,89.8
+Digapatia,6401,24.6375,89.8
+Baiddyabal Gharia,6402,24.6375,89.8
+Madhnagar,6403,24.6375,89.8
+Laxman,6410,24.6375,89.8
+Gopalpur U.P.O,6420,24.25,88.9833
+Lalpur S.O,6421,24.25,88.9833
+Abdulpur,6422,24.25,88.9833
+Harua,6430,24.65,90.6167
+Dayarampur,6431,24.7833,90.5
+Baraigram,6432,24.7167,90.5583
+Hatgurudaspur,6440,24.6375,89.8
+Singra,6450,24.8667,89.1
+Naogaon Sadar,6500,24.7083,88.8181
+Prasadpur,6510,24.7667,88.7167
+Manda,6511,24.7833,88.7
+Balihar,6512,24.2167,88.8333
+Niamatpur,6520,24.8333,88.5667
+Mahadebpur,6530,24.9333,88.75
+Patnitala,6540,25.05,88.7667
+Nitpur,6550,25.0333,88.45
+Porsa,6551,25.0333,88.45
+Panguria,6552,25.0333,88.45
+Sapahar,6560,25.1167,88.6833
+Moduhil,6561,25.1167,88.6833
+Badalgachhi,6570,24.95,88.9
+Dhamuirhat,6580,24.7083,88.8181
+Raninagar,6590,23.9,89.8167
+Kashimpur,6591,23.8833,89.1833
+Ahsanganj,6596,23.8917,89.5
+Bandai,6597,23.8917,89.5
+Pabna Sadar,6600,23.8967,89.61
+Kaliko Cotton Mills,6601,23.8967,89.61
+Hamayetpur,6602,23.8967,89.61
+Debottar,6610,23.8967,89.61
+Ishwardi,6620,23.6167,89.7667
+Dhapari,6621,23.6167,89.7667
+Pakshi,6622,23.6167,89.7667
+Rajapur,6623,23.6167,89.7667
+Chatmohar,6630,23.8967,89.61
+Bhangura,6640,23.8967,89.61
+Banwarinagar,6650,23.8967,89.61
+Sujanagar,6660,23.7833,89.3833
+Sagarkandi,6661,23.7833,89.3833
+Sathia,6670,23.8967,89.61
+Bera,6680,24.0833,89.6167
+Nakalia,6681,24.0333,89.6667
+Kashinathpur,6682,23.9667,89.6167
+Puran Bharenga,6683,24.0278,89.6333
+Sirajganj Sadar,6700,23.7333,89.4833
+Raipur,6701,23.7333,89.4833
+Rashidabad,6702,23.7333,89.4833
+Kazipur,6710,23.9167,90.2167
+Shuvgachha,6711,23.9167,90.2167
+Gandail,6712,23.9167,90.2167
+Dhangora,6720,24.1551,89.9449
+Malonga,6721,24.1551,89.9449
+Baiddya Jam Toil,6730,24.1551,89.9449
+Belkuchi,6740,24.2833,89.7167
+Sohagpur,6741,24.5833,90.8333
+Rajapur,6742,24.5,90.5833
+Enayetpur,6751,23.9167,90.25
+Sthal,6752,24.2,89.7333
+Ullapara,6760,24.3167,89.5667
+Ullapara R.S,6761,24.3,89.6
+Lahiri Mohanpur,6762,24.3,89.6
+Salap,6763,24.2833,89.6333
+Shahjadpur,6770,23.9556,89.9667
+Porjana,6771,24.15,89.65
+Jamirta,6772,23.7667,90.2
+Kaijuri,6773,23.95,90.05
+Tarash,6780,24.4167,89.3667
+Kustia Sadar,7000,23.9,89.1
+Kushtia Mohini,7001,23.9,89.1
+Jagati,7002,23.9,89.1
+Islami University,7003,23.9,89.1
+Kumarkhali,7010,23.4667,89.7
+Panti,7011,23.7667,89.2167
+Janipur,7020,23.8,89.2833
+Khoksa,7021,24.45,88.8833
+Mirpur,7030,23.9333,88.9833
+Poradaha,7031,23.85,89.0167
+Amla Sadarpur,7032,23.8917,89.0
+Bheramara,7040,24.0333,88.9667
+Ganges Bheramara,7041,24.0333,88.9667
+Allardarga,7042,24.0333,88.9667
+Rafayetpur,7050,23.9,89.1438
+Taragunia,7051,23.9,89.1438
+Khasmathurapur,7052,23.9,89.1438
+Meherpur Sadar,7100,23.75,88.7
+Amjhupi,7101,23.75,88.7
+Mujib Nagar Complex,7102,23.75,88.7
+Gangni,7110,23.7333,88.85
+Amjhupi,7152,23.75,88.7
+Chuadanga Sadar,7200,23.7167,88.9167
+Munshiganj,7201,23.7167,88.9167
+Alamdanga,7210,23.6833,89.3833
+Hardi,7211,23.7833,88.9
+Damurhuda,7220,23.4833,88.8833
+Darshana,7221,23.4833,88.8833
+Andulbaria,7222,23.4833,88.8833
+Doulatganj,7230,23.6667,89.0208
+Jinaidaha Sadar,7300,23.4667,89.1389
+Jinaidaha Cadet College,7301,23.4667,89.1389
+Harinakundu,7310,23.4667,89.1389
+Shailakupa,7320,23.6167,89.3167
+Kumiradaha,7321,23.6167,89.3167
+Kotchandpur,7330,23.4667,89.1389
+Maheshpur,7340,23.35,88.9167
+Naldanga,7350,23.4333,89.1833
+Hatbar Bazar,7351,23.4333,89.1833
+Jessore Sadar,7400,23.1542,89.2625
+Jessore Upa-Shahar,7401,23.1542,89.2625
+Chanchra,7402,23.1333,89.2167
+Jessore canttonment,7403,23.1542,89.2625
+Jessore Airbach,7404,23.1542,89.2625
+Rupdia,7405,23.1333,89.3
+Basundia,7406,23.1167,89.3833
+Churamankathi,7407,23.2333,89.15
+Chougachha,7410,23.1083,89.15
+Jhikargachha,7420,23.1167,89.1167
+Sarsa,7430,23.0667,88.95
+Benapole,7431,23.05,88.9
+Jadabpur,7432,23.05,89.0
+Bag Achra,7433,22.9667,88.9667
+Monirampur,7440,23.0167,89.2333
+Keshobpur,7450,23.1083,89.15
+Noapara,7460,23.1833,89.2333
+Rajghat,7461,23.1833,89.2333
+Bhugilhat,7462,23.1833,89.2333
+Bagharpara,7470,23.2333,89.35
+Gouranagar,7471,23.2333,89.35
+Narail Sadar,7500,24.3333,90.0667
+Ratanganj,7501,24.3333,90.0667
+Laxmipasha,7510,23.85,90.2333
+Lohagora,7511,23.85,90.2333
+Itna,7512,23.9833,90.7833
+Naldi,7513,23.7,90.1
+Baradia,7514,23.8667,89.8167
+Kalia,7520,24.25,90.0667
+Mohajan,7521,24.25,90.0667
+Magura Sadar,7600,23.6833,89.1033
+Shripur,7610,24.7333,88.4167
+Langalbadh,7611,24.7333,88.4167
+Nachol,7612,24.7333,88.4167
+Arpara,7620,23.75,89.0333
+Mohammadpur,7630,23.1667,89.05
+Binodpur,7631,23.4333,89.5
+Nahata,7632,23.3333,89.5167
+Rajbari Sadar,7700,23.7139,89.6139
+Goalanda,7710,23.7167,89.7667
+Khankhanapur,7711,23.6833,89.7
+Pangsha,7720,23.7833,89.4333
+Ramkol,7721,23.8,89.3667
+Ratandia,7722,23.7667,89.5
+Mrigibazar,7723,23.7833,89.4333
+Baliakandi,7730,23.7167,89.7167
+Nalia,7731,23.6,89.6333
+Faridpursadar,7800,23.1917,90.1583
+Kanaipur,7801,23.55,89.7833
+Ambikapur,7802,22.8333,90.5333
+Baitulaman Politecni,7803,23.1917,90.1583
+Shriangan,7804,23.1917,90.1583
+Charbadrashan,7810,23.2714,89.8071
+Sadarpur,7820,23.8833,89.95
+Hat Krishapur,7821,23.8833,89.95
+Bishwa jaker Manjil,7822,23.8833,89.95
+Bhanga,7830,23.2714,89.8071
+Nagarkanda,7840,23.2833,89.6833
+Talma,7841,23.4833,89.9
+Madukhali,7850,23.2714,89.8071
+Kamarkali,7851,23.2714,89.8071
+Boalmari,7860,22.5667,89.1
+Rupatpat,7861,22.5667,89.1
+Alfadanga,7870,23.3,89.7
+Madaripur Sadar,7900,23.6667,90.7611
+Charmugria,7901,23.6667,90.7611
+Kulpaddi,7902,23.15,90.2167
+Habiganj,7903,24.3833,91.4167
+Mustafapur,7904,23.4667,90.65
+Rajoir,7910,23.1989,90.0533
+Khalia,7911,23.2167,90.0167
+Kalkini,7920,23.1,90.2667
+Sahabrampur,7921,23.1,90.2667
+Barhamganj,7930,23.6667,89.7083
+Nilaksmibandar,7931,23.6667,89.7083
+Bahadurpur,7932,23.9167,89.8833
+Umedpur,7933,23.4167,89.5333
+Shariatpur Sadar,8000,22.9917,90.3917
+Angaria,8001,22.7167,90.4667
+Chikandi,8002,23.2667,90.3167
+Jajira,8010,24.9,89.1333
+Chandradighalia,8013,24.9,89.1333
+Naria,8020,23.25,90.475
+Bhozeshwar,8021,23.25,90.475
+Gharisar,8022,23.2667,90.4833
+Upshi,8023,23.25,90.475
+Kartikpur,8024,23.2333,90.4667
+Bhedorganj,8030,23.4139,90.2205
+Damudhya,8040,23.4139,90.2205
+Gosairhat,8050,23.1003,90.4561
+Gopalganj Sadar,8100,23.0667,89.8333
+Ulpur,8101,23.0667,89.8333
+Barfa,8102,23.0667,89.8333
+Kotalipara,8110,23.1472,89.9083
+Tungipara,8120,22.9,89.9167
+Patgati,8121,22.8833,89.9167
+Kashiani,8130,23.2333,89.75
+Ramdia College,8131,23.2333,89.75
+Ratoil,8132,23.2333,89.75
+Jonapur,8133,23.2333,89.75
+Maksudpur,8140,23.5333,90.1667
+Batkiamari,8141,23.4,90.0167
+Khandarpara,8142,23.2667,89.8667
+Barishal Sadar,8200,22.8667,90.4056
+Bukhainagar,8201,22.75,90.45
+Saheberhat,8202,22.8667,90.4056
+Sugandia,8203,22.8667,90.4056
+Patang,8204,22.6667,90.4667
+Kashipur,8205,23.1833,90.3
+Jaguarhat,8206,22.8667,90.4056
+Babuganj,8210,22.8167,90.3333
+Rahamatpur,8211,23.6333,90.5833
+Chandpasha,8212,23.225,90.4583
+Madhabpasha,8213,23.225,90.4583
+Thakur Mallik,8214,23.225,90.4583
+Nizamuddin College,8215,23.225,90.4583
+Barishal Cadet,8216,23.225,90.4583
+Uzirpur,8220,22.8333,90.25
+Dhamura,8221,22.8833,90.2
+Jugirkanda,8222,22.85,90.1667
+Dakuarhat,8223,22.9875,90.4292
+Shikarpur,8224,23.3833,91.1
+Gouranadi,8230,22.9,90.2667
+Tarki Bandar,8231,22.9,90.2667
+Kashemabad,8232,22.9,90.2667
+Batajor,8233,22.9,90.2667
+Agailzhara,8240,22.95,90.1833
+Gaila,8241,22.95,90.1833
+Paisarhat,8242,22.95,90.1833
+Muladi,8250,22.951,90.425
+Kazirchar,8251,22.951,90.425
+Charkalekhan,8252,22.951,90.425
+Barajalia,8260,22.951,90.425
+Osman Manjil,8261,22.951,90.425
+Mahendiganj,8270,22.9222,90.4611
+Laskarpur,8271,23.05,90.1333
+Ulania,8272,22.85,90.6
+Nalgora,8273,22.8667,90.65
+Langutia,8274,22.9222,90.4611
+Sahebganj,8280,23.0833,90.7667
+Charamandi,8281,22.8,90.5583
+Padri Shibpur,8282,22.8,90.5583
+Shialguni,8283,22.8,90.5583
+kalaskati,8284,22.5167,90.35
+Bhola Sadar,8300,23.3833,91.0167
+Joynagar,8301,23.3833,91.0167
+Doulatkhan,8310,22.9167,91.15
+Hajipur,8311,22.9167,91.15
+Borhanuddin UPO,8320,22.4833,90.8
+Mirzakalu,8321,22.4833,90.8
+Lalmohan UPO,8330,23.0925,90.7436
+Daurihat,8331,23.0925,90.7436
+Gazaria,8332,23.0925,90.7436
+Charfashion,8340,22.969,90.9276
+Dularhat,8341,22.969,90.9276
+Keramatganj,8342,22.969,90.9276
+Hatshoshiganj,8350,22.969,90.9276
+Hajirhat,8360,22.969,90.9276
+Jhalokathi Sadar,8400,22.7417,90.2
+Nabagram,8401,22.7167,90.2333
+Baukathi,8402,22.7417,90.2
+Gabha,8403,22.7667,90.1667
+Shekherhat,8404,22.7417,90.2
+Rajapur,8410,23.65,90.0333
+Nalchhiti,8420,22.6333,90.2833
+Beerkathi,8421,22.6333,90.2833
+Kathalia,8430,22.4167,90.1333
+Amua,8431,22.3833,90.0833
+Niamatee,8432,22.4,90.1083
+Shoulajalia,8433,22.4,90.1083
+Pirojpur Sadar,8500,22.4967,90.1717
+Hularhat,8501,22.4967,90.1717
+Parerhat,8502,22.4967,90.1717
+Kaukhali,8510,22.6333,90.0667
+Keundia,8511,22.6333,90.0667
+Joykul,8512,22.6333,90.0667
+Jolagati,8513,22.6333,90.0667
+Swarupkathi,8520,22.6833,90.1
+Darus Sunnat,8521,22.6833,90.1
+Kaurikhara,8522,22.6833,90.1
+Jalabari,8523,22.6833,90.1
+Banaripara,8530,22.8,90.1667
+Chakhar,8531,22.8,90.1667
+Nazirpur,8540,22.4167,90.7167
+Sriramkathi,8541,22.4167,90.7167
+Bhandaria,8550,22.4833,90.0667
+Kanudashkathi,8551,22.4667,90.0583
+Dhaoa,8552,22.45,90.05
+Mathbaria,8560,22.3,89.95
+Tushkhali,8561,22.3667,89.9333
+Halta,8562,22.6,90.4
+Gulishakhali,8563,22.2333,90.2667
+Tiarkhali,8564,22.375,90.1375
+Betmor Natun Hat,8565,22.375,90.1375
+Shilarganj,8566,22.375,90.1375
+Patuakhali Sadar,8600,22.75,89.2667
+Moukaran,8601,22.75,89.2667
+Dumkee,8602,22.75,89.2667
+Rahimabad,8603,22.75,89.2667
+Subidkhali,8610,22.5833,90.1778
+Bauphal,8620,22.4167,90.55
+Bagabandar,8621,22.4,90.575
+Birpasha,8622,22.4,90.575
+Kalishari,8623,22.4,90.575
+Kalaia,8624,22.3833,90.6
+Dashmina,8630,22.5833,90.1778
+Galachipa,8640,24.1,90.3
+Gazipur Bandar,8641,24.1,90.3
+Khepupara,8650,21.9833,90.2167
+Mahipur,8651,21.8667,90.1333
+Barguna Sadar,8700,22.2588,90.4376
+Nali Bandar,8701,22.2588,90.4376
+Amtali,8710,22.3,90.1
+Patharghata,8720,22.0333,89.9667
+Kakchira,8721,22.2167,90.05
+Bamna,8730,22.3167,90.1
+Betagi,8740,22.4272,91.9711
+Darul Ulam,8741,22.4272,91.9711
+Khulna G.P.O,9000,22.8404,89.5392
+Khula Sadar,9100,22.8174,89.5648
+Khulna Shipyard,9201,22.7667,89.4192
+Doulatpur,9202,22.7667,89.4192
+BIT Khulna,9203,22.7667,89.4192
+Siramani,9204,22.7667,89.4192
+Jahanabad Canttonmen,9205,22.7667,89.4192
+Sonali Jute Mills,9206,22.7667,89.4192
+Atra Shilpa Area,9207,22.7667,89.4192
+Khulna University,9208,22.7667,89.4192
+Phultala,9210,22.7,89.5167
+Digalia,9220,22.9417,89.5583
+Chandni Mahal,9221,22.9417,89.5583
+Senhati,9222,22.8833,89.55
+Ghoshghati,9223,22.9417,89.5583
+Gazirhat,9224,23.0,89.5667
+Terakhada,9230,22.9333,89.6667
+Pak Barasat,9231,22.9333,89.6667
+Alaipur,9240,23.5167,89.3333
+Rupsha,9241,23.5167,89.3333
+Belphulia,9242,23.5167,89.3333
+Sajiara,9250,22.8167,89.4333
+Ghonabanda,9251,22.7444,89.3111
+Chuknagar,9252,22.8333,89.3
+Shahapur,9253,22.5833,89.2
+Batiaghat,9260,22.7667,89.4192
+Surkalee,9261,22.7667,89.4192
+Chalna Bazar,9270,22.4833,89.5167
+Dakup,9271,22.4833,89.5167
+Bajua,9272,22.5333,89.5833
+Nalian,9273,22.4333,89.45
+Paikgachha,9280,22.5833,89.3333
+Godaipur,9281,22.5778,89.2833
+Kapilmoni,9282,22.5778,89.2833
+Katipara,9283,22.6333,89.2667
+Chandkhali,9284,22.5167,89.25
+Garaikhali,9285,22.5778,89.2833
+Madinabad,9290,22.7667,89.4192
+Amadee,9291,22.7667,89.4192
+Bagerhat Sadar,9300,22.8521,89.8
+P.C College,9301,22.8521,89.8
+Rangdia,9302,22.8521,89.8
+Kachua,9310,22.8833,90.2167
+Sonarkola,9311,22.8833,90.2167
+Morelganj,9320,22.8521,89.8
+Sannasi Bazar,9321,22.8521,89.8
+Telisatee,9322,22.8521,89.8
+Rayenda,9330,22.8521,89.8
+Rampal,9340,23.5333,90.5167
+Foylahat,9341,23.1,90.075
+Sonatunia,9342,22.6667,89.6333
+Gourambha,9343,23.1,90.075
+Chalna Ankorage,9350,22.8521,89.8
+Mongla Port,9351,22.8521,89.8
+Chitalmari,9360,22.85,89.8667
+Barabaria,9361,22.85,89.8667
+Fakirhat,9370,22.7833,89.7333
+Mansa,9371,22.8,89.6833
+Bhanganpar Bazar,9372,22.7917,89.7083
+Mollahat,9380,22.65,89.375
+Kahalpur,9381,22.65,89.375
+Dariala,9382,22.4167,89.0167
+Charkulia,9383,22.65,89.375
+Nagarkandi,9384,22.8833,89.7333
+Pak Gangni,9385,22.65,89.375
+Satkhira Sadar,9400,22.8403,89.1972
+Satkhira Islamia Acc,9401,22.8403,89.1972
+Gunakar kati,9402,22.8403,89.1972
+Budhhat,9403,22.8403,89.1972
+kalaroa,9410,22.8667,89.0333
+Murarikati,9411,22.3,89.05
+Jhaudanga,9412,22.8167,89.05
+Hamidpur,9413,23.15,89.25
+Khordo,9414,23.1,89.0633
+Chandanpur,9415,24.3667,88.9333
+Taala,9420,22.7667,89.1667
+Patkelghata,9421,22.7667,89.1667
+Debbhata,9430,22.8403,89.1972
+Gurugram,9431,22.8403,89.1972
+Kaliganj UPO,9440,23.6333,88.6333
+Nalta Mubaroknagar,9441,23.6333,88.6333
+Ratanpur,9442,23.6333,88.6333
+Nakipur,9450,22.3333,89.1167
+Noornagar,9451,22.4167,89.5042
+Naobeki,9452,22.4167,89.5042
+Buri Goalini,9453,22.2833,89.2167
+Gabura,9454,22.2833,89.2833
+Habinagar,9455,22.7667,90.4
+Ashashuni,9460,22.5167,89.2333
+Baradal,9461,22.5167,89.2333

@@ -15,5 +15,5 @@ setup(
     long_description=read('README.rst'),
     url='http://bitbucket.org/richardpenman/ajaxbrowser',
     license='lgpl',
-    install_requires=['demjson', 'lxml'],
+    install_requires=['demjson', 'lxml', 'templater'],
 )

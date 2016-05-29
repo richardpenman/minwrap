@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 
-import csv, operator, collections, urllib
+import csv, operator, collections, urllib, itertools
 import common, verticals
 # for using native Python strings
 import sip
 sip.setapi('QString', 2)
 from PyQt4.QtCore import QUrl
+from templater import Templater
 
 
 
@@ -35,20 +36,22 @@ class Model:
             default = [(None, default_cases)]
             qs_diffs, post_diffs = self.model
             # abstract the example cases
-            qs_abstraction = [(key, self.abstract(examples)) for (key, examples) in qs_diffs]
-            post_abstraction = [(key, self.abstract(examples)) for (key, examples) in post_diffs]
+            remove_empty = lambda es: [e for e in es if e]
+            qs_abstraction = remove_empty([[(key, case) for case in self.abstract(examples)] for (key, examples) in qs_diffs])
+            post_abstraction = remove_empty([[(key, case) for case in self.abstract(examples)] for (key, examples) in post_diffs])
+            #print 'abstractions:', qs_abstraction, post_abstraction
             
-            for qs_key, qs_cases in qs_abstraction or default:
-                for qs_case in qs_cases or default_cases:
-                    for post_key, post_cases in post_abstraction or default:
-                        for post_case in post_cases or default_cases:
-                            if qs_case is not None or post_case is not None:
-                                # found an abstraction
-                                self._used = True
-                                yield self.gen_request(qs_key, qs_case, post_key, post_case)
+            for qs_key_cases in zip(*(qs_abstraction)) or [()]:
+                print 'qs key:', qs_key_cases
+                for post_key_cases in zip(*(post_abstraction)) or [()]:
+                    print 'post key:', post_key_cases
+                    if qs_key_cases or post_key_cases:
+                        # found an abstraction
+                        self._used = True
+                        yield self.gen_request(dict(qs_key_cases), dict(post_key_cases))
 
 
-    def gen_request(self, qs_key, qs_value, post_key, post_value):
+    def gen_request(self, qs_dict, post_dict):
         """Generate a request modifying the transitions for this model with the provided parameters
         """
         transition = self.transitions[0]
@@ -56,12 +59,10 @@ class Model:
         qs_items = transition.qs
         data_items = transition.data
 
-        if qs_value is not None:
-            qs_items = [(key, urllib.quote_plus(qs_value.encode('utf-8')) if key == qs_key else value) for (key, value) in qs_items]
-            url.setEncodedQueryItems(qs_items)
-        if post_value is not None:
-            # need to properly encode POST? XXX
-            data_items = [(key, post_value if key == post_key else value) for (key, value) in data_items]
+        qs_items = [(key, urllib.quote_plus(qs_dict[key].encode('utf-8')) if key in qs_dict else value) for (key, value) in qs_items]
+        url.setEncodedQueryItems(qs_items)
+        # need to properly encode POST? XXX
+        data_items = [(key, post_dict[key] if key in post_dict else value) for (key, value) in data_items]
         return url, transition.headers, self.encode_data(data_items)
 
 
@@ -108,45 +109,34 @@ class Model:
         """Attempt abstacting these examples
         If successful return a list of similar entities else None"""
         if examples is not None:
-            all_cases = verticals.extend(examples)
-            if all_cases:
-                common.logger.info('Abstraction template: {} {}'.format(examples, len(all_cases)))
-                template = u'{}'
+            similar_cases = verticals.extend(examples)
+            if similar_cases:
+                common.logger.info('Abstracted {} to {} similar examples'.format(examples, len(similar_cases)))
+                for case in similar_cases:
+                    yield case
             else:
-                # try abstracting the template in case the changing part is a substring
-                template, examples = self.build_template(examples)
-                all_cases = verticals.extend(examples) or []
-                common.logger.info('Abstraction template: {} {} {}'.format(template, examples, len(all_cases)))
+                # no known data for these exact examples
+                # interesting data may just be a subset so generate a template of static components
+                template = Templater()
+                for text in examples:
+                    template.learn(text)
+                common.logger.info('Trained template: {}'.format(template._template))
 
-            for case in all_cases:
-                yield template.format(case)
-
-
-    def build_template(self, examples):
-        """Build a template that removes the common prefix and suffix
-
-        >>> m = Model()
-        >>> m.build_template(['<div>hello</div>', '<div>world</div>'])
-        ('<div>{}</div>', ['hello', 'world'])
-        >>> m.build_template(['aba', 'aca'])
-        ('a{}a', ['b', 'c'])
-        >>> m.build_template(['hello', 'world'])
-        ('{}', ['hello', 'world'])
-        """
-        prefix = ''
-        suffix = ''
-        for i, letters in enumerate(zip(*examples)):
-            if len(set(letters)) == 1:
-                prefix += letters[0]
-            else:
-                for letters in reversed(list(zip(*examples))[i:]): 
-                    if len(set(letters)) == 1:
-                        suffix = letters[0] + suffix
+                # and now check whether dynamic components can be abstracted
+                parsed_examples = [template.parse(text) for text in examples]
+                similar_cases = []
+                for examples in zip(*parsed_examples):
+                    if any(examples):
+                        similar_cases.append(verticals.extend(examples) or [])
+                        if similar_cases[-1]:
+                            common.logger.info('Abstracted {} to {} similar examples'.format(examples, len(similar_cases[-1])))
+                        else:
+                            common.logger.info('Failed to abstract: {}'.format(examples))
                     else:
-                        break
-                break
-        escape_brackets = lambda v: v.replace('{', '{{').replace('}', '}}')
-        return escape_brackets(prefix) + u'{}' + escape_brackets(suffix), [example[len(prefix) : len(example) - len(suffix)] for example in examples]
+                        # create iterator of empty strings
+                        similar_cases.append('' for _ in itertools.count())
+                for vector in zip(*similar_cases):
+                    yield template.join(vector)
 
 
     def ready(self):

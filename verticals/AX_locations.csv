@@ -1,37 +1,37 @@
-AX,22100,Mariehamn,Mariehamns stad,211,Maarianhamina,478,,,60.1236,20.4625,1
-AX,22101,Mariehamn,Mariehamns stad,211,Maarianhamina,478,,,60.1236,20.4625,1
-AX,22110,Mariehamn,Mariehamns stad,211,Maarianhamina,478,,,60.1236,20.4625,1
-AX,22111,Mariehamn,Mariehamns stad,211,Maarianhamina,478,,,60.1236,20.4625,1
-AX,22120,Mariehamn,Mariehamns stad,211,Maarianhamina,478,,,60.1236,20.4625,1
-AX,22160,Mariehamn,Mariehamns stad,211,Maarianhamina,478,,,60.1236,20.4625,1
-AX,22270,Eckerö,Ålands landsbygd,212,Eckerö,043,,,60.1236,20.4625,1
-AX,22220,Emkarby,Ålands landsbygd,212,Finström,060,,,60.1236,20.4625,1
-AX,22310,Pċlsböle,Ålands landsbygd,212,Finström,060,,,60.1236,20.4625,1
-AX,22330,Tjudö,Ålands landsbygd,212,Finström,060,,,60.1236,20.4625,1
-AX,22410,Godby,Ålands landsbygd,212,Finström,060,,,60.1236,20.4625,1
-AX,22411,Godby,Ålands landsbygd,212,Finström,060,,,60.1236,20.4625,1
-AX,22340,Geta,Ålands landsbygd,212,Geta,065,,,60.1236,20.4625,1
-AX,22240,Hammarland,Ålands landsbygd,212,Hammarland,076,,,60.1236,20.4625,1
-AX,22130,Gottby,Ålands landsbygd,212,Jomala,170,,,60.1236,20.4625,1
-AX,22140,Mariehamn,Ålands landsbygd,212,Jomala,170,,,60.1236,20.4625,1
-AX,22150,Jomala,Ålands landsbygd,212,Jomala,170,,,60.1236,20.4625,1
-AX,22151,Jomala,Ålands landsbygd,212,Jomala,170,,,60.1236,20.4625,1
-AX,22610,Lemland,Ålands landsbygd,212,Lemland,417,,,60.1169,20.2582,1
-AX,22630,Lumparland,Ålands landsbygd,212,Lumparland,438,,,60.1169,20.2582,4
-AX,22320,Ödkarby,Ålands landsbygd,212,Saltvik,736,,,60.1236,20.4625,1
-AX,22430,Saltvik,Ålands landsbygd,212,Saltvik,736,,,60.1236,20.4625,1
-AX,22520,Kastelholm,Ålands landsbygd,212,Sund,771,,,60.1236,20.4625,1
-AX,22530,Sund,Ålands landsbygd,212,Sund,771,,,60.1236,20.4625,1
-AX,22840,Lappo,Ålands skärgård,213,Brändö,035,,,60.1236,20.4625,1
-AX,22910,Torsholma,Ålands skärgård,213,Brändö,035,,,60.1236,20.4625,1
-AX,22920,Brändö,Ålands skärgård,213,Brändö,035,,,60.1236,20.4625,1
-AX,22930,Fiskö,Ålands skärgård,213,Brändö,035,,,60.1236,20.4625,1
-AX,22940,Ċva,Ålands skärgård,213,Brändö,035,,,60.1236,20.4625,1
-AX,22950,Jurmo,Ålands skärgård,213,Brändö,035,,,60.1236,20.4625,1
-AX,22710,Föglö,Ålands skärgård,213,Föglö,062,,,60.1302,20.6668,1
-AX,22810,Seglinge,Ålands skärgård,213,Kumlinge,295,,,60.1236,20.4625,1
-AX,22820,Kumlinge,Ålands skärgård,213,Kumlinge,295,,,60.1236,20.4625,1
-AX,22830,Enklinge,Ålands skärgård,213,Kumlinge,295,,,60.1236,20.4625,1
-AX,22730,Kökar,Ålands skärgård,213,Kökar,318,,,60.1302,20.6668,1
-AX,22720,Sottunga,Ålands skärgård,213,Sottunga,766,,,60.1302,20.6668,4
-AX,22550,Vċrdö,Ålands skärgård,213,Vċrdö,941,,,60.1236,20.4625,1
+Mariehamn,22100,60.1236,20.4625
+Mariehamn,22101,60.1236,20.4625
+Mariehamn,22110,60.1236,20.4625
+Mariehamn,22111,60.1236,20.4625
+Mariehamn,22120,60.1236,20.4625
+Mariehamn,22160,60.1236,20.4625
+Eckerö,22270,60.1236,20.4625
+Emkarby,22220,60.1236,20.4625
+Pċlsböle,22310,60.1236,20.4625
+Tjudö,22330,60.1236,20.4625
+Godby,22410,60.1236,20.4625
+Godby,22411,60.1236,20.4625
+Geta,22340,60.1236,20.4625
+Hammarland,22240,60.1236,20.4625
+Gottby,22130,60.1236,20.4625
+Mariehamn,22140,60.1236,20.4625
+Jomala,22150,60.1236,20.4625
+Jomala,22151,60.1236,20.4625
+Lemland,22610,60.1169,20.2582
+Lumparland,22630,60.1169,20.2582
+Ödkarby,22320,60.1236,20.4625
+Saltvik,22430,60.1236,20.4625
+Kastelholm,22520,60.1236,20.4625
+Sund,22530,60.1236,20.4625
+Lappo,22840,60.1236,20.4625
+Torsholma,22910,60.1236,20.4625
+Brändö,22920,60.1236,20.4625
+Fiskö,22930,60.1236,20.4625
+Ċva,22940,60.1236,20.4625
+Jurmo,22950,60.1236,20.4625
+Föglö,22710,60.1302,20.6668
+Seglinge,22810,60.1236,20.4625
+Kumlinge,22820,60.1236,20.4625
+Enklinge,22830,60.1236,20.4625
+Kökar,22730,60.1302,20.6668
+Sottunga,22720,60.1302,20.6668
+Vċrdö,22550,60.1236,20.4625

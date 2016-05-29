@@ -9,7 +9,8 @@ sip.setapi('QString', 2)
 import os, collections, pprint
 import common, model, parser, transition, webkit, wrappers
 from PyQt4.QtNetwork import QNetworkRequest
-from PyQt4.QtCore import QUrl
+from PyQt4.QtCore import QUrl, Qt
+from PyQt4.QtGui import QApplication
 
 
 
@@ -18,10 +19,13 @@ class AjaxBrowser(webkit.Browser):
         """Extend webkit.Browser to add some specific functionality for abstracting AJAX requests
         """
         super(AjaxBrowser, self).__init__(**argv)
-        self.view.loadFinished.connect(self.loaded)
+        #self.view.loadFinished.connect(self.loaded)
+        self.view.page().mainFrame().loadFinished.connect(self.loaded)
+        # XXX loadStarted signal to clear?
         self.orig_html = self.orig_txt = ''
         # keep track of the potentially useful transitions
         self.transitions = []
+        self.wrapper = None
 
 
     def loaded(self, ok):
@@ -31,7 +35,6 @@ class AjaxBrowser(webkit.Browser):
             # store original content so that can compare later changes
             self.orig_html = self.current_html()
             self.orig_txt = self.current_text()
-            self.transitions = []
  
 
     def finished(self, reply):
@@ -52,9 +55,13 @@ class AjaxBrowser(webkit.Browser):
                     common.logger.debug('failed to parse: {} {}'.format(reply.url().toString(), reply.data))
                 else:
                     # were able to parse response
-                    common.logger.info('Successfully parsed response: {} {} {}'.format(reply.url().toString(), reply.data, js))
+                    common.logger.debug('Successfully parsed response: {} {} {}'.format(reply.url().toString(), reply.data, js))
                     # save for checking later once interface has been updated
                     self.transitions.append(transition.Transition(reply, js))
+
+        #elif reply.url().toString() == self.current_url():
+            # XXX how to properly determine when page loaded? loadFinished signal unreliable - check DOM change?
+        #    self.loaded(True)
 
 
 def set_start_state(browser):
@@ -64,12 +71,16 @@ def set_start_state(browser):
     browser.view.page().setLinkDelegationPolicy(2)
     def link_clicked(url):
         link = url.toString()
-        if link.endswith('/runfiat'):
-            wrappers.fiat().run(browser)
+        if link.endswith('/runbritishairways'):
+            browser.wrapper = wrappers.britishairways().run(browser)
+        elif link.endswith('/rundelta'):
+            browser.wrapper = wrappers.delta().run(browser)
+        elif link.endswith('/runfiat'):
+            browser.wrapper = wrappers.fiat().run(browser)
         elif link.endswith('/runlufthansa'):
-            wrappers.lufthansa().run(browser)
+            browser.wrapper = wrappers.lufthansa().run(browser)
         elif link.endswith('/runpeugeot'):
-            wrappers.peugeot().run(browser)
+            browser.wrapper = wrappers.peugeot().run(browser)
         else:
             # load the link
             browser.view.load(url)
@@ -83,27 +94,36 @@ def main():
 
     models = {}
     while browser.running:
-        browser.wait_quiet()
-        browser.wait(0.5)
+        #browser.app.processEvents() 
+        if browser.wrapper is not None:
+            try:
+                QApplication.setOverrideCursor(Qt.BusyCursor)
+                browser.wrapper.next()
+            except StopIteration:
+                QApplication.restoreOverrideCursor()
+                browser.wrapper = None
+        browser.app.processEvents() 
+        #browser.wait_quiet()
+
         if browser.transitions:
+            parsed_transitions = []
             # check the transitions that were discovered
-            transitions, browser.transitions = browser.transitions, []
+            #transitions, browser.transitions = browser.transitions, []
             cur_html = browser.current_html()
             cur_text = browser.current_text()
-            for transition in transitions:
+            for transition in browser.transitions:
                 total_changed = num_changed = 0
                 for value in transition.values:
                     total_changed += 1
+                    # XXX should instead isolate new part of DOM and compare against that
                     if (value in cur_html and value not in browser.orig_html) or (value in cur_text and value not in browser.orig_txt):
                         # found a change in this AJAX request that is not in the original DOM
                         num_changed += 1
        
-                #open('test.html', 'w').write(cur_html)
-                #open('test2.html', 'w').write(common.remove_tags(cur_html))
-                #open('test.txt', 'w').write(cur_text)
-                common.logger.info('Transition updates DOM: {} {} {} / {}'.format(transition.url.toString(), transition.data, num_changed, total_changed))
                 # XXX adjust this threshold for each website? STD around mean?
                 if num_changed > 1:
+                    parsed_transitions.append(transition)
+                    common.logger.info('Transition updates DOM: {} {} {} / {}'.format(transition.url.toString(), transition.data, num_changed, total_changed))
                     key = hash(transition)
                     if key in models:
                         this_model = models[key]
@@ -127,7 +147,11 @@ def main():
                                 browser.table.add_rows(*parser.json_to_rows(js))
                         else:
                             break
-
+                else:
+                    common.logger.debug('Transition updates DOM: {} {} {} / {}'.format(transition.url.toString(), transition.data, num_changed, total_changed))
+            #browser.transitions = []
+            for t in parsed_transitions:
+                browser.transitions.remove(t)
 
 
 if __name__ == '__main__':

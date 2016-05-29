@@ -5,7 +5,7 @@ Install modules for parsing JSON and HTML:
 
 .. sourcecode:: bash
 
-    pip install demjson lxml
+    pip install demjson lxml templater
 
 
 Install Qt and Python bindings for Webkit

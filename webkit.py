@@ -36,7 +36,7 @@ class NetworkAccessManager(QNetworkAccessManager):
         self.setProxy(proxy)
         self.sslErrors.connect(self.sslErrorHandler)
         # the requests that are still active
-        self.active_requests = [] # XXX needs to be thread safe?
+        self.active_requests = [] 
 
 
     def shutdown(self):

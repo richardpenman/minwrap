@@ -19,7 +19,7 @@
         <th>HTTP method</th>
         <th>Response format</th>
         <th>Output</th>
-        <th>Status</th>
+        <th>Notes</th>
         <th>Automate</th>
     </tr>
     <tr>
@@ -28,7 +28,8 @@
         <td>GET</td>
         <td>JavaScript</td>
         <td>Matching locations</td>
-        <td>JavaScript content loaded with type text/plain and then modified before being inserted into document</td>
+        <td>JavaScript results use content-type text/plain and then modified before being inserted into document</td>
+        <td><a href="runbritishairways">GO</a></td>
     </tr>
     <tr>
         <td><a href="http://www.delta.com/">Delta</a></td>
@@ -37,6 +38,16 @@
         <td>JavaScript</td>
         <td>Matching locations</td>
         <td>Request has 2 parameters - the prefix and a query counter</td>
+        <td>Needs native input filling<!--<a href="rundelta">GO</a>--></td>
+    </tr>
+    <tr>
+        <td><a href="http://www.lufthansa.com/uk/en/Homepage">Lufthansa</a></td>
+        <td>Location prefixes</td>
+        <td>POST</td>
+        <td>JSON</td>
+        <td>Matching locations</td>
+        <td></td>
+        <td>Needs native input filling<!--<a href="runlufthansa">GO</a>--></td>
     </tr>
     <tr>
         <td><a href="http://www.fiat.co.uk/find-dealer">Fiat</a></td>
@@ -44,7 +55,7 @@
         <td>GET</td>
         <td>JSONP</td>
         <td>UK car dealers</th>
-        <td>Successfully abstract and parse</td>
+        <td></td>
         <td><a href="runfiat">GO</a></td>
     </tr>
     <tr>
@@ -53,16 +64,7 @@
         <td>GET</td>
         <td>JSONP</td>
         <td>UK car dealers</td>
-        <td>Multiple jumps not supported</td>
-    </tr>
-    <tr>
-        <td><a href="http://www.lufthansa.com/uk/en/Homepage">Lufthansa</a></td>
-        <td>Location prefixes</td>
-        <td>POST</td>
-        <td>JSON</td>
-        <td>Matching locations</td>
-        <td>Successfully abstract and parse, but requires keyup event to automate</td>
-        <!--<td><a href="runlufthansa">GO</a></td>-->
+        <td>Multiple jumps not yet supported</td>
     </tr>
     <tr>
         <td><a href="http://www.peugeot.nl/zoek-een-dealer/">Peugeot</a></td>
@@ -70,7 +72,7 @@
         <td>POST</td>
         <td>JSON</td>
         <td>Dutch car dealers</td>
-        <td>Successfully abstract but fail to parse HTML results</td>
+        <td>Output is JSON but then bulk of this is a HTML block, so parsing is less useful</td>
         <td><a href="runpeugeot">GO</a></td>
     </tr>
     <!--<li><a href=""></a></li>-->

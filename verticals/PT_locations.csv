@@ -1,636 +1,636 @@
-PT,3750,Alcafaz,Aveiro,01,Corvo,01,Atenor,01,40.5667,-8.3167,4
-PT,3850,Albergaria-a-Velha,Aveiro,01,Santa Cruz das Flores,02,Atenor,01,40.7,-8.4833,4
-PT,3780,Amoreira da Gândara,Aveiro,01,São Roque do Pico,03,Atenor,01,40.4833,-8.5333,4
-PT,4540,Albergaria da Serra,Aveiro,01,Povoação,04,Atenor,01,40.8917,-8.3,
-PT,3800,Aveiro,Aveiro,01,Ribeira Grande,05,Edroso,12,40.6333,-8.65,4
-PT,3804,Aveiro,Aveiro,01,Ribeira Grande,05,Edroso,12,40.6333,-8.65,4
-PT,3810,Aveiro,Aveiro,01,Ribeira Grande,05,Atenor,01,40.6333,-8.65,4
-PT,3814,Aveiro,Aveiro,01,Ribeira Grande,05,Poiares,06,40.6333,-8.65,4
-PT,4550,Bairros,Aveiro,01,Vila Franca do Campo,06,Atenor,01,41.0333,-8.2333,4
-PT,4500,Espinho,Aveiro,01,Ribeira Brava,07,Atenor,01,41.0148,-8.5318,
-PT,4504,Espinho,Aveiro,01,Ribeira Brava,07,Cicouro,02,41.0148,-8.5318,
-PT,3860,Avanca,Aveiro,01,Santa Cruz,08,Atenor,01,40.8,-8.5667,4
-PT,3864,Estarreja,Aveiro,01,Santa Cruz,08,Cicouro,02,40.8438,-8.4704,
-PT,3865,Canelas,Aveiro,01,Santa Cruz,08,Constantim,03,40.9667,-8.2,4
-PT,3700,Arrifana,Aveiro,01,Santana,09,Cicouro,02,40.9167,-8.5,4
-PT,4505,Argoncilhe,Aveiro,01,Santana,09,Atenor,01,41.0167,-8.5333,4
-PT,4520,Escapães,Aveiro,01,Santana,09,Bagueixe,04,40.8308,-8.55,
-PT,4525,Canedo,Aveiro,01,Santana,09,Constantim,03,41,-8.4667,4
-PT,4535,Lourosa,Aveiro,01,Santana,09,Espadanedo,13,41.1185,-8.4416,
-PT,3830,Ervosas,Aveiro,01,São Vicente,10,Bagueixe,04,40.6955,-8.5984,
-PT,3020,Sargento Mor,Aveiro,01,Penalva do Castelo,11,Cicouro,02,40.2674,-8.4,
-PT,3050,Mealhada,Aveiro,01,Penalva do Castelo,11,Mazouco,05,40.3492,-8.4765,
-PT,3054,Mealhada,Aveiro,01,Penalva do Castelo,11,Mazouco,05,40.3632,-8.4731,
-PT,3870,Agro,Aveiro,01,Penedono,12,Atenor,01,40.7667,-8.65,4
-PT,3720,Oliveira de Azeméis,Aveiro,01,Resende,13,Chacim,09,40.8667,-8.4875,
-PT,3770,Azurveira,Aveiro,01,Santa Comba Dão,14,Atenor,01,40.5611,-8.6111,
-PT,3880,Ovar,Aveiro,01,São João da Pesqueira,15,Mazouco,05,40.9167,-8.6,
-PT,3885,Arada,Aveiro,01,São João da Pesqueira,15,Atenor,01,40.9167,-8.6,4
-PT,3740,Bouça,Aveiro,01,Sátão,17,Atenor,01,41.0167,-8.35,4
-PT,3744,Sever do Vouga,Aveiro,01,Sátão,17,Poiares,06,40.8389,-8.4542,
-PT,3840,Vagos,Aveiro,01,Sernancelhe,18,Castelãos,08,40.4833,-8.6906,
-PT,3730,Arões,Aveiro,01,Tabuaço,19,Atenor,01,40.8,-8.3,4
-PT,7600,Aljustrel,Beja,02,Corvo,01,Atenor,01,37.8667,-8.1667,4
-PT,7700,Almodôvar,Beja,02,Santa Cruz das Flores,02,Atenor,01,37.5167,-8.0667,4
-PT,7920,Alvito,Beja,02,São Roque do Pico,03,Atenor,01,38.25,-7.9833,4
-PT,7230,Barrancos,Beja,02,Povoação,04,Atenor,01,38.1333,-6.9833,4
-PT,7800,Beja,Beja,02,Ribeira Grande,05,Chacim,09,38.0167,-7.8667,4
-PT,7801,Beja,Beja,02,Ribeira Grande,05,Chacim,09,38.0167,-7.8667,4
-PT,7780,Aivados,Beja,02,Vila Franca do Campo,06,Cicouro,02,37.75,-8.2167,4
-PT,7940,Cuba,Beja,02,Ribeira Brava,07,Atenor,01,38.2833,-7.9333,
-PT,7900,Alfundão,Beja,02,Santa Cruz,08,Atenor,01,38.1167,-8.0667,4
-PT,7750,Água Salgada,Beja,02,Santana,09,Atenor,01,37.8167,-7.8167,4
-PT,7860,Moura,Beja,02,São Vicente,10,Bagueixe,04,38.0357,-7.8036,
-PT,7875,Monte da Fonte dos Arcos,Beja,02,São Vicente,10,Constantim,03,38.0357,-7.8036,
-PT,7885,Amareleja,Beja,02,São Vicente,10,Atenor,01,38.2,-7.2333,4
-PT,7630,A de Mateus,Beja,02,Penalva do Castelo,11,Castelãos,08,37.6,-8.7,
-PT,7645,Águas Ferrenhas,Beja,02,Penalva do Castelo,11,Corujas,11,37.75,-8.7667,
-PT,7665,Corte Sevilha,Beja,02,Penalva do Castelo,11,Constantim,03,37.9667,-7.9917,
-PT,7670,Alcarias,Beja,02,Penedono,12,Atenor,01,37.7833,-8.2333,4
-PT,7830,A do Pinto,Beja,02,Resende,13,Atenor,01,37.9167,-7.4833,4
-PT,7960,Marmelar,Beja,02,Santa Comba Dão,14,Atenor,01,38.1905,-8.0202,
-PT,4720,Chouselas,Braga,03,Corvo,01,Peredo,24,41.6436,-8.3513,
-PT,4740,Barqueiros,Braga,03,Santa Cruz das Flores,02,Grijó,15,41.4833,-8.7333,4
-PT,4750,Barreiro,Braga,03,Santa Cruz das Flores,02,Atenor,01,41.5667,-8.65,
-PT,4755,Sapagal,Braga,03,Santa Cruz das Flores,02,Constantim,03,41.5389,-8.4111,
-PT,4775,Chavão,Braga,03,Santa Cruz das Flores,02,Murçós,22,41.5083,-8.375,
-PT,4905,Aldeia,Braga,03,Santa Cruz das Flores,02,Poiares,06,41.4833,-8.6667,4
-PT,4700,Braga,Braga,03,São Roque do Pico,03,Zoio,49,41.55,-8.4333,4
-PT,4704,Braga,Braga,03,São Roque do Pico,03,Carrapatas,07,41.55,-8.4333,4
-PT,4705,Arentim,Braga,03,São Roque do Pico,03,Constantim,03,41.4833,-8.4833,4
-PT,4709,Celeirós,Braga,03,São Roque do Pico,03,Poiares,06,41.5389,-8.4444,
-PT,4710,Braga,Braga,03,São Roque do Pico,03,São Pedro Valbom,51,41.55,-8.4333,4
-PT,4714,Braga,Braga,03,São Roque do Pico,03,São Pedro Valbom,51,41.55,-8.4333,4
-PT,4715,Braga,Braga,03,São Roque do Pico,03,Santa Maria,42,41.55,-8.4333,4
-PT,4719,Braga,Braga,03,São Roque do Pico,03,Santa Maria,42,41.55,-8.4333,4
-PT,4860,Abadim,Braga,03,Povoação,04,Atenor,01,41.5333,-7.9833,4
-PT,4615,Alijão,Braga,03,Ribeira Grande,05,Atenor,01,41.3667,-8.1333,4
-PT,4820,Rego,Braga,03,Ribeira Grande,05,Lamalonga,17,41.4167,-8.1,
-PT,4890,Boucinha,Braga,03,Ribeira Grande,05,Cicouro,02,41.55,-8.2667,4
-PT,4824,Fafe,Braga,03,Ribeira Brava,07,Chacim,09,41.3131,-8.4624,
-PT,4765,Guardizela,Braga,03,Santa Cruz,08,Olmos,23,41.5833,-8.2667,
-PT,4800,Guimarães,Braga,03,Santa Cruz,08,Atenor,01,41.4803,-8.2434,
-PT,4804,São Torcato,Braga,03,Santa Cruz,08,São Torcato,65,41.4816,-8.3387,
-PT,4805,Balazar,Braga,03,Santa Cruz,08,Mazouco,05,41.5,-8.3833,4
-PT,4809,Brito,Braga,03,Santa Cruz,08,Carrapatas,07,41.45,-8.3667,4
-PT,4810,Guimarães,Braga,03,Santa Cruz,08,Talhas,30,41.5833,-8.2667,
-PT,4814,Guimarães,Braga,03,Santa Cruz,08,São Sebastião (Guimarães),63,41.5434,-8.2903,
-PT,4815,São Faustino,Braga,03,Santa Cruz,08,São Pedro Valbom,51,41.1278,-8.5222,
-PT,4835,Guimarães,Braga,03,Santa Cruz,08,Espadanedo,13,41.5366,-8.3317,
-PT,4839,Nespereira,Braga,03,Santa Cruz,08,Vale Benfeito,32,41.5366,-8.3317,
-PT,4830,Costeirinha,Braga,03,Santana,09,Atenor,01,41.5567,-8.32,
-PT,4840,Picouço,Braga,03,São Vicente,10,Atenor,01,41.5583,-8.325,
-PT,4845,Lijó,Braga,03,São Vicente,10,Espadanedo,13,41.5792,-8.2542,
-PT,4850,Tapado,Braga,03,Penalva do Castelo,11,Atenor,01,41.5667,-8.14,
-PT,4760,Gavião,Braga,03,Penedono,12,Lagoa,16,41.7333,-8.3,
-PT,4764,Vila Nova de Famalicão,Braga,03,Penedono,12,Sortes,48,41.5362,-8.4222,
-PT,4770,Abade de Vermoim,Braga,03,Penedono,12,Atenor,01,41.3833,-8.4833,4
-PT,4730,Povoadura,Braga,03,Resende,13,Atenor,01,41.6,-8.0833,
-PT,4620,Santa Eulália,Braga,03,Santa Comba Dão,14,Atenor,01,41.2167,-8.5667,
-PT,5350,Alfândega da Fé,Bragança,04,Corvo,01,Cicouro,02,41.3333,-6.9667,4
-PT,5300,Bragança,Bragança,04,Santa Cruz das Flores,02,Sé,45,41.8167,-6.75,4
-PT,5301,Bragança,Bragança,04,Santa Cruz das Flores,02,Sé,45,41.8167,-6.75,4
-PT,5140,Amedo,Bragança,04,São Roque do Pico,03,Atenor,01,41.25,-7.3333,4
-PT,5180,Fornos,Bragança,04,Povoação,04,Atenor,01,41.0522,-7.4329,
-PT,5340,Ala,Bragança,04,Ribeira Grande,05,Atenor,01,41.6,-7.0167,4
-PT,5210,Miranda do Douro,Bragança,04,Vila Franca do Campo,06,Castelãos,08,41.5333,-6.2333,
-PT,5225,Atenor,Bragança,04,Vila Franca do Campo,06,Atenor,01,41.4167,-6.4833,4
-PT,5370,Vale de Martinho,Bragança,04,Ribeira Brava,07,Atenor,01,41.55,-7.1833,
-PT,5385,Aguieiras,Bragança,04,Ribeira Brava,07,Constantim,03,41.7167,-7.2,4
-PT,5200,Viduedo,Bragança,04,Santa Cruz,08,Atenor,01,41.3153,-6.5031,
-PT,5160,Quinta da Silveira,Bragança,04,Santana,09,Cicouro,02,41.3333,-7.05,
-PT,5360,Assares,Bragança,04,São Vicente,10,Atenor,01,41.3333,-7.0833,4
-PT,5230,Algoso,Bragança,04,Penalva do Castelo,11,Atenor,01,41.4667,-6.5833,4
-PT,5320,Alvaredos,Bragança,04,Penedono,12,Cicouro,02,41.8,-7.0667,4
-PT,5335,Agrochão,Bragança,04,Penedono,12,Atenor,01,41.7,-7.0333,4
-PT,6250,Alto São João,Castelo Branco,05,Corvo,01,Atenor,01,40.35,-7.35,
-PT,6000,Almaceda,Castelo Branco,05,Santa Cruz das Flores,02,Cicouro,02,40,-7.6667,4
-PT,6004,Castelo Branco,Castelo Branco,05,Santa Cruz das Flores,02,Mazouco,05,39.8962,-7.6372,
-PT,6005,Alcains,Castelo Branco,05,Santa Cruz das Flores,02,Atenor,01,40.0417,-7.55,
-PT,6200,Covilhã,Castelo Branco,05,São Roque do Pico,03,Talhinhas,31,40.15,-7.6667,
-PT,6201,Covilhã,Castelo Branco,05,São Roque do Pico,03,Carrapatas,07,40.15,-7.6667,
-PT,6215,Barco,Castelo Branco,05,São Roque do Pico,03,Bagueixe,04,40.1667,-7.6167,4
-PT,6225,Aldeia São Francisco de Assis,Castelo Branco,05,São Roque do Pico,03,Cicouro,02,40.1333,-7.7333,4
-PT,6230,Ourondo,Castelo Branco,05,São Roque do Pico,03,Espadanedo,13,40.1,-7.4667,
-PT,6185,Bogas de Baixo,Castelo Branco,05,Povoação,04,Chacim,09,40.05,-7.7833,4
-PT,6060,Alcafozes,Castelo Branco,05,Ribeira Grande,05,Atenor,01,39.95,-7.1167,4
-PT,6160,Talvinheira,Castelo Branco,05,Vila Franca do Campo,06,Atenor,01,39.9667,-7.9667,
-PT,6090,Águas,Castelo Branco,05,Ribeira Brava,07,Atenor,01,40.1167,-7.2,4
-PT,6320,Alizo,Castelo Branco,05,Ribeira Brava,07,Carrapatas,07,40.5667,-7.15,
-PT,6150,Alvito da Beira,Castelo Branco,05,Santa Cruz,08,Atenor,01,39.8333,-7.8,4
-PT,6100,Ameixoeira,Castelo Branco,05,Santana,09,Atenor,01,39.95,-7.8333,4
-PT,6110,Abrunheiro Grande,Castelo Branco,05,São Vicente,10,Atenor,01,39.7167,-8.1833,4
-PT,6030,Vila Velha de Ródão,Castelo Branco,05,Penalva do Castelo,11,Bagueixe,04,39.6667,-7.65,
-PT,3300,Arganil,Coimbra,06,Corvo,01,Cicouro,02,40.2167,-8.05,4
-PT,3305,Anceriz,Coimbra,06,Corvo,01,Atenor,01,40.2667,-7.9167,4
-PT,6285,Berreiros,Coimbra,06,Corvo,01,Corujas,11,40.5833,-7.475,
-PT,3060,Ançã,Coimbra,06,Santa Cruz das Flores,02,Atenor,01,40.2667,-8.5167,4
-PT,3000,Coimbra,Coimbra,06,São Roque do Pico,03,Lamalonga,17,40.2639,-8.5891,
-PT,3004,Coimbra,Coimbra,06,São Roque do Pico,03,Lamalonga,17,40.2639,-8.5891,
-PT,3025,Coimbra,Coimbra,06,São Roque do Pico,03,Talhas,30,40.278,-8.3553,
-PT,3030,Coimbra,Coimbra,06,São Roque do Pico,03,Lamas,18,40.1083,-8.2583,
-PT,3040,Coimbra,Coimbra,06,São Roque do Pico,03,Lagoa,16,40.1569,-8.3771,
-PT,3044,Cernache,Coimbra,06,São Roque do Pico,03,Edroso,12,40.1683,-8.4518,
-PT,3045,Coimbra,Coimbra,06,São Roque do Pico,03,Murçós,22,40.1833,-8.55,
-PT,3049,Taveiro,Coimbra,06,São Roque do Pico,03,Santa Combinha,27,40.1683,-8.4518,
-PT,3150,Alvogadas,Coimbra,06,Povoação,04,Atenor,01,40.1792,-8.4,
-PT,3080,Cabo Mondego,Coimbra,06,Ribeira Grande,05,Bagueixe,04,40.1689,-8.8796,
-PT,3084,Figueira da Foz,Coimbra,06,Ribeira Grande,05,Corujas,11,40.1689,-8.8796,
-PT,3090,Marinha das Ondas,Coimbra,06,Ribeira Grande,05,Castelãos,08,40.1214,-8.7437,
-PT,3094,Gala,Coimbra,06,Ribeira Grande,05,Ferreira,14,40.1214,-8.7437,
-PT,3330,Sandinha,Coimbra,06,Vila Franca do Campo,06,Cicouro,02,40.1917,-8.0333,
-PT,3200,Lousã,Coimbra,06,Ribeira Brava,07,Constantim,03,40.1367,-8.29,
-PT,3070,Arneiro,Coimbra,06,Santa Cruz,08,Atenor,01,40.4167,-8.7,4
-PT,3220,Azenha,Coimbra,06,Santana,09,Atenor,01,40.0833,-8.7333,4
-PT,3140,Abrunheira,Coimbra,06,São Vicente,10,Atenor,01,40.15,-8.4333,4
-PT,3400,Biqueiro,Coimbra,06,Penalva do Castelo,11,Edroso,12,40.2966,-7.8668,
-PT,3405,Bobadela,Coimbra,06,Penalva do Castelo,11,Bagueixe,04,40.35,-7.9,4
-PT,3320,Cabril,Coimbra,06,Penedono,12,Atenor,01,40.0833,-7.8833,4
-PT,3360,Ameal,Coimbra,06,Resende,13,Atenor,01,40.1833,-8.55,4
-PT,3230,Bouça,Coimbra,06,Santa Comba Dão,14,Atenor,01,40.0167,-8.3167,
-PT,3130,Alfarelos,Coimbra,06,São João da Pesqueira,15,Atenor,01,40.15,-8.65,4
-PT,3420,Azere,Coimbra,06,São Pedro do Sul,16,Atenor,01,40.35,-8.1,4
-PT,3350,Arrifana,Coimbra,06,Sátão,17,Atenor,01,40.2167,-8.2833,4
-PT,7200,Aldeia da Venda,Évora,07,Corvo,01,Constantim,03,38.55,-7.425,
-PT,7250,Montes das Ferrarias,Évora,07,Corvo,01,Poiares,06,38.7,-7.4,
-PT,7040,Arraiolos,Évora,07,Santa Cruz das Flores,02,Atenor,01,38.7167,-7.9833,4
-PT,7150,Borba,Évora,07,São Roque do Pico,03,Atenor,01,38.8,-7.45,4
-PT,7100,Arcos,Évora,07,Povoação,04,Atenor,01,38.8329,-7.5155,4
-PT,7000,Foros da Carvalhas,Évora,07,Ribeira Grande,05,Atenor,01,38.7,-7.7833,
-PT,7004,Évora,Évora,07,Ribeira Grande,05,Mazouco,05,38.7,-7.7833,
-PT,7005,Évora,Évora,07,Ribeira Grande,05,Lamas,18,38.7,-7.7833,
-PT,7009,Mare,Évora,07,Ribeira Grande,05,Lamas,18,38.7,-7.7833,
-PT,7050,Montemor-O-Novo,Évora,07,Vila Franca do Campo,06,Bagueixe,04,38.5859,-8.3568,
-PT,7490,Brotas,Évora,07,Ribeira Brava,07,Atenor,01,38.8667,-8.15,4
-PT,7240,Baldio da Granja,Évora,07,Santa Cruz,08,Atenor,01,38.3635,-7.3685,
-PT,7220,Alqueva,Évora,07,Santana,09,Atenor,01,38.2167,-7.5333,4
-PT,7170,Redondo,Évora,07,São Vicente,10,Cicouro,02,38.7888,-7.4576,
-PT,2965,Landeira,Évora,07,Penedono,12,Cicouro,02,38.5787,-8.7017,
-PT,7080,Vendas Novas,Évora,07,Penedono,12,Atenor,01,38.5665,-8.0556,
-PT,7090,Alcáçovas,Évora,07,Resende,13,Atenor,01,38.4,-8.15,4
-PT,7160,Bencatel,Évora,07,Santa Comba Dão,14,Atenor,01,38.75,-7.45,4
-PT,8200,Albufeira,Faro,08,Corvo,01,Atenor,01,37.0833,-8.25,4
-PT,8201,Albufeira,Faro,08,Corvo,01,Atenor,01,37.0833,-8.25,4
-PT,8970,Afonso Vicente,Faro,08,Santa Cruz das Flores,02,Atenor,01,37.5,-7.5333,4
-PT,8670,Aljezur,Faro,08,São Roque do Pico,03,Atenor,01,37.3167,-8.8,4
-PT,8950,Horta Nova,Faro,08,Povoação,04,Atenor,01,37.2417,-7.75,
-PT,8000,Faro,Faro,08,Ribeira Grande,05,Mazouco,05,37.1307,-8.0632,
-PT,8004,Faro,Faro,08,Ribeira Grande,05,Mazouco,05,37.1307,-8.0632,
-PT,8005,Faro,Faro,08,Ribeira Grande,05,Poiares,06,37.1343,-8.0704,
-PT,8009,Campinas,Faro,08,Ribeira Grande,05,Atenor,01,37.0667,-7.9333,
-PT,8700,Ilha da Culatra,Faro,08,Ribeira Grande,05,Mazouco,05,37.0667,-7.9063,
-PT,8400,Urbanização Presa de Moura,Faro,08,Vila Franca do Campo,06,Atenor,01,37.1101,-8.4337,
-PT,8401,Lagoa,Faro,08,Vila Franca do Campo,06,Constantim,03,37.1101,-8.4337,
-PT,8600,Vale de Coitos,Faro,08,Ribeira Brava,07,Bagueixe,04,37.1417,-8.7583,
-PT,8601,Lagos,Faro,08,Ribeira Brava,07,Mazouco,05,37.1286,-8.6595,
-PT,8100,Águas Frias,Faro,08,Santa Cruz,08,Cicouro,02,37.3167,-8.1833,4
-PT,8125,Quarteira,Faro,08,Santa Cruz,08,Mazouco,05,37.1369,-8.0349,
-PT,8135,Além,Faro,08,Santa Cruz,08,Atenor,01,37.0833,-7.9833,4
-PT,8550,Alferce,Faro,08,Santana,09,Atenor,01,37.3333,-8.4833,4
-PT,8500,Alagoas,Faro,08,Penalva do Castelo,11,Atenor,01,37.0833,-8.7667,4
-PT,8501,Portimão,Faro,08,Penalva do Castelo,11,Constantim,03,37.1446,-8.5479,
-PT,8150,Alcaria,Faro,08,Penedono,12,Atenor,01,37.4167,-7.6333,4
-PT,8300,Almarjão,Faro,08,Resende,13,Carrapatas,07,37.3,-8.6333,4
-PT,8365,Alcantarilha,Faro,08,Resende,13,Atenor,01,37.1333,-8.35,4
-PT,8375,Aldeia Ruiva,Faro,08,Resende,13,Mazouco,05,37.219,-8.3571,
-PT,8800,Alcarias Baixas,Faro,08,Santa Comba Dão,14,Atenor,01,37.3056,-7.8833,
-PT,8801,Tavira,Faro,08,Santa Comba Dão,14,Mazouco,05,37.1917,-7.8089,
-PT,8650,Barão de São Miguel,Faro,08,São João da Pesqueira,15,Atenor,01,37.1,-8.8,4
-PT,8900,Sítio das Areias,Faro,08,São Pedro do Sul,16,Atenor,01,37.3167,-8.7833,
-PT,3570,Açores,Guarda,09,Corvo,01,Atenor,01,40.65,-7.3,4
-PT,6350,Aldeia Nova,Guarda,09,Santa Cruz das Flores,02,Cicouro,02,40.7,-7.4333,4
-PT,6355,Ade,Guarda,09,Santa Cruz das Flores,02,Atenor,01,40.55,-6.9833,4
-PT,6360,Açores,Guarda,09,São Roque do Pico,03,Atenor,01,40.65,-7.3,4
-PT,6440,Algodres,Guarda,09,Povoação,04,Atenor,01,40.95,-7.05,4
-PT,6370,Algodres,Guarda,09,Ribeira Grande,05,Atenor,01,40.95,-7.05,4
-PT,6290,Aldeias,Guarda,09,Vila Franca do Campo,06,Atenor,01,40.4667,-7.6,4
-PT,6300,Adão,Guarda,09,Ribeira Brava,07,Atenor,01,40.45,-7.1667,4
-PT,6301,Guarda,Guarda,09,Ribeira Brava,07,Santa Maria,42,40.554,-7.219,
-PT,6260,Avesseira,Guarda,09,Santa Cruz,08,Cicouro,02,40.1959,-7.5039,
-PT,6430,Aveloso,Guarda,09,Santana,09,Atenor,01,40.9333,-7.3167,4
-PT,6400,Abadia,Guarda,09,São Vicente,10,Lamas,18,40.7396,-7.15,
-PT,6324,Cerdeira,Guarda,09,Penalva do Castelo,11,Espadanedo,13,40.4614,-7.0904,
-PT,6270,Aguincho,Guarda,09,Penedono,12,Atenor,01,40.2833,-7.7167,4
-PT,3640,Guilheiro,Guarda,09,Resende,13,Cortiços,10,40.9042,-7.5125,
-PT,6420,Trancoso,Guarda,09,Resende,13,Lamas,18,40.7604,-7.3729,
-PT,5150,Almendra,Guarda,09,Santa Comba Dão,14,Atenor,01,41,-7.05,4
-PT,5155,Cedovim,Guarda,09,Santa Comba Dão,14,Constantim,03,41.1333,-7.3,
-PT,2445,Água de Madeiros,Leiria,10,Corvo,01,Cortiços,10,39.7,-8.9833,
-PT,2460,Alcobaça,Leiria,10,Corvo,01,Atenor,01,39.55,-8.9833,4
-PT,2461,Alcobaça,Leiria,10,Corvo,01,Atenor,01,39.55,-8.9833,4
-PT,2475,Algarão,Leiria,10,Corvo,01,Mazouco,05,39.4,-9,
-PT,3250,Aldeia Nova,Leiria,10,Santa Cruz das Flores,02,Atenor,01,39.86,-8.4367,
-PT,3260,Venda do Henrique,Leiria,10,Santa Cruz das Flores,02,Poiares,06,39.8667,-8.3167,
-PT,3240,Ansião,Leiria,10,São Roque do Pico,03,Cicouro,02,39.886,-8.4541,
-PT,2440,Casal das Carvalhas,Leiria,10,Povoação,04,Atenor,01,39.6583,-8.8199,
-PT,2495,Barreirinho Velho,Leiria,10,Povoação,04,Constantim,03,39.6,-8.7167,
-PT,2540,Barreiras,Leiria,10,Ribeira Grande,05,Atenor,01,39.25,-9.15,4
-PT,2500,A dos Francos,Leiria,10,Vila Franca do Campo,06,Atenor,01,39.3167,-9.05,4
-PT,3280,Valongo,Leiria,10,Ribeira Brava,07,Atenor,01,40.0028,-8.2028,
-PT,2400,Leiria,Leiria,10,Santana,09,Bagueixe,04,39.7167,-8.8333,
-PT,2404,Leiria,Leiria,10,Santana,09,Lombo,19,39.6083,-9.0083,
-PT,2405,A-do-Barbas,Leiria,10,Santana,09,Espadanedo,13,39.8417,-8.6333,
-PT,2410,Andreus,Leiria,10,Santana,09,Mazouco,05,39.6833,-8.8,4
-PT,2414,Leiria,Leiria,10,Santana,09,Edroso,12,39.8017,-8.66,
-PT,2415,Bidoeira de Baixo,Leiria,10,Santana,09,Salselas,26,39.9833,-8.8,
-PT,2416,Bidoeira de Cima,Leiria,10,Santana,09,Salselas,26,39.8017,-8.66,
-PT,2419,Leiria,Leiria,10,Santana,09,Ferreira,14,39.8017,-8.66,
-PT,2420,Arrabal,Leiria,10,Santana,09,Cicouro,02,39.7,-8.7333,4
-PT,2424,Soutocico,Leiria,10,Santana,09,Cicouro,02,39.8167,-8.7333,
-PT,2425,Brejo,Leiria,10,Santana,09,Lagoa,16,39.2333,-9.15,4
-PT,2430,Amieirinha,Leiria,10,São Vicente,10,Atenor,01,39.7333,-8.9333,4
-PT,2450,Casais Baixo,Leiria,10,Penalva do Castelo,11,Atenor,01,39.6,-8.85,4
-PT,2510,Óbidos,Leiria,10,Penedono,12,Indefinida,00,39.62,-8.8492,
-PT,3270,Adega,Leiria,10,Resende,13,Atenor,01,39.8833,-8.2167,
-PT,2520,Baleal,Leiria,10,Santa Comba Dão,14,Poiares,06,39.3667,-9.35,4
-PT,2525,Alto Foz,Leiria,10,Santa Comba Dão,14,Cicouro,02,39.3329,-9.3329,
-PT,3100,Casal da Rosa,Leiria,10,São João da Pesqueira,15,Corujas,11,39.8759,-8.5593,
-PT,3105,Barros da Paz,Leiria,10,São João da Pesqueira,15,Constantim,03,39.9667,-8.6833,4
-PT,2480,Porto de Mós,Leiria,10,São Pedro do Sul,16,Corujas,11,39.6449,-8.7705,
-PT,2485,Mira de Aire,Leiria,10,São Pedro do Sul,16,Castelãos,08,39.6515,-8.7652,
-PT,2580,Abrigada,Lisboa,11,Corvo,01,Atenor,01,39.1333,-9.0167,4
-PT,2581,Alenquer,Lisboa,11,Corvo,01,Corujas,11,39.05,-9,4
-PT,2630,Arranhó,Lisboa,11,Santa Cruz das Flores,02,Atenor,01,38.95,-9.1333,4
-PT,2634,Arruda dos Vinhos,Lisboa,11,Santa Cruz das Flores,02,Cicouro,02,38.9833,-9.0833,4
-PT,2050,Azambuja,Lisboa,11,São Roque do Pico,03,Bagueixe,04,39.0667,-8.8667,4
-PT,2065,Alcoentre,Lisboa,11,São Roque do Pico,03,Atenor,01,39.2,-8.95,4
-PT,2550,Cadaval,Lisboa,11,Povoação,04,Cicouro,02,39.2333,-9.1,4
-PT,2645,Manique,Lisboa,11,Ribeira Grande,05,Atenor,01,38.7267,-9.4033,
-PT,2649,Alcabideche,Lisboa,11,Ribeira Grande,05,Atenor,01,38.7333,-9.4167,4
-PT,2750,Cascais,Lisboa,11,Ribeira Grande,05,Constantim,03,39.05,-9.4,
-PT,2754,Cascais,Lisboa,11,Ribeira Grande,05,Constantim,03,38.7871,-9.4299,
-PT,2755,Malveira da Serra,Lisboa,11,Ribeira Grande,05,Atenor,01,38.7194,-9.4278,
-PT,2756,Alvide,Lisboa,11,Ribeira Grande,05,Atenor,01,38.7167,-9.4333,4
-PT,2765,Alapraia,Lisboa,11,Ribeira Grande,05,Bagueixe,04,38.7,-9.3667,4
-PT,2769,São João do Estoril,Lisboa,11,Ribeira Grande,05,Bagueixe,04,38.7717,-9.3732,
-PT,2775,Madorna,Lisboa,11,Ribeira Grande,05,Mazouco,05,38.6963,-9.3561,
-PT,2779,Parede,Lisboa,11,Ribeira Grande,05,Mazouco,05,38.6833,-9.3333,
-PT,2785,Madorna,Lisboa,11,Ribeira Grande,05,Poiares,06,38.7167,-9.3667,
-PT,2789,Outeiro de Polima,Lisboa,11,Ribeira Grande,05,Poiares,06,38.7215,-9.366,
-PT,1000,Lisboa,Lisboa,11,Vila Franca do Campo,06,São Pedro de Serracenos,44,38.7167,-9.1333,4
-PT,1049,Lisboa,Lisboa,11,Vila Franca do Campo,06,São Julião de Palácios,43,38.7167,-9.1333,4
-PT,1050,Lisboa,Lisboa,11,Vila Franca do Campo,06,Olmos,23,38.7222,-9.1928,4
-PT,1066,Lisboa,Lisboa,11,Vila Franca do Campo,06,Prado (São Miguel),50,38.7167,-9.1333,4
-PT,1067,Lisboa,Lisboa,11,Vila Franca do Campo,06,Olmos,23,38.7167,-9.1333,4
-PT,1068,Lisboa,Lisboa,11,Vila Franca do Campo,06,Prado (São Miguel),50,38.7167,-9.1333,4
-PT,1069,Lisboa,Lisboa,11,Vila Franca do Campo,06,Ferreira,14,38.7167,-9.1333,4
-PT,1070,Lisboa,Lisboa,11,Vila Franca do Campo,06,Cortiços,10,38.7222,-9.1928,4
-PT,1092,Lisboa,Lisboa,11,Vila Franca do Campo,06,Prado (São Miguel),50,38.7167,-9.1333,4
-PT,1098,Lisboa,Lisboa,11,Vila Franca do Campo,06,Cortiços,10,38.7167,-9.1333,4
-PT,1099,Lisboa,Lisboa,11,Vila Franca do Campo,06,Prado (São Miguel),50,38.7167,-9.1333,4
-PT,1100,Lisboa,Lisboa,11,Vila Franca do Campo,06,Vinhas,38,38.7167,-9.1333,4
-PT,1149,Lisboa,Lisboa,11,Vila Franca do Campo,06,Sortes,48,38.7167,-9.1333,4
-PT,1150,Lisboa,Lisboa,11,Vila Franca do Campo,06,Peredo,24,38.7167,-9.1333,4
-PT,1166,Lisboa,Lisboa,11,Vila Franca do Campo,06,Sé,45,38.7167,-9.1333,4
-PT,1167,Lisboa,Lisboa,11,Vila Franca do Campo,06,Sé,45,38.7167,-9.1333,4
-PT,1169,Lisboa,Lisboa,11,Vila Franca do Campo,06,Poiares,06,38.7167,-9.1333,4
-PT,1170,Lisboa,Lisboa,11,Vila Franca do Campo,06,Soutelo Mourisco,29,38.7167,-9.1333,4
-PT,1199,Lisboa,Lisboa,11,Vila Franca do Campo,06,Soutelo Mourisco,29,38.7167,-9.1333,4
-PT,1200,Lisboa,Lisboa,11,Vila Franca do Campo,06,Murçós,22,38.7167,-9.1333,4
-PT,1208,Lisboa,Lisboa,11,Vila Franca do Campo,06,Zoio,49,38.7167,-9.1333,4
-PT,1209,Lisboa,Lisboa,11,Vila Franca do Campo,06,Zoio,49,38.7167,-9.1333,4
-PT,1249,Lisboa,Lisboa,11,Vila Franca do Campo,06,Zoio,49,38.7167,-9.1333,4
-PT,1250,Lisboa,Lisboa,11,Vila Franca do Campo,06,Talhas,30,38.7222,-9.1928,4
-PT,1269,Lisboa,Lisboa,11,Vila Franca do Campo,06,Sendas,46,38.7167,-9.1333,4
-PT,1300,Lisboa,Lisboa,11,Vila Franca do Campo,06,Cicouro,02,38.7167,-9.1333,4
-PT,1349,Lisboa,Lisboa,11,Vila Franca do Campo,06,Vale Benfeito,32,38.7167,-9.1333,4
-PT,1350,Lisboa,Lisboa,11,Vila Franca do Campo,06,Vilar do Monte,35,38.7167,-9.1333,4
-PT,1399,Lisboa,Lisboa,11,Vila Franca do Campo,06,Salselas,26,38.7167,-9.1333,4
-PT,1400,Lisboa,Lisboa,11,Vila Franca do Campo,06,Vale Benfeito,32,38.7167,-9.1333,4
-PT,1449,Lisboa,Lisboa,11,Vila Franca do Campo,06,Samil,40,38.7167,-9.1333,4
-PT,1500,Lisboa,Lisboa,11,Vila Franca do Campo,06,Castelãos,08,38.7167,-9.1333,4
-PT,1549,Lisboa,Lisboa,11,Vila Franca do Campo,06,Castelãos,08,38.7167,-9.1333,4
-PT,1600,Lisboa,Lisboa,11,Vila Franca do Campo,06,Salsas,39,38.7167,-9.1333,4
-PT,1649,Lisboa,Lisboa,11,Vila Franca do Campo,06,Olmos,23,38.7167,-9.1333,4
-PT,1700,Lisboa,Lisboa,11,Vila Franca do Campo,06,Chacim,09,38.7167,-9.1333,4
-PT,1748,Lisboa,Lisboa,11,Vila Franca do Campo,06,Santa Maria,42,38.7167,-9.1333,4
-PT,1749,Lisboa,Lisboa,11,Vila Franca do Campo,06,Bagueixe,04,38.7167,-9.1333,4
-PT,1750,Lisboa,Lisboa,11,Vila Franca do Campo,06,Lamas,18,38.7167,-9.1333,4
-PT,1769,Lisboa,Lisboa,11,Vila Franca do Campo,06,Lamas,18,38.7167,-9.1333,4
-PT,1800,Lisboa,Lisboa,11,Vila Franca do Campo,06,Vale da Porca,33,38.7167,-9.1333,4
-PT,1849,Lisboa,Lisboa,11,Vila Franca do Campo,06,Morais,21,38.7167,-9.1333,4
-PT,1900,Lisboa,Lisboa,11,Vila Franca do Campo,06,Constantim,03,38.7167,-9.1333,4
-PT,1949,Lisboa,Lisboa,11,Vila Franca do Campo,06,Constantim,03,38.7167,-9.1333,4
-PT,1950,Lisboa,Lisboa,11,Vila Franca do Campo,06,Morais,21,38.7167,-9.1333,4
-PT,1959,Lisboa,Lisboa,11,Vila Franca do Campo,06,Morais,21,38.7167,-9.1333,4
-PT,1990,Lisboa,Lisboa,11,Vila Franca do Campo,06,Vale da Porca,33,38.7167,-9.1333,4
-PT,1998,Lisboa,Lisboa,11,Vila Franca do Campo,06,Vale da Porca,33,38.7167,-9.1333,4
-PT,2660,Frielas,Lisboa,11,Ribeira Brava,07,Poiares,06,39.1667,-9.35,
-PT,2664,São Julião do Tojal,Lisboa,11,Ribeira Brava,07,Lagoa,16,38.9833,-9.2417,
-PT,2670,Loures,Lisboa,11,Ribeira Brava,07,Carrapatas,07,38.9019,-9.1228,
-PT,2674,Loures,Lisboa,11,Ribeira Brava,07,Carrapatas,07,38.9,-9.1167,
-PT,2680,Camarate,Lisboa,11,Ribeira Brava,07,Constantim,03,38.8,-9.1333,4
-PT,2681,Camarate,Lisboa,11,Ribeira Brava,07,Constantim,03,38.8,-9.1333,4
-PT,2685,Sacavém,Lisboa,11,Ribeira Brava,07,Edroso,12,38.8034,-9.1333,
-PT,2689,Portela,Lisboa,11,Ribeira Brava,07,Lombo,19,38.8034,-9.1333,
-PT,2690,Santa Iria de Azóia,Lisboa,11,Ribeira Brava,07,Espadanedo,13,38.8167,-9.1,
-PT,2691,Santa Iria de Azóia,Lisboa,11,Ribeira Brava,07,Espadanedo,13,38.8167,-9.1,
-PT,2694,Santa Iria de Azóia,Lisboa,11,Ribeira Brava,07,Espadanedo,13,38.8167,-9.1,
-PT,2695,Bobadela,Lisboa,11,Ribeira Brava,07,Murçós,22,38.8167,-9.1,4
-PT,2699,Bobadela,Lisboa,11,Ribeira Brava,07,Murçós,22,38.8167,-9.1,4
-PT,2530,Atalaia,Lisboa,11,Santa Cruz,08,Corujas,11,39.1167,-9.1,4
-PT,2590,Venda das Pulgas,Lisboa,11,Santana,09,Constantim,03,39.1,-9.2,
-PT,2640,Ribamar,Lisboa,11,Santana,09,Espadanedo,13,38.875,-9.3,
-PT,2644,Mafra,Lisboa,11,Santana,09,Chacim,09,38.7696,-9.3913,
-PT,2655,Ericeira,Lisboa,11,Santana,09,Poiares,06,39.0833,-9.1667,
-PT,2665,Aboboreira,Lisboa,11,Santana,09,Atenor,01,39.0417,-9.1639,
-PT,2669,Vila Franca do Rosário,Lisboa,11,Santana,09,Grijó,15,38.9833,-9.2417,
-PT,1495,Algés,Lisboa,11,São Vicente,10,Poiares,06,38.7,-9.2333,4
-PT,1499,Cruz Quebrada,Lisboa,11,São Vicente,10,Carrapatas,07,38.7,-9.2333,
-PT,2730,Tercena,Lisboa,11,São Vicente,10,Cicouro,02,38.7333,-9.2833,
-PT,2734,Queluz de Baixo,Lisboa,11,São Vicente,10,Cicouro,02,38.7333,-9.2833,
-PT,2740,Vila Fria,Lisboa,11,São Vicente,10,Chacim,09,38.772,-9.292,
-PT,2744,Porto Salvo,Lisboa,11,São Vicente,10,Chacim,09,38.772,-9.292,
-PT,2760,Caxias,Lisboa,11,São Vicente,10,Corujas,11,38.7717,-9.3732,
-PT,2761,Caxias,Lisboa,11,São Vicente,10,Corujas,11,38.7717,-9.3732,
-PT,2770,Paço de Arcos,Lisboa,11,São Vicente,10,Mazouco,05,38.6961,-9.3557,
-PT,2774,Paço de Arcos,Lisboa,11,São Vicente,10,Mazouco,05,38.6961,-9.3557,
-PT,2780,Oeiras,Lisboa,11,São Vicente,10,Bagueixe,04,38.7215,-9.366,
-PT,2784,Oeiras,Lisboa,11,São Vicente,10,Bagueixe,04,38.7215,-9.366,
-PT,2790,Queijas,Lisboa,11,São Vicente,10,Cortiços,10,38.7167,-9.25,
-PT,2794,Queijas,Lisboa,11,São Vicente,10,Cortiços,10,38.7167,-9.25,
-PT,2795,Linda a Velha,Lisboa,11,São Vicente,10,Castelãos,08,38.7167,-9.25,
-PT,2799,Linda a Velha,Lisboa,11,São Vicente,10,Castelãos,08,38.7167,-9.25,
-PT,2605,Belas,Lisboa,11,Penalva do Castelo,11,Bagueixe,04,38.7667,-9.2667,4
-PT,2609,Belas,Lisboa,11,Penalva do Castelo,11,Bagueixe,04,38.7667,-9.2667,4
-PT,2635,Rio de Mouro,Lisboa,11,Penalva do Castelo,11,Castelãos,08,38.7667,-9.35,
-PT,2639,Rio de Mouro,Lisboa,11,Penalva do Castelo,11,Castelãos,08,38.7667,-9.35,
-PT,2705,Azoia,Lisboa,11,Penalva do Castelo,11,Mazouco,05,38.7667,-9.4833,4
-PT,2706,Terrugem,Lisboa,11,Penalva do Castelo,11,Espadanedo,13,38.7648,-9.2774,
-PT,2709,Terrugem,Lisboa,11,Penalva do Castelo,11,Espadanedo,13,38.7648,-9.2774,
-PT,2710,Linhó,Lisboa,11,Penalva do Castelo,11,Edroso,12,39.0083,-9.0917,
-PT,2714,Sintra,Lisboa,11,Penalva do Castelo,11,Chacim,09,39.1333,-9.2,
-PT,2715,Pero Pinheiro,Lisboa,11,Penalva do Castelo,11,Ferreira,14,38.9833,-9.05,
-PT,2719,Armés,Lisboa,11,Penalva do Castelo,11,Espadanedo,13,38.9822,-9.219,
-PT,2725,Mem Martins,Lisboa,11,Penalva do Castelo,11,Cicouro,02,38.8,-9.3333,
-PT,2729,Tapada das Mercês,Lisboa,11,Penalva do Castelo,11,Cicouro,02,38.8,-9.3333,
-PT,2735,São Marcos,Lisboa,11,Penalva do Castelo,11,Morais,21,38.7333,-9.2833,
-PT,2739,Agualva-Cacém,Lisboa,11,Penalva do Castelo,11,Morais,21,38.7333,-9.2833,
-PT,2745,Queluz,Lisboa,11,Penalva do Castelo,11,Lamalonga,17,38.772,-9.292,
-PT,2749,Queluz,Lisboa,11,Penalva do Castelo,11,Lagoa,16,38.772,-9.292,
-PT,2560,A dos Cunhados,Lisboa,11,Resende,13,Atenor,01,39.15,-9.3,4
-PT,2565,Cabeça Gorda,Lisboa,11,Resende,13,Cicouro,02,39.2,-9.2667,4
-PT,2600,Vila Franca de Xira,Lisboa,11,Santa Comba Dão,14,Chacim,09,38.95,-9.0167,
-PT,2601,Alhandra,Lisboa,11,Santa Comba Dão,14,Atenor,01,38.9167,-9,4
-PT,2615,Alverca do Ribatejo,Lisboa,11,Santa Comba Dão,14,Cicouro,02,39.2167,-9.2167,
-PT,2616,Alverca do Ribatejo,Lisboa,11,Santa Comba Dão,14,Cicouro,02,38.8188,-9.2304,
-PT,2619,Alverca do Ribatejo,Lisboa,11,Santa Comba Dão,14,Cicouro,02,38.8188,-9.2304,
-PT,2625,Póvoa de Santa Iria,Lisboa,11,Santa Comba Dão,14,Poiares,06,38.8207,-9.2171,
-PT,2626,Granja,Lisboa,11,Santa Comba Dão,14,Castelãos,08,38.8207,-9.2171,
-PT,2610,Amadora,Lisboa,11,São João da Pesqueira,15,Atenor,01,38.75,-9.2333,4
-PT,2614,Amadora,Lisboa,11,São João da Pesqueira,15,Atenor,01,38.75,-9.2333,4
-PT,2650,Amadora,Lisboa,11,São João da Pesqueira,15,Cortiços,10,38.75,-9.2333,4
-PT,2700,Amadora,Lisboa,11,São João da Pesqueira,15,Castelãos,08,38.75,-9.2333,4
-PT,2704,Amadora,Lisboa,11,São João da Pesqueira,15,Poiares,06,38.75,-9.2333,4
-PT,2720,Amadora,Lisboa,11,São João da Pesqueira,15,Bagueixe,04,38.75,-9.2333,4
-PT,2724,Amadora,Lisboa,11,São João da Pesqueira,15,Castelãos,08,38.75,-9.2333,4
-PT,1675,Pontinha,Lisboa,11,São Pedro do Sul,16,Mazouco,05,38.8,-9.2333,
-PT,1679,Pontinha,Lisboa,11,São Pedro do Sul,16,Mazouco,05,38.8,-9.2333,
-PT,1685,Caneças,Lisboa,11,São Pedro do Sul,16,Atenor,01,38.8,-9.2333,4
-PT,1689,Famões,Lisboa,11,São Pedro do Sul,16,Cicouro,02,38.8,-9.2333,
-PT,2620,Olival Basto,Lisboa,11,São Pedro do Sul,16,Bagueixe,04,38.8207,-9.2171,
-PT,2621,Póvoa de Santo Adrião,Lisboa,11,São Pedro do Sul,16,Poiares,06,38.8207,-9.2171,
-PT,2675,Odivelas,Lisboa,11,São Pedro do Sul,16,Constantim,03,38.9019,-9.1227,
-PT,7440,Alter do Chão,Portalegre,12,Corvo,01,Atenor,01,39.2,-7.6667,4
-PT,7340,Arronches,Portalegre,12,Santa Cruz das Flores,02,Atenor,01,39.1167,-7.2833,4
-PT,7480,Caliço,Portalegre,12,São Roque do Pico,03,Atenor,01,39.1,-8.0333,
-PT,7370,Campo Maior,Portalegre,12,Povoação,04,Constantim,03,39.0167,-7.0667,4
-PT,7374,Campo Maior,Portalegre,12,Povoação,04,Atenor,01,39.0167,-7.0667,4
-PT,7320,Póvoa e Meadas,Portalegre,12,Ribeira Grande,05,Atenor,01,39.2111,-7.6944,
-PT,7430,Aldeia da Mata,Portalegre,12,Vila Franca do Campo,06,Atenor,01,39.3,-7.7333,4
-PT,7350,Elvas,Portalegre,12,Ribeira Brava,07,Atenor,01,39.0571,-7.2524,
-PT,7354,Elvas,Portalegre,12,Ribeira Brava,07,Constantim,03,39.0571,-7.2524,
-PT,7460,Cabeço de Vide,Portalegre,12,Santa Cruz,08,Atenor,01,39.1333,-7.5833,4
-PT,6040,Atalaia,Portalegre,12,Santana,09,Atenor,01,39.45,-7.8667,4
-PT,7330,Barretos,Portalegre,12,São Vicente,10,Atenor,01,39.4333,-7.3667,4
-PT,7450,Monte das Canas,Portalegre,12,Penalva do Castelo,11,Atenor,01,39.1333,-7.3833,
-PT,6050,Alpalhão,Portalegre,12,Penedono,12,Atenor,01,39.4167,-7.6167,4
-PT,7400,Galveias,Portalegre,12,Resende,13,Atenor,01,39.077,-7.7776,
-PT,7425,Abertas de Baixo,Portalegre,12,Resende,13,Cicouro,02,39.077,-7.7776,
-PT,7300,Monte Frei Alvaro,Portalegre,12,Santa Comba Dão,14,Poiares,06,39.2167,-7.4067,
-PT,7301,Portalegre,Portalegre,12,Santa Comba Dão,14,Castelãos,08,39.2167,-7.4067,
-PT,7470,Cano,Portalegre,12,São João da Pesqueira,15,Atenor,01,38.9667,-7.7667,4
-PT,4600,Amarante,Porto,13,Corvo,01,Vale da Porca,33,41.2667,-8.0833,4
-PT,4605,Vila Meã,Porto,13,Corvo,01,Peredo,24,41.1083,-8.4917,
-PT,4640,Abadia,Porto,13,Santa Cruz das Flores,02,Atenor,01,41.1633,-8.3367,
-PT,5040,Alvaro,Porto,13,Santa Cruz das Flores,02,Lagoa,16,41.3,-8.3667,
-PT,4610,Aboim,Porto,13,São Roque do Pico,03,Bagueixe,04,41.3167,-8.0667,4
-PT,4650,Aião,Porto,13,São Roque do Pico,03,Atenor,01,41.3,-8.2,4
-PT,4420,Gondomar,Porto,13,Povoação,04,Chacim,09,41.2075,-8.583,
-PT,4435,Rio Tinto,Porto,13,Povoação,04,Castelãos,08,41.1833,-8.5333,
-PT,4510,Jovim,Porto,13,Povoação,04,Bagueixe,04,41.1185,-8.4416,
-PT,4515,Covelo,Porto,13,Povoação,04,Atenor,01,41.1185,-8.4416,
-PT,4425,Maia,Porto,13,Vila Franca do Campo,06,Atenor,01,41.2075,-8.583,
-PT,4470,Maia,Porto,13,Vila Franca do Campo,06,Poiares,06,41.2075,-8.583,
-PT,4474,Maia,Porto,13,Vila Franca do Campo,06,Carrapatas,07,41.2075,-8.583,
-PT,4475,Maia,Porto,13,Vila Franca do Campo,06,Cicouro,02,41.2075,-8.583,
-PT,4479,Maia,Porto,13,Vila Franca do Campo,06,Bagueixe,04,41.2075,-8.583,
-PT,4575,Bomba,Porto,13,Ribeira Brava,07,Atenor,01,41.3143,-8.4714,
-PT,4625,Alminhas,Porto,13,Ribeira Brava,07,Cicouro,02,41.1,-8.2167,
-PT,4630,Aidros,Porto,13,Ribeira Brava,07,Constantim,03,41.2167,-8.275,
-PT,4635,Banho e Carvalhosa,Porto,13,Ribeira Brava,07,Bagueixe,04,41.15,-8.5111,
-PT,4450,Matosinhos,Porto,13,Santa Cruz,08,Poiares,06,41.2075,-8.583,
-PT,4454,Matosinhos,Porto,13,Santa Cruz,08,Poiares,06,41.2075,-8.583,
-PT,4455,Lavra,Porto,13,Santa Cruz,08,Constantim,03,41.2075,-8.583,
-PT,4460,Guifões,Porto,13,Santa Cruz,08,Cicouro,02,41.2075,-8.583,
-PT,4464,Senhora da Hora,Porto,13,Santa Cruz,08,Cortiços,10,41.2075,-8.583,
-PT,4465,São Mamede de Infesta,Porto,13,Santa Cruz,08,Chacim,09,41.2075,-8.583,
-PT,4590,Carvalhosa,Porto,13,Santana,09,Cicouro,02,41.3,-8.3667,4
-PT,4595,Arreigada,Porto,13,Santana,09,Atenor,01,41.25,-8.4,4
-PT,4580,Paredes,Porto,13,São Vicente,10,Carrapatas,07,41.2389,-8.45,
-PT,4585,Senande,Porto,13,São Vicente,10,Atenor,01,41.1417,-8.55,
-PT,4560,Igreja,Porto,13,Penalva do Castelo,11,Atenor,01,41.26,-8.5233,
-PT,4564,Penafiel,Porto,13,Penalva do Castelo,11,Peredo,24,41.2636,-8.45,
-PT,4000,Porto,Porto,13,Penedono,12,Cicouro,02,41.15,-8.6167,4
-PT,4049,Porto,Porto,13,Penedono,12,Edroso,12,41.15,-8.6167,4
-PT,4050,Porto,Porto,13,Penedono,12,Bagueixe,04,41.15,-8.6167,4
-PT,4099,Porto,Porto,13,Penedono,12,Castelãos,08,41.15,-8.6167,4
-PT,4100,Porto,Porto,13,Penedono,12,Corujas,11,41.15,-8.6167,4
-PT,4149,Porto,Porto,13,Penedono,12,Poiares,06,41.15,-8.6167,4
-PT,4150,Porto,Porto,13,Penedono,12,Poiares,06,41.15,-8.6167,4
-PT,4169,Porto,Porto,13,Penedono,12,Carrapatas,07,41.15,-8.6167,4
-PT,4199,Porto,Porto,13,Penedono,12,Poiares,06,41.15,-8.6167,4
-PT,4200,Porto,Porto,13,Penedono,12,Cortiços,10,41.15,-8.6167,4
-PT,4249,Porto,Porto,13,Penedono,12,Cicouro,02,41.15,-8.6167,4
-PT,4250,Porto,Porto,13,Penedono,12,Corujas,11,41.15,-8.6167,4
-PT,4269,Porto,Porto,13,Penedono,12,Corujas,11,41.15,-8.6167,4
-PT,4300,Porto,Porto,13,Penedono,12,Constantim,03,41.15,-8.6167,4
-PT,4349,Porto,Porto,13,Penedono,12,Cicouro,02,41.15,-8.6167,4
-PT,4350,Porto,Porto,13,Penedono,12,Constantim,03,41.15,-8.6167,4
-PT,4369,Porto,Porto,13,Penedono,12,Constantim,03,41.15,-8.6167,4
-PT,4490,Póvoa de Varzim,Porto,13,Resende,13,Cortiços,10,41.3667,-8.7333,
-PT,4495,Póvoa de Varzim,Porto,13,Resende,13,Cicouro,02,41.4,-8.75,
-PT,4570,Balazar,Porto,13,Resende,13,Mazouco,05,41.4,-8.6333,4
-PT,4780,Areias,Porto,13,Santa Comba Dão,14,Bagueixe,04,41.3394,-8.6167,
-PT,4795,Vila das Aves,Porto,13,Santa Comba Dão,14,Mazouco,05,41.2083,-8.5292,
-PT,4825,Agrela,Porto,13,Santa Comba Dão,14,Atenor,01,41.2167,-8.6333,4
-PT,4440,Campo,Porto,13,São João da Pesqueira,15,Cicouro,02,41.1833,-8.4667,4
-PT,4445,Alfena,Porto,13,São João da Pesqueira,15,Atenor,01,41.2333,-8.5333,4
-PT,4480,Vila do Conde,Porto,13,São Pedro do Sul,16,Sesulfe,28,41.36,-8.697,
-PT,4484,Touguinha,Porto,13,São Pedro do Sul,16,Peredo,24,41.343,-8.6502,
-PT,4485,Guilhabreu,Porto,13,São Pedro do Sul,16,Corujas,11,41.2833,-8.25,
-PT,4486,Mindelo,Porto,13,São Pedro do Sul,16,Lagoa,16,41.343,-8.6502,
-PT,4400,Vila Nova de Gaia,Porto,13,Sátão,17,Lagoa,16,41.2075,-8.583,
-PT,4404,Vila Nova de Gaia,Porto,13,Sátão,17,Cortiços,10,41.2075,-8.583,
-PT,4405,Vila Nova de Gaia,Porto,13,Sátão,17,Carrapatas,07,41.2075,-8.583,
-PT,4409,Vila Nova de Gaia,Porto,13,Sátão,17,Carrapatas,07,41.2075,-8.583,
-PT,4410,Arcozelo,Porto,13,Sátão,17,Atenor,01,41.05,-8.65,4
-PT,4414,Canelas,Porto,13,Sátão,17,Constantim,03,41.0833,-8.6,4
-PT,4415,Perosinho,Porto,13,Sátão,17,Ferreira,14,41.0932,-8.5045,
-PT,4430,Vila Nova de Gaia,Porto,13,Sátão,17,Cortiços,10,41.1167,-8.55,
-PT,4434,Vila Nova de Gaia,Porto,13,Sátão,17,Lagoa,16,41.1167,-8.55,
-PT,4745,Alvarelhos,Porto,13,Sernancelhe,18,Atenor,01,41.3,-8.6,4
-PT,4785,Aldeia Nova,Porto,13,Sernancelhe,18,Poiares,06,41.4,-8.7833,4
-PT,2200,Abrantes,Santarém,14,Corvo,01,Espadanedo,13,39.4667,-8.2,4
-PT,2205,Abrantes,Santarém,14,Corvo,01,Chacim,09,39.4667,-8.2,4
-PT,2230,Atalaia,Santarém,14,Corvo,01,Ferreira,14,39.5833,-8.2333,4
-PT,2380,Alcanena,Santarém,14,Santa Cruz das Flores,02,Atenor,01,39.45,-8.6667,4
-PT,2384,Alcanena,Santarém,14,Santa Cruz das Flores,02,Atenor,01,39.45,-8.6667,4
-PT,2395,Covão do Coelho,Santarém,14,Santa Cruz das Flores,02,Poiares,06,39.5125,-8.5376,
-PT,2080,Almeirim,Santarém,14,São Roque do Pico,03,Atenor,01,39.2,-8.6333,4
-PT,2090,Alpiarça,Santarém,14,Povoação,04,Atenor,01,39.25,-8.5833,4
-PT,2120,Bilrete,Santarém,14,Ribeira Grande,05,Atenor,01,39.0964,-8.7182,
-PT,2130,Benavente,Santarém,14,Ribeira Grande,05,Atenor,01,38.9833,-8.8,4
-PT,2135,Adema,Santarém,14,Ribeira Grande,05,Cicouro,02,38.9809,-8.7963,
-PT,2890,Bela Vista,Santarém,14,Ribeira Grande,05,Cicouro,02,38.75,-8.9667,
-PT,2070,Alto do Padrão,Santarém,14,Vila Franca do Campo,06,Atenor,01,39.15,-8.7833,
-PT,2140,Arneiro de Cima,Santarém,14,Ribeira Brava,07,Atenor,01,39.6151,-8.486,
-PT,2250,Almegue,Santarém,14,Santa Cruz,08,Atenor,01,39.5944,-8.4611,
-PT,2100,Agolada,Santarém,14,Santana,09,Atenor,01,39,-8.55,4
-PT,2330,Entroncamento,Santarém,14,São Vicente,10,Atenor,01,39.5125,-8.5376,
-PT,2240,Barcai,Santarém,14,Penalva do Castelo,11,Atenor,01,39.5167,-8.4556,
-PT,2150,Azinhaga,Santarém,14,Penedono,12,Atenor,01,39.35,-8.5333,4
-PT,6120,Alpalhão,Santarém,14,Resende,13,Mazouco,05,39.55,-7.85,4
-PT,2040,Alcobertas,Santarém,14,Santa Comba Dão,14,Atenor,01,39.4167,-8.9,4
-PT,2125,Glória do Ribatejo,Santarém,14,São João da Pesqueira,15,Atenor,01,39.0964,-8.7182,
-PT,2000,Santarém,Santarém,14,São Pedro do Sul,16,Edroso,12,39.3336,-8.6351,
-PT,2004,Santarém,Santarém,14,São Pedro do Sul,16,Macedo de Cavaleiros,20,39.33,-8.6494,
-PT,2005,Várzea,Santarém,14,São Pedro do Sul,16,Santa Combinha,27,39.2917,-8.7389,
-PT,2009,Santarém,Santarém,14,São Pedro do Sul,16,Macedo de Cavaleiros,20,39.33,-8.6494,
-PT,2025,Abrã,Santarém,14,São Pedro do Sul,16,Cicouro,02,39.4417,-8.7583,
-PT,2300,Balancho,Santarém,14,Sernancelhe,18,Poiares,06,39.6333,-7.95,4
-PT,2305,Carvalhal da Póvoa,Santarém,14,Sernancelhe,18,Lagoa,16,39.4083,-8.5167,
-PT,2350,Alcorochel,Santarém,14,Tabuaço,19,Atenor,01,39.4167,-8.5833,4
-PT,2354,Renova,Santarém,14,Tabuaço,19,Lagoa,16,39.5221,-8.5327,
-PT,2260,Atalaia,Santarém,14,Tarouca,20,Atenor,01,39.5833,-8.2333,4
-PT,2435,Cacinheira,Santarém,14,Tondela,21,Constantim,03,39.6972,-8.4306,
-PT,2490,Alburitel,Santarém,14,Tondela,21,Atenor,01,39.65,-8.5167,4
-PT,7580,Alcácer do Sal,Setúbal,15,Corvo,01,Constantim,03,38.3667,-8.5,4
-PT,7595,Batão,Setúbal,15,Corvo,01,Bagueixe,04,38.2546,-8.4905,
-PT,2800,Almada,Setúbal,15,São Roque do Pico,03,Atenor,01,38.6833,-9.15,4
-PT,2804,Almada,Setúbal,15,São Roque do Pico,03,Atenor,01,38.6833,-9.15,4
-PT,2805,Almada,Setúbal,15,São Roque do Pico,03,Bagueixe,04,38.6833,-9.15,4
-PT,2809,Almada,Setúbal,15,São Roque do Pico,03,Bagueixe,04,38.6833,-9.15,4
-PT,2810,Almada,Setúbal,15,São Roque do Pico,03,Cortiços,10,38.6833,-9.15,4
-PT,2814,Almada,Setúbal,15,São Roque do Pico,03,Corujas,11,38.6833,-9.15,4
-PT,2815,Sobreda,Setúbal,15,São Roque do Pico,03,Castelãos,08,38.6833,-9.15,
-PT,2819,Sobreda,Setúbal,15,São Roque do Pico,03,Castelãos,08,38.6833,-9.15,
-PT,2820,Charneca de Caparica,Setúbal,15,São Roque do Pico,03,Chacim,09,38.6667,-9.2,
-PT,2821,Charneca de Caparica,Setúbal,15,São Roque do Pico,03,Chacim,09,38.6667,-9.2,
-PT,2825,Monte de Caparica,Setúbal,15,São Roque do Pico,03,Cicouro,02,38.6667,-9.2,
-PT,2829,Costa de Caparica,Setúbal,15,São Roque do Pico,03,Constantim,03,38.6667,-9.2,
-PT,2830,Barreiro,Setúbal,15,Povoação,04,Mazouco,05,38.6667,-9.0667,4
-PT,2835,Lavradio,Setúbal,15,Povoação,04,Cicouro,02,38.6667,-9.0667,
-PT,7570,Azinheira dos Barros,Setúbal,15,Ribeira Grande,05,Atenor,01,38.0667,-8.4167,4
-PT,2860,Alhos Vedros,Setúbal,15,Vila Franca do Campo,06,Atenor,01,38.65,-9.0333,4
-PT,2864,Moita,Setúbal,15,Vila Franca do Campo,06,Constantim,03,38.638,-9.0253,
-PT,2870,Montijo,Setúbal,15,Ribeira Brava,07,Cicouro,02,38.7,-8.9167,
-PT,2985,Canha,Setúbal,15,Ribeira Brava,07,Atenor,01,38.5132,-8.9953,
-PT,2950,Palmela,Setúbal,15,Santa Cruz,08,Cicouro,02,38.5667,-8.8833,
-PT,2951,Cabanas,Setúbal,15,Santa Cruz,08,Bagueixe,04,38.5585,-8.8833,
-PT,2954,Palmela,Setúbal,15,Santa Cruz,08,Cicouro,02,38.5585,-8.8833,
-PT,2955,Pinhal Novo,Setúbal,15,Santa Cruz,08,Constantim,03,38.5585,-8.8833,
-PT,7500,Aldeia de Santo André,Setúbal,15,Santana,09,Carrapatas,07,38.1,-8.7667,
-PT,7540,Abela,Setúbal,15,Santana,09,Atenor,01,38,-8.5667,4
-PT,7555,Abertas,Setúbal,15,Santana,09,Constantim,03,37.7833,-8.6417,
-PT,7565,Alvalade,Setúbal,15,Santana,09,Cicouro,02,37.9333,-8.4,4
-PT,2840,Paio Pires,Setúbal,15,São Vicente,10,Atenor,01,38.6167,-9.1,
-PT,2844,Seixal,Setúbal,15,São Vicente,10,Bagueixe,04,38.6167,-9.1074,
-PT,2845,Cruz de Pau,Setúbal,15,São Vicente,10,Cicouro,02,38.6167,-9.1167,
-PT,2855,Corroios,Setúbal,15,São Vicente,10,Mazouco,05,38.6765,-9.0932,
-PT,2865,Fernão Ferro,Setúbal,15,São Vicente,10,Poiares,06,38.638,-9.0253,
-PT,2925,Parral,Setúbal,15,Penalva do Castelo,11,Atenor,01,38.5167,-9.0167,
-PT,2970,Almoinha,Setúbal,15,Penalva do Castelo,11,Atenor,01,38.4667,-9.1667,
-PT,2975,Casal do Sapo,Setúbal,15,Penalva do Castelo,11,Constantim,03,38.4442,-9.0485,
-PT,2900,Setúbal,Setúbal,15,Penedono,12,Atenor,01,38.5132,-8.9953,
-PT,2904,Setúbal,Setúbal,15,Penedono,12,Atenor,01,38.5132,-8.9953,
-PT,2910,Setúbal,Setúbal,15,Penedono,12,Mazouco,05,38.5132,-8.9953,
-PT,2914,Setúbal,Setúbal,15,Penedono,12,Mazouco,05,38.5132,-8.9953,
-PT,7520,Sines,Setúbal,15,Resende,13,Atenor,01,38,-8.8,
-PT,4970,Aboim,Viana do Castelo,16,Corvo,01,Atenor,01,41.9167,-8.45,4
-PT,4974,Arcos de Valdevez,Viana do Castelo,16,Corvo,01,Vale de Prados,34,41.85,-8.4167,4
-PT,4910,Águas Férreas,Viana do Castelo,16,Santa Cruz das Flores,02,Atenor,01,41.8542,-8.7542,
-PT,4960,Bouças,Viana do Castelo,16,São Roque do Pico,03,Atenor,01,42.1,-8.3167,4
-PT,4950,Cutelo,Viana do Castelo,16,Povoação,04,Atenor,01,41.8333,-8.65,
-PT,4940,Agualonga,Viana do Castelo,16,Ribeira Grande,05,Atenor,01,41.8833,-8.6167,4
-PT,4980,Caçapedro,Viana do Castelo,16,Vila Franca do Campo,06,Atenor,01,41.95,-8.45,
-PT,4990,Ponte de Lima,Viana do Castelo,16,Ribeira Brava,07,Lombo,19,41.9165,-8.5299,
-PT,4930,Arão,Viana do Castelo,16,Santa Cruz,08,Atenor,01,42.0167,-8.6333,4
-PT,4900,Viana do Castelo,Viana do Castelo,16,Santana,09,Lamalonga,17,41.7833,-8.8667,
-PT,4904,Viana do Castelo,Viana do Castelo,16,Santana,09,Lombo,19,41.6993,-8.7303,
-PT,4925,Viana do Castelo,Viana do Castelo,16,Santana,09,Sesulfe,28,41.8954,-8.5796,
-PT,4935,Viana do Castelo,Viana do Castelo,16,Santana,09,Corujas,11,41.825,-8.7208,
-PT,4920,Campos,Viana do Castelo,16,São Vicente,10,Atenor,01,41.9667,-8.7,4
-PT,5070,Alijó,Vila Real,17,Corvo,01,Atenor,01,41.2667,-7.4667,4
-PT,5085,Cruz,Vila Real,17,Corvo,01,Bagueixe,04,41.2,-7.5333,
-PT,5460,Alturas do Barroso,Vila Real,17,Santa Cruz das Flores,02,Atenor,01,41.7,-7.8167,4
-PT,5400,Abobeleira,Vila Real,17,São Roque do Pico,03,Santa Comba de Rossas,41,41.75,-7.5,4
-PT,5425,Anelhe,Vila Real,17,São Roque do Pico,03,Cicouro,02,41.6833,-7.5833,4
-PT,4880,Alto da Bouça,Vila Real,17,Ribeira Grande,05,Atenor,01,41.3667,-7.8333,
-PT,5470,Azevedo,Vila Real,17,Vila Franca do Campo,06,Atenor,01,41.7167,-8.0333,
-PT,5090,Candedo,Vila Real,17,Ribeira Brava,07,Atenor,01,41.3667,-7.3833,4
-PT,5050,Mourisca,Vila Real,17,Santa Cruz,08,Atenor,01,41.54,-7.6367,
-PT,5054,Peso da Régua,Vila Real,17,Santa Cruz,08,Carrapatas,07,41.2813,-7.6965,
-PT,4870,Alvadia,Vila Real,17,Santana,09,Atenor,01,41.4333,-7.7833,4
-PT,5060,Calvário,Vila Real,17,São Vicente,10,Atenor,01,41.2444,-7.7278,
-PT,5030,Alvações do Corgo,Vila Real,17,Penalva do Castelo,11,Atenor,01,41.2,-7.75,4
-PT,5430,Fonte Mercê,Vila Real,17,Penedono,12,Atenor,01,41.6426,-7.3241,
-PT,5445,Argeriz,Vila Real,17,Penedono,12,Constantim,03,41.5833,-7.3833,4
-PT,5450,Vila Pouca de Aguiar,Vila Real,17,Resende,13,Ferreira,14,41.5348,-7.5955,
-PT,5000,Vilarinho de Tanha,Vila Real,17,Santa Comba Dão,14,Atenor,01,41.2167,-7.7,
-PT,5004,Vila Nova de Cima,Vila Real,17,Santa Comba Dão,14,Chacim,09,41.4036,-7.7321,
-PT,5110,Barroca,Viseu,18,Corvo,01,Constantim,03,41.0792,-7.6958,
-PT,5114,Barroca,Viseu,18,Corvo,01,Constantim,03,41.0778,-7.7043,
-PT,3430,Carregal do Sal,Viseu,18,Santa Cruz das Flores,02,Constantim,03,40.4333,-8,4
-PT,3600,Almofala,Viseu,18,São Roque do Pico,03,Atenor,01,40.95,-7.8,4
-PT,4690,Alhões,Viseu,18,Povoação,04,Atenor,01,40.9833,-8.0167,4
-PT,5100,Lamego,Viseu,18,Ribeira Grande,05,Atenor,01,41.0889,-7.7833,
-PT,3530,Abrunhosa-A-Velha,Viseu,18,Vila Franca do Campo,06,Atenor,01,40.5833,-7.65,4
-PT,3534,Mangualde,Viseu,18,Vila Franca do Campo,06,Cortiços,10,40.5833,-7.8,
-PT,3620,Aldeia de Nacomba,Viseu,18,Ribeira Brava,07,Atenor,01,40.95,-7.6167,4
-PT,3450,Almaça,Viseu,18,Santa Cruz,08,Atenor,01,40.3333,-8.2167,4
-PT,3520,Nelas,Viseu,18,Santana,09,Constantim,03,40.5333,-7.8667,
-PT,3525,Canas de Senhorim,Viseu,18,Santana,09,Atenor,01,40.5,-7.9,4
-PT,3475,Areal,Viseu,18,São Vicente,10,Atenor,01,40.5986,-8.1389,
-PT,3680,Arcozelo das Maias,Viseu,18,São Vicente,10,Cicouro,02,40.7333,-8.2833,4
-PT,3684,Vilarinho,Viseu,18,São Vicente,10,Corujas,11,40.8389,-7.9963,
-PT,3550,Antas,Viseu,18,Penalva do Castelo,11,Atenor,01,41,-7.85,4
-PT,3630,Antas,Viseu,18,Penedono,12,Atenor,01,41,-7.85,4
-PT,4660,Adega,Viseu,18,Resende,13,Atenor,01,41.15,-7.8,4
-PT,3440,Nova Foz do Dão,Viseu,18,Santa Comba Dão,14,Cicouro,02,40.3667,-8.1333,
-PT,5130,Quinta do Pisão,Viseu,18,São João da Pesqueira,15,Atenor,01,41.1667,-7.5333,
-PT,3660,Costeiras,Viseu,18,São Pedro do Sul,16,Atenor,01,40.85,-8.1133,
-PT,3560,Águas Boas,Viseu,18,Sátão,17,Atenor,01,40.85,-7.6167,4
-PT,3650,Quinta das Marras,Viseu,18,Sátão,17,Bagueixe,04,40.7222,-7.8667,
-PT,5120,Adorigo,Viseu,18,Tabuaço,19,Atenor,01,41.15,-7.6,4
-PT,3610,Tarouca,Viseu,18,Tarouca,20,Carrapatas,07,40.7389,-7.8722,
-PT,3460,Molelos,Viseu,18,Tondela,21,Corujas,11,40.4833,-8.0083,
-PT,3464,Tondela,Viseu,18,Tondela,21,Olmos,23,40.5996,-8.0968,
-PT,3465,Arnosa,Viseu,18,Tondela,21,Atenor,01,40.5,-8.1667,4
-PT,3500,Viseu,Viseu,18,Viseu,23,Peredo,24,40.6333,-7.9167,
-PT,3504,Viseu,Viseu,18,Viseu,23,Peredo,24,40.9,-7.8631,
-PT,3505,Brufe,Viseu,18,Viseu,23,Cicouro,02,40.7333,-7.7833,4
-PT,3510,Viseu,Viseu,18,Viseu,23,Chacim,09,40.9472,-7.9278,
-PT,3514,Viseu,Viseu,18,Viseu,23,Peredo,24,40.7966,-7.908,
-PT,3515,Viseu,Viseu,18,Viseu,23,Atenor,01,40.7792,-7.9058,
-PT,3519,Viseu,Viseu,18,Viseu,23,Atenor,01,40.7966,-7.908,
-PT,3670,Mouta de Baixo,Viseu,18,Vouzela,24,Atenor,01,40.7833,-8.1722,
-PT,9000,Funchal,Ilha da Madeira,31,São Roque do Pico,03,Carrapatas,07,32.6333,-16.9,4
-PT,9004,Funchal,Ilha da Madeira,31,São Roque do Pico,03,Castelãos,08,32.6333,-16.9,4
-PT,9020,Funchal,Ilha da Madeira,31,São Roque do Pico,03,Mazouco,05,32.6333,-16.9,4
-PT,9024,Funchal,Ilha da Madeira,31,São Roque do Pico,03,Mazouco,05,32.6333,-16.9,4
-PT,9050,Funchal,Ilha da Madeira,31,São Roque do Pico,03,Cortiços,10,32.6333,-16.9,4
-PT,9054,Funchal,Ilha da Madeira,31,São Roque do Pico,03,Cortiços,10,32.6333,-16.9,4
-PT,9060,Funchal,Ilha da Madeira,31,São Roque do Pico,03,Bagueixe,04,32.6333,-16.9,4
-PT,9064,Funchal,Ilha da Madeira,31,São Roque do Pico,03,Bagueixe,04,32.6333,-16.9,4
-PT,9800,Porto,Ilha de São Jorge,45,Santa Cruz das Flores,02,Atenor,01,41.15,-8.6167,4
+Alcafaz,3750,40.5667,-8.3167
+Albergaria-a-Velha,3850,40.7,-8.4833
+Amoreira da Gândara,3780,40.4833,-8.5333
+Albergaria da Serra,4540,40.8917,-8.3
+Aveiro,3800,40.6333,-8.65
+Aveiro,3804,40.6333,-8.65
+Aveiro,3810,40.6333,-8.65
+Aveiro,3814,40.6333,-8.65
+Bairros,4550,41.0333,-8.2333
+Espinho,4500,41.0148,-8.5318
+Espinho,4504,41.0148,-8.5318
+Avanca,3860,40.8,-8.5667
+Estarreja,3864,40.8438,-8.4704
+Canelas,3865,40.9667,-8.2
+Arrifana,3700,40.9167,-8.5
+Argoncilhe,4505,41.0167,-8.5333
+Escapães,4520,40.8308,-8.55
+Canedo,4525,41.0,-8.4667
+Lourosa,4535,41.1185,-8.4416
+Ervosas,3830,40.6955,-8.5984
+Sargento Mor,3020,40.2674,-8.4
+Mealhada,3050,40.3492,-8.4765
+Mealhada,3054,40.3632,-8.4731
+Agro,3870,40.7667,-8.65
+Oliveira de Azeméis,3720,40.8667,-8.4875
+Azurveira,3770,40.5611,-8.6111
+Ovar,3880,40.9167,-8.6
+Arada,3885,40.9167,-8.6
+Bouça,3740,41.0167,-8.35
+Sever do Vouga,3744,40.8389,-8.4542
+Vagos,3840,40.4833,-8.6906
+Arões,3730,40.8,-8.3
+Aljustrel,7600,37.8667,-8.1667
+Almodôvar,7700,37.5167,-8.0667
+Alvito,7920,38.25,-7.9833
+Barrancos,7230,38.1333,-6.9833
+Beja,7800,38.0167,-7.8667
+Beja,7801,38.0167,-7.8667
+Aivados,7780,37.75,-8.2167
+Cuba,7940,38.2833,-7.9333
+Alfundão,7900,38.1167,-8.0667
+Água Salgada,7750,37.8167,-7.8167
+Moura,7860,38.0357,-7.8036
+Monte da Fonte dos Arcos,7875,38.0357,-7.8036
+Amareleja,7885,38.2,-7.2333
+A de Mateus,7630,37.6,-8.7
+Águas Ferrenhas,7645,37.75,-8.7667
+Corte Sevilha,7665,37.9667,-7.9917
+Alcarias,7670,37.7833,-8.2333
+A do Pinto,7830,37.9167,-7.4833
+Marmelar,7960,38.1905,-8.0202
+Chouselas,4720,41.6436,-8.3513
+Barqueiros,4740,41.4833,-8.7333
+Barreiro,4750,41.5667,-8.65
+Sapagal,4755,41.5389,-8.4111
+Chavão,4775,41.5083,-8.375
+Aldeia,4905,41.4833,-8.6667
+Braga,4700,41.55,-8.4333
+Braga,4704,41.55,-8.4333
+Arentim,4705,41.4833,-8.4833
+Celeirós,4709,41.5389,-8.4444
+Braga,4710,41.55,-8.4333
+Braga,4714,41.55,-8.4333
+Braga,4715,41.55,-8.4333
+Braga,4719,41.55,-8.4333
+Abadim,4860,41.5333,-7.9833
+Alijão,4615,41.3667,-8.1333
+Rego,4820,41.4167,-8.1
+Boucinha,4890,41.55,-8.2667
+Fafe,4824,41.3131,-8.4624
+Guardizela,4765,41.5833,-8.2667
+Guimarães,4800,41.4803,-8.2434
+São Torcato,4804,41.4816,-8.3387
+Balazar,4805,41.5,-8.3833
+Brito,4809,41.45,-8.3667
+Guimarães,4810,41.5833,-8.2667
+Guimarães,4814,41.5434,-8.2903
+São Faustino,4815,41.1278,-8.5222
+Guimarães,4835,41.5366,-8.3317
+Nespereira,4839,41.5366,-8.3317
+Costeirinha,4830,41.5567,-8.32
+Picouço,4840,41.5583,-8.325
+Lijó,4845,41.5792,-8.2542
+Tapado,4850,41.5667,-8.14
+Gavião,4760,41.7333,-8.3
+Vila Nova de Famalicão,4764,41.5362,-8.4222
+Abade de Vermoim,4770,41.3833,-8.4833
+Povoadura,4730,41.6,-8.0833
+Santa Eulália,4620,41.2167,-8.5667
+Alfândega da Fé,5350,41.3333,-6.9667
+Bragança,5300,41.8167,-6.75
+Bragança,5301,41.8167,-6.75
+Amedo,5140,41.25,-7.3333
+Fornos,5180,41.0522,-7.4329
+Ala,5340,41.6,-7.0167
+Miranda do Douro,5210,41.5333,-6.2333
+Atenor,5225,41.4167,-6.4833
+Vale de Martinho,5370,41.55,-7.1833
+Aguieiras,5385,41.7167,-7.2
+Viduedo,5200,41.3153,-6.5031
+Quinta da Silveira,5160,41.3333,-7.05
+Assares,5360,41.3333,-7.0833
+Algoso,5230,41.4667,-6.5833
+Alvaredos,5320,41.8,-7.0667
+Agrochão,5335,41.7,-7.0333
+Alto São João,6250,40.35,-7.35
+Almaceda,6000,40.0,-7.6667
+Castelo Branco,6004,39.8962,-7.6372
+Alcains,6005,40.0417,-7.55
+Covilhã,6200,40.15,-7.6667
+Covilhã,6201,40.15,-7.6667
+Barco,6215,40.1667,-7.6167
+Aldeia São Francisco de Assis,6225,40.1333,-7.7333
+Ourondo,6230,40.1,-7.4667
+Bogas de Baixo,6185,40.05,-7.7833
+Alcafozes,6060,39.95,-7.1167
+Talvinheira,6160,39.9667,-7.9667
+Águas,6090,40.1167,-7.2
+Alizo,6320,40.5667,-7.15
+Alvito da Beira,6150,39.8333,-7.8
+Ameixoeira,6100,39.95,-7.8333
+Abrunheiro Grande,6110,39.7167,-8.1833
+Vila Velha de Ródão,6030,39.6667,-7.65
+Arganil,3300,40.2167,-8.05
+Anceriz,3305,40.2667,-7.9167
+Berreiros,6285,40.5833,-7.475
+Ançã,3060,40.2667,-8.5167
+Coimbra,3000,40.2639,-8.5891
+Coimbra,3004,40.2639,-8.5891
+Coimbra,3025,40.278,-8.3553
+Coimbra,3030,40.1083,-8.2583
+Coimbra,3040,40.1569,-8.3771
+Cernache,3044,40.1683,-8.4518
+Coimbra,3045,40.1833,-8.55
+Taveiro,3049,40.1683,-8.4518
+Alvogadas,3150,40.1792,-8.4
+Cabo Mondego,3080,40.1689,-8.8796
+Figueira da Foz,3084,40.1689,-8.8796
+Marinha das Ondas,3090,40.1214,-8.7437
+Gala,3094,40.1214,-8.7437
+Sandinha,3330,40.1917,-8.0333
+Lousã,3200,40.1367,-8.29
+Arneiro,3070,40.4167,-8.7
+Azenha,3220,40.0833,-8.7333
+Abrunheira,3140,40.15,-8.4333
+Biqueiro,3400,40.2966,-7.8668
+Bobadela,3405,40.35,-7.9
+Cabril,3320,40.0833,-7.8833
+Ameal,3360,40.1833,-8.55
+Bouça,3230,40.0167,-8.3167
+Alfarelos,3130,40.15,-8.65
+Azere,3420,40.35,-8.1
+Arrifana,3350,40.2167,-8.2833
+Aldeia da Venda,7200,38.55,-7.425
+Montes das Ferrarias,7250,38.7,-7.4
+Arraiolos,7040,38.7167,-7.9833
+Borba,7150,38.8,-7.45
+Arcos,7100,38.8329,-7.5155
+Foros da Carvalhas,7000,38.7,-7.7833
+Évora,7004,38.7,-7.7833
+Évora,7005,38.7,-7.7833
+Mare,7009,38.7,-7.7833
+Montemor-O-Novo,7050,38.5859,-8.3568
+Brotas,7490,38.8667,-8.15
+Baldio da Granja,7240,38.3635,-7.3685
+Alqueva,7220,38.2167,-7.5333
+Redondo,7170,38.7888,-7.4576
+Landeira,2965,38.5787,-8.7017
+Vendas Novas,7080,38.5665,-8.0556
+Alcáçovas,7090,38.4,-8.15
+Bencatel,7160,38.75,-7.45
+Albufeira,8200,37.0833,-8.25
+Albufeira,8201,37.0833,-8.25
+Afonso Vicente,8970,37.5,-7.5333
+Aljezur,8670,37.3167,-8.8
+Horta Nova,8950,37.2417,-7.75
+Faro,8000,37.1307,-8.0632
+Faro,8004,37.1307,-8.0632
+Faro,8005,37.1343,-8.0704
+Campinas,8009,37.0667,-7.9333
+Ilha da Culatra,8700,37.0667,-7.9063
+Urbanização Presa de Moura,8400,37.1101,-8.4337
+Lagoa,8401,37.1101,-8.4337
+Vale de Coitos,8600,37.1417,-8.7583
+Lagos,8601,37.1286,-8.6595
+Águas Frias,8100,37.3167,-8.1833
+Quarteira,8125,37.1369,-8.0349
+Além,8135,37.0833,-7.9833
+Alferce,8550,37.3333,-8.4833
+Alagoas,8500,37.0833,-8.7667
+Portimão,8501,37.1446,-8.5479
+Alcaria,8150,37.4167,-7.6333
+Almarjão,8300,37.3,-8.6333
+Alcantarilha,8365,37.1333,-8.35
+Aldeia Ruiva,8375,37.219,-8.3571
+Alcarias Baixas,8800,37.3056,-7.8833
+Tavira,8801,37.1917,-7.8089
+Barão de São Miguel,8650,37.1,-8.8
+Sítio das Areias,8900,37.3167,-8.7833
+Açores,3570,40.65,-7.3
+Aldeia Nova,6350,40.7,-7.4333
+Ade,6355,40.55,-6.9833
+Açores,6360,40.65,-7.3
+Algodres,6440,40.95,-7.05
+Algodres,6370,40.95,-7.05
+Aldeias,6290,40.4667,-7.6
+Adão,6300,40.45,-7.1667
+Guarda,6301,40.554,-7.219
+Avesseira,6260,40.1959,-7.5039
+Aveloso,6430,40.9333,-7.3167
+Abadia,6400,40.7396,-7.15
+Cerdeira,6324,40.4614,-7.0904
+Aguincho,6270,40.2833,-7.7167
+Guilheiro,3640,40.9042,-7.5125
+Trancoso,6420,40.7604,-7.3729
+Almendra,5150,41.0,-7.05
+Cedovim,5155,41.1333,-7.3
+Água de Madeiros,2445,39.7,-8.9833
+Alcobaça,2460,39.55,-8.9833
+Alcobaça,2461,39.55,-8.9833
+Algarão,2475,39.4,-9.0
+Aldeia Nova,3250,39.86,-8.4367
+Venda do Henrique,3260,39.8667,-8.3167
+Ansião,3240,39.886,-8.4541
+Casal das Carvalhas,2440,39.6583,-8.8199
+Barreirinho Velho,2495,39.6,-8.7167
+Barreiras,2540,39.25,-9.15
+A dos Francos,2500,39.3167,-9.05
+Valongo,3280,40.0028,-8.2028
+Leiria,2400,39.7167,-8.8333
+Leiria,2404,39.6083,-9.0083
+A-do-Barbas,2405,39.8417,-8.6333
+Andreus,2410,39.6833,-8.8
+Leiria,2414,39.8017,-8.66
+Bidoeira de Baixo,2415,39.9833,-8.8
+Bidoeira de Cima,2416,39.8017,-8.66
+Leiria,2419,39.8017,-8.66
+Arrabal,2420,39.7,-8.7333
+Soutocico,2424,39.8167,-8.7333
+Brejo,2425,39.2333,-9.15
+Amieirinha,2430,39.7333,-8.9333
+Casais Baixo,2450,39.6,-8.85
+Óbidos,2510,39.62,-8.8492
+Adega,3270,39.8833,-8.2167
+Baleal,2520,39.3667,-9.35
+Alto Foz,2525,39.3329,-9.3329
+Casal da Rosa,3100,39.8759,-8.5593
+Barros da Paz,3105,39.9667,-8.6833
+Porto de Mós,2480,39.6449,-8.7705
+Mira de Aire,2485,39.6515,-8.7652
+Abrigada,2580,39.1333,-9.0167
+Alenquer,2581,39.05,-9.0
+Arranhó,2630,38.95,-9.1333
+Arruda dos Vinhos,2634,38.9833,-9.0833
+Azambuja,2050,39.0667,-8.8667
+Alcoentre,2065,39.2,-8.95
+Cadaval,2550,39.2333,-9.1
+Manique,2645,38.7267,-9.4033
+Alcabideche,2649,38.7333,-9.4167
+Cascais,2750,39.05,-9.4
+Cascais,2754,38.7871,-9.4299
+Malveira da Serra,2755,38.7194,-9.4278
+Alvide,2756,38.7167,-9.4333
+Alapraia,2765,38.7,-9.3667
+São João do Estoril,2769,38.7717,-9.3732
+Madorna,2775,38.6963,-9.3561
+Parede,2779,38.6833,-9.3333
+Madorna,2785,38.7167,-9.3667
+Outeiro de Polima,2789,38.7215,-9.366
+Lisboa,1000,38.7167,-9.1333
+Lisboa,1049,38.7167,-9.1333
+Lisboa,1050,38.7222,-9.1928
+Lisboa,1066,38.7167,-9.1333
+Lisboa,1067,38.7167,-9.1333
+Lisboa,1068,38.7167,-9.1333
+Lisboa,1069,38.7167,-9.1333
+Lisboa,1070,38.7222,-9.1928
+Lisboa,1092,38.7167,-9.1333
+Lisboa,1098,38.7167,-9.1333
+Lisboa,1099,38.7167,-9.1333
+Lisboa,1100,38.7167,-9.1333
+Lisboa,1149,38.7167,-9.1333
+Lisboa,1150,38.7167,-9.1333
+Lisboa,1166,38.7167,-9.1333
+Lisboa,1167,38.7167,-9.1333
+Lisboa,1169,38.7167,-9.1333
+Lisboa,1170,38.7167,-9.1333
+Lisboa,1199,38.7167,-9.1333
+Lisboa,1200,38.7167,-9.1333
+Lisboa,1208,38.7167,-9.1333
+Lisboa,1209,38.7167,-9.1333
+Lisboa,1249,38.7167,-9.1333
+Lisboa,1250,38.7222,-9.1928
+Lisboa,1269,38.7167,-9.1333
+Lisboa,1300,38.7167,-9.1333
+Lisboa,1349,38.7167,-9.1333
+Lisboa,1350,38.7167,-9.1333
+Lisboa,1399,38.7167,-9.1333
+Lisboa,1400,38.7167,-9.1333
+Lisboa,1449,38.7167,-9.1333
+Lisboa,1500,38.7167,-9.1333
+Lisboa,1549,38.7167,-9.1333
+Lisboa,1600,38.7167,-9.1333
+Lisboa,1649,38.7167,-9.1333
+Lisboa,1700,38.7167,-9.1333
+Lisboa,1748,38.7167,-9.1333
+Lisboa,1749,38.7167,-9.1333
+Lisboa,1750,38.7167,-9.1333
+Lisboa,1769,38.7167,-9.1333
+Lisboa,1800,38.7167,-9.1333
+Lisboa,1849,38.7167,-9.1333
+Lisboa,1900,38.7167,-9.1333
+Lisboa,1949,38.7167,-9.1333
+Lisboa,1950,38.7167,-9.1333
+Lisboa,1959,38.7167,-9.1333
+Lisboa,1990,38.7167,-9.1333
+Lisboa,1998,38.7167,-9.1333
+Frielas,2660,39.1667,-9.35
+São Julião do Tojal,2664,38.9833,-9.2417
+Loures,2670,38.9019,-9.1228
+Loures,2674,38.9,-9.1167
+Camarate,2680,38.8,-9.1333
+Camarate,2681,38.8,-9.1333
+Sacavém,2685,38.8034,-9.1333
+Portela,2689,38.8034,-9.1333
+Santa Iria de Azóia,2690,38.8167,-9.1
+Santa Iria de Azóia,2691,38.8167,-9.1
+Santa Iria de Azóia,2694,38.8167,-9.1
+Bobadela,2695,38.8167,-9.1
+Bobadela,2699,38.8167,-9.1
+Atalaia,2530,39.1167,-9.1
+Venda das Pulgas,2590,39.1,-9.2
+Ribamar,2640,38.875,-9.3
+Mafra,2644,38.7696,-9.3913
+Ericeira,2655,39.0833,-9.1667
+Aboboreira,2665,39.0417,-9.1639
+Vila Franca do Rosário,2669,38.9833,-9.2417
+Algés,1495,38.7,-9.2333
+Cruz Quebrada,1499,38.7,-9.2333
+Tercena,2730,38.7333,-9.2833
+Queluz de Baixo,2734,38.7333,-9.2833
+Vila Fria,2740,38.772,-9.292
+Porto Salvo,2744,38.772,-9.292
+Caxias,2760,38.7717,-9.3732
+Caxias,2761,38.7717,-9.3732
+Paço de Arcos,2770,38.6961,-9.3557
+Paço de Arcos,2774,38.6961,-9.3557
+Oeiras,2780,38.7215,-9.366
+Oeiras,2784,38.7215,-9.366
+Queijas,2790,38.7167,-9.25
+Queijas,2794,38.7167,-9.25
+Linda a Velha,2795,38.7167,-9.25
+Linda a Velha,2799,38.7167,-9.25
+Belas,2605,38.7667,-9.2667
+Belas,2609,38.7667,-9.2667
+Rio de Mouro,2635,38.7667,-9.35
+Rio de Mouro,2639,38.7667,-9.35
+Azoia,2705,38.7667,-9.4833
+Terrugem,2706,38.7648,-9.2774
+Terrugem,2709,38.7648,-9.2774
+Linhó,2710,39.0083,-9.0917
+Sintra,2714,39.1333,-9.2
+Pero Pinheiro,2715,38.9833,-9.05
+Armés,2719,38.9822,-9.219
+Mem Martins,2725,38.8,-9.3333
+Tapada das Mercês,2729,38.8,-9.3333
+São Marcos,2735,38.7333,-9.2833
+Agualva-Cacém,2739,38.7333,-9.2833
+Queluz,2745,38.772,-9.292
+Queluz,2749,38.772,-9.292
+A dos Cunhados,2560,39.15,-9.3
+Cabeça Gorda,2565,39.2,-9.2667
+Vila Franca de Xira,2600,38.95,-9.0167
+Alhandra,2601,38.9167,-9.0
+Alverca do Ribatejo,2615,39.2167,-9.2167
+Alverca do Ribatejo,2616,38.8188,-9.2304
+Alverca do Ribatejo,2619,38.8188,-9.2304
+Póvoa de Santa Iria,2625,38.8207,-9.2171
+Granja,2626,38.8207,-9.2171
+Amadora,2610,38.75,-9.2333
+Amadora,2614,38.75,-9.2333
+Amadora,2650,38.75,-9.2333
+Amadora,2700,38.75,-9.2333
+Amadora,2704,38.75,-9.2333
+Amadora,2720,38.75,-9.2333
+Amadora,2724,38.75,-9.2333
+Pontinha,1675,38.8,-9.2333
+Pontinha,1679,38.8,-9.2333
+Caneças,1685,38.8,-9.2333
+Famões,1689,38.8,-9.2333
+Olival Basto,2620,38.8207,-9.2171
+Póvoa de Santo Adrião,2621,38.8207,-9.2171
+Odivelas,2675,38.9019,-9.1227
+Alter do Chão,7440,39.2,-7.6667
+Arronches,7340,39.1167,-7.2833
+Caliço,7480,39.1,-8.0333
+Campo Maior,7370,39.0167,-7.0667
+Campo Maior,7374,39.0167,-7.0667
+Póvoa e Meadas,7320,39.2111,-7.6944
+Aldeia da Mata,7430,39.3,-7.7333
+Elvas,7350,39.0571,-7.2524
+Elvas,7354,39.0571,-7.2524
+Cabeço de Vide,7460,39.1333,-7.5833
+Atalaia,6040,39.45,-7.8667
+Barretos,7330,39.4333,-7.3667
+Monte das Canas,7450,39.1333,-7.3833
+Alpalhão,6050,39.4167,-7.6167
+Galveias,7400,39.077,-7.7776
+Abertas de Baixo,7425,39.077,-7.7776
+Monte Frei Alvaro,7300,39.2167,-7.4067
+Portalegre,7301,39.2167,-7.4067
+Cano,7470,38.9667,-7.7667
+Amarante,4600,41.2667,-8.0833
+Vila Meã,4605,41.1083,-8.4917
+Abadia,4640,41.1633,-8.3367
+Alvaro,5040,41.3,-8.3667
+Aboim,4610,41.3167,-8.0667
+Aião,4650,41.3,-8.2
+Gondomar,4420,41.2075,-8.583
+Rio Tinto,4435,41.1833,-8.5333
+Jovim,4510,41.1185,-8.4416
+Covelo,4515,41.1185,-8.4416
+Maia,4425,41.2075,-8.583
+Maia,4470,41.2075,-8.583
+Maia,4474,41.2075,-8.583
+Maia,4475,41.2075,-8.583
+Maia,4479,41.2075,-8.583
+Bomba,4575,41.3143,-8.4714
+Alminhas,4625,41.1,-8.2167
+Aidros,4630,41.2167,-8.275
+Banho e Carvalhosa,4635,41.15,-8.5111
+Matosinhos,4450,41.2075,-8.583
+Matosinhos,4454,41.2075,-8.583
+Lavra,4455,41.2075,-8.583
+Guifões,4460,41.2075,-8.583
+Senhora da Hora,4464,41.2075,-8.583
+São Mamede de Infesta,4465,41.2075,-8.583
+Carvalhosa,4590,41.3,-8.3667
+Arreigada,4595,41.25,-8.4
+Paredes,4580,41.2389,-8.45
+Senande,4585,41.1417,-8.55
+Igreja,4560,41.26,-8.5233
+Penafiel,4564,41.2636,-8.45
+Porto,4000,41.15,-8.6167
+Porto,4049,41.15,-8.6167
+Porto,4050,41.15,-8.6167
+Porto,4099,41.15,-8.6167
+Porto,4100,41.15,-8.6167
+Porto,4149,41.15,-8.6167
+Porto,4150,41.15,-8.6167
+Porto,4169,41.15,-8.6167
+Porto,4199,41.15,-8.6167
+Porto,4200,41.15,-8.6167
+Porto,4249,41.15,-8.6167
+Porto,4250,41.15,-8.6167
+Porto,4269,41.15,-8.6167
+Porto,4300,41.15,-8.6167
+Porto,4349,41.15,-8.6167
+Porto,4350,41.15,-8.6167
+Porto,4369,41.15,-8.6167
+Póvoa de Varzim,4490,41.3667,-8.7333
+Póvoa de Varzim,4495,41.4,-8.75
+Balazar,4570,41.4,-8.6333
+Areias,4780,41.3394,-8.6167
+Vila das Aves,4795,41.2083,-8.5292
+Agrela,4825,41.2167,-8.6333
+Campo,4440,41.1833,-8.4667
+Alfena,4445,41.2333,-8.5333
+Vila do Conde,4480,41.36,-8.697
+Touguinha,4484,41.343,-8.6502
+Guilhabreu,4485,41.2833,-8.25
+Mindelo,4486,41.343,-8.6502
+Vila Nova de Gaia,4400,41.2075,-8.583
+Vila Nova de Gaia,4404,41.2075,-8.583
+Vila Nova de Gaia,4405,41.2075,-8.583
+Vila Nova de Gaia,4409,41.2075,-8.583
+Arcozelo,4410,41.05,-8.65
+Canelas,4414,41.0833,-8.6
+Perosinho,4415,41.0932,-8.5045
+Vila Nova de Gaia,4430,41.1167,-8.55
+Vila Nova de Gaia,4434,41.1167,-8.55
+Alvarelhos,4745,41.3,-8.6
+Aldeia Nova,4785,41.4,-8.7833
+Abrantes,2200,39.4667,-8.2
+Abrantes,2205,39.4667,-8.2
+Atalaia,2230,39.5833,-8.2333
+Alcanena,2380,39.45,-8.6667
+Alcanena,2384,39.45,-8.6667
+Covão do Coelho,2395,39.5125,-8.5376
+Almeirim,2080,39.2,-8.6333
+Alpiarça,2090,39.25,-8.5833
+Bilrete,2120,39.0964,-8.7182
+Benavente,2130,38.9833,-8.8
+Adema,2135,38.9809,-8.7963
+Bela Vista,2890,38.75,-8.9667
+Alto do Padrão,2070,39.15,-8.7833
+Arneiro de Cima,2140,39.6151,-8.486
+Almegue,2250,39.5944,-8.4611
+Agolada,2100,39.0,-8.55
+Entroncamento,2330,39.5125,-8.5376
+Barcai,2240,39.5167,-8.4556
+Azinhaga,2150,39.35,-8.5333
+Alpalhão,6120,39.55,-7.85
+Alcobertas,2040,39.4167,-8.9
+Glória do Ribatejo,2125,39.0964,-8.7182
+Santarém,2000,39.3336,-8.6351
+Santarém,2004,39.33,-8.6494
+Várzea,2005,39.2917,-8.7389
+Santarém,2009,39.33,-8.6494
+Abrã,2025,39.4417,-8.7583
+Balancho,2300,39.6333,-7.95
+Carvalhal da Póvoa,2305,39.4083,-8.5167
+Alcorochel,2350,39.4167,-8.5833
+Renova,2354,39.5221,-8.5327
+Atalaia,2260,39.5833,-8.2333
+Cacinheira,2435,39.6972,-8.4306
+Alburitel,2490,39.65,-8.5167
+Alcácer do Sal,7580,38.3667,-8.5
+Batão,7595,38.2546,-8.4905
+Almada,2800,38.6833,-9.15
+Almada,2804,38.6833,-9.15
+Almada,2805,38.6833,-9.15
+Almada,2809,38.6833,-9.15
+Almada,2810,38.6833,-9.15
+Almada,2814,38.6833,-9.15
+Sobreda,2815,38.6833,-9.15
+Sobreda,2819,38.6833,-9.15
+Charneca de Caparica,2820,38.6667,-9.2
+Charneca de Caparica,2821,38.6667,-9.2
+Monte de Caparica,2825,38.6667,-9.2
+Costa de Caparica,2829,38.6667,-9.2
+Barreiro,2830,38.6667,-9.0667
+Lavradio,2835,38.6667,-9.0667
+Azinheira dos Barros,7570,38.0667,-8.4167
+Alhos Vedros,2860,38.65,-9.0333
+Moita,2864,38.638,-9.0253
+Montijo,2870,38.7,-8.9167
+Canha,2985,38.5132,-8.9953
+Palmela,2950,38.5667,-8.8833
+Cabanas,2951,38.5585,-8.8833
+Palmela,2954,38.5585,-8.8833
+Pinhal Novo,2955,38.5585,-8.8833
+Aldeia de Santo André,7500,38.1,-8.7667
+Abela,7540,38.0,-8.5667
+Abertas,7555,37.7833,-8.6417
+Alvalade,7565,37.9333,-8.4
+Paio Pires,2840,38.6167,-9.1
+Seixal,2844,38.6167,-9.1074
+Cruz de Pau,2845,38.6167,-9.1167
+Corroios,2855,38.6765,-9.0932
+Fernão Ferro,2865,38.638,-9.0253
+Parral,2925,38.5167,-9.0167
+Almoinha,2970,38.4667,-9.1667
+Casal do Sapo,2975,38.4442,-9.0485
+Setúbal,2900,38.5132,-8.9953
+Setúbal,2904,38.5132,-8.9953
+Setúbal,2910,38.5132,-8.9953
+Setúbal,2914,38.5132,-8.9953
+Sines,7520,38.0,-8.8
+Aboim,4970,41.9167,-8.45
+Arcos de Valdevez,4974,41.85,-8.4167
+Águas Férreas,4910,41.8542,-8.7542
+Bouças,4960,42.1,-8.3167
+Cutelo,4950,41.8333,-8.65
+Agualonga,4940,41.8833,-8.6167
+Caçapedro,4980,41.95,-8.45
+Ponte de Lima,4990,41.9165,-8.5299
+Arão,4930,42.0167,-8.6333
+Viana do Castelo,4900,41.7833,-8.8667
+Viana do Castelo,4904,41.6993,-8.7303
+Viana do Castelo,4925,41.8954,-8.5796
+Viana do Castelo,4935,41.825,-8.7208
+Campos,4920,41.9667,-8.7
+Alijó,5070,41.2667,-7.4667
+Cruz,5085,41.2,-7.5333
+Alturas do Barroso,5460,41.7,-7.8167
+Abobeleira,5400,41.75,-7.5
+Anelhe,5425,41.6833,-7.5833
+Alto da Bouça,4880,41.3667,-7.8333
+Azevedo,5470,41.7167,-8.0333
+Candedo,5090,41.3667,-7.3833
+Mourisca,5050,41.54,-7.6367
+Peso da Régua,5054,41.2813,-7.6965
+Alvadia,4870,41.4333,-7.7833
+Calvário,5060,41.2444,-7.7278
+Alvações do Corgo,5030,41.2,-7.75
+Fonte Mercê,5430,41.6426,-7.3241
+Argeriz,5445,41.5833,-7.3833
+Vila Pouca de Aguiar,5450,41.5348,-7.5955
+Vilarinho de Tanha,5000,41.2167,-7.7
+Vila Nova de Cima,5004,41.4036,-7.7321
+Barroca,5110,41.0792,-7.6958
+Barroca,5114,41.0778,-7.7043
+Carregal do Sal,3430,40.4333,-8.0
+Almofala,3600,40.95,-7.8
+Alhões,4690,40.9833,-8.0167
+Lamego,5100,41.0889,-7.7833
+Abrunhosa-A-Velha,3530,40.5833,-7.65
+Mangualde,3534,40.5833,-7.8
+Aldeia de Nacomba,3620,40.95,-7.6167
+Almaça,3450,40.3333,-8.2167
+Nelas,3520,40.5333,-7.8667
+Canas de Senhorim,3525,40.5,-7.9
+Areal,3475,40.5986,-8.1389
+Arcozelo das Maias,3680,40.7333,-8.2833
+Vilarinho,3684,40.8389,-7.9963
+Antas,3550,41.0,-7.85
+Antas,3630,41.0,-7.85
+Adega,4660,41.15,-7.8
+Nova Foz do Dão,3440,40.3667,-8.1333
+Quinta do Pisão,5130,41.1667,-7.5333
+Costeiras,3660,40.85,-8.1133
+Águas Boas,3560,40.85,-7.6167
+Quinta das Marras,3650,40.7222,-7.8667
+Adorigo,5120,41.15,-7.6
+Tarouca,3610,40.7389,-7.8722
+Molelos,3460,40.4833,-8.0083
+Tondela,3464,40.5996,-8.0968
+Arnosa,3465,40.5,-8.1667
+Viseu,3500,40.6333,-7.9167
+Viseu,3504,40.9,-7.8631
+Brufe,3505,40.7333,-7.7833
+Viseu,3510,40.9472,-7.9278
+Viseu,3514,40.7966,-7.908
+Viseu,3515,40.7792,-7.9058
+Viseu,3519,40.7966,-7.908
+Mouta de Baixo,3670,40.7833,-8.1722
+Funchal,9000,32.6333,-16.9
+Funchal,9004,32.6333,-16.9
+Funchal,9020,32.6333,-16.9
+Funchal,9024,32.6333,-16.9
+Funchal,9050,32.6333,-16.9
+Funchal,9054,32.6333,-16.9
+Funchal,9060,32.6333,-16.9
+Funchal,9064,32.6333,-16.9
+Porto,9800,41.15,-8.6167
