@@ -7,12 +7,13 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 from time import time, sleep
 from datetime import datetime
+import db
 
 # for using native Python strings
 import sip
 sip.setapi('QString', 2)
 from PyQt4.QtGui import QApplication, QDesktopServices, QImage, QPainter, QVBoxLayout, QLineEdit, QWidget, QWidget, QShortcut, QKeySequence, QTableWidget, QTableWidgetItem
-from PyQt4.QtCore import QByteArray, QUrl, QTimer, QEventLoop, QIODevice, QObject, Qt
+from PyQt4.QtCore import QByteArray, QUrl, QTimer, QEventLoop, QIODevice, QObject, Qt, QVariant
 from PyQt4.QtWebKit import QWebFrame, QWebView, QWebElement, QWebPage, QWebSettings, QWebInspector
 from PyQt4.QtNetwork import QNetworkAccessManager, QNetworkProxy, QNetworkRequest, QNetworkReply, QNetworkDiskCache
 
@@ -24,19 +25,18 @@ MAX_POST_SIZE = 2 ** 25
 
 
 class NetworkAccessManager(QNetworkAccessManager):
-    def __init__(self, proxy):
+    def __init__(self, proxy, use_cache):
         """Subclass QNetworkAccessManager for finer control network operations
 
         proxy: the string of a proxy to download through
-        cache_size: the maximum size of the webkit cache (MB)
-        cache_dir: where to place the cache
+        use_cache: whether to cache replies so that can load faster with the same content subsequent times
         """
         super(NetworkAccessManager, self).__init__()
-        # and proxy
         self.setProxy(proxy)
         self.sslErrors.connect(self.sslErrorHandler)
         # the requests that are still active
         self.active_requests = [] 
+        self.cache = db.DbmDict() if use_cache else None
 
 
     def shutdown(self):
@@ -69,28 +69,59 @@ class NetworkAccessManager(QNetworkAccessManager):
     def createRequest(self, operation, request, post):
         """Override creating a network request
         """
+        url = request.url().toString()
         if str(request.url().path()).endswith('.ttf'):
             # block fonts, which can cause webkit to crash
-            common.logger.debug('Blocking: {}'.format(request.url().toString()))
+            common.logger.debug('Blocking: {}'.format(url))
             request.setUrl(QUrl())
+
+        data = self.parse_data(post)
+        key = '{} {}'.format(url, data)
+        use_cache = not url.startswith('file') and 'http://www.britishairways.com' not in url # XXX
+        if self.cache is not None and use_cache and key in self.cache:
+            common.logger.debug('Load from cache: ' + key)
+            content, headers, attributes = self.cache[key]
+            reply = CachedNetworkReply(self, request.url(), content, headers, attributes)
         else:
-            common.logger.debug('Request: {} {}'.format(request.url().toString(), post or ''))
-        reply = QNetworkAccessManager.createRequest(self, operation, request, post)
-        reply.error.connect(self.catch_error)
-        self.active_requests.append(reply)
-        reply.destroyed.connect(self.active_requests.remove)
-        # save reference to original request
+            common.logger.debug('Request: {} {}'.format(url, post or ''))
+            reply = QNetworkAccessManager.createRequest(self, operation, request, post)
+            reply.error.connect(self.catch_error)
+            self.active_requests.append(reply)
+            reply.destroyed.connect(self.active_requests.remove)
+            # save reference to original request
+            reply.content = QByteArray()
+            reply.readyRead.connect(self._save_content(reply))
+            if self.cache is not None and use_cache:
+                reply.finished.connect(self._cache_content(reply, key))
         reply.orig_request = request
-        reply.data = self.parse_data(post)
-        reply.content = ''
-        def save_content(r):
-            # save copy of reply content before is lost
-            def _save_content():
-                r.content += r.peek(r.size())
-            return _save_content
-        reply.readyRead.connect(save_content(reply))
+        reply.data = data
         return reply
-       
+    
+    
+    def _save_content(self, r):
+        """Save copy of reply content before is lost
+        """
+        def save_content():
+            r.content.append(r.peek(r.size()))
+        return save_content
+   
+    def _cache_content(self, r, key):
+        """Cache downloaded content
+        """
+        def cache_content():
+            headers = [(header, r.rawHeader(header)) for header in r.rawHeaderList()]
+            attributes = []
+            attributes.append((QNetworkRequest.HttpStatusCodeAttribute, r.attribute(QNetworkRequest.HttpStatusCodeAttribute).toInt()))
+            attributes.append((QNetworkRequest.HttpReasonPhraseAttribute, r.attribute(QNetworkRequest.HttpReasonPhraseAttribute).toByteArray()))
+            #attributes.append((QNetworkRequest.RedirectionTargetAttribute, r.attribute(QNetworkRequest.RedirectionTargetAttribute).toUrl()))
+            attributes.append((QNetworkRequest.ConnectionEncryptedAttribute, r.attribute(QNetworkRequest.ConnectionEncryptedAttribute).toBool()))
+            #attributes.append((QNetworkRequest.CacheLoadControlAttribute, r.attribute(QNetworkRequest.CacheLoadControlAttribute).toInt()))
+            #attributes.append((QNetworkRequest.CacheSaveControlAttribute, r.attribute(QNetworkRequest.CacheSaveControlAttribute).toBool()))
+            #attributes.append((QNetworkRequest.SourceIsFromCacheAttribute, r.attribute(QNetworkRequest.SourceIsFromCacheAttribute).toBool()))
+            #print 'save cache:', key, len(r.content), len(headers), attributes
+            self.cache[key] = r.content, headers, attributes
+        return cache_content
+
 
     def parse_data(self, data):
         """Parse this posted data into a list of key/value pairs
@@ -138,6 +169,43 @@ class NetworkAccessManager(QNetworkAccessManager):
     def sslErrorHandler(self, reply, errors): 
         common.logger.info('SSL errors: {}'.format(errors))
         reply.ignoreSslErrors() 
+
+
+
+class CachedNetworkReply(QNetworkReply):
+    def __init__(self, parent, url, content, headers, attributes):
+        super(CachedNetworkReply, self).__init__(parent)
+        self.setUrl(url)
+        self.content = content
+        self.offset = 0
+        for header, value in headers:
+            self.setRawHeader(header, value)
+        #self.setHeader(QNetworkRequest.ContentLengthHeader, len(content))
+        for attribute, value in attributes:
+            self.setAttribute(attribute, value)
+        self.setOpenMode(QNetworkReply.ReadOnly | QNetworkReply.Unbuffered)
+        # trigger signals that content is ready
+        QTimer.singleShot(0, self.readyRead)
+        QTimer.singleShot(0, self.finished)
+
+    def bytesAvailable(self):
+        return len(self.content) - self.offset
+
+    def isSequential(self):
+        return True
+
+    def abort(self):
+        pass # qt requires that this be defined
+
+    def readData(self, size):
+        """Return up to size bytes from buffer
+        """
+        if self.offset >= len(self.content):
+            return ''
+        number = min(size, len(self.content) - self.offset)
+        data = self.content[self.offset : self.offset + number]
+        self.offset += number
+        return str(data)
 
 
 
@@ -261,7 +329,7 @@ class ResultsTable(QTableWidget):
 
 
 class Browser(QWidget):
-    def __init__(self, gui=False, user_agent='WebKit', proxy=None, load_images=True, load_javascript=True, load_java=True, load_plugins=True, timeout=20, delay=5, app=None):
+    def __init__(self, gui=False, user_agent='WebKit', proxy=None, load_images=True, load_javascript=True, load_java=True, load_plugins=True, timeout=20, delay=5, app=None, use_cache=False):
         """Widget class that contains the address bar, webview for rendering webpages, and a table for displaying results
 
         gui: whether to show webkit window or run headless
@@ -273,12 +341,14 @@ class Browser(QWidget):
         load_plugins: whether to enable browser plugins
         timeout: the maximum amount of seconds to wait for a request
         delay: the minimum amount of seconds to wait between requests
+        app: QApplication object so that can instantiate multiple browser objects
+        use_cache: whether to cache all replies
         """
         # must instantiate the QApplication object before any other Qt objects
         self.app = app or QApplication(sys.argv)
         super(Browser, self).__init__()
         self.running = True
-        manager = NetworkAccessManager(proxy)
+        manager = NetworkAccessManager(proxy, use_cache)
         manager.finished.connect(self.finished)
         page = WebPage(user_agent)
         page.setNetworkAccessManager(manager)
@@ -312,21 +382,9 @@ class Browser(QWidget):
         QShortcut(QKeySequence.Quit, self, self.close)
         QShortcut(QKeySequence.Back, self, self.view.back)
         QShortcut(QKeySequence.Forward, self, self.view.forward)
-        QShortcut(QKeySequence.Save, self, self.save)
+        #QShortcut(QKeySequence.Save, self, self.save)
         QShortcut(QKeySequence.New, self, self.home)
         QShortcut(QKeySequence(Qt.CTRL + Qt.Key_F), self, self.fullscreen)
-
-
-    def save(self):
-        """Save the current HTML to disk
-        """
-        html = self.current_html()
-        for i in itertools.count(1):
-            filename = 'data/test{}.html'.format(i)
-            if not os.path.exists(filename):
-                open(filename, 'w').write(common.to_unicode(html))
-                print 'save', filename
-                break
 
 
     def home(self):
@@ -369,44 +427,45 @@ class Browser(QWidget):
         return common.to_unicode(str(self.view.page().mainFrame().toPlainText()))
 
 
-    def load(self, url=None, html=None, headers=None, data=None, num_retries=1):
+    def load(self, url, html=None, headers=None, data=None):
         """Load given url in webkit and return html when loaded
 
         url: the URL to load
         html: optional HTML to set instead of downloading
         headers: the headers to attach to the request
         data: the data to POST
-        num_retries: how many times to try downloading this URL
         """
         if not self.running:
             return
         if isinstance(url, basestring):
             # convert string to Qt's URL object
             url = QUrl(url)
+        self.update_address(url)
+        if html:
+            # load pre downloaded HTML
+            self.view.setContent(html, baseUrl=url)
+            return html
+
         t1 = time()
         loop = QEventLoop()
+        self.view.loadFinished.connect(loop.quit)
+        # need to make network request
+        request = QNetworkRequest(url)
+        if headers:
+            # add headers to request when defined
+            for header, value in headers:
+                request.setRawHeader(header, value)
+        if data:
+            # POST request
+            self.view.load(request, QNetworkAccessManager.PostOperation, data)
+        else:
+            # GET request
+            self.view.load(request)
+
+        # set a timeout on the download loop
         timer = QTimer()
         timer.setSingleShot(True)
         timer.timeout.connect(loop.quit)
-        self.view.loadFinished.connect(loop.quit)
-        if url:
-            self.update_address(url)
-            if html:
-                # load pre downloaded HTML
-                self.view.setContent(html, baseUrl=url)
-            else:
-                # need to make network request
-                request = QNetworkRequest(url)
-                if headers:
-                    # add headers to request when defined
-                    for header, value in headers:
-                        request.setRawHeader(header, value)
-                if data:
-                    # POST request
-                    self.view.load(request, QNetworkAccessManager.PostOperation, data)
-                else:
-                    # GET request
-                    self.view.load(request)
         timer.start(self.timeout * 1000)
         loop.exec_() # delay here until download finished or timeout
     
@@ -417,12 +476,8 @@ class Browser(QWidget):
             self.wait(self.delay - (time() - t1))
         else:
             # did not download in time
-            if num_retries > 0:
-                common.logger.debug('Timeout - retrying: {}'.format(url.toString()))
-                parsed_html = self.load(url, num_retries=num_retries-1)
-            else:
-                common.logger.debug('Timed out: {}'.format(url.toString()))
-                parsed_html = ''
+            common.logger.debug('Timed out: {}'.format(url.toString()))
+            parsed_html = ''
         return parsed_html
 
 
@@ -482,10 +537,17 @@ class Browser(QWidget):
         return len(es)
 
 
-    def keydown(self, key):
-        """XXX Need to instantiate this and other native events
+    def keys(self, pattern, text):
+        """Simulate typing by focusing on element and triggering key events
         """
-        raise NotImplementedError('add support for native events')
+        es = self.find(pattern)
+        for e in es:
+            e.evaluateJavaScript("this.focus()")
+        for i in range(len(text)):
+            self.fill(pattern, text[:i+1])
+            for e in es:
+                for event_type in ('keydown', 'keyup', 'keypress'):
+                    e.evaluateJavaScript("var evObj = document.createEvent('Event'); evObj.initEvent('{}', true, true); this.dispatchEvent(evObj);".format(event_type))
 
 
     def attr(self, pattern, name, value=None):
@@ -531,18 +593,6 @@ class Browser(QWidget):
         return matches
 
 
-    def response(self, url):
-        """Get data for this downloaded resource, if exists
-        """
-        record = self.view.page().networkAccessManager().cache().data(QUrl(url))
-        if record:
-            data = record.readAll()
-            record.reset()
-        else:
-            data = None
-        return data
-    
-    
     def run(self):
         """Run the Qt event loop so can interact with the browser
         """
@@ -557,6 +607,8 @@ class Browser(QWidget):
 
 
     def update_address(self, url):
+        """Set address of the URL text field
+        """
         self.url_input.setText(url.toString())
         
 

@@ -42,9 +42,9 @@ class Model:
             #print 'abstractions:', qs_abstraction, post_abstraction
             
             for qs_key_cases in zip(*(qs_abstraction)) or [()]:
-                print 'qs key:', qs_key_cases
+                common.logger.debug('qs key: {}'.format(qs_key_cases))
                 for post_key_cases in zip(*(post_abstraction)) or [()]:
-                    print 'post key:', post_key_cases
+                    common.logger.debug('post key: {}'.format(post_key_cases))
                     if qs_key_cases or post_key_cases:
                         # found an abstraction
                         self._used = True
@@ -85,7 +85,6 @@ class Model:
             post_diffs = self.find_diffs([t.data for t in self.transitions])
             if qs_diffs or post_diffs:
                 self.model = qs_diffs, post_diffs
-                print 'model:', self.model
             else:
                 # remove the duplicate transition
                 common.logger.debug('Duplicate requests')

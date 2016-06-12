@@ -25,25 +25,23 @@ class delta:
     def run(self, browser):
         browser.load('http://www.delta.com/')
         for value in self.inputs:
-            browser.fill('input#originCity', value)
-            browser.click('input#originCity')
+            browser.keys('input#originCity', value)
             browser.wait_quiet()
             yield
 
 
 class lufthansa:
     def __init__(self):
-        self.inputs = 'vie', 'aus'
+        self.inputs = 'lon', 'new', 'par'
 
     def run(self, browser):
-        # XXX need to simulate keyup event to get working
+        browser.load('http://www.lufthansa.com/uk/en/Homepage')
         for value in self.inputs:
-            browser.load('http://www.lufthansa.com/uk/en/Homepage')
-            #browser.click('input#flightmanagerFlightsFormOrigin')
-            browser.fill('input#flightmanagerFlightsFormOrigin', value)
-            browser.click('input#flightmanagerFlightsFormOrigin')
+            browser.keys('input#flightmanagerFlightsFormOrigin', value)
             browser.wait_load('div.rw-popup')
+            browser.wait_quiet()
             yield
+
 
 class fiat:
     def __init__(self):
