@@ -82,6 +82,37 @@ def most_common(l):
     """
     return max(set(l), key=l.count)
 
+
+def parse_proxy(proxy):
+    """Parse a proxy into its fragments
+    Returns a dict with username, password, host, and port
+
+    >>> f = parse_proxy('login:pw@66.197.208.200:8080')
+    >>> f.username
+    'login'
+    >>> f.password
+    'pw'
+    >>> f.host
+    '66.197.208.200'
+    >>> f.port
+    '8080'
+    >>> f = parse_proxy('66.197.208.200')
+    >>> f.username == f.password == f.port == ''
+    True
+    >>> f.host
+    '66.197.208.200'
+    """
+    fragments = {}
+    if isinstance(proxy, basestring):
+        match = re.match('((?P<username>\w+):(?P<password>\w+)@)?(?P<host>\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})(:(?P<port>\d+))?', proxy)
+        if match:
+            groups = match.groupdict()
+            fragments['username'] = groups.get('username') or ''
+            fragments['password'] = groups.get('password') or ''
+            fragments['host'] = groups.get('host')
+            fragments['port'] = groups.get('port') or ''
+    return fragments
+
     
 def remove_tags(html):
     """Remove tags from this html string
@@ -207,4 +238,4 @@ def get_logger(output_file, level=logging.INFO, maxbytes=0):
         console_handler.setLevel(level)
         logger.addHandler(console_handler)
     return logger
-logger = get_logger('.ajax.log', maxbytes=2*1024*1024*1024)
+logger = get_logger('output/browser.log', maxbytes=2*1024*1024*1024)

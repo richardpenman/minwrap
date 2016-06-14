@@ -7,17 +7,25 @@ import sip
 sip.setapi('QString', 2)
 from PyQt4.QtCore import QUrl
 from templater import Templater
-
+import parser
 
 
 class Model:
     """Build a model for these transitions and extend to all known cases 
     """
-    def __init__(self):
-        # the transitions that follow this template
+    def __init__(self, key):
+        # the hash of transitions that will fit this model
+        self.key = key
+        # the example transitions that follow this template
         self.transitions = [] 
+        # the data extracted from these transitions
+        self.records = []
+        # the field names for the extracted data
+        self.fields = []
+        # the generated model GET/POST parameters
         self.model = None
-        self._used = False # whether model has already been executed
+        # whether model has already been executed
+        self._used = False 
 
 
     def add(self, transition):
@@ -25,13 +33,18 @@ class Model:
         """
         if not self._used:
             self.transitions.append(transition)
+            for record in parser.json_to_records(transition.js):
+                self.records.append(record)
+                for field in record:
+                    if field not in self.fields:
+                        self.fields.append(field)
             self.build()
 
 
     def run(self):
         """Run the model if has successfully been built
         """
-        if self.ready():
+        if self.ready() and not self._used:
             default_cases = [None]
             default = [(None, default_cases)]
             qs_diffs, post_diffs = self.model
@@ -109,8 +122,8 @@ class Model:
         If successful return a list of similar entities else None"""
         if examples is not None:
             similar_cases = verticals.extend(examples)
-            if similar_cases:
-                common.logger.info('Abstracted {} to {} similar examples'.format(examples, len(similar_cases)))
+            if similar_cases is not None:
+                common.logger.info('Abstracted {}'.format(examples))
                 for case in similar_cases:
                     yield case
             else:
@@ -128,7 +141,7 @@ class Model:
                     if any(examples):
                         similar_cases.append(verticals.extend(examples) or [])
                         if similar_cases[-1]:
-                            common.logger.info('Abstracted {} to {} similar examples'.format(examples, len(similar_cases[-1])))
+                            common.logger.info('Abstracted {}'.format(examples))
                         else:
                             common.logger.info('Failed to abstract: {}'.format(examples))
                     else:
@@ -141,4 +154,4 @@ class Model:
     def ready(self):
         """Whether this model is ready to be used
         """
-        return self.model is not None and not self._used
+        return self.model is not None

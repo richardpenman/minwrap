@@ -110,12 +110,25 @@ def json_counter(es, result=None):
     return result
 
 
-def json_to_rows(js):
-    """Extract rows from this json object by finding the leaf nodes and taking the nodes with most common counts as the columns
+def json_to_records(js):
+    """Extract records from this json object by finding the leaf nodes and taking the nodes with most common counts as the columns
     """
+    records = []
     counter = json_counter(js)
-    num_entries = common.most_common([len(values) for values in counter.values()])
-    # get the fields with the correct number of entries
-    fields = sorted(key for key in counter.keys() if len(counter[key]) == num_entries)
-    results = zip(*[counter[field] for field in fields])
-    return [field.title() for field in fields], results
+    if counter:
+        num_entries = common.most_common([len(values) for values in counter.values()])
+        # get the fields with the correct number of entries
+        fields = [key for key in counter.keys() if len(counter[key]) == num_entries]
+        for i in range(num_entries):
+            result = dict([(field, counter[field][i]) for field in fields])
+            records.append(result)
+    return records
+
+
+if __name__ == '__main__':
+    import sys
+    text = sys.argv[1]
+    r = json_to_records(parse(text))
+    from webscraping import common
+    l = common.unique(sum([e.values() for e in r], []))
+    print l#[str(e) for e in l]

@@ -7,21 +7,23 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 from time import time, sleep
 from datetime import datetime
-import db
 
 # for using native Python strings
 import sip
 sip.setapi('QString', 2)
 from PyQt4.QtGui import QApplication, QDesktopServices, QImage, QPainter, QVBoxLayout, QLineEdit, QWidget, QWidget, QShortcut, QKeySequence, QTableWidget, QTableWidgetItem
-from PyQt4.QtCore import QByteArray, QUrl, QTimer, QEventLoop, QIODevice, QObject, Qt, QVariant
+from PyQt4.QtCore import QByteArray, QUrl, QTimer, QEventLoop, QIODevice, QObject, Qt
 from PyQt4.QtWebKit import QWebFrame, QWebView, QWebElement, QWebPage, QWebSettings, QWebInspector
 from PyQt4.QtNetwork import QNetworkAccessManager, QNetworkProxy, QNetworkRequest, QNetworkReply, QNetworkDiskCache
 
-import common
-
 # maximum number of bytes to read from a POST request
 MAX_POST_SIZE = 2 ** 25
+# output directory where to save generated files
+OUTPUT_DIR = 'output'
+if not os.path.exists(OUTPUT_DIR):
+    os.mkdir(OUTPUT_DIR)
 
+import common, db
 
 
 class NetworkAccessManager(QNetworkAccessManager):
@@ -36,7 +38,7 @@ class NetworkAccessManager(QNetworkAccessManager):
         self.sslErrors.connect(self.sslErrorHandler)
         # the requests that are still active
         self.active_requests = [] 
-        self.cache = db.DbmDict() if use_cache else None
+        self.cache = db.DbmDict(os.path.join(OUTPUT_DIR, 'cache.db')) if use_cache else None
 
 
     def shutdown(self):
@@ -55,11 +57,11 @@ class NetworkAccessManager(QNetworkAccessManager):
         """
         if proxy:
             fragments = common.parse_proxy(proxy)
-            if fragments.host:
-                QNetworkAccessManager.setProxy(self, 
-                    QNetworkProxy(QNetworkProxy.HttpProxy, 
-                      fragments.host, int(fragments.port), 
-                      fragments.username, fragments.password
+            if fragments['host']:
+                QNetworkAccessManager.setProxy(self,
+                    QNetworkProxy(QNetworkProxy.HttpProxy,
+                      fragments['host'], int(fragments['port']),
+                      fragments['username'], fragments['password']
                     )
                 )
             else:
@@ -77,7 +79,7 @@ class NetworkAccessManager(QNetworkAccessManager):
 
         data = self.parse_data(post)
         key = '{} {}'.format(url, data)
-        use_cache = not url.startswith('file') and 'http://www.britishairways.com' not in url # XXX
+        use_cache = not url.startswith('file')
         if self.cache is not None and use_cache and key in self.cache:
             common.logger.debug('Load from cache: ' + key)
             content, headers, attributes = self.cache[key]
@@ -295,24 +297,31 @@ class ResultsTable(QTableWidget):
         """A table to display results from the scraping
         """
         super(ResultsTable, self).__init__()
+        # also save data to a CSV file
+        self.hide()
+        self.clear()
+
+    def clear(self):
         # avoid displaying duplicate rows
         self.row_hashes = set()
-        # also save data to a CSV file
-        self.writer = csv.writer(open('data.csv', 'w'))
         self.fields = None
-        self.hide()
+        self.writer = csv.writer(open(os.path.join(OUTPUT_DIR, 'data.csv'), 'w'))
+        super(ResultsTable, self).clear()
 
-    def add_rows(self, fields, rows=None):
+    def add_records(self, records):
         """Add these rows to the table and initialize fields if not already
         """
-        if self.fields is None:
-            self.show()
-            self.fields = fields
-            self.setColumnCount(len(fields))
-            self.setHorizontalHeaderLabels(fields)
-            self.writer.writerow(fields)
-        for row in rows or []:
-            self.add_row(row)
+        for record in records:
+            if self.fields is None:
+                self.fields = sorted(record.keys())
+                self.setColumnCount(len(self.fields))
+                header = [field.title() for field in self.fields]
+                self.setHorizontalHeaderLabels(header)
+                self.writer.writerow(header)
+                self.show()
+            # filter to fields in the header
+            filtered_row = [record.get(field) for field in self.fields]
+            self.add_row(filtered_row)
 
     def add_row(self, cols):
         """Add this row to the table if is not duplicate
@@ -382,7 +391,7 @@ class Browser(QWidget):
         QShortcut(QKeySequence.Quit, self, self.close)
         QShortcut(QKeySequence.Back, self, self.view.back)
         QShortcut(QKeySequence.Forward, self, self.view.forward)
-        #QShortcut(QKeySequence.Save, self, self.save)
+        QShortcut(QKeySequence.Save, self, self.save)
         QShortcut(QKeySequence.New, self, self.home)
         QShortcut(QKeySequence(Qt.CTRL + Qt.Key_F), self, self.fullscreen)
 
@@ -401,6 +410,18 @@ class Browser(QWidget):
             self.showNormal()
         else:
             self.showMaximized() 
+
+
+    def save(self):
+        """Save the current HTML state to disk
+        """
+        for i in itertools.count(1):
+            filename = os.path.join(OUTPUT_DIR, 'state{}.html'.format(i))
+            if not os.path.exists(filename):
+                html = self.current_html()
+                open(filename, 'w').write(common.to_unicode(html))
+                print 'save', filename
+                break
 
 
     def set_proxy(self, proxy):
@@ -526,7 +547,6 @@ class Browser(QWidget):
 
     def click(self, pattern='input'):
         """Click all elements that match the pattern.
-        XXX possible to do this with native API rather than JavaScript hack?
 
         Uses standard CSS pattern matching: http://www.w3.org/TR/CSS2/selector.html
         Returns the number of elements clicked
@@ -543,11 +563,11 @@ class Browser(QWidget):
         es = self.find(pattern)
         for e in es:
             e.evaluateJavaScript("this.focus()")
-        for i in range(len(text)):
-            self.fill(pattern, text[:i+1])
-            for e in es:
-                for event_type in ('keydown', 'keyup', 'keypress'):
-                    e.evaluateJavaScript("var evObj = document.createEvent('Event'); evObj.initEvent('{}', true, true); this.dispatchEvent(evObj);".format(event_type))
+        self.fill(pattern, text)
+        for e in es:
+            for event_type in ('keydown', 'keyup', 'keypress'):
+                e.evaluateJavaScript("var evObj = document.createEvent('Event'); evObj.initEvent('{}', true, true); this.dispatchEvent(evObj);".format(event_type))
+        return len(es)
 
 
     def attr(self, pattern, name, value=None):
@@ -646,6 +666,5 @@ if __name__ == '__main__':
     w.screenshot('duckduckgo.jpg')
     # click search button 
     w.click('input[id=search_button_homepage]')
-    w.run()
     # show webpage for 10 seconds
     w.wait(10)

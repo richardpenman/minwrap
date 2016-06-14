@@ -5,12 +5,12 @@ __doc__ = 'Interface to run the ajax browser'
 # for using native Python strings
 import sip
 sip.setapi('QString', 2)
-
-import os, collections, pprint
-import common, model, parser, transition, webkit, wrappers
 from PyQt4.QtNetwork import QNetworkRequest
 from PyQt4.QtCore import QUrl, Qt
 from PyQt4.QtGui import QApplication
+
+import os, collections, pprint
+import webkit, common, model, parser, transition, verticals, wrappers
 
 
 
@@ -32,7 +32,7 @@ class AjaxBrowser(webkit.Browser):
         """Start loading new page so clear the state
         """
         self.orig_html = self.orig_txt = ''
-        self.transitions = []
+        self.outstanding_transitions = []
 
     def _load_finish(self, ok):
         """Finished loading a page so store the initial state
@@ -66,22 +66,19 @@ class AjaxBrowser(webkit.Browser):
                     common.logger.debug('Successfully parsed response: {} {} {}'.format(reply.url().toString(), reply.data, js))
                     # save for checking later once interface has been updated
                     new_transition = transition.Transition(reply, js)
-                    self.transitions.append(new_transition)
+                    self.outstanding_transitions.append(new_transition)
                     key = hash(new_transition)
                     try:
                         this_model = self.models[key]
                     except KeyError:
                         # start a new model for this key
-                        self.models[key] = this_model = model.Model()
+                        self.models[key] = this_model = model.Model(key)
                     this_model.add(new_transition)
+                    if False and this_model.ready():
+                        # add data to verticals for supporting multiple step abstractions
+                        verticals.add_model(this_model, self)
 
 
-"""
-when multiple then abstract
-if appears in DOM then is assumed to be final node 
-else may be intermediate stage
-    load leaf nodes into table
-"""
 
 def set_start_state(browser):
     """Temporary hack to load a start page for choosing which wrapper to load
@@ -108,63 +105,59 @@ def set_start_state(browser):
 
 
 def main():
-    browser = AjaxBrowser(gui=True, use_cache=True, load_images=False)
+    browser = AjaxBrowser(gui=True, use_cache=True, load_images=False, load_java=False, load_plugins=False)
     set_start_state(browser)
 
+    expected_output = None
     while browser.running:
         if browser.wrapper is not None:
+            QApplication.setOverrideCursor(Qt.BusyCursor)
             try:
-                QApplication.setOverrideCursor(Qt.BusyCursor)
-                browser.wrapper.next()
+                expected_output = browser.wrapper.next()
+                browser.wait_quiet()
             except StopIteration:
                 QApplication.restoreOverrideCursor()
                 browser.wrapper = None
         browser.app.processEvents() 
-        #browser.wait_quiet()
 
-        if browser.transitions:
+        if browser.outstanding_transitions and expected_output:
             parsed_transitions = []
+            #cur_html = browser.current_html()
+            #cur_text = browser.current_text()
             # check the transitions that were discovered
-            #transitions, browser.transitions = browser.transitions, []
-            cur_html = browser.current_html()
-            cur_text = browser.current_text()
-            for prev_transition in browser.transitions:
-                total_changed = num_changed = 0
-                for value in prev_transition.values:
-                    total_changed += 1
-                    # XXX should instead isolate new part of DOM and compare against that
-                    if (value in cur_html and value not in browser.orig_html) or (value in cur_text and value not in browser.orig_txt):
-                        # found a change in this AJAX request that is not in the original DOM
-                        num_changed += 1
+            for prev_transition in browser.outstanding_transitions:
+                num_changed = 0
+                for e in expected_output:
+                    for value in prev_transition.values:
+                        #if (value in cur_html and value not in browser.orig_html) or (value in cur_text and value not in browser.orig_txt):
+                        if e in value:
+                            # found a change in this AJAX request that is not in the original DOM
+                            num_changed += 1
        
                 # XXX adjust this threshold for each website? STD around mean?
-                if num_changed > 1:
-                    parsed_transitions.append(prev_transition)
-                    common.logger.info('Transition updates DOM: {} {} {} / {}'.format(prev_transition.url.toString(), prev_transition.data, num_changed, total_changed))
+                if num_changed > len(expected_output) / 4:
+                    common.logger.info('Transition updates DOM: {} {} {} / {}'.format(prev_transition.url.toString(), prev_transition.data, num_changed, len(expected_output)))
                     key = hash(prev_transition)
                     this_model = browser.models[key]
                     for event_i, (url, headers, data) in enumerate(this_model.run()):
                         # model has generated an AJAX request
                         if browser.running:
                             if event_i == 0:
-                                # initialize the result table with the already known transitions
-                                for result_transition in this_model.transitions:
-                                    browser.table.add_rows(*parser.json_to_rows(result_transition.js))
+                                # initialize the result table with the already known transition records
+                                browser.table.clear()
+                                browser.table.add_records(this_model.records)
                                     
                             common.logger.debug('Calling abstraction: {} {}'.format(url.toString(), data))
                             browser.load(url=url, headers=headers, data=data)
                             js = parser.parse(browser.current_text())
                             if js:
-                                browser.table.add_rows(*parser.json_to_rows(js))
+                                browser.table.add_records(parser.json_to_records(js))
                         else:
                             break
                 else:
-                    common.logger.debug('Transition updates DOM: {} {} {} / {}'.format(prev_transition.url.toString(), prev_transition.data, num_changed, total_changed))
-            for t in parsed_transitions:
-                try:
-                    browser.transitions.remove(t)
-                except ValueError:
-                    pass
+                    common.logger.debug('Transition updates DOM: {} {} {} / {}'.format(prev_transition.url.toString(), prev_transition.data, num_changed, len(expected_output)))
+            browser.outstanding_transitions = []
+
 
 
 if __name__ == '__main__':

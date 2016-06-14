@@ -18,7 +18,9 @@ USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36
 def download(url):
     status = html = None
     try:
-        response = urllib2.urlopen(url)
+        headers = {'User-Agent' : USER_AGENT}
+        request = urllib2.Request(url, None, headers)
+        response = request.urlopen(url)
         status = response.code
         html = response.read()
     except Exception as e:
@@ -67,56 +69,9 @@ from PyQt4.QtCore import *
 from PyQt4.QtWebKit import *  
 from PyQt4.QtNetwork import *
   
-class RenderBrowser2(QWebView):  
-    def __init__(self, app):  
-        QWebView.__init__(self)  
-        self.manager = NetworkAccessManager()
-        self.page().setNetworkAccessManager(self.manager)
-        self.manager.finished.connect(self._replyFinished)
-        self.app = app
- 
-    def get(self, url):
-        self.num_requests = self.reply_size = 0
-        self.loadFinished.connect(self._loadFinished)  
-        self.load(QUrl(url))  
-        self.app.exec_()  
-  
-    def _loadFinished(self, result):  
-        self.app.quit()  
-
-    def _replyFinished(self, reply):
-        self.num_requests += 1
-        #print 'raw:', reply.rawHeader('Content-Length') or 0
-        self.reply_size += reply.content_size#int(reply.rawHeader('Content-Length') or 0)
-
-
-class NetworkAccessManager(QNetworkAccessManager):
-    def __init__(self):
-        super(NetworkAccessManager, self).__init__()
-
-    def createRequest(self, operation, request, post):
-        """Override creating a network request
-        """
-        reply = QNetworkAccessManager.createRequest(self, operation, request, post)
-        #reply.error.connect(self.catch_error)
-        #self.active_requests.append(reply)
-        #reply.destroyed.connect(self.remove_inactive)
-        # save reference to original request
-        #reply.orig_request = request
-        #reply.data = self.parse_data(post)
-        reply.content_size = 0
-        def save_content(r):
-            # save copy of reply content before is lost
-            def _save_content():
-                r.content_size += len(r.peek(r.size()))
-            return _save_content
-        reply.readyRead.connect(save_content(reply))
-        return reply
-
 
 
 b = RenderBrowser(app=app, gui=False, user_agent=USER_AGENT, delay=0, timeout=10, load_plugins=False, load_java=False)
-#b = RenderBrowser2(app)
 
 def test_performance(website):
     bag = {}
