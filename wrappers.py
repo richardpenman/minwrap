@@ -107,10 +107,26 @@ class hyundai:
     def run(self, browser):
         for input_value, output_values in self.data:
             browser.load('http://www.hyundai.at/Beratung/Beratung/Handler-finden.aspx')
-            print browser.keys('input#dealerAutocomplete', input_value) # XXX why is text not inserted?
-            print browser.click('a#ctl00_cphContent_ctl01_ctlSearchBox_lbSearch')
+            browser.keys('input#dealerAutocomplete', input_value) # XXX why is text not inserted?
+            browser.click('a#ctl00_cphContent_ctl01_ctlSearchBox_lbSearch')
             yield output_values
-            
+           
+
+class kia:
+    def __init__(self):
+        self.data = [
+            ('madrid', ['Calle Sinesio Delgado 36', '28029', 'San Francisco de Sales 34', '28003', 'kiturmadrid@kia.es', 'http://www.kiturmadrid.com', '911108878', 'autosselikar@kia.es', '914811535']),
+            ('granada', ['Polígono Industrial de Guadix, M2, P11', '18500', 'Guadix', 'C/ Comercio (P.Ind El Florío)', '18015', 'Granada', 'armmotor@kia.es', 'http://www.dealershipdomain.com', '958126211']),
+        ]
+
+    def run(self, browser):
+        for input_value, output_values in self.data:
+            browser.load('http://www.kia.com/es/dealerfinder2011/')
+            browser.fill('input#ds-searchinput', input_value) # XXX why not inserted
+            browser.keys('input#ds-searchinput', input_value) # XXX why not inserted
+            browser.wait(5)
+            yield output_values
+
 
 class peugeot:
     def __init__(self):

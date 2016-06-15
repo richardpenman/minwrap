@@ -2,6 +2,7 @@
 
 import re, json, numbers, collections
 import xml.etree.ElementTree as ET
+import xmltodict
 import demjson
 import common
 
@@ -40,13 +41,7 @@ def parse_jsonp(t):
 def parse_xml(t):
     """Parse this XML into a dict
     """
-    pass
-    """try:
-        # check if is XML
-        reply.parsed_response = ET.fromstring(response)
-    except ET.ParseError:
-        return
-    """
+    return xmltodict.parse(t)
 
 
 def parse_js(t):
@@ -67,7 +62,9 @@ def parse_js(t):
 def parse(text, content_type=''):
     """Try all parsers on this input
     """
-    for fn in parse_json, parse_jsonp, parse_xml, parse_js:
+    if content_type == 'text/xml':
+        return parse_xml(text)
+    for fn in parse_json, parse_jsonp, parse_js:
         result = fn(text)
         if result is not None:
             return result

@@ -51,13 +51,13 @@ class AjaxBrowser(webkit.Browser):
 
         content_type = reply.header(QNetworkRequest.ContentTypeHeader).toString().lower()
         # main page has loaded
-        if re.search('(image|audio|video|model|message)/', content_type) or content_type == 'text/css':
+        if re.match('(image|audio|video|model|message)/', content_type) or content_type == 'text/css':
             pass # ignore these irrelevant content types
         else:
             common.logger.debug('Response: {} {}'.format(reply.url().toString(), reply.data))
             # have found a response that can potentially be parsed
             content = common.to_unicode(str(reply.content))
-            if 'application/x-www-form-urlencoded' in content_type or 'application/xml' in content_type or 'application/javascript' in content_type or 'application/json' in content_type or 'text/javascript' in content_type or 'text/plain' in content_type:
+            if re.match('(application|text)/', content_type):
                 js = parser.parse(content, content_type)
             else:
                 js = None
@@ -84,7 +84,6 @@ def set_start_state(browser):
     browser.view.page().setLinkDelegationPolicy(2)
     def link_clicked(url):
         link = url.toString()
-        print link
         match = re.search('file.*/run(\w+)$', link)
         if match:
             try:
