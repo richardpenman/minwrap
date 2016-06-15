@@ -51,50 +51,35 @@ class Model:
     def run(self, browser):
         """Run the model if has successfully been built
         """
-        # XXX combine GET and POST into single list to reduce logic and match paper
         if self.used:
             return
         if self.ready():
-            default_cases = [None]
-            default = [(None, default_cases)]
-            get_diffs, post_diffs = self.model
             # remove redundant parameters that do not change the result, such as counters
             for transition in self.transitions:
                 if transition.output:
                     # found a transition that matches a known output
                     # check which parameters can be removed while still producing the same result
                     common.logger.info('Check whether any parameters in the model are redundant')
-                    for key, _ in get_diffs:
-                        ignore = key, GET
+                    for (key, _), method in self.model:
+                        ignore = key, method
                         if ignore not in self.ignored:
-                            test_html = browser.load(**self.gen_request(ignored=[(key, GET)], transition=transition))
+                            test_html = browser.load(**self.gen_request(ignored=[ignore], transition=transition))
                             if transition.matches(transition.output, test_html):
                                 self.ignored.append(ignore)
-                                print 'can ignore GET key:', key
-                    for key, _ in post_diffs:
-                        ignore = key, POST
-                        if ignore not in self.ignored:
-                            test_html = browser.load(**self.gen_request(ignored=[(key, POST)], transition=transition))
-                            if transition.matches(transition.output, test_html):
-                                ignored.append(ignore)
-                                print 'can ignore POST key:', key
-                    break
+                                print 'can ignore key:', ignore
+                    break # just need to test a single transition
 
             # abstract the example cases
             remove_empty = lambda es: [e for e in es if e]
-            get_abstraction = remove_empty([[(key, case) for case in self.abstract(examples)] for (key, examples) in get_diffs if (key, GET) not in self.ignored])
-            post_abstraction = remove_empty([[(key, case) for case in self.abstract(examples)] for (key, examples) in post_diffs if (key, POST) not in self.ignored])
+            abstraction = remove_empty([[((key, case), method) for case in self.abstract(examples)] for ((key, examples), method) in self.model if (key, method) not in self.ignored])
             
-            for get_key_cases in zip(*(get_abstraction)) or [()]:
-                common.logger.debug('qs key: {}'.format(get_key_cases))
-                for post_key_cases in zip(*(post_abstraction)) or [()]:
-                    common.logger.debug('post key: {}'.format(post_key_cases))
-                    if get_key_cases or post_key_cases:
-                        # found an abstraction
-                        self.used = True
-                        params = self.gen_request(dict(get_key_cases), dict(post_key_cases))
-                        common.logger.debug('Calling abstraction: {url} {data}'.format(**params))
-                        yield browser.load(**params)
+            for override_params in zip(*abstraction):
+                # found an abstraction
+                common.logger.debug('key: {}'.format(override_params))
+                self.used = True
+                download_params = self.gen_request(override_params)
+                common.logger.debug('Calling abstraction: {url} {data}'.format(**download_params))
+                yield browser.load(**download_params)
 
         else:
             # check whether multiple identical requests returned the same data
@@ -105,11 +90,15 @@ class Model:
                 yield browser.load(**self.gen_request())
 
 
-    def gen_request(self, get_dict=None, post_dict=None, ignored=None, transition=None):
+    def gen_request(self, override_params=None, ignored=None, transition=None):
         """Generate a request modifying the transitions for this model with the provided parameters
+
+        override_params: a list of ((key, value), method) pairs to override the parameters for this transition
+        ignored: a list of (key, method) pairs of parameters that can be left out
+        transition: a specific transition to use rather than the first one for this model
         """
-        get_dict = get_dict or {}
-        post_dict = post_dict or {}
+        get_dict = dict([param for (param, method) in (override_params or []) if method == GET])
+        post_dict = dict([param for (param, method) in (override_params or []) if method == POST])
         ignored = ignored or []
         transition = transition or self.transitions[0]
         url = QUrl(transition.url)
@@ -140,7 +129,7 @@ class Model:
             get_diffs = self.find_diffs([t.qs for t in self.transitions])
             post_diffs = self.find_diffs([t.data for t in self.transitions])
             if get_diffs or post_diffs:
-                self.model = get_diffs, post_diffs
+                self.model = [(diff, GET) for diff in get_diffs] + [(diff, POST) for diff in post_diffs]
             else:
                 # found a duplicate transition
                 common.logger.debug('Duplicate requests: {}'.format(self.transitions[-1]))

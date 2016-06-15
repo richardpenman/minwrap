@@ -64,10 +64,12 @@ def parse(text, content_type=''):
     """
     if content_type == 'text/xml':
         return parse_xml(text)
-    for fn in parse_json, parse_jsonp, parse_js:
+    for fn in parse_json, parse_jsonp:
         result = fn(text)
         if result is not None:
             return result
+    if 'html' not in content_type:
+        return parse_js(text)
 
 
 def json_counter(es, result=None):

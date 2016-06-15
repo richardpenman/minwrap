@@ -101,7 +101,7 @@ def set_start_state(browser):
 
 
 def main():
-    browser = AjaxBrowser(gui=True, use_cache=False, load_images=True, load_java=False, load_plugins=False)
+    browser = AjaxBrowser(gui=True, use_cache=False, load_images=False, load_java=False, load_plugins=False)
     set_start_state(browser)
 
     expected_output = None

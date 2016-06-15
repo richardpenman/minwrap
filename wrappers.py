@@ -1,6 +1,12 @@
 # -*- coding: utf-8 -*-
 
-__doc__ = 'Wrappers to interact with websites and trigger AJAX events'
+__doc__ = """Wrappers to interact with websites and trigger AJAX events
+
+A wrapper defines a run() method that takes a browser instance. 
+yield is used to give execution back to the main event loop. 
+A list of strings can be passed to define what the reply of interest should contain.
+"""
+
 
 
 class britishairways:
@@ -126,6 +132,22 @@ class kia:
             browser.keys('input#ds-searchinput', input_value) # XXX why not inserted
             browser.wait(5)
             yield output_values
+
+
+class landrover:
+    def __init__(self):
+        self.data = [
+            ('Lisboa', ['Avenida Marechal Gomes Costa, 33, Lisboa, 1800-255', 'Carclasse', '211 901 000', '211 901 099', 'miguel.igrejas@carclasse.pt', 'http://carclasse.landrover.pt/']),
+            ('Alcafaz', ['M. Coutinho Porto', 'Av. Dr. Francisco Sá Carneiro, Apartado 149, Paredes, Porto, 4580-104', '255 780 100', '255 780 111', 'mcoutinhoporto@mcoutinho.pt', 'http://mcoutinho.landrover.pt/']),
+        ]
+
+    def run(self, browser):
+        for input_value, output_values in self.data:
+            browser.load('http://www.landrover.pt/national-dealer-locator.html')
+            browser.fill('input[name=placeName]', input_value)
+            browser.click('input[type=submit]')
+            yield output_values
+
 
 
 class peugeot:
