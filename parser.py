@@ -45,7 +45,6 @@ def parse_xml(t):
         # check if is XML
         reply.parsed_response = ET.fromstring(response)
     except ET.ParseError:
-        # XXX add support for JavaScript
         return
     """
 
@@ -72,19 +71,6 @@ def parse(text, content_type=''):
         result = fn(text)
         if result is not None:
             return result
-    # still have not parsed
-    #if 'javascript' in content_type or 'plain' in content_type:
-        # try extract strings
-    #    return parse_js(text)
-
-
-# text parsers to test
-#text_parsers = [
-#    lambda s: s, # original string
-#    lambda s: s.replace(' ', '+'), # plus encoding
-#    lambda s: s.replace(' ', '%20'), # space encoding
-#    lambda s: urllib.quote(s), # percent encoding
-#]
 
 
 def json_counter(es, result=None):
@@ -123,12 +109,3 @@ def json_to_records(js):
             result = dict([(field, counter[field][i]) for field in fields])
             records.append(result)
     return records
-
-
-if __name__ == '__main__':
-    import sys
-    text = sys.argv[1]
-    r = json_to_records(parse(text))
-    from webscraping import common
-    l = common.unique(sum([e.values() for e in r], []))
-    print l#[str(e) for e in l]
