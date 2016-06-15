@@ -52,7 +52,9 @@ class Model:
         """Run the model if has successfully been built
         """
         # XXX combine GET and POST into single list to reduce logic and match paper
-        if self.ready() and not self.used:
+        if self.used:
+            return
+        if self.ready():
             default_cases = [None]
             default = [(None, default_cases)]
             get_diffs, post_diffs = self.model
@@ -94,6 +96,14 @@ class Model:
                         common.logger.debug('Calling abstraction: {url} {data}'.format(**params))
                         yield browser.load(**params)
 
+        else:
+            # check whether multiple identical requests returned the same data
+            unique_outputs = set([id(t.output) for t in self.transitions if t.output])
+            if len(unique_outputs) > 1:
+                common.logger.debug('Single request matches multiple outputs: {}'.format(str(self.transitions[-1])))
+                self.used = True
+                yield browser.load(**self.gen_request())
+
 
     def gen_request(self, get_dict=None, post_dict=None, ignored=None, transition=None):
         """Generate a request modifying the transitions for this model with the provided parameters
@@ -121,7 +131,7 @@ class Model:
             return str(url.toString())[1:]
         else:
             return ''
- 
+
 
     def build(self):
         """Build model of these transitions
@@ -132,9 +142,8 @@ class Model:
             if get_diffs or post_diffs:
                 self.model = get_diffs, post_diffs
             else:
-                # remove the duplicate transition
-                common.logger.debug('Duplicate requests')
-                self.transitions = self.transitions[:1]
+                # found a duplicate transition
+                common.logger.debug('Duplicate requests: {}'.format(self.transitions[-1]))
 
 
     def find_diffs(self, kvs):

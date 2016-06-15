@@ -66,6 +66,21 @@ class fiat:
             yield output_values
 
 
+class audi:
+    def __init__(self):
+        self.data = [
+            ('Antwerpen', ['Auto Natie', 'info@autonatie.audi.be', '+32 3 231 59 30', 'Groenendaallaan, 397 ANTWERPEN 3', 'Garage Thuy n.v.', 'Lakborslei, 81 DEURNE (ANTWERPEN)', '+32 3 326 11 22', 'info@thuy.audi.be']),
+            ('Bruxelles', ['D\'Ieteren Mail', 'Rue Du Mail, 50 IXELLES', '+32 2 536 55 11', 'info@dmail.audi.be', 'Audi Center Brussels', 'Bemptstraat, 38 DROGENBOS', '+32 2 371 27 11', 'info@ddrogenbos.audi.be']),
+        ]
+    
+    def run(self, browser):
+        for input_value, output_values in self.data:
+            browser.load('http://www.dealerlocator.audi.be/default.aspx')
+            browser.keys('input#addressinput', input_value)
+            browser.click('span#lnk_search')
+            yield output_values
+
+        
 class dacia:
     def __init__(self):
         self.data = [
@@ -81,6 +96,21 @@ class dacia:
             browser.click('button')
             yield output_values
 
+
+class hyundai:
+    def __init__(self):
+        self.data = [
+            ('linz', ['Lietz Linz GmbH', 'St. Peter Straße 21', '4020 Linz', '0732307665', 'Lietz-Urfahr GmbH', 'Mostnystraße 8', '4040 Linz-Urfahr', '0732757272']),
+            ('salzburg', ['AUTO&MOTORRAD HOLZMEISTER GmbH&Co.KG', 'http://holzmeister.hyundai.at/', 'Almerstraße 36', '5760 Saalfelden', '0658273891', 'info@autobike.eu']),
+        ]
+
+    def run(self, browser):
+        for input_value, output_values in self.data:
+            browser.load('http://www.hyundai.at/Beratung/Beratung/Handler-finden.aspx')
+            print browser.keys('input#dealerAutocomplete', input_value) # XXX why is text not inserted?
+            print browser.click('a#ctl00_cphContent_ctl01_ctlSearchBox_lbSearch')
+            yield output_values
+            
 
 class peugeot:
     def __init__(self):

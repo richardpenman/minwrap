@@ -50,11 +50,11 @@ class Transition:
                 num_found += 1
         # XXX adjust this threshold for each website?
         if num_found > len(expected_output) / 4:
-            common.logger.info('Transition matches expected output: {} {} {} / {}'.format(self.url.toString(), self.data, num_found, len(expected_output)))
+            common.logger.info('Transition matches expected output: {} {} / {}'.format(str(self), num_found, len(expected_output)))
             self.output = expected_output
             return True
         else:
-            common.logger.debug('Transition does not match expected output: {} {} {} / {}'.format(self.url.toString(), self.data, num_found, len(expected_output)))
+            #common.logger.debug('Transition does not match expected output: {} {} {} / {}'.format(self.url.toString(), self.data, num_found, len(expected_output)))
             return False
 
 

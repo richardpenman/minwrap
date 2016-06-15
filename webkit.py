@@ -321,7 +321,8 @@ class ResultsTable(QTableWidget):
                 self.show()
             # filter to fields in the header
             filtered_row = [record.get(field) for field in self.fields]
-            self.add_row(filtered_row)
+            if any(filtered_row):
+                self.add_row(filtered_row)
 
     def add_row(self, cols):
         """Add this row to the table if is not duplicate

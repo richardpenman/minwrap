@@ -84,18 +84,16 @@ def set_start_state(browser):
     browser.view.page().setLinkDelegationPolicy(2)
     def link_clicked(url):
         link = url.toString()
-        if link.endswith('/runbritishairways'):
-            browser.wrapper = wrappers.britishairways().run(browser)
-        elif link.endswith('/rundacia'):
-            browser.wrapper = wrappers.dacia().run(browser)
-        elif link.endswith('/rundelta'):
-            browser.wrapper = wrappers.delta().run(browser)
-        elif link.endswith('/runfiat'):
-            browser.wrapper = wrappers.fiat().run(browser)
-        elif link.endswith('/runlufthansa'):
-            browser.wrapper = wrappers.lufthansa().run(browser)
-        elif link.endswith('/runpeugeot'):
-            browser.wrapper = wrappers.peugeot().run(browser)
+        print link
+        match = re.search('file.*/run(\w+)$', link)
+        if match:
+            try:
+                wrapper = getattr(wrappers, match.groups()[0])()
+            except AttributeError:
+                pass
+            else:
+                QApplication.setOverrideCursor(Qt.WaitCursor)
+                browser.wrapper = wrapper.run(browser)
         else:
             # load the link
             browser.view.load(url)
@@ -104,19 +102,17 @@ def set_start_state(browser):
 
 
 def main():
-    browser = AjaxBrowser(gui=True, use_cache=False, load_images=False, load_java=False, load_plugins=False)
+    browser = AjaxBrowser(gui=True, use_cache=False, load_images=True, load_java=False, load_plugins=False)
     set_start_state(browser)
 
     expected_output = None
     while browser.running:
         if browser.wrapper is not None:
             try:
-                QApplication.setOverrideCursor(Qt.WaitCursor)
                 expected_output = browser.wrapper.next()
                 browser.wait_quiet()
             except StopIteration:
-                # XXX cursor is not set back
-                QApplication.setOverrideCursor(Qt.ArrowCursor)
+                QApplication.restoreOverrideCursor()
                 browser.wrapper = None
         browser.app.processEvents() 
 
