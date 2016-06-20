@@ -63,7 +63,7 @@ class Model:
                     for (key, _), method in self.model:
                         ignore = key, method
                         if ignore not in self.ignored:
-                            test_html = browser.load(**self.gen_request(ignored=[ignore], transition=transition))
+                            test_html = browser.load(**self.gen_request(ignored=self.ignored + [ignore], transition=transition))
                             if transition.matches(transition.output, test_html):
                                 self.ignored.append(ignore)
                                 print 'can ignore key:', ignore
