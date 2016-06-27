@@ -122,7 +122,7 @@ class dacia:
         self.category = 'car dealer'
         self.http_method = 'GET'
         self.response_format = 'HTML'
-        self.notes = 'Includes redundant parameters <i>_sourcePage</i> and <i>__fp</i>'
+        self.notes = 'Includes redundant parameters _sourcePage and __fp. Final response is HTML and scraping this is not yet supported.'
 
     def run(self, browser):
         for input_value, output_values in self.data:
@@ -185,7 +185,7 @@ class landrover:
         self.category = 'car dealer'
         self.http_method = 'GET'
         self.response_format = 'HTML'
-        self.notes = ''
+        self.notes = 'Final response is HTML and scraping this is not yet supported'
 
     def run(self, browser):
         for input_value, output_values in self.data:
@@ -212,7 +212,7 @@ class lexus:
     def run(self, browser):
         for input_value, output_values in self.data:
             browser.load(self.website)
-            browser.click('span[class="icon icon--base icon-close"]')
+            browser.click('span[class="icon icon--base icon-close"]') # accept cookies
             browser.wait_load('div.form-control__item__postcode')
             browser.fill('div.form-control__item__postcode input', input_value)
             browser.click('div.form-control__item__postcode button')

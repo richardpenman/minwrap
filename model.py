@@ -185,13 +185,14 @@ class Model:
                 for case in similar_cases:
                     yield case
             else:
-                similar_cases = browser.find_transitions(examples)
-                if similar_cases is not None:
-                    common.logger.info('Examples match previous transitions')
-                    for result in similar_cases:
-                        yield result
-            
-                else:
+                success = False
+                for case in browser.find_transitions(examples):
+                    if not success:
+                        success = True
+                        common.logger.info('Examples match previous transitions')
+                        yield case
+
+                if not success:
                     # no known data for these exact examples
                     # interesting data may just be a subset so generate a template of static components
                     template = Templater()

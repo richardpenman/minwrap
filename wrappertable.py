@@ -17,10 +17,14 @@ class WrapperTable(QTableWidget):
         self.wrapper = None
 
         header = 'Website', 'HTTP method', 'Response format', 'Category', 'Notes', 'Run'
-        self.setFont(QFont('Times New Roman', 16))
+        font = QFont('Times New Roman', 16)
+        self.setFont(font)
         self.setColumnCount(len(header))
         self.setHorizontalHeaderLabels(header)
+        font.setBold(True)
+        self.horizontalHeader().setFont(font)
         self.setVerticalHeaderLabels([])
+
         for wrapper_name in dir(wrappers):
             if not wrapper_name.startswith('_'):
                 wrapper = getattr(wrappers, wrapper_name)()
@@ -41,6 +45,7 @@ class WrapperTable(QTableWidget):
                 self.setVerticalHeaderItem(num_rows, QTableWidgetItem(''))
         self.horizontalHeader().setResizeMode(QHeaderView.ResizeToContents)
         self.showMaximized()
+        self.setSortingEnabled(True)
         self.raise_()
 
     def select_wrapper(self, wrapper):
