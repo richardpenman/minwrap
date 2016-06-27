@@ -7,45 +7,50 @@ import sip
 sip.setapi('QString', 2)
 from PyQt4.QtCore import QUrl
 from templater import Templater
-import parser
+import parser, transition
 
 # constants to indicate GET and POST requests
-GET, POST = 0, 1
+PATH, GET, POST = 0, 1, 2
 
 
 
 class Model:
     """Build a model for these transitions and extend to all known cases 
     """
-    def __init__(self, key):
-        # the hash of transitions that will fit this model
-        self.key = key
-        # the example transitions that follow this template
-        self.transitions = [] 
+    def __init__(self, transitions=None):
         # the data extracted from these transitions
         self.records = []
         # the field names for the extracted data
         self.fields = []
-        # the generated model GET/POST parameters
-        self.model = None
+        # the generated model PATH/GET/POST parameters
+        self.params = None
         # whether model has already been executed
         self.used = False 
         # which parameters can be ignored
         self.ignored = []
+        # the example transitions that follow this template
+        self.transitions = []
+        for transition in transitions or []:
+            self.add(transition)
+
+
+    def __len__(self):
+        """Return the number of unique URL's in this model
+        """
+        return len(set([t.url.toString() for t in self.transitions]))
 
 
     def add(self, transition):
-        """Add this transition to the model
+        """Add transition to model
         """
-        if not self.used:
-            self.transitions.append(transition)
-            self.build()
-            if transition.js:
-                for record in parser.json_to_records(transition.js):
-                    self.records.append(record)
-                    for field in record:
-                        if field not in self.fields:
-                            self.fields.append(field)
+        self.transitions.append(transition)
+        self.build()
+        if transition.js:
+            for record in parser.json_to_records(transition.js):
+                self.records.append(record)
+                for field in record:
+                    if field not in self.fields:
+                        self.fields.append(field)
 
 
     def run(self, browser):
@@ -56,32 +61,38 @@ class Model:
         if self.ready():
             # remove redundant parameters that do not change the result, such as counters
             for transition in self.transitions:
-                if transition.output:
+                if transition.output and (transition.qs or transition.data):
                     # found a transition that matches a known output
                     # check which parameters can be removed while still producing the same result
                     common.logger.info('Check whether any parameters in the model are redundant')
-                    for (key, _), method in self.model:
+                    for (key, _), method in self.params:
                         ignore = key, method
-                        if ignore not in self.ignored:
+                        if method in (GET, POST) and ignore not in self.ignored:
                             test_html = browser.load(**self.gen_request(ignored=self.ignored + [ignore], transition=transition))
                             if transition.matches(transition.output, test_html):
+                                common.logger.info('Can ignore key: {}'.format(ignore))
                                 self.ignored.append(ignore)
-                                print 'can ignore key:', ignore
                     break # just need to test a single transition
 
             # abstract the example cases
-            remove_empty = lambda es: [e for e in es if e]
-            abstraction = remove_empty([[((key, case), method) for case in self.abstract(examples)] for ((key, examples), method) in self.model if (key, method) not in self.ignored])
+            abstraction = []
+            def gen_params(key, method, case_iter):
+                for case in case_iter:
+                    yield (key, case), method
+            for ((key, examples), method) in self.params: 
+                if (key, method) not in self.ignored:
+                    abstraction.append(gen_params(key, method, self.abstract(browser, examples)))
+            #remove_empty = lambda es: [e for e in es if e]
             
-            for override_params in zip(*abstraction):
+            for override_params in itertools.izip(*abstraction):
                 # found an abstraction
-                common.logger.debug('key: {}'.format(override_params))
                 self.used = True
                 download_params = self.gen_request(override_params)
                 common.logger.debug('Calling abstraction: {url} {data}'.format(**download_params))
                 yield browser.load(**download_params)
 
         else:
+            
             # check whether multiple identical requests returned the same data
             unique_outputs = set([id(t.output) for t in self.transitions if t.output])
             if len(unique_outputs) > 1:
@@ -97,11 +108,17 @@ class Model:
         ignored: a list of (key, method) pairs of parameters that can be left out
         transition: a specific transition to use rather than the first one for this model
         """
-        get_dict = dict([param for (param, method) in (override_params or []) if method == GET])
-        post_dict = dict([param for (param, method) in (override_params or []) if method == POST])
+        override_params = override_params or []
         ignored = ignored or []
         transition = transition or self.transitions[0]
         url = QUrl(transition.url)
+        get_dict = dict([param for (param, method) in override_params if method == GET])
+        post_dict = dict([param for (param, method) in override_params if method == POST])
+        path_dict = self.path_to_dict(transition.path)
+        for (key, case), method in override_params:
+            if method == PATH:
+                path_dict[key] = case
+        url.setPath(self.dict_to_path(path_dict))
         qs_items = transition.qs
         data_items = transition.data
 
@@ -126,22 +143,31 @@ class Model:
         """Build model of these transitions
         """
         if len(self.transitions) > 1:
+            path_diffs = self.find_diffs([self.path_to_dict(t.path).items() for t in self.transitions])
             get_diffs = self.find_diffs([t.qs for t in self.transitions])
             post_diffs = self.find_diffs([t.data for t in self.transitions])
-            if get_diffs or post_diffs:
-                self.model = [(diff, GET) for diff in get_diffs] + [(diff, POST) for diff in post_diffs]
+            if get_diffs or post_diffs or path_diffs:
+                self.params = [(diff, PATH) for diff in path_diffs] + [(diff, GET) for diff in get_diffs] + [(diff, POST) for diff in post_diffs] 
+                common.logger.info('Model built: {}'.format(self.params))
             else:
                 # found a duplicate transition
                 common.logger.debug('Duplicate requests: {}'.format(self.transitions[-1]))
 
 
+    def path_to_dict(self, path):
+        return dict(enumerate(path.split('/')))
+
+    def dict_to_path(self, d):
+        return '/'.join(unicode(value) for _, value in sorted(d.items()))
+
+
     def find_diffs(self, kvs):
         """Find keys with different values
+        kvs: list of (key, value) pairs
         """
         model = []
         kvdicts = [dict(kv) for kv in kvs]
         for key, _ in kvs[0]:
-            #if key.startswith('_'): continue # XXX
             values = [kvdict[key] for kvdict in kvdicts if kvdict[key]]
             if not all(value == values[0] for value in values):
                 # found a key with differing values
@@ -149,41 +175,54 @@ class Model:
         return model
 
 
-    def abstract(self, examples):
+    def abstract(self, browser, examples):
         """Attempt abstacting these examples and if successful return a list of similar entities else None
         """
         if examples is not None:
             similar_cases = verticals.extend(examples)
             if similar_cases is not None:
-                common.logger.info('Abstracted {}'.format(examples))
+                common.logger.info('Abstracted: {}'.format(examples))
                 for case in similar_cases:
                     yield case
             else:
-                # no known data for these exact examples
-                # interesting data may just be a subset so generate a template of static components
-                template = Templater()
-                for text in examples:
-                    template.learn(text)
-                common.logger.info('Trained template: {}'.format(template._template))
+                similar_cases = browser.find_transitions(examples)
+                if similar_cases is not None:
+                    common.logger.info('Examples match previous transitions')
+                    for result in similar_cases:
+                        yield result
+            
+                else:
+                    # no known data for these exact examples
+                    # interesting data may just be a subset so generate a template of static components
+                    template = Templater()
+                    for text in examples:
+                        template.learn(text)
+                    common.logger.info('Trained template: {}'.format(template._template))
 
-                # and now check whether dynamic components can be abstracted
-                parsed_examples = [template.parse(text) for text in examples]
-                similar_cases = []
-                for examples in zip(*parsed_examples):
-                    if any(examples):
-                        similar_cases.append(verticals.extend(examples) or [])
-                        if similar_cases[-1]:
-                            common.logger.info('Abstracted {}'.format(examples))
+                    # and now check whether dynamic components can be abstracted
+                    parsed_examples = [template.parse(text) for text in examples]
+                    similar_cases = []
+                    for examples in zip(*parsed_examples):
+                        if any(examples):
+                            similar_cases.append(verticals.extend(examples) or [])
+                            if similar_cases[-1]:
+                                common.logger.info('Abstracted: {}'.format(examples))
+                            else:
+                                common.logger.info('Failed to abstract: {}'.format(examples))
                         else:
-                            common.logger.info('Failed to abstract: {}'.format(examples))
-                    else:
-                        # create iterator of empty strings
-                        similar_cases.append('' for _ in itertools.count())
-                for vector in zip(*similar_cases):
-                    yield template.join(vector)
+                            # create iterator of empty strings
+                            similar_cases.append('' for _ in itertools.count())
+
+                    if similar_cases:
+                        for vector in zip(*similar_cases):
+                            yield template.join(vector)
+                    # XXX add support for partial matches over dependencies - need to find example
+                    #else:
+                    #    for result in self.navigate_dependencies(browser, examples):
+                    #        yield template.join(result)
 
 
     def ready(self):
         """Whether this model is ready to be used
         """
-        return self.model is not None
+        return self.params is not None

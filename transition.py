@@ -18,7 +18,7 @@ class Transition:
         self.content = common.to_unicode(str(reply.content))
         self.output = None
         self.js = js
-        #self.values = [value for value in json_values(js) or [] if value] # XXX need to convert unicode?
+        self.values = [value for value in json_values(js) or [] if value] # XXX need to convert unicode?
         request = reply.orig_request
         self.headers = [(header, request.rawHeader(header)) for header in request.rawHeaderList()]
 
@@ -37,7 +37,7 @@ class Transition:
         """A unique key to represent this transition
         """
         get_keys = lambda es: tuple(k for (k,v) in es)
-        return hash((self.host, self.path, get_keys(self.qs), get_keys(self.data)))
+        return hash((self.host, self.path.count('/'), get_keys(self.qs), get_keys(self.data)))
 
 
     def matches(self, expected_output, content=None):
@@ -57,6 +57,70 @@ class Transition:
             #common.logger.debug('Transition does not match expected output: {} {} {} / {}'.format(self.url.toString(), self.data, num_found, len(expected_output)))
             return False
 
+
+
+def generate_path(data, goal, parents=None):
+    """Find the path to the goal in this data structure
+
+    >>> js = [{'person': 'richard', 'location': 'oxford'}, {'person': 'tim', 'location': 'oxford'}]
+    >>> [jp.steps for jp in generate_path(js, 'richard')]
+    [(0, 'person')]
+    >>> [jp.steps for jp in generate_path(js, 'oxford')]
+    [(0, 'location'), (1, 'location')]
+    >>> [jp.steps for jp in generate_path(js, 'cambridge')]
+    []
+
+    """
+    parents = [] if parents is None else parents 
+    if isinstance(data, dict):
+        for key, record in data.items():
+            for result in generate_path(record, goal, parents[:] + [key]):
+                yield result
+    elif isinstance(data, list):
+        for index, record in enumerate(data):
+            for result in generate_path(record, goal, parents[:] + [index]):
+                yield result
+    elif data == goal or unicode(data) == goal:
+        yield JsonPath(parents)
+
+
+
+class JsonPath:
+    """Wrapper to iterate through a dictionary given a list of indices / keys
+
+    >>> jp = JsonPath([0, 'person'])
+    >>> jp([{'person': 'richard'}, {'person': 'tim'}])
+    'richard'
+    >>> jp([])
+    """
+    def __init__(self, steps):
+        self.steps = tuple(steps)
+
+    def __str__(self):
+        return str(self.steps)
+
+    def __eq__(self, other):
+        if type(other) is type(self):
+            return self.__dict__ == other.__dict__
+        return False
+
+    def __hash__(self):
+        return hash(str(self))
+
+    def __call__(self, js, steps=None):
+        steps = list(self.steps) if steps is None else steps
+        if steps:
+            step = steps.pop(0)
+            try:
+                js = js[step]
+            except (KeyError, IndexError):
+                return None
+            else:
+                return self(js, steps)
+        else:
+            return js
+
+    
 
 def json_values(es):
     """Recursively parse values from this json dict

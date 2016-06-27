@@ -9,8 +9,8 @@ from PyQt4.QtNetwork import QNetworkRequest
 from PyQt4.QtCore import QUrl, Qt
 from PyQt4.QtGui import QApplication
 
-import re, os, collections, pprint
-import webkit, common, model, parser, transition, verticals, wrappers
+import sys, re, os, collections, pprint
+import webkit, common, model, parser, transition, verticals, wrappertable
 
 
 
@@ -19,25 +19,17 @@ class AjaxBrowser(webkit.Browser):
         """Extend webkit.Browser to add some specific functionality for abstracting AJAX requests
         """
         super(AjaxBrowser, self).__init__(**argv)
-        #self.view.page().mainFrame().loadStarted.connect(self._load_start)
-        #self._load_start()
         self.view.page().mainFrame().loadFinished.connect(self._load_finish)
         # keep track of the potentially useful transitions
         self.wrapper = None
-        # store transitions with the same path and similar querystring / POST at the same key
-        self.models = {}
         # transitions found so far
         self.transitions = []
 
 
-    #def _load_start(self):
-    #    """Start loading new page so clear the state
-    #    """
-
     def _load_finish(self, ok):
         """Finished loading a page so store the initial state
         """
-        if ok and not self.current_url().startswith('file'):
+        if ok:
             # a webpage has loaded successfully
             common.logger.info('loaded: {} {}'.format(ok, self.current_url()))
  
@@ -55,55 +47,76 @@ class AjaxBrowser(webkit.Browser):
             pass # ignore these irrelevant content types
         else:
             common.logger.debug('Response: {} {}'.format(reply.url().toString(), reply.data))
-            # have found a response that can potentially be parsed
+            # have found a response that can potentially be parsed for useful content
             content = common.to_unicode(str(reply.content))
             if re.match('(application|text)/', content_type):
                 js = parser.parse(content, content_type)
             else:
                 js = None
             # save for checking later once interface has been updated
-            new_transition = transition.Transition(reply, js)
-            self.transitions.append(new_transition)
-            key = hash(new_transition)
-            try:
-                this_model = self.models[key]
-            except KeyError:
-                # start a new model for this key
-                self.models[key] = this_model = model.Model(key)
-            this_model.add(new_transition)
-            if False and this_model.ready():
-                # add data to verticals for supporting multiple step abstractions
-                verticals.add_model(this_model, self)
+            self.transitions.append(transition.Transition(reply, js))
 
 
+    def run_models(self, models):
+        """Try running models first that potentially use less steps, given by the length of the model
+        """
+        for final_model in sorted(models.values(), key=lambda m: len(m), reverse=True): # XXX reverse sort to test geocode
+            event_i = None
+            for event_i, _ in enumerate(final_model.run(self)):
+                if event_i == 0:
+                    # initialize the result table with the already known transition records
+                    self.table.clear()
+                    self.table.add_records(final_model.records)
+                # model has generated an AJAX request
+                if self.running:
+                    js = parser.parse(self.current_text())
+                    if js:
+                        self.table.add_records(parser.json_to_records(js))
+                else:
+                    break
+            if event_i is not None:
+                break # sucessfully executed a model so can exit
 
-def set_start_state(browser):
-    """Temporary hack to load a start page for choosing which wrapper to load
-    """
-    browser.view.setUrl(QUrl.fromLocalFile(os.path.abspath('start.html')))
-    browser.view.page().setLinkDelegationPolicy(2)
-    def link_clicked(url):
-        link = url.toString()
-        match = re.search('file.*/run(\w+)$', link)
-        if match:
-            try:
-                wrapper = getattr(wrappers, match.groups()[0])()
-            except AttributeError:
-                pass
-            else:
-                QApplication.setOverrideCursor(Qt.WaitCursor)
-                browser.wrapper = wrapper.run(browser)
-        else:
-            # load the link
-            browser.view.load(url)
-    browser.view.linkClicked.connect(link_clicked)
+
+    def find_transitions(self, examples):
+        """Find transitions that have the example data we are after at the same path
+        """
+        path_transitions = collections.defaultdict(list)
+        for example in examples:
+            for t in self.transitions:
+                if example in t.values:
+                    # data exists in this transition
+                    for path in transition.generate_path(t.js, example):
+                        path_transitions[path].append(t)
+
+        # check if any of these matches can be modelled
+        for path, ts in path_transitions.items():
+            if len(ts) == len(examples):
+                # found a path that satisfies all conditions
+                common.logger.info('Found a path: {}'.format(path))
+                success = False
+                for _ in model.Model(ts).run(self):
+                    js = parser.parse(self.current_text())
+                    if js:
+                        success = True
+                        yield path(js)
+                if success:
+                    break # this model was successful so can exit
 
 
 
 def main():
-    browser = AjaxBrowser(gui=True, use_cache=False, load_images=False, load_java=False, load_plugins=False)
-    set_start_state(browser)
+    app = QApplication(sys.argv)
+    wt = wrappertable.WrapperTable()
+    app.exec_()
+    if wt.wrapper is None:
+        return
+    # execute the selected wrapper 
+    browser = AjaxBrowser(app=app, gui=True, use_cache=False, load_images=False, load_java=False, load_plugins=False)
+    browser.wrapper = wt.wrapper.run(browser)
+    QApplication.setOverrideCursor(Qt.WaitCursor)
 
+    models = {} 
     expected_output = None
     while browser.running:
         if browser.wrapper is not None:
@@ -111,36 +124,24 @@ def main():
                 expected_output = browser.wrapper.next()
                 browser.wait_quiet()
             except StopIteration:
+                # completed running the wrapper
+                expected_output = browser.wrapper = None
                 QApplication.restoreOverrideCursor()
-                browser.wrapper = None
+                browser.run_models(models)
         browser.app.processEvents() 
 
         if browser.transitions and expected_output:
-            used_transitions = []
             # check whether the transitions that were discovered contain the expected output
-            for prev_transition in browser.transitions:
-                if prev_transition.matches(expected_output):
-                    used_transitions.append(prev_transition)
-                    key = hash(prev_transition)
-                    this_model = browser.models[key]
-
-                    for event_i, _ in enumerate(this_model.run(browser)):
-                        if event_i == 0:
-                            # initialize the result table with the already known transition records
-                            browser.table.clear()
-                            browser.table.add_records(this_model.records)
-                        # model has generated an AJAX request
-                        if browser.running:
-                            js = parser.parse(browser.current_text())
-                            if js:
-                                browser.table.add_records(parser.json_to_records(js))
-                        else:
-                            break
-            for t in used_transitions:
-                try:
+            for t in reversed(browser.transitions):
+                if t.matches(expected_output):
+                    # found a transition that matches the expected output so add it to model
+                    try:
+                        m = models[hash(t)]
+                    except KeyError:
+                        m = models[hash(t)] = model.Model()
+                    m.add(t)
                     browser.transitions.remove(t)
-                except ValueError:
-                    pass
+
 
 
 if __name__ == '__main__':
