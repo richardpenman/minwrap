@@ -513,8 +513,8 @@ class Browser(QWidget):
 
 
     def wait_quiet(self, timeout=20):
-        """Wait until all requests have completed
-        `timeout' is the maximum amount of seconds to wait
+        """Wait until all requests have completed up to a maximum timeout.
+        Returns True if all requests complete before the timeout.
         """
         self.app.processEvents()
         deadline = time() + timeout
@@ -527,8 +527,8 @@ class Browser(QWidget):
 
 
     def wait_load(self, pattern, timeout=60):
-        """Wait for this content to be loaded up to maximum timeout
-        Returns boolean of whether pattern was loaded in the time limit
+        """Wait for this content to be loaded up to maximum timeout.
+        Returns True if pattern was loaded in the time limit.
         """
         deadline = time() + timeout
         while time() < deadline:
@@ -559,7 +559,8 @@ class Browser(QWidget):
 
 
     def keys(self, pattern, text):
-        """Simulate typing by focusing on element and triggering key events
+        """Simulate typing by focusing on elements that match the pattern and triggering key events.
+        Returns the number of elements matched.
         """
         es = self.find(pattern)
         for e in es:
@@ -572,7 +573,7 @@ class Browser(QWidget):
 
 
     def attr(self, pattern, name, value=None):
-        """Set attribute if value is defined, else get
+        """For the elements that match this pattern, set attribute if value is defined, else return the value.
         """
         if value is None:
             # want to get attribute
@@ -585,7 +586,7 @@ class Browser(QWidget):
 
 
     def fill(self, pattern, value):
-        """Set text of these elements to value
+        """Set text of the matching elements to value, and return the number of elements matched.
         """
         es = self.find(pattern)
         for e in es:
@@ -599,8 +600,7 @@ class Browser(QWidget):
 
  
     def find(self, pattern):
-        """Returns whether element matching css pattern exists
-        Note this uses CSS syntax, not Xpath
+        """Returns the elements matching this CSS pattern.
         """
         if isinstance(pattern, basestring):
             matches = self.view.page().mainFrame().findAllElements(pattern).toList()

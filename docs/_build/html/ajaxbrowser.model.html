@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ajaxbrowser.model module &mdash; ajaxbrowser  documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="ajaxbrowser  documentation" href="index.html" />
+    <link rel="up" title="ajaxbrowser package" href="ajaxbrowser.html" />
+    <link rel="next" title="ajaxbrowser.parser module" href="ajaxbrowser.parser.html" />
+    <link rel="prev" title="ajaxbrowser.main module" href="ajaxbrowser.main.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-ajaxbrowser.model">
+<span id="ajaxbrowser-model-module"></span><h1>ajaxbrowser.model module<a class="headerlink" href="#module-ajaxbrowser.model" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="ajaxbrowser.model.Model">
+<em class="property">class </em><code class="descclassname">ajaxbrowser.model.</code><code class="descname">Model</code><span class="sig-paren">(</span><em>transitions=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ajaxbrowser/model.html#Model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ajaxbrowser.model.Model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build a model for these transitions and extend to all known cases</p>
+<dl class="method">
+<dt id="ajaxbrowser.model.Model.abstract">
+<code class="descname">abstract</code><span class="sig-paren">(</span><em>browser</em>, <em>examples</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ajaxbrowser/model.html#Model.abstract"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ajaxbrowser.model.Model.abstract" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attempt abstacting these examples and if successful return a list of similar entities else None</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ajaxbrowser.model.Model.add">
+<code class="descname">add</code><span class="sig-paren">(</span><em>transition</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ajaxbrowser/model.html#Model.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ajaxbrowser.model.Model.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add transition to model</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ajaxbrowser.model.Model.build">
+<code class="descname">build</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ajaxbrowser/model.html#Model.build"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ajaxbrowser.model.Model.build" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build model of these transitions</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ajaxbrowser.model.Model.dict_to_path">
+<code class="descname">dict_to_path</code><span class="sig-paren">(</span><em>d</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ajaxbrowser/model.html#Model.dict_to_path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ajaxbrowser.model.Model.dict_to_path" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ajaxbrowser.model.Model.encode_data">
+<code class="descname">encode_data</code><span class="sig-paren">(</span><em>items</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ajaxbrowser/model.html#Model.encode_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ajaxbrowser.model.Model.encode_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert these querystring items into a string of data</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ajaxbrowser.model.Model.find_diffs">
+<code class="descname">find_diffs</code><span class="sig-paren">(</span><em>kvs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ajaxbrowser/model.html#Model.find_diffs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ajaxbrowser.model.Model.find_diffs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find keys with different values
+kvs: list of (key, value) pairs</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ajaxbrowser.model.Model.gen_request">
+<code class="descname">gen_request</code><span class="sig-paren">(</span><em>override_params=None</em>, <em>ignored=None</em>, <em>transition=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ajaxbrowser/model.html#Model.gen_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ajaxbrowser.model.Model.gen_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a request modifying the transitions for this model with the provided parameters</p>
+<p>override_params: a list of ((key, value), method) pairs to override the parameters for this transition
+ignored: a list of (key, method) pairs of parameters that can be left out
+transition: a specific transition to use rather than the first one for this model</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ajaxbrowser.model.Model.path_to_dict">
+<code class="descname">path_to_dict</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ajaxbrowser/model.html#Model.path_to_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ajaxbrowser.model.Model.path_to_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ajaxbrowser.model.Model.ready">
+<code class="descname">ready</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ajaxbrowser/model.html#Model.ready"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ajaxbrowser.model.Model.ready" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether this model is ready to be used</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ajaxbrowser.model.Model.run">
+<code class="descname">run</code><span class="sig-paren">(</span><em>browser</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ajaxbrowser/model.html#Model.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ajaxbrowser.model.Model.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run the model if has successfully been built</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="ajaxbrowser.html">ajaxbrowser package</a><ul>
+      <li>Previous: <a href="ajaxbrowser.main.html" title="previous chapter">ajaxbrowser.main module</a></li>
+      <li>Next: <a href="ajaxbrowser.parser.html" title="next chapter">ajaxbrowser.parser module</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/ajaxbrowser.model.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Author.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+      
+      |
+      <a href="_sources/ajaxbrowser.model.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

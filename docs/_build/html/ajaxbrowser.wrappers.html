@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ajaxbrowser.wrappers package &mdash; ajaxbrowser  documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="ajaxbrowser  documentation" href="index.html" />
+    <link rel="up" title="ajaxbrowser package" href="ajaxbrowser.html" />
+    <link rel="next" title="ajaxbrowser.wrappers.audi module" href="ajaxbrowser.wrappers.audi.html" />
+    <link rel="prev" title="ajaxbrowser package" href="ajaxbrowser.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="ajaxbrowser-wrappers-package">
+<h1>ajaxbrowser.wrappers package<a class="headerlink" href="#ajaxbrowser-wrappers-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ajaxbrowser.wrappers.audi.html">ajaxbrowser.wrappers.audi module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ajaxbrowser.wrappers.british_airways.html">ajaxbrowser.wrappers.british_airways module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ajaxbrowser.wrappers.dacia.html">ajaxbrowser.wrappers.dacia module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ajaxbrowser.wrappers.delta.html">ajaxbrowser.wrappers.delta module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ajaxbrowser.wrappers.fiat.html">ajaxbrowser.wrappers.fiat module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ajaxbrowser.wrappers.kia.html">ajaxbrowser.wrappers.kia module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ajaxbrowser.wrappers.landrover.html">ajaxbrowser.wrappers.landrover module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ajaxbrowser.wrappers.lexus.html">ajaxbrowser.wrappers.lexus module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ajaxbrowser.wrappers.lufthansa.html">ajaxbrowser.wrappers.lufthansa module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ajaxbrowser.wrappers.peugeot.html">ajaxbrowser.wrappers.peugeot module</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="module-contents">
+<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-ajaxbrowser.wrappers"></span><p>Wrappers to interact with websites and trigger AJAX events</p>
+<p>A wrapper defines a class called Wrapper with several required attributes:</p>
+<ul class="simple">
+<li>data: a list of tuples defining the input and expected output strings (&#8216;London&#8217;: [&#8216;...&#8217;, &#8216;...&#8217;])</li>
+<li>run(): this method takes an AjaxBrowser instance and performs each execution on the browser, calling yield after each iteration to relinquish control to the parent thread so that network traffic from the execution path can be analysed.</li>
+</ul>
+<p>There are also several optional attributes that are used for displaying a summary in the start window:</p>
+<ul class="simple">
+<li>website: the website this wrapper is for</li>
+<li>category: the category of website (autocomplete, car dealers, etc)</li>
+<li>http_method: the HTTP method used for downloading the key data (GET/POST)</li>
+<li>response_format: the content type of the key data (JSON/JSONP/XML/HTML/etc)</li>
+<li>notes: any further notes about this website</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">ajaxbrowser.wrappers package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-contents">Module contents</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="ajaxbrowser.html">ajaxbrowser package</a><ul>
+      <li>Previous: <a href="ajaxbrowser.html" title="previous chapter">ajaxbrowser package</a></li>
+      <li>Next: <a href="ajaxbrowser.wrappers.audi.html" title="next chapter">ajaxbrowser.wrappers.audi module</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/ajaxbrowser.wrappers.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Author.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+      
+      |
+      <a href="_sources/ajaxbrowser.wrappers.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

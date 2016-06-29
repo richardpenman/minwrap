@@ -52,7 +52,19 @@ Wrappers are classes defined in the *wrappers* directory and are structured like
                 yield output_values
 
 
-Documentation on each attribute is available here. XXX
+A wrapper defines a class called Wrapper with several required attributes:
+
+- data: a list of tuples defining the input and expected output strings ('London': ['...', '...'])
+- run(): this method takes an AjaxBrowser instance and performs each execution on the browser, calling yield after each iteration to relinquish control to the parent thread so that network traffic from the execution path can be analysed.
+
+There are also several optional attributes that are used for displaying a summary in the start window:
+
+- website: the website this wrapper is for
+- category: the category of website (autocomplete, car dealers, etc)
+- http_method: the HTTP method used for downloading the key data (GET/POST)
+- response_format: the content type of the key data (JSON/JSONP/XML/HTML/etc)
+- notes: any further notes about this website
+
 
 Here is an implementation for Lufthunsa from *wrappers/lufthunsa.py*:
 
@@ -104,6 +116,11 @@ And here is an implementation for Lexus from *wrappers/lexus.py*:
                 browser.click('div.form-control__item__postcode button')
                 yield output_values
 
+
+AjaxBrowser
+===========
+
+The AjaxBrowser class is a wrapper around WebKit's **QWebView** class for rendering web pages, which is documented at http://doc.qt.io/qt-4.8/qwebview.html. Some helper methods have been defined
 
 
 Run

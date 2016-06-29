@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ajaxbrowser.common module &mdash; ajaxbrowser  documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="ajaxbrowser  documentation" href="index.html" />
+    <link rel="up" title="ajaxbrowser package" href="ajaxbrowser.html" />
+    <link rel="next" title="ajaxbrowser.db module" href="ajaxbrowser.db.html" />
+    <link rel="prev" title="ajaxbrowser.ajaxbrowser module" href="ajaxbrowser.ajaxbrowser.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-ajaxbrowser.common">
+<span id="ajaxbrowser-common-module"></span><h1>ajaxbrowser.common module<a class="headerlink" href="#module-ajaxbrowser.common" title="Permalink to this headline">¶</a></h1>
+<p>Common helper functions</p>
+<dl class="class">
+<dt id="ajaxbrowser.common.ConsoleHandler">
+<em class="property">class </em><code class="descclassname">ajaxbrowser.common.</code><code class="descname">ConsoleHandler</code><a class="reference internal" href="_modules/ajaxbrowser/common.html#ConsoleHandler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ajaxbrowser.common.ConsoleHandler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">logging.StreamHandler</span></code></p>
+<p>Log to stderr for errors else stdout</p>
+<dl class="method">
+<dt id="ajaxbrowser.common.ConsoleHandler.emit">
+<code class="descname">emit</code><span class="sig-paren">(</span><em>record</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ajaxbrowser/common.html#ConsoleHandler.emit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ajaxbrowser.common.ConsoleHandler.emit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="ajaxbrowser.common.get_logger">
+<code class="descclassname">ajaxbrowser.common.</code><code class="descname">get_logger</code><span class="sig-paren">(</span><em>output_file</em>, <em>level=20</em>, <em>maxbytes=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ajaxbrowser/common.html#get_logger"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ajaxbrowser.common.get_logger" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a logger instance</p>
+<dl class="docutils">
+<dt>output_file:</dt>
+<dd>file where to save the log</dd>
+<dt>level:</dt>
+<dd>the minimum logging level to save</dd>
+<dt>maxbytes:</dt>
+<dd>the maxbytes allowed for the log file size. 0 means no limit.</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="ajaxbrowser.common.most_common">
+<code class="descclassname">ajaxbrowser.common.</code><code class="descname">most_common</code><span class="sig-paren">(</span><em>l</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ajaxbrowser/common.html#most_common"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ajaxbrowser.common.most_common" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the most common element in this list</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">most_common</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ajaxbrowser.common.parse_proxy">
+<code class="descclassname">ajaxbrowser.common.</code><code class="descname">parse_proxy</code><span class="sig-paren">(</span><em>proxy</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ajaxbrowser/common.html#parse_proxy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ajaxbrowser.common.parse_proxy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse a proxy into its fragments
+Returns a dict with username, password, host, and port</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">parse_proxy</span><span class="p">(</span><span class="s">&#39;login:pw@66.197.208.200:8080&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">username</span>
+<span class="go">&#39;login&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">password</span>
+<span class="go">&#39;pw&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">host</span>
+<span class="go">&#39;66.197.208.200&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">port</span>
+<span class="go">&#39;8080&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">parse_proxy</span><span class="p">(</span><span class="s">&#39;66.197.208.200&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">username</span> <span class="o">==</span> <span class="n">f</span><span class="o">.</span><span class="n">password</span> <span class="o">==</span> <span class="n">f</span><span class="o">.</span><span class="n">port</span> <span class="o">==</span> <span class="s">&#39;&#39;</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">host</span>
+<span class="go">&#39;66.197.208.200&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ajaxbrowser.common.remove_tags">
+<code class="descclassname">ajaxbrowser.common.</code><code class="descname">remove_tags</code><span class="sig-paren">(</span><em>html</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ajaxbrowser/common.html#remove_tags"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ajaxbrowser.common.remove_tags" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove tags from this html string</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ajaxbrowser.common.to_ascii">
+<code class="descclassname">ajaxbrowser.common.</code><code class="descname">to_ascii</code><span class="sig-paren">(</span><em>html</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ajaxbrowser/common.html#to_ascii"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ajaxbrowser.common.to_ascii" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return ascii part of html</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ajaxbrowser.common.to_float">
+<code class="descclassname">ajaxbrowser.common.</code><code class="descname">to_float</code><span class="sig-paren">(</span><em>s</em>, <em>default=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ajaxbrowser/common.html#to_float"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ajaxbrowser.common.to_float" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return float from this string</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">to_float</span><span class="p">(</span><span class="s">&#39;90.45&#39;</span><span class="p">)</span>
+<span class="go">90.45</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">to_float</span><span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">)</span>
+<span class="go">0.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">to_float</span><span class="p">(</span><span class="s">&#39;90&#39;</span><span class="p">)</span>
+<span class="go">90.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">to_float</span><span class="p">(</span><span class="s">&#39;..9&#39;</span><span class="p">)</span>
+<span class="go">0.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">to_float</span><span class="p">(</span><span class="s">&#39;.9&#39;</span><span class="p">)</span>
+<span class="go">0.9</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">to_float</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+<span class="go">0.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">to_float</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ajaxbrowser.common.to_int">
+<code class="descclassname">ajaxbrowser.common.</code><code class="descname">to_int</code><span class="sig-paren">(</span><em>s</em>, <em>default=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ajaxbrowser/common.html#to_int"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ajaxbrowser.common.to_int" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return integer from this string</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">to_int</span><span class="p">(</span><span class="s">&#39;90&#39;</span><span class="p">)</span>
+<span class="go">90</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">to_int</span><span class="p">(</span><span class="s">&#39;-90.2432&#39;</span><span class="p">)</span>
+<span class="go">-90</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">to_int</span><span class="p">(</span><span class="s">&#39;a90a&#39;</span><span class="p">)</span>
+<span class="go">90</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">to_int</span><span class="p">(</span><span class="s">&#39;a&#39;</span><span class="p">)</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">to_int</span><span class="p">(</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
+<span class="go">90</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ajaxbrowser.common.to_unicode">
+<code class="descclassname">ajaxbrowser.common.</code><code class="descname">to_unicode</code><span class="sig-paren">(</span><em>obj</em>, <em>encoding='utf-8'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ajaxbrowser/common.html#to_unicode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ajaxbrowser.common.to_unicode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert obj to unicode</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ajaxbrowser.common.unescape">
+<code class="descclassname">ajaxbrowser.common.</code><code class="descname">unescape</code><span class="sig-paren">(</span><em>text</em>, <em>encoding='utf-8'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ajaxbrowser/common.html#unescape"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ajaxbrowser.common.unescape" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interpret escape characters</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">unescape</span><span class="p">(</span><span class="s">&#39;&amp;lt;hello&amp;nbsp;&amp;amp;%20world&amp;gt;&#39;</span><span class="p">)</span>
+<span class="go">&#39;&lt;hello &amp; world&gt;&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="ajaxbrowser.html">ajaxbrowser package</a><ul>
+      <li>Previous: <a href="ajaxbrowser.ajaxbrowser.html" title="previous chapter">ajaxbrowser.ajaxbrowser module</a></li>
+      <li>Next: <a href="ajaxbrowser.db.html" title="next chapter">ajaxbrowser.db module</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/ajaxbrowser.common.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Author.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+      
+      |
+      <a href="_sources/ajaxbrowser.common.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

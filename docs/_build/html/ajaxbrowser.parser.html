@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ajaxbrowser.parser module &mdash; ajaxbrowser  documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="ajaxbrowser  documentation" href="index.html" />
+    <link rel="up" title="ajaxbrowser package" href="ajaxbrowser.html" />
+    <link rel="next" title="ajaxbrowser.setup module" href="ajaxbrowser.setup.html" />
+    <link rel="prev" title="ajaxbrowser.model module" href="ajaxbrowser.model.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-ajaxbrowser.parser">
+<span id="ajaxbrowser-parser-module"></span><h1>ajaxbrowser.parser module<a class="headerlink" href="#module-ajaxbrowser.parser" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="ajaxbrowser.parser.json_counter">
+<code class="descclassname">ajaxbrowser.parser.</code><code class="descname">json_counter</code><span class="sig-paren">(</span><em>es</em>, <em>result=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ajaxbrowser/parser.html#json_counter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ajaxbrowser.parser.json_counter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse number of times each key-value pair occurs in json</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">json_counter</span><span class="p">([{</span><span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;bob&#39;</span><span class="p">,</span> <span class="s">&#39;age&#39;</span><span class="p">:</span> <span class="mi">29</span><span class="p">},</span> <span class="p">{</span><span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;sara&#39;</span><span class="p">,</span> <span class="s">&#39;age&#39;</span><span class="p">:</span> <span class="mi">17</span><span class="p">},</span> <span class="s">&#39;hello&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+<span class="go">[(&#39;age&#39;, [29, 17]), (&#39;name&#39;, [&#39;bob&#39;, &#39;sara&#39;])]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ajaxbrowser.parser.json_to_records">
+<code class="descclassname">ajaxbrowser.parser.</code><code class="descname">json_to_records</code><span class="sig-paren">(</span><em>js</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ajaxbrowser/parser.html#json_to_records"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ajaxbrowser.parser.json_to_records" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract records from this json object by finding the leaf nodes and taking the nodes with most common counts as the columns</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ajaxbrowser.parser.parse">
+<code class="descclassname">ajaxbrowser.parser.</code><code class="descname">parse</code><span class="sig-paren">(</span><em>text</em>, <em>content_type=''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ajaxbrowser/parser.html#parse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ajaxbrowser.parser.parse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Try all parsers on this input</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ajaxbrowser.parser.parse_js">
+<code class="descclassname">ajaxbrowser.parser.</code><code class="descname">parse_js</code><span class="sig-paren">(</span><em>t</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ajaxbrowser/parser.html#parse_js"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ajaxbrowser.parser.parse_js" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse the key/value pairs from this JavaScript</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">text</span> <span class="o">=</span> <span class="s">r&#39;var s0=[];var s1={};var s4=[];var s2={};var s5=[];var s3={};var s6=[];s0[0]=s1;s0[1]=s2;s0[2]=s3; s1.airportCode=&quot;MEL&quot;;s1.airportFullName=&quot;Melbourne, Australia (MEL)&quot;;s1.airportName=&quot;Tullamarine&quot;;s1.aliases=s4;s1.cityCode=&quot;MEL&quot;;s1.cityName=&quot;Melbourne&quot;;s1.countryCode=&quot;AU&quot;;s1.region=&quot;Australia&quot;; s4[0]=&quot;Melbourne, Australia (MEL)&quot;;s4[1]=&quot;Tullamarine&quot;;s4[2]=&quot;Australia&quot;; s2.airportCode=&quot;MLB&quot;;s2.airportFullName=&quot;Melbourne, FL (MLB)&quot;;s2.airportName=&quot;Melbourne Intl&quot;;s2.aliases=s5;s2.cityCode=&quot;MLB&quot;;s2.cityName=&quot;Melbourne&quot;;s2.countryCode=&quot;US&quot;;s2.region=&quot;FL&quot;; s5[0]=&quot;Melbourne, FL (MLB)&quot;;s5[1]=&quot;Melbourne Intl&quot;;s5[2]=&quot;Florida&quot;; s3.airportCode=&quot;DOM&quot;;s3.airportFullName=&quot;Marigot, Dominica (DOM)&quot;;s3.airportName=&quot;Melville Hall Arpt&quot;;s3.aliases=s6;s3.cityCode=&quot;DOM&quot;;s3.cityName=&quot;Marigot&quot;;s3.countryCode=&quot;DM&quot;;s3.region=&quot;Dominica&quot;; s6[0]=&quot;Marigot, Dominica (DOM)&quot;;s6[1]=&quot;Melville Hall Arpt&quot;;s6[2]=&quot;Dominica&quot;; dwr.engine._remoteHandleCallback(&quot;3&quot;,&quot;0&quot;,{citiesDWR:s0,code:&quot;mel&quot;});&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parse_js</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="go">[{&#39;airportCode&#39;: &#39;MEL&#39;}, {&#39;airportFullName&#39;: &#39;Melbourne, Australia (MEL)&#39;}, {&#39;airportName&#39;: &#39;Tullamarine&#39;}, {&#39;cityCode&#39;: &#39;MEL&#39;}, {&#39;cityName&#39;: &#39;Melbourne&#39;}, {&#39;countryCode&#39;: &#39;AU&#39;}, {&#39;region&#39;: &#39;Australia&#39;}, {&#39;airportCode&#39;: &#39;MLB&#39;}, {&#39;airportFullName&#39;: &#39;Melbourne, FL (MLB)&#39;}, {&#39;airportName&#39;: &#39;Melbourne Intl&#39;}, {&#39;cityCode&#39;: &#39;MLB&#39;}, {&#39;cityName&#39;: &#39;Melbourne&#39;}, {&#39;countryCode&#39;: &#39;US&#39;}, {&#39;region&#39;: &#39;FL&#39;}, {&#39;airportCode&#39;: &#39;DOM&#39;}, {&#39;airportFullName&#39;: &#39;Marigot, Dominica (DOM)&#39;}, {&#39;airportName&#39;: &#39;Melville Hall Arpt&#39;}, {&#39;cityCode&#39;: &#39;DOM&#39;}, {&#39;cityName&#39;: &#39;Marigot&#39;}, {&#39;countryCode&#39;: &#39;DM&#39;}, {&#39;region&#39;: &#39;Dominica&#39;}]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">text</span> <span class="o">=</span> <span class="s">r&#39;var s0={};var s1=&quot;Melbourne, Melbourne (MEL), Australia&quot;;s0[&quot;MEL&quot;]=s1;var s2=&quot;Melilla, Melilla (MLN), Spain&quot;;s0[&quot;MLN&quot;]=s2; DWREngine._handleResponse(&quot;null&quot;, s0);&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parse_js</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="go">[{&#39;s1&#39;: &#39;Melbourne, Melbourne (MEL), Australia&#39;}, {&#39;s2&#39;: &#39;Melilla, Melilla (MLN), Spain&#39;}]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ajaxbrowser.parser.parse_json">
+<code class="descclassname">ajaxbrowser.parser.</code><code class="descname">parse_json</code><span class="sig-paren">(</span><em>s</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ajaxbrowser/parser.html#parse_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ajaxbrowser.parser.parse_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse this string into a dict if json else return None</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">parse_json</span><span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parse_json</span><span class="p">(</span><span class="s">&#39;{&quot;a&quot;:3}&#39;</span><span class="p">)</span>
+<span class="go">{u&#39;a&#39;: 3}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parse_json</span><span class="p">(</span><span class="s">&#39;{a:3}&#39;</span><span class="p">)</span>
+<span class="go">{u&#39;a&#39;: 3}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ajaxbrowser.parser.parse_jsonp">
+<code class="descclassname">ajaxbrowser.parser.</code><code class="descname">parse_jsonp</code><span class="sig-paren">(</span><em>t</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ajaxbrowser/parser.html#parse_jsonp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ajaxbrowser.parser.parse_jsonp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse this string into a dict if jsonp else return None</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">parse_jsonp</span><span class="p">(</span><span class="s">&#39;callback({&quot;a&quot;:3}) &#39;</span><span class="p">)</span>
+<span class="go">{u&#39;a&#39;: 3}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ajaxbrowser.parser.parse_xml">
+<code class="descclassname">ajaxbrowser.parser.</code><code class="descname">parse_xml</code><span class="sig-paren">(</span><em>t</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ajaxbrowser/parser.html#parse_xml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ajaxbrowser.parser.parse_xml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse this XML into a dict</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="ajaxbrowser.html">ajaxbrowser package</a><ul>
+      <li>Previous: <a href="ajaxbrowser.model.html" title="previous chapter">ajaxbrowser.model module</a></li>
+      <li>Next: <a href="ajaxbrowser.setup.html" title="next chapter">ajaxbrowser.setup module</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/ajaxbrowser.parser.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Author.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+      
+      |
+      <a href="_sources/ajaxbrowser.parser.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

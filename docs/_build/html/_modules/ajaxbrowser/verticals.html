@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ajaxbrowser.verticals &mdash; ajaxbrowser  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="ajaxbrowser  documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for ajaxbrowser.verticals</h1><div class="highlight"><pre>
+<span class="c"># -*- coding: utf-8 -*-</span>
+
+<span class="n">__doc__</span> <span class="o">=</span> <span class="s">&#39;Allow classifying inputs and extending them to all cases in the same domain&#39;</span>
+
+<span class="kn">import</span> <span class="nn">collections</span><span class="o">,</span> <span class="nn">csv</span><span class="o">,</span> <span class="nn">glob</span><span class="o">,</span> <span class="nn">threading</span>
+<span class="kn">import</span> <span class="nn">common</span><span class="o">,</span> <span class="nn">parser</span>
+
+
+<div class="viewcode-block" id="hash_key"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.verticals.hash_key">[docs]</a><span class="k">def</span> <span class="nf">hash_key</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Define a hash for this value that ignores case</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">hash</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span></div>
+
+
+<span class="n">vertical_data</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">defaultdict</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span>
+<div class="viewcode-block" id="load_data"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.verticals.load_data">[docs]</a><span class="k">def</span> <span class="nf">load_data</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Load sample vertical data into a dictionary with a key for each column</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">common</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;Start loading verticals data&#39;</span><span class="p">)</span>
+    <span class="k">global</span> <span class="n">vertical_data</span>
+    <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s">&#39;verticals/*.csv&#39;</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)):</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">v</span><span class="p">:</span>
+                    <span class="n">vertical_data</span><span class="p">[</span><span class="s">&#39;{}-field{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">i</span><span class="p">)][</span><span class="n">hash_key</span><span class="p">(</span><span class="n">v</span><span class="p">)]</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">to_unicode</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+    <span class="n">common</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;Completed loading verticals data&#39;</span><span class="p">)</span></div>
+<span class="c"># load vertical data in background thread to avoid having to wait</span>
+<span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">load_data</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">())</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+
+
+<div class="viewcode-block" id="extend"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.verticals.extend">[docs]</a><span class="k">def</span> <span class="nf">extend</span><span class="p">(</span><span class="n">examples</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Attempt abstacting these examples from known vertical data.</span>
+<span class="sd">    If successful return a list of similar entities else None&quot;&quot;&quot;</span>
+    <span class="n">scores</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">example</span> <span class="ow">in</span> <span class="n">examples</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">hash_dict</span> <span class="ow">in</span> <span class="n">vertical_data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="c"># use overlap instead of exact match? XXX</span>
+            <span class="k">if</span> <span class="n">hash_key</span><span class="p">(</span><span class="n">example</span><span class="p">)</span> <span class="ow">in</span> <span class="n">hash_dict</span><span class="p">:</span>
+                <span class="n">scores</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">if</span> <span class="n">scores</span><span class="p">:</span>
+        <span class="c"># a perfect score will match all examples</span>
+        <span class="n">num_perfect_labels</span> <span class="o">=</span> <span class="n">scores</span><span class="o">.</span><span class="n">values</span><span class="p">()</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">examples</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">num_perfect_labels</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="c"># found that a unique category matched these examples</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="p">[</span><span class="n">key</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">scores</span> <span class="k">if</span> <span class="n">scores</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">examples</span><span class="p">)][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">common</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;Using vertical: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">label</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">vertical_data</span><span class="p">[</span><span class="n">label</span><span class="p">]</span><span class="o">.</span><span class="n">itervalues</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">num_perfect_labels</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c"># found no category perfectly matched</span>
+            <span class="n">common</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;Partially matched: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">label</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c"># found multiple categories perfectly matched, so need more examples</span>
+            <span class="n">common</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;Multiple labels match all examples: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">([</span><span class="n">label</span> <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">scores</span> <span class="k">if</span> <span class="n">scores</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">examples</span><span class="p">)]))</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c"># no matches to examples</span>
+        <span class="n">common</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;Examples do not match available vertical data: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">examples</span><span class="p">))</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Author.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

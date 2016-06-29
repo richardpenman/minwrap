@@ -1,0 +1,757 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ajaxbrowser.webkit &mdash; ajaxbrowser  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="ajaxbrowser  documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for ajaxbrowser.webkit</h1><div class="highlight"><pre>
+<span class="c"># -*- coding: utf-8 -*-</span>
+
+<span class="n">__doc__</span> <span class="o">=</span> <span class="s">&#39;Interface to qt webkit for loading and interacting with JavaScript dependent webpages&#39;</span>
+
+<span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">re</span><span class="o">,</span> <span class="nn">urllib2</span><span class="o">,</span> <span class="nn">random</span><span class="o">,</span> <span class="nn">itertools</span><span class="o">,</span> <span class="nn">csv</span>
+<span class="nb">reload</span><span class="p">(</span><span class="n">sys</span><span class="p">)</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">setdefaultencoding</span><span class="p">(</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span><span class="p">,</span> <span class="n">sleep</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="c"># for using native Python strings</span>
+<span class="kn">import</span> <span class="nn">sip</span>
+<span class="n">sip</span><span class="o">.</span><span class="n">setapi</span><span class="p">(</span><span class="s">&#39;QString&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">PyQt4.QtGui</span> <span class="kn">import</span> <span class="n">QApplication</span><span class="p">,</span> <span class="n">QDesktopServices</span><span class="p">,</span> <span class="n">QImage</span><span class="p">,</span> <span class="n">QPainter</span><span class="p">,</span> <span class="n">QVBoxLayout</span><span class="p">,</span> <span class="n">QLineEdit</span><span class="p">,</span> <span class="n">QWidget</span><span class="p">,</span> <span class="n">QWidget</span><span class="p">,</span> <span class="n">QShortcut</span><span class="p">,</span> <span class="n">QKeySequence</span><span class="p">,</span> <span class="n">QTableWidget</span><span class="p">,</span> <span class="n">QTableWidgetItem</span>
+<span class="kn">from</span> <span class="nn">PyQt4.QtCore</span> <span class="kn">import</span> <span class="n">QByteArray</span><span class="p">,</span> <span class="n">QUrl</span><span class="p">,</span> <span class="n">QTimer</span><span class="p">,</span> <span class="n">QEventLoop</span><span class="p">,</span> <span class="n">QIODevice</span><span class="p">,</span> <span class="n">QObject</span><span class="p">,</span> <span class="n">Qt</span>
+<span class="kn">from</span> <span class="nn">PyQt4.QtWebKit</span> <span class="kn">import</span> <span class="n">QWebFrame</span><span class="p">,</span> <span class="n">QWebView</span><span class="p">,</span> <span class="n">QWebElement</span><span class="p">,</span> <span class="n">QWebPage</span><span class="p">,</span> <span class="n">QWebSettings</span><span class="p">,</span> <span class="n">QWebInspector</span>
+<span class="kn">from</span> <span class="nn">PyQt4.QtNetwork</span> <span class="kn">import</span> <span class="n">QNetworkAccessManager</span><span class="p">,</span> <span class="n">QNetworkProxy</span><span class="p">,</span> <span class="n">QNetworkRequest</span><span class="p">,</span> <span class="n">QNetworkReply</span><span class="p">,</span> <span class="n">QNetworkDiskCache</span>
+
+<span class="c"># maximum number of bytes to read from a POST request</span>
+<span class="n">MAX_POST_SIZE</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="mi">25</span>
+<span class="c"># output directory where to save generated files</span>
+<span class="n">OUTPUT_DIR</span> <span class="o">=</span> <span class="s">&#39;output&#39;</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">OUTPUT_DIR</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">OUTPUT_DIR</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">common</span><span class="o">,</span> <span class="nn">db</span>
+
+
+<div class="viewcode-block" id="NetworkAccessManager"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.NetworkAccessManager">[docs]</a><span class="k">class</span> <span class="nc">NetworkAccessManager</span><span class="p">(</span><span class="n">QNetworkAccessManager</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">proxy</span><span class="p">,</span> <span class="n">use_cache</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Subclass QNetworkAccessManager for finer control network operations</span>
+
+<span class="sd">        proxy: the string of a proxy to download through</span>
+<span class="sd">        use_cache: whether to cache replies so that can load faster with the same content subsequent times</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">NetworkAccessManager</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setProxy</span><span class="p">(</span><span class="n">proxy</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sslErrors</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sslErrorHandler</span><span class="p">)</span>
+        <span class="c"># the requests that are still active</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">active_requests</span> <span class="o">=</span> <span class="p">[]</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">cache</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">DbmDict</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">OUTPUT_DIR</span><span class="p">,</span> <span class="s">&#39;cache.db&#39;</span><span class="p">))</span> <span class="k">if</span> <span class="n">use_cache</span> <span class="k">else</span> <span class="bp">None</span>
+
+
+<div class="viewcode-block" id="NetworkAccessManager.shutdown"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.NetworkAccessManager.shutdown">[docs]</a>    <span class="k">def</span> <span class="nf">shutdown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Network is shutting down event</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># prevent new requests</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setNetworkAccessible</span><span class="p">(</span><span class="n">QNetworkAccessManager</span><span class="o">.</span><span class="n">NotAccessible</span><span class="p">)</span>
+        <span class="c"># abort existing requests</span>
+        <span class="k">for</span> <span class="n">request</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">active_requests</span><span class="p">:</span>
+            <span class="n">request</span><span class="o">.</span><span class="n">abort</span><span class="p">()</span>
+            <span class="n">request</span><span class="o">.</span><span class="n">deleteLater</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="NetworkAccessManager.setProxy"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.NetworkAccessManager.setProxy">[docs]</a>    <span class="k">def</span> <span class="nf">setProxy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">proxy</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Parse proxy components from proxy</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">proxy</span><span class="p">:</span>
+            <span class="n">fragments</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">parse_proxy</span><span class="p">(</span><span class="n">proxy</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">fragments</span><span class="p">[</span><span class="s">&#39;host&#39;</span><span class="p">]:</span>
+                <span class="n">QNetworkAccessManager</span><span class="o">.</span><span class="n">setProxy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                    <span class="n">QNetworkProxy</span><span class="p">(</span><span class="n">QNetworkProxy</span><span class="o">.</span><span class="n">HttpProxy</span><span class="p">,</span>
+                      <span class="n">fragments</span><span class="p">[</span><span class="s">&#39;host&#39;</span><span class="p">],</span> <span class="nb">int</span><span class="p">(</span><span class="n">fragments</span><span class="p">[</span><span class="s">&#39;port&#39;</span><span class="p">]),</span>
+                      <span class="n">fragments</span><span class="p">[</span><span class="s">&#39;username&#39;</span><span class="p">],</span> <span class="n">fragments</span><span class="p">[</span><span class="s">&#39;password&#39;</span><span class="p">]</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">common</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;Invalid proxy: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">proxy</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="NetworkAccessManager.createRequest"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.NetworkAccessManager.createRequest">[docs]</a>    <span class="k">def</span> <span class="nf">createRequest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">operation</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">post</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Override creating a network request</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">url</span><span class="p">()</span><span class="o">.</span><span class="n">toString</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">url</span><span class="p">()</span><span class="o">.</span><span class="n">path</span><span class="p">())</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">&#39;.ttf&#39;</span><span class="p">):</span>
+            <span class="c"># block fonts, which can cause webkit to crash</span>
+            <span class="n">common</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;Blocking: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+            <span class="n">request</span><span class="o">.</span><span class="n">setUrl</span><span class="p">(</span><span class="n">QUrl</span><span class="p">())</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_data</span><span class="p">(</span><span class="n">post</span><span class="p">)</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="s">&#39;{} {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="n">use_cache</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">url</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;file&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">use_cache</span> <span class="ow">and</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="p">:</span>
+            <span class="n">common</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;Load from cache: &#39;</span> <span class="o">+</span> <span class="n">key</span><span class="p">)</span>
+            <span class="n">content</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">attributes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+            <span class="n">reply</span> <span class="o">=</span> <span class="n">CachedNetworkReply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">url</span><span class="p">(),</span> <span class="n">content</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">attributes</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">common</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;Request: {} {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">post</span> <span class="ow">or</span> <span class="s">&#39;&#39;</span><span class="p">))</span>
+            <span class="n">reply</span> <span class="o">=</span> <span class="n">QNetworkAccessManager</span><span class="o">.</span><span class="n">createRequest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">operation</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">post</span><span class="p">)</span>
+            <span class="n">reply</span><span class="o">.</span><span class="n">error</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">catch_error</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">active_requests</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reply</span><span class="p">)</span>
+            <span class="n">reply</span><span class="o">.</span><span class="n">destroyed</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">active_requests</span><span class="o">.</span><span class="n">remove</span><span class="p">)</span>
+            <span class="c"># save reference to original request</span>
+            <span class="n">reply</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="n">QByteArray</span><span class="p">()</span>
+            <span class="n">reply</span><span class="o">.</span><span class="n">readyRead</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_save_content</span><span class="p">(</span><span class="n">reply</span><span class="p">))</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">use_cache</span><span class="p">:</span>
+                <span class="n">reply</span><span class="o">.</span><span class="n">finished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache_content</span><span class="p">(</span><span class="n">reply</span><span class="p">,</span> <span class="n">key</span><span class="p">))</span>
+        <span class="n">reply</span><span class="o">.</span><span class="n">orig_request</span> <span class="o">=</span> <span class="n">request</span>
+        <span class="n">reply</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="k">return</span> <span class="n">reply</span></div>
+    
+    
+    <span class="k">def</span> <span class="nf">_save_content</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Save copy of reply content before is lost</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">def</span> <span class="nf">save_content</span><span class="p">():</span>
+            <span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">peek</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">size</span><span class="p">()))</span>
+        <span class="k">return</span> <span class="n">save_content</span>
+   
+    <span class="k">def</span> <span class="nf">_cache_content</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Cache downloaded content</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">def</span> <span class="nf">cache_content</span><span class="p">():</span>
+            <span class="n">headers</span> <span class="o">=</span> <span class="p">[(</span><span class="n">header</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">rawHeader</span><span class="p">(</span><span class="n">header</span><span class="p">))</span> <span class="k">for</span> <span class="n">header</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">rawHeaderList</span><span class="p">()]</span>
+            <span class="n">attributes</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">attributes</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">QNetworkRequest</span><span class="o">.</span><span class="n">HttpStatusCodeAttribute</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">attribute</span><span class="p">(</span><span class="n">QNetworkRequest</span><span class="o">.</span><span class="n">HttpStatusCodeAttribute</span><span class="p">)</span><span class="o">.</span><span class="n">toInt</span><span class="p">()))</span>
+            <span class="n">attributes</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">QNetworkRequest</span><span class="o">.</span><span class="n">HttpReasonPhraseAttribute</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">attribute</span><span class="p">(</span><span class="n">QNetworkRequest</span><span class="o">.</span><span class="n">HttpReasonPhraseAttribute</span><span class="p">)</span><span class="o">.</span><span class="n">toByteArray</span><span class="p">()))</span>
+            <span class="c">#attributes.append((QNetworkRequest.RedirectionTargetAttribute, r.attribute(QNetworkRequest.RedirectionTargetAttribute).toUrl()))</span>
+            <span class="n">attributes</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">QNetworkRequest</span><span class="o">.</span><span class="n">ConnectionEncryptedAttribute</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">attribute</span><span class="p">(</span><span class="n">QNetworkRequest</span><span class="o">.</span><span class="n">ConnectionEncryptedAttribute</span><span class="p">)</span><span class="o">.</span><span class="n">toBool</span><span class="p">()))</span>
+            <span class="c">#attributes.append((QNetworkRequest.CacheLoadControlAttribute, r.attribute(QNetworkRequest.CacheLoadControlAttribute).toInt()))</span>
+            <span class="c">#attributes.append((QNetworkRequest.CacheSaveControlAttribute, r.attribute(QNetworkRequest.CacheSaveControlAttribute).toBool()))</span>
+            <span class="c">#attributes.append((QNetworkRequest.SourceIsFromCacheAttribute, r.attribute(QNetworkRequest.SourceIsFromCacheAttribute).toBool()))</span>
+            <span class="c">#print &#39;save cache:&#39;, key, len(r.content), len(headers), attributes</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">attributes</span>
+        <span class="k">return</span> <span class="n">cache_content</span>
+
+
+<div class="viewcode-block" id="NetworkAccessManager.parse_data"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.NetworkAccessManager.parse_data">[docs]</a>    <span class="k">def</span> <span class="nf">parse_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Parse this posted data into a list of key/value pairs</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="n">QUrl</span><span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">)</span>
+            <span class="n">url</span><span class="o">.</span><span class="n">setEncodedQuery</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">peek</span><span class="p">(</span><span class="n">MAX_POST_SIZE</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">url</span><span class="o">.</span><span class="n">queryItems</span><span class="p">()</span>
+        <span class="k">return</span> <span class="p">[]</span></div>
+
+
+<div class="viewcode-block" id="NetworkAccessManager.catch_error"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.NetworkAccessManager.catch_error">[docs]</a>    <span class="k">def</span> <span class="nf">catch_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">eid</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Interpret the HTTP error ID received</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">eid</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">301</span><span class="p">):</span>
+            <span class="n">errors</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="mi">0</span> <span class="p">:</span> <span class="s">&#39;no error condition. Note: When the HTTP protocol returns a redirect no error will be reported. You can check if there is a redirect with the QNetworkRequest::RedirectionTargetAttribute attribute.&#39;</span><span class="p">,</span>
+                <span class="mi">1</span> <span class="p">:</span> <span class="s">&#39;the remote server refused the connection (the server is not accepting requests)&#39;</span><span class="p">,</span>
+                <span class="mi">2</span> <span class="p">:</span> <span class="s">&#39;the remote server closed the connection prematurely, before the entire reply was received and processed&#39;</span><span class="p">,</span>
+                <span class="mi">3</span> <span class="p">:</span> <span class="s">&#39;the remote host name was not found (invalid hostname)&#39;</span><span class="p">,</span>
+                <span class="mi">4</span> <span class="p">:</span> <span class="s">&#39;the connection to the remote server timed out&#39;</span><span class="p">,</span>
+                <span class="mi">5</span> <span class="p">:</span> <span class="s">&#39;the operation was canceled via calls to abort() or close() before it was finished.&#39;</span><span class="p">,</span>
+                <span class="mi">6</span> <span class="p">:</span> <span class="s">&#39;the SSL/TLS handshake failed and the encrypted channel could not be established. The sslErrors() signal should have been emitted.&#39;</span><span class="p">,</span>
+                <span class="mi">7</span> <span class="p">:</span> <span class="s">&#39;the connection was broken due to disconnection from the network, however the system has initiated roaming to another access point. The request should be resubmitted and will be processed as soon as the connection is re-established.&#39;</span><span class="p">,</span>
+                <span class="mi">101</span> <span class="p">:</span> <span class="s">&#39;the connection to the proxy server was refused (the proxy server is not accepting requests)&#39;</span><span class="p">,</span>
+                <span class="mi">102</span> <span class="p">:</span> <span class="s">&#39;the proxy server closed the connection prematurely, before the entire reply was received and processed&#39;</span><span class="p">,</span>
+                <span class="mi">103</span> <span class="p">:</span> <span class="s">&#39;the proxy host name was not found (invalid proxy hostname)&#39;</span><span class="p">,</span>
+                <span class="mi">104</span> <span class="p">:</span> <span class="s">&#39;the connection to the proxy timed out or the proxy did not reply in time to the request sent&#39;</span><span class="p">,</span>
+                <span class="mi">105</span> <span class="p">:</span> <span class="s">&#39;the proxy requires authentication in order to honour the request but did not accept any credentials offered (if any)&#39;</span><span class="p">,</span>
+                <span class="mi">201</span> <span class="p">:</span> <span class="s">&#39;the access to the remote content was denied (similar to HTTP error 401)&#39;</span><span class="p">,</span>
+                <span class="mi">202</span> <span class="p">:</span> <span class="s">&#39;the operation requested on the remote content is not permitted&#39;</span><span class="p">,</span>
+                <span class="mi">203</span> <span class="p">:</span> <span class="s">&#39;the remote content was not found at the server (similar to HTTP error 404)&#39;</span><span class="p">,</span>
+                <span class="mi">204</span> <span class="p">:</span> <span class="s">&#39;the remote server requires authentication to serve the content but the credentials provided were not accepted (if any)&#39;</span><span class="p">,</span>
+                <span class="mi">205</span> <span class="p">:</span> <span class="s">&#39;the request needed to be sent again, but this failed for example because the upload data could not be read a second time.&#39;</span><span class="p">,</span>
+                <span class="mi">301</span> <span class="p">:</span> <span class="s">&#39;the Network Access API cannot honor the request because the protocol is not known&#39;</span><span class="p">,</span>
+                <span class="mi">302</span> <span class="p">:</span> <span class="s">&#39;the requested operation is invalid for this protocol&#39;</span><span class="p">,</span>
+                <span class="mi">99</span> <span class="p">:</span> <span class="s">&#39;an unknown network-related error was detected&#39;</span><span class="p">,</span>
+                <span class="mi">199</span> <span class="p">:</span> <span class="s">&#39;an unknown proxy-related error was detected&#39;</span><span class="p">,</span>
+                <span class="mi">299</span> <span class="p">:</span> <span class="s">&#39;an unknown error related to the remote content was detected&#39;</span><span class="p">,</span>
+                <span class="mi">399</span> <span class="p">:</span> <span class="s">&#39;a breakdown in protocol was detected (parsing error, invalid or unexpected responses, etc.)&#39;</span><span class="p">,</span>
+            <span class="p">}</span>
+            <span class="n">common</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;Error </span><span class="si">%d</span><span class="s">: </span><span class="si">%s</span><span class="s"> (</span><span class="si">%s</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">eid</span><span class="p">,</span> <span class="n">errors</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">eid</span><span class="p">,</span> <span class="s">&#39;unknown error&#39;</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">sender</span><span class="p">()</span><span class="o">.</span><span class="n">url</span><span class="p">()</span><span class="o">.</span><span class="n">toString</span><span class="p">()))</span></div>
+
+
+<div class="viewcode-block" id="NetworkAccessManager.sslErrorHandler"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.NetworkAccessManager.sslErrorHandler">[docs]</a>    <span class="k">def</span> <span class="nf">sslErrorHandler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reply</span><span class="p">,</span> <span class="n">errors</span><span class="p">):</span> 
+        <span class="n">common</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;SSL errors: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">errors</span><span class="p">))</span>
+        <span class="n">reply</span><span class="o">.</span><span class="n">ignoreSslErrors</span><span class="p">()</span> </div></div>
+
+
+
+<div class="viewcode-block" id="CachedNetworkReply"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.CachedNetworkReply">[docs]</a><span class="k">class</span> <span class="nc">CachedNetworkReply</span><span class="p">(</span><span class="n">QNetworkReply</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">attributes</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">CachedNetworkReply</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setUrl</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="n">content</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">offset</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">header</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">headers</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setRawHeader</span><span class="p">(</span><span class="n">header</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="c">#self.setHeader(QNetworkRequest.ContentLengthHeader, len(content))</span>
+        <span class="k">for</span> <span class="n">attribute</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">attributes</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setAttribute</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setOpenMode</span><span class="p">(</span><span class="n">QNetworkReply</span><span class="o">.</span><span class="n">ReadOnly</span> <span class="o">|</span> <span class="n">QNetworkReply</span><span class="o">.</span><span class="n">Unbuffered</span><span class="p">)</span>
+        <span class="c"># trigger signals that content is ready</span>
+        <span class="n">QTimer</span><span class="o">.</span><span class="n">singleShot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">readyRead</span><span class="p">)</span>
+        <span class="n">QTimer</span><span class="o">.</span><span class="n">singleShot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">finished</span><span class="p">)</span>
+
+<div class="viewcode-block" id="CachedNetworkReply.bytesAvailable"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.CachedNetworkReply.bytesAvailable">[docs]</a>    <span class="k">def</span> <span class="nf">bytesAvailable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">offset</span></div>
+
+<div class="viewcode-block" id="CachedNetworkReply.isSequential"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.CachedNetworkReply.isSequential">[docs]</a>    <span class="k">def</span> <span class="nf">isSequential</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">True</span></div>
+
+<div class="viewcode-block" id="CachedNetworkReply.abort"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.CachedNetworkReply.abort">[docs]</a>    <span class="k">def</span> <span class="nf">abort</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span> <span class="c"># qt requires that this be defined</span></div>
+
+<div class="viewcode-block" id="CachedNetworkReply.readData"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.CachedNetworkReply.readData">[docs]</a>    <span class="k">def</span> <span class="nf">readData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return up to size bytes from buffer</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">offset</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">):</span>
+            <span class="k">return</span> <span class="s">&#39;&#39;</span>
+        <span class="n">number</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">offset</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">offset</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">offset</span> <span class="o">+</span> <span class="n">number</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">offset</span> <span class="o">+=</span> <span class="n">number</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div></div>
+
+
+
+<div class="viewcode-block" id="WebPage"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.WebPage">[docs]</a><span class="k">class</span> <span class="nc">WebPage</span><span class="p">(</span><span class="n">QWebPage</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_agent</span><span class="p">,</span> <span class="n">confirm</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Override QWebPage to set User-Agent and JavaScript messages</span>
+
+<span class="sd">        user_agent: the User Agent to submit</span>
+<span class="sd">        confirm: default response to confirm dialog boxes</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">WebPage</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">user_agent</span> <span class="o">=</span> <span class="n">user_agent</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">confirm</span> <span class="o">=</span> <span class="n">confirm</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setForwardUnsupportedContent</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+
+<div class="viewcode-block" id="WebPage.userAgentForUrl"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.WebPage.userAgentForUrl">[docs]</a>    <span class="k">def</span> <span class="nf">userAgentForUrl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Use same user agent for all URL&#39;s</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_agent</span></div>
+
+<div class="viewcode-block" id="WebPage.javaScriptAlert"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.WebPage.javaScriptAlert">[docs]</a>    <span class="k">def</span> <span class="nf">javaScriptAlert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frame</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Override default JavaScript alert popup and send to log</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">common</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;Alert: &#39;</span> <span class="o">+</span> <span class="n">message</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="WebPage.javaScriptConfirm"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.WebPage.javaScriptConfirm">[docs]</a>    <span class="k">def</span> <span class="nf">javaScriptConfirm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frame</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Override default JavaScript confirm popup and send to log</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">common</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;Confirm: &#39;</span> <span class="o">+</span> <span class="n">message</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">confirm</span></div>
+
+
+<div class="viewcode-block" id="WebPage.javaScriptPrompt"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.WebPage.javaScriptPrompt">[docs]</a>    <span class="k">def</span> <span class="nf">javaScriptPrompt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frame</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">default</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Override default JavaScript prompt popup and send to log</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">common</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;Prompt: {} {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">default</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="WebPage.javaScriptConsoleMessage"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.WebPage.javaScriptConsoleMessage">[docs]</a>    <span class="k">def</span> <span class="nf">javaScriptConsoleMessage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">line_number</span><span class="p">,</span> <span class="n">source_id</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Override default JavaScript console and send to log</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">common</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;Console: {} {} {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">line_number</span><span class="p">,</span> <span class="n">source_id</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="WebPage.shouldInterruptJavaScript"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.WebPage.shouldInterruptJavaScript">[docs]</a>    <span class="k">def</span> <span class="nf">shouldInterruptJavaScript</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Disable javascript interruption dialog box</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">True</span></div></div>
+
+
+
+<div class="viewcode-block" id="WebView"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.WebView">[docs]</a><span class="k">class</span> <span class="nc">WebView</span><span class="p">(</span><span class="n">QWebView</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">page</span><span class="p">,</span> <span class="n">load_images</span><span class="p">,</span> <span class="n">load_javascript</span><span class="p">,</span> <span class="n">load_java</span><span class="p">,</span> <span class="n">load_plugins</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Override QWebView to set which plugins to load</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">WebView</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setPage</span><span class="p">(</span><span class="n">page</span><span class="p">)</span>
+        <span class="c"># set whether to enable plugins, images, and java</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">()</span><span class="o">.</span><span class="n">setAttribute</span><span class="p">(</span><span class="n">QWebSettings</span><span class="o">.</span><span class="n">AutoLoadImages</span><span class="p">,</span> <span class="n">load_images</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">()</span><span class="o">.</span><span class="n">setAttribute</span><span class="p">(</span><span class="n">QWebSettings</span><span class="o">.</span><span class="n">JavascriptEnabled</span><span class="p">,</span> <span class="n">load_javascript</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">()</span><span class="o">.</span><span class="n">setAttribute</span><span class="p">(</span><span class="n">QWebSettings</span><span class="o">.</span><span class="n">JavaEnabled</span><span class="p">,</span> <span class="n">load_java</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">()</span><span class="o">.</span><span class="n">setAttribute</span><span class="p">(</span><span class="n">QWebSettings</span><span class="o">.</span><span class="n">PluginsEnabled</span><span class="p">,</span> <span class="n">load_plugins</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">()</span><span class="o">.</span><span class="n">setAttribute</span><span class="p">(</span><span class="n">QWebSettings</span><span class="o">.</span><span class="n">DeveloperExtrasEnabled</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="UrlInput"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.UrlInput">[docs]</a><span class="k">class</span> <span class="nc">UrlInput</span><span class="p">(</span><span class="n">QLineEdit</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Address URL input widget</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">view</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">UrlInput</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">view</span> <span class="o">=</span> <span class="n">view</span>
+        <span class="c"># add event listener on &quot;enter&quot; pressed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">returnPressed</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_return_pressed</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">_return_pressed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">QUrl</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="c"># load url into browser frame</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">url</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="ResultsTable"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.ResultsTable">[docs]</a><span class="k">class</span> <span class="nc">ResultsTable</span><span class="p">(</span><span class="n">QTableWidget</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;A table to display results from the scraping</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ResultsTable</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="c"># also save data to a CSV file</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+
+<div class="viewcode-block" id="ResultsTable.clear"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.ResultsTable.clear">[docs]</a>    <span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+        <span class="c"># avoid displaying duplicate rows</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">row_hashes</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">OUTPUT_DIR</span><span class="p">,</span> <span class="s">&#39;data.csv&#39;</span><span class="p">),</span> <span class="s">&#39;w&#39;</span><span class="p">))</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ResultsTable</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+
+<div class="viewcode-block" id="ResultsTable.add_records"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.ResultsTable.add_records">[docs]</a>    <span class="k">def</span> <span class="nf">add_records</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">records</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add these rows to the table and initialize fields if not already</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">records</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">record</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">setColumnCount</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">))</span>
+                <span class="n">header</span> <span class="o">=</span> <span class="p">[</span><span class="n">field</span><span class="o">.</span><span class="n">title</span><span class="p">()</span> <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">setHorizontalHeaderLabels</span><span class="p">(</span><span class="n">header</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">header</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+            <span class="c"># filter to fields in the header</span>
+            <span class="n">filtered_row</span> <span class="o">=</span> <span class="p">[</span><span class="n">record</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">field</span><span class="p">)</span> <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">filtered_row</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">add_row</span><span class="p">(</span><span class="n">filtered_row</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ResultsTable.add_row"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.ResultsTable.add_row">[docs]</a>    <span class="k">def</span> <span class="nf">add_row</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cols</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add this row to the table if is not duplicate</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="nb">hash</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">cols</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">row_hashes</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">row_hashes</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+            <span class="n">num_rows</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rowCount</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">insertRow</span><span class="p">(</span><span class="n">num_rows</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cols</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">setItem</span><span class="p">(</span><span class="n">num_rows</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">QTableWidgetItem</span><span class="p">(</span><span class="n">col</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">cols</span><span class="p">)</span></div></div>
+
+
+
+<div class="viewcode-block" id="Browser"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.Browser">[docs]</a><span class="k">class</span> <span class="nc">Browser</span><span class="p">(</span><span class="n">QWidget</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gui</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">user_agent</span><span class="o">=</span><span class="s">&#39;WebKit&#39;</span><span class="p">,</span> <span class="n">proxy</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">load_images</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">load_javascript</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">load_java</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">load_plugins</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">delay</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">use_cache</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Widget class that contains the address bar, webview for rendering webpages, and a table for displaying results</span>
+
+<span class="sd">        gui: whether to show webkit window or run headless</span>
+<span class="sd">        user_agent: the user-agent when downloading content</span>
+<span class="sd">        proxy: a QNetworkProxy to download through</span>
+<span class="sd">        load_images: whether to download images</span>
+<span class="sd">        load_javascript: whether to enable javascript</span>
+<span class="sd">        load_java: whether to enable java</span>
+<span class="sd">        load_plugins: whether to enable browser plugins</span>
+<span class="sd">        timeout: the maximum amount of seconds to wait for a request</span>
+<span class="sd">        delay: the minimum amount of seconds to wait between requests</span>
+<span class="sd">        app: QApplication object so that can instantiate multiple browser objects</span>
+<span class="sd">        use_cache: whether to cache all replies</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># must instantiate the QApplication object before any other Qt objects</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">app</span> <span class="ow">or</span> <span class="n">QApplication</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Browser</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">running</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">manager</span> <span class="o">=</span> <span class="n">NetworkAccessManager</span><span class="p">(</span><span class="n">proxy</span><span class="p">,</span> <span class="n">use_cache</span><span class="p">)</span>
+        <span class="n">manager</span><span class="o">.</span><span class="n">finished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">finished</span><span class="p">)</span>
+        <span class="n">page</span> <span class="o">=</span> <span class="n">WebPage</span><span class="p">(</span><span class="n">user_agent</span><span class="p">)</span>
+        <span class="n">page</span><span class="o">.</span><span class="n">setNetworkAccessManager</span><span class="p">(</span><span class="n">manager</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">view</span> <span class="o">=</span> <span class="n">WebView</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="n">load_images</span><span class="p">,</span> <span class="n">load_javascript</span><span class="p">,</span> <span class="n">load_java</span><span class="p">,</span> <span class="n">load_plugins</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span> <span class="o">=</span> <span class="n">timeout</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">delay</span> <span class="o">=</span> <span class="n">delay</span>
+
+        <span class="c"># use grid layout to hold widgets</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grid</span> <span class="o">=</span> <span class="n">QVBoxLayout</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">url_input</span> <span class="o">=</span> <span class="n">UrlInput</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url_input</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">table</span> <span class="o">=</span> <span class="n">ResultsTable</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_shortcuts</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">gui</span><span class="p">:</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">raise_</span><span class="p">()</span> <span class="c"># give focus to this browser window</span>
+
+
+    <span class="k">def</span> <span class="nf">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c"># not sure why, but to avoid seg fault need to release the QWebPage manually</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">setPage</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="Browser.add_shortcuts"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.Browser.add_shortcuts">[docs]</a>    <span class="k">def</span> <span class="nf">add_shortcuts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Define shortcuts for convenient interaction</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">QShortcut</span><span class="p">(</span><span class="n">QKeySequence</span><span class="o">.</span><span class="n">Close</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">)</span>
+        <span class="n">QShortcut</span><span class="p">(</span><span class="n">QKeySequence</span><span class="o">.</span><span class="n">Quit</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">)</span>
+        <span class="n">QShortcut</span><span class="p">(</span><span class="n">QKeySequence</span><span class="o">.</span><span class="n">Back</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">back</span><span class="p">)</span>
+        <span class="n">QShortcut</span><span class="p">(</span><span class="n">QKeySequence</span><span class="o">.</span><span class="n">Forward</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">forward</span><span class="p">)</span>
+        <span class="n">QShortcut</span><span class="p">(</span><span class="n">QKeySequence</span><span class="o">.</span><span class="n">Save</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">)</span>
+        <span class="n">QShortcut</span><span class="p">(</span><span class="n">QKeySequence</span><span class="o">.</span><span class="n">New</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">home</span><span class="p">)</span>
+        <span class="n">QShortcut</span><span class="p">(</span><span class="n">QKeySequence</span><span class="p">(</span><span class="n">Qt</span><span class="o">.</span><span class="n">CTRL</span> <span class="o">+</span> <span class="n">Qt</span><span class="o">.</span><span class="n">Key_F</span><span class="p">),</span> <span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fullscreen</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Browser.home"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.Browser.home">[docs]</a>    <span class="k">def</span> <span class="nf">home</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Go back to initial page in history</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">history</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">history</span><span class="p">()</span>
+        <span class="n">history</span><span class="o">.</span><span class="n">goToItem</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">itemAt</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="Browser.fullscreen"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.Browser.fullscreen">[docs]</a>    <span class="k">def</span> <span class="nf">fullscreen</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Alternate fullscreen mode</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">isMaximized</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">showNormal</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">showMaximized</span><span class="p">()</span> </div>
+
+
+<div class="viewcode-block" id="Browser.save"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.Browser.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Save the current HTML state to disk</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">OUTPUT_DIR</span><span class="p">,</span> <span class="s">&#39;state{}.html&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+                <span class="n">html</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_html</span><span class="p">()</span>
+                <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">common</span><span class="o">.</span><span class="n">to_unicode</span><span class="p">(</span><span class="n">html</span><span class="p">))</span>
+                <span class="k">print</span> <span class="s">&#39;save&#39;</span><span class="p">,</span> <span class="n">filename</span>
+                <span class="k">break</span></div>
+
+
+<div class="viewcode-block" id="Browser.set_proxy"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.Browser.set_proxy">[docs]</a>    <span class="k">def</span> <span class="nf">set_proxy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">proxy</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Shortcut to set the proxy</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">page</span><span class="p">()</span><span class="o">.</span><span class="n">networkAccessManager</span><span class="p">()</span><span class="o">.</span><span class="n">setProxy</span><span class="p">(</span><span class="n">proxy</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Browser.current_url"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.Browser.current_url">[docs]</a>    <span class="k">def</span> <span class="nf">current_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return current URL</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">url</span><span class="p">()</span><span class="o">.</span><span class="n">toString</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="Browser.current_html"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.Browser.current_html">[docs]</a>    <span class="k">def</span> <span class="nf">current_html</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return current rendered HTML</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">common</span><span class="o">.</span><span class="n">to_unicode</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">page</span><span class="p">()</span><span class="o">.</span><span class="n">mainFrame</span><span class="p">()</span><span class="o">.</span><span class="n">toHtml</span><span class="p">()))</span></div>
+
+
+<div class="viewcode-block" id="Browser.current_text"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.Browser.current_text">[docs]</a>    <span class="k">def</span> <span class="nf">current_text</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return text from the current rendered HTML</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">common</span><span class="o">.</span><span class="n">to_unicode</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">page</span><span class="p">()</span><span class="o">.</span><span class="n">mainFrame</span><span class="p">()</span><span class="o">.</span><span class="n">toPlainText</span><span class="p">()))</span></div>
+
+
+<div class="viewcode-block" id="Browser.load"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.Browser.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">html</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Load given url in webkit and return html when loaded</span>
+
+<span class="sd">        url: the URL to load</span>
+<span class="sd">        html: optional HTML to set instead of downloading</span>
+<span class="sd">        headers: the headers to attach to the request</span>
+<span class="sd">        data: the data to POST</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">running</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="nb">basestring</span><span class="p">):</span>
+            <span class="c"># convert string to Qt&#39;s URL object</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="n">QUrl</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_address</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">html</span><span class="p">:</span>
+            <span class="c"># load pre downloaded HTML</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">setContent</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="n">baseUrl</span><span class="o">=</span><span class="n">url</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">html</span>
+
+        <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+        <span class="n">loop</span> <span class="o">=</span> <span class="n">QEventLoop</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">loadFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">loop</span><span class="o">.</span><span class="n">quit</span><span class="p">)</span>
+        <span class="c"># need to make network request</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">QNetworkRequest</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">headers</span><span class="p">:</span>
+            <span class="c"># add headers to request when defined</span>
+            <span class="k">for</span> <span class="n">header</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">headers</span><span class="p">:</span>
+                <span class="n">request</span><span class="o">.</span><span class="n">setRawHeader</span><span class="p">(</span><span class="n">header</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">data</span><span class="p">:</span>
+            <span class="c"># POST request</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">QNetworkAccessManager</span><span class="o">.</span><span class="n">PostOperation</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c"># GET request</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+
+        <span class="c"># set a timeout on the download loop</span>
+        <span class="n">timer</span> <span class="o">=</span> <span class="n">QTimer</span><span class="p">()</span>
+        <span class="n">timer</span><span class="o">.</span><span class="n">setSingleShot</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">timer</span><span class="o">.</span><span class="n">timeout</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">loop</span><span class="o">.</span><span class="n">quit</span><span class="p">)</span>
+        <span class="n">timer</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span>
+        <span class="n">loop</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span> <span class="c"># delay here until download finished or timeout</span>
+    
+        <span class="k">if</span> <span class="n">timer</span><span class="o">.</span><span class="n">isActive</span><span class="p">():</span>
+            <span class="c"># downloaded successfully</span>
+            <span class="n">timer</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+            <span class="n">parsed_html</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_html</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">delay</span> <span class="o">-</span> <span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t1</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c"># did not download in time</span>
+            <span class="n">common</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;Timed out: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="o">.</span><span class="n">toString</span><span class="p">()))</span>
+            <span class="n">parsed_html</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+        <span class="k">return</span> <span class="n">parsed_html</span></div>
+
+
+<div class="viewcode-block" id="Browser.wait"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.Browser.wait">[docs]</a>    <span class="k">def</span> <span class="nf">wait</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Wait for delay time</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">deadline</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">+</span> <span class="n">timeout</span>
+        <span class="k">while</span> <span class="n">time</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">deadline</span><span class="p">:</span>
+            <span class="n">sleep</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">processEvents</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Browser.wait_quiet"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.Browser.wait_quiet">[docs]</a>    <span class="k">def</span> <span class="nf">wait_quiet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Wait until all requests have completed up to a maximum timeout.</span>
+<span class="sd">        Returns True if all requests complete before the timeout.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">processEvents</span><span class="p">()</span>
+        <span class="n">deadline</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">+</span> <span class="n">timeout</span>
+        <span class="n">manager</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">page</span><span class="p">()</span><span class="o">.</span><span class="n">networkAccessManager</span><span class="p">()</span>
+        <span class="k">while</span> <span class="n">time</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">deadline</span> <span class="ow">and</span> <span class="n">manager</span><span class="o">.</span><span class="n">active_requests</span><span class="p">:</span>
+            <span class="n">sleep</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">processEvents</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">processEvents</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">manager</span><span class="o">.</span><span class="n">active_requests</span> <span class="o">==</span> <span class="p">[]</span></div>
+
+
+<div class="viewcode-block" id="Browser.wait_load"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.Browser.wait_load">[docs]</a>    <span class="k">def</span> <span class="nf">wait_load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pattern</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">60</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Wait for this content to be loaded up to maximum timeout.</span>
+<span class="sd">        Returns True if pattern was loaded in the time limit.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">deadline</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">+</span> <span class="n">timeout</span>
+        <span class="k">while</span> <span class="n">time</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">deadline</span><span class="p">:</span>
+            <span class="n">sleep</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">processEvents</span><span class="p">()</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">pattern</span><span class="p">):</span>
+                <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">return</span> <span class="bp">False</span></div>
+
+
+<div class="viewcode-block" id="Browser.js"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.Browser.js">[docs]</a>    <span class="k">def</span> <span class="nf">js</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">script</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Shortcut to execute javascript on current document and return result</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">processEvents</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">page</span><span class="p">()</span><span class="o">.</span><span class="n">mainFrame</span><span class="p">()</span><span class="o">.</span><span class="n">evaluateJavaScript</span><span class="p">(</span><span class="n">script</span><span class="p">)</span><span class="o">.</span><span class="n">toString</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Browser.click"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.Browser.click">[docs]</a>    <span class="k">def</span> <span class="nf">click</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pattern</span><span class="o">=</span><span class="s">&#39;input&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Click all elements that match the pattern.</span>
+
+<span class="sd">        Uses standard CSS pattern matching: http://www.w3.org/TR/CSS2/selector.html</span>
+<span class="sd">        Returns the number of elements clicked</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">es</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">es</span><span class="p">:</span>
+            <span class="n">e</span><span class="o">.</span><span class="n">evaluateJavaScript</span><span class="p">(</span><span class="s">&quot;var evObj = document.createEvent(&#39;MouseEvents&#39;); evObj.initEvent(&#39;click&#39;, true, true); this.dispatchEvent(evObj);&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">es</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Browser.keys"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.Browser.keys">[docs]</a>    <span class="k">def</span> <span class="nf">keys</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pattern</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Simulate typing by focusing on elements that match the pattern and triggering key events.</span>
+<span class="sd">        Returns the number of elements matched.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">es</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">es</span><span class="p">:</span>
+            <span class="n">e</span><span class="o">.</span><span class="n">evaluateJavaScript</span><span class="p">(</span><span class="s">&quot;this.focus()&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">es</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">event_type</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;keydown&#39;</span><span class="p">,</span> <span class="s">&#39;keyup&#39;</span><span class="p">,</span> <span class="s">&#39;keypress&#39;</span><span class="p">):</span>
+                <span class="n">e</span><span class="o">.</span><span class="n">evaluateJavaScript</span><span class="p">(</span><span class="s">&quot;var evObj = document.createEvent(&#39;Event&#39;); evObj.initEvent(&#39;{}&#39;, true, true); this.dispatchEvent(evObj);&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">event_type</span><span class="p">))</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">es</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Browser.attr"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.Browser.attr">[docs]</a>    <span class="k">def</span> <span class="nf">attr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pattern</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;For the elements that match this pattern, set attribute if value is defined, else return the value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="c"># want to get attribute</span>
+            <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">page</span><span class="p">()</span><span class="o">.</span><span class="n">mainFrame</span><span class="p">()</span><span class="o">.</span><span class="n">findFirstElement</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span><span class="o">.</span><span class="n">attribute</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">es</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">es</span><span class="p">:</span>
+                <span class="n">e</span><span class="o">.</span><span class="n">setAttribute</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+            <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">es</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Browser.fill"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.Browser.fill">[docs]</a>    <span class="k">def</span> <span class="nf">fill</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pattern</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set text of the matching elements to value, and return the number of elements matched.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">es</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">es</span><span class="p">:</span>
+            <span class="n">tag</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">tagName</span><span class="p">())</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">tag</span> <span class="o">==</span> <span class="s">&#39;input&#39;</span><span class="p">:</span>
+                <span class="n">e</span><span class="o">.</span><span class="n">setAttribute</span><span class="p">(</span><span class="s">&#39;value&#39;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+                <span class="c">#e.evaluateJavaScript(&#39;this.value = &quot;%s&quot;&#39; % value)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">e</span><span class="o">.</span><span class="n">setPlainText</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">es</span><span class="p">)</span></div>
+
+ 
+<div class="viewcode-block" id="Browser.find"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.Browser.find">[docs]</a>    <span class="k">def</span> <span class="nf">find</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pattern</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the elements matching this CSS pattern.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="nb">basestring</span><span class="p">):</span>
+            <span class="n">matches</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">page</span><span class="p">()</span><span class="o">.</span><span class="n">mainFrame</span><span class="p">()</span><span class="o">.</span><span class="n">findAllElements</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span><span class="o">.</span><span class="n">toList</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">matches</span> <span class="o">=</span> <span class="n">pattern</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">QWebElement</span><span class="p">):</span>
+            <span class="n">matches</span> <span class="o">=</span> <span class="p">[</span><span class="n">pattern</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">common</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&#39;Unknown pattern: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">pattern</span><span class="p">))</span>
+            <span class="n">matches</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">return</span> <span class="n">matches</span></div>
+
+
+<div class="viewcode-block" id="Browser.run"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.Browser.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Run the Qt event loop so can interact with the browser</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span> <span class="c"># start GUI thread</span></div>
+
+
+<div class="viewcode-block" id="Browser.finished"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.Browser.finished">[docs]</a>    <span class="k">def</span> <span class="nf">finished</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reply</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Override this method in subclasses to process downloaded urls</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">reply</span><span class="o">.</span><span class="n">url</span><span class="p">()</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">url</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">update_address</span><span class="p">(</span><span class="n">reply</span><span class="o">.</span><span class="n">url</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="Browser.update_address"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.Browser.update_address">[docs]</a>    <span class="k">def</span> <span class="nf">update_address</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set address of the URL text field</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">url_input</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">url</span><span class="o">.</span><span class="n">toString</span><span class="p">())</span></div>
+        
+
+<div class="viewcode-block" id="Browser.screenshot"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.Browser.screenshot">[docs]</a>    <span class="k">def</span> <span class="nf">screenshot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_file</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Take screenshot of current webpage and save results</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">frame</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">page</span><span class="p">()</span><span class="o">.</span><span class="n">mainFrame</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">page</span><span class="p">()</span><span class="o">.</span><span class="n">setViewportSize</span><span class="p">(</span><span class="n">frame</span><span class="o">.</span><span class="n">contentsSize</span><span class="p">())</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">QImage</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">page</span><span class="p">()</span><span class="o">.</span><span class="n">viewportSize</span><span class="p">(),</span> <span class="n">QImage</span><span class="o">.</span><span class="n">Format_ARGB32</span><span class="p">)</span>
+        <span class="n">painter</span> <span class="o">=</span> <span class="n">QPainter</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+        <span class="n">frame</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">painter</span><span class="p">)</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">end</span><span class="p">()</span>
+        <span class="n">common</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;saving: &#39;</span> <span class="o">+</span> <span class="n">output_file</span><span class="p">)</span>
+        <span class="n">image</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">output_file</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Browser.closeEvent"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.webkit.Browser.closeEvent">[docs]</a>    <span class="k">def</span> <span class="nf">closeEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Catch the close window event and stop the script</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">running</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">page</span><span class="p">()</span><span class="o">.</span><span class="n">networkAccessManager</span><span class="p">()</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span></div></div>
+
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="c"># initiate webkit and show gui</span>
+    <span class="c"># once script is working you can disable the gui</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">Browser</span><span class="p">(</span><span class="n">gui</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> 
+    <span class="c"># load webpage</span>
+    <span class="n">w</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s">&#39;http://duckduckgo.com&#39;</span><span class="p">)</span>
+    <span class="c"># fill search textbox </span>
+    <span class="n">w</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="s">&#39;input[id=search_form_input_homepage]&#39;</span><span class="p">,</span> <span class="s">&#39;web scraping&#39;</span><span class="p">)</span>
+    <span class="c"># take screenshot of webpage</span>
+    <span class="n">w</span><span class="o">.</span><span class="n">screenshot</span><span class="p">(</span><span class="s">&#39;duckduckgo.jpg&#39;</span><span class="p">)</span>
+    <span class="c"># click search button </span>
+    <span class="n">w</span><span class="o">.</span><span class="n">click</span><span class="p">(</span><span class="s">&#39;input[id=search_button_homepage]&#39;</span><span class="p">)</span>
+    <span class="c"># show webpage for 10 seconds</span>
+    <span class="n">w</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Author.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

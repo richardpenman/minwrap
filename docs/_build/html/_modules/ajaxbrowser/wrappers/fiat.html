@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ajaxbrowser.wrappers.fiat &mdash; ajaxbrowser  documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="ajaxbrowser  documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for ajaxbrowser.wrappers.fiat</h1><div class="highlight"><pre>
+<span class="c"># -*- coding: utf-8 -*-</span>
+
+<div class="viewcode-block" id="Wrapper"><a class="viewcode-back" href="../../../ajaxbrowser.wrappers.fiat.html#ajaxbrowser.wrappers.fiat.Wrapper">[docs]</a><span class="k">class</span> <span class="nc">Wrapper</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span><span class="s">&#39;OX1&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;OXON&#39;</span><span class="p">,</span> <span class="s">&#39;0051422&#39;</span><span class="p">,</span> <span class="s">&#39;HARTWELL ABINGDON&#39;</span><span class="p">,</span> <span class="s">&#39;01235522822&#39;</span><span class="p">,</span> <span class="s">&#39;OX14 5JU&#39;</span><span class="p">,</span> <span class="s">&#39;David Ebsworth&#39;</span><span class="p">,</span> <span class="s">&#39;david.ebsworth@hartwell.co.uk&#39;</span><span class="p">,</span> <span class="s">&#39;3112&#39;</span><span class="p">,</span> <span class="s">&#39;hartwell-auto.co.uk/fiat/?locationcode=00000013&amp;bannerid=DL&amp;source=WCOR&#39;</span><span class="p">,</span> <span class="s">&#39;08448548198&#39;</span><span class="p">,</span> <span class="s">&#39;51.66387&#39;</span><span class="p">,</span> <span class="s">&#39;0870 909 5214&#39;</span><span class="p">,</span> <span class="s">&#39;-1.297952&#39;</span><span class="p">,</span> <span class="s">&#39;ABINGDON&#39;</span><span class="p">,</span> <span class="s">&#39;6870.98&#39;</span><span class="p">,</span> <span class="s">&#39;DRAYTON ROAD&#39;</span><span class="p">,</span> <span class="s">&#39;BUCKS&#39;</span><span class="p">,</span> <span class="s">&#39;0060169&#39;</span><span class="p">,</span> <span class="s">&#39;PERRYS&#39;</span><span class="p">,</span> <span class="s">&#39;08433939305&#39;</span><span class="p">,</span> <span class="s">&#39;HP19_8BY&#39;</span><span class="p">,</span> <span class="s">&#39;Lee Jackson&#39;</span><span class="p">,</span> <span class="s">&#39;aylesfiatcontrol@perrys.co.uk&#39;</span><span class="p">,</span> <span class="s">&#39;perrys-auto.co.uk/fiat/?locationcode=00000034&amp;bannerid=DL&amp;source=WCOR&#39;</span><span class="p">]),</span>
+            <span class="p">(</span><span class="s">&#39;CB2&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;10 WHITTON ROAD&#39;</span><span class="p">,</span> <span class="s">&#39;SURREY&#39;</span><span class="p">,</span> <span class="s">&#39;0046500&#39;</span><span class="p">,</span> <span class="s">&#39;MOTOR VILLAGE CROYDON&#39;</span><span class="p">,</span> <span class="s">&#39;02086831000&#39;</span><span class="p">,</span> <span class="s">&#39;CR0 3HH&#39;</span><span class="p">,</span> <span class="s">&#39;Simon Wright&#39;</span><span class="p">,</span> <span class="s">&#39;tim.keatinge@fiat.com&#39;</span><span class="p">,</span> <span class="s">&#39;croydon-motorvillage.co.uk/fiat/?locationcode=00000256&amp;bannerid=DL&amp;source=WCOR&#39;</span><span class="p">,</span> <span class="s">&#39;0208 6831222&#39;</span><span class="p">,</span> <span class="s">&#39;51.385291&#39;</span><span class="p">,</span> <span class="s">&#39;02086831222&#39;</span><span class="p">,</span> <span class="s">&#39;CROYDON&#39;</span><span class="p">,</span> <span class="s">&#39;89491.75&#39;</span><span class="p">,</span> <span class="s">&#39;121 CANTERBURY ROAD&#39;</span><span class="p">,</span> <span class="s">&#39;BERKS&#39;</span><span class="p">,</span> <span class="s">&#39;0065920&#39;</span><span class="p">,</span> <span class="s">&#39;THAMES MOTOR GROUP (SLOUGH) LTD.&#39;</span><span class="p">,</span> <span class="s">&#39;01753 325063&#39;</span><span class="p">,</span> <span class="s">&#39;SL1 6BB&#39;</span><span class="p">,</span> <span class="s">&#39;Tim Fennell&#39;</span><span class="p">,</span> <span class="s">&#39;ss@thamesmotorgroup.co.uk&#39;</span><span class="p">,</span> <span class="s">&#39;thames-auto.co.uk/fiat/?locationcode=00000819&amp;bannerid=DL&amp;source=WCOR&#39;</span><span class="p">,</span> <span class="s">&#39;01628559669&#39;</span><span class="p">,</span> <span class="s">&#39;51.520652&#39;</span><span class="p">,</span> <span class="s">&#39;-0.647828&#39;</span><span class="p">,</span> <span class="s">&#39;01753788000&#39;</span><span class="p">,</span> <span class="s">&#39;01753325063&#39;</span><span class="p">,</span> <span class="s">&#39;SLOUGH&#39;</span><span class="p">,</span> <span class="s">&#39;90276.94&#39;</span><span class="p">,</span> <span class="s">&#39;470 BATH ROAD&#39;</span><span class="p">,</span> <span class="s">&#39;0047239&#39;</span><span class="p">,</span> <span class="s">&#39;DESIRA GROUP PLC - NORWICH&#39;</span><span class="p">,</span> <span class="s">&#39;01603633222&#39;</span><span class="p">,</span> <span class="s">&#39;NR2_4TG&#39;</span><span class="p">]),</span>
+        <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">website</span> <span class="o">=</span> <span class="s">&#39;http://www.fiat.co.uk/find-dealer&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">category</span> <span class="o">=</span> <span class="s">&#39;car dealer&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">http_method</span> <span class="o">=</span> <span class="s">&#39;GET&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">response_format</span> <span class="o">=</span> <span class="s">&#39;JSONP&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">notes</span> <span class="o">=</span> <span class="s">&#39;Two potential AJAX requests by postcode and sales type&#39;</span>
+
+<div class="viewcode-block" id="Wrapper.run"><a class="viewcode-back" href="../../../ajaxbrowser.wrappers.fiat.html#ajaxbrowser.wrappers.fiat.Wrapper.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">browser</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">input_value</span><span class="p">,</span> <span class="n">output_values</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
+            <span class="n">browser</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">website</span><span class="p">)</span>
+            <span class="n">browser</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="s">&#39;div.input_text input&#39;</span><span class="p">,</span> <span class="n">input_value</span><span class="p">)</span>
+            <span class="n">browser</span><span class="o">.</span><span class="n">click</span><span class="p">(</span><span class="s">&#39;div.input_text button.search&#39;</span><span class="p">)</span>
+            <span class="k">yield</span> <span class="n">output_values</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Author.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
