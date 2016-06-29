@@ -9,7 +9,7 @@ from PyQt4.QtNetwork import QNetworkRequest
 from PyQt4.QtCore import QUrl, Qt
 from PyQt4.QtGui import QApplication
 
-import sys, re, os, collections, pprint
+import argparse, sys, re, os, collections, pprint
 import webkit, common, model, parser, transition, verticals, wrappertable
 
 
@@ -105,15 +105,18 @@ class AjaxBrowser(webkit.Browser):
 
 
 
-def main():
+def main(wrapper_name):
     app = QApplication(sys.argv)
-    wt = wrappertable.WrapperTable()
-    app.exec_()
-    if wt.wrapper is None:
-        return
+    if wrapper_name is None:
+        wt = wrappertable.WrapperTable()
+        app.exec_()
+        if wt.wrapper is None:
+            return
+        wrapper_name = wt.wrapper_name
+
     # execute the selected wrapper 
     browser = AjaxBrowser(app=app, gui=True, use_cache=False, load_images=False, load_java=False, load_plugins=False)
-    browser.wrapper = wt.wrapper.run(browser)
+    browser.wrapper = wrappertable.load_wrapper(wrapper_name).run(browser)
     QApplication.setOverrideCursor(Qt.WaitCursor)
 
     models = {} 
@@ -143,6 +146,16 @@ def main():
                     browser.transitions.remove(t)
 
 
-
 if __name__ == '__main__':
-    main()
+    ap = argparse.ArgumentParser()
+    ap.add_argument('-s', '--show-wrappers', action='store_true', help='display a list of available wrappers')
+    ap.add_argument('-w', '--wrapper', help='the wrapper to execute')
+    args = ap.parse_args()
+    wrapper_names = wrappertable.get_wrappers()
+    if args.show_wrappers:
+        print 'Available wrappers:', wrapper_names
+    else:
+        if args.wrapper is None or args.wrapper in wrapper_names:
+            main(args.wrapper)
+        else:
+            ap.error('This wrapper does not exist. Available wrappers are: {}'.format(wrapper_names))

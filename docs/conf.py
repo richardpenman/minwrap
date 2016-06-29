@@ -23,7 +23,7 @@ class Mock(MagicMock):
     @classmethod
     def __getattr__(cls, name):
             return Mock()
-MOCK_MODULES = ['sip', 'PyQt4', 'PyQt4.QtGui', 'PyQt4.QtCore', 'PyQt4.QtWebKit', 'PyQt4.QtNetwork', 'demjson', 'lxml']
+MOCK_MODULES = ['sip', 'PyQt4', 'PyQt4.QtGui', 'PyQt4.QtCore', 'PyQt4.QtWebKit', 'PyQt4.QtNetwork', 'demjson', 'xmltodict', 'templater']
 sys.modules.update((mod_name, MagicMock()) for mod_name in MOCK_MODULES)
 
 import shlex

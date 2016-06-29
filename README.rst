@@ -23,22 +23,15 @@ OSX:
     brew install qt pyqt sip
 
 
-Run
-===
-
-.. sourcecode:: bash
-
-    python main.py
-
 
 Wrappers
 ========
 
-Wrappers are classes defined in *wrappers.py* and are structured like this:
+Wrappers are classes defined in the *wrappers* directory and are structured like this:
 
 .. sourcecode:: python
 
-    class wrapper_name:
+    class Wrapper:
         def __init__(self):
             self.data = [
                 (input value1, [expected output values1]),
@@ -59,14 +52,13 @@ Wrappers are classes defined in *wrappers.py* and are structured like this:
                 yield output_values
 
 
-The attributes *website*, *category*, *http_method*, *response_format*, and *notes* are optional - these are just displayed in the table on the initial loading page.
-The necessary part is defined in *run()*, which takes an *AjaxBrowser* instance and defines the browser interaction. The *yield* command is use to relinquish control to the parent thread so that network traffic from the execution path can be analysed.
+Documentation on each attribute is available here. XXX
 
-Here is an implementation for Lufthunsa:
+Here is an implementation for Lufthunsa from *wrappers/lufthunsa.py*:
 
 .. sourcecode:: python
 
-    class lufthansa:
+    class Wrapper:
         def __init__(self):
             self.data = [
                 ('lon', ['United Kingdom', 'London, all airports', 'London City Airport', 'London Gatwick', 'London Heathrow', 'London-Stansted', 'Southampton', 'London, Canada', 'Sarnia', 'Windsor', 'Londrina', 'Long Beach', 'Burbank', 'Oxnard/Ventura', 'Norway', 'Longyearbyen']),
@@ -86,11 +78,11 @@ Here is an implementation for Lufthunsa:
                 yield output_values
 
 
-And here is an implementation for Lexus:
+And here is an implementation for Lexus from *wrappers/lexus.py*:
 
 .. sourcecode:: python
 
-    class lexus:
+    class Wrapper:
         def __init__(self):
             self.data = [
                 ('paris', ['58, Boulevard Saint Marcel', '75005', '01 55 43 55 00', '3, rue des Ardennes', '75019', '01 40 03 16 00', '4, avenue de la Grande Armée', '75017', '01 40 55 40 00']),
@@ -113,7 +105,24 @@ And here is an implementation for Lexus:
                 yield output_values
 
 
-Further examples are available in *wrappers.py*.
+
+Run
+===
+
+.. sourcecode:: bash
+
+    $ python main.py -h
+    usage: main.py [-h] [-s] [-w WRAPPER]
+
+    optional arguments:
+      -h, --help            show this help message and exit
+      -s, --show-wrappers   display a list of available wrappers
+      -w WRAPPER, --wrapper WRAPPER
+                            the wrapper to execute
+
+
+A wrapper to execute can be passed from the command line. If no wrapper is passed then a window with details of each defined wrapper will be displayed and the *Go* button can be clicked to execute one of them.
+
 
 
 Files

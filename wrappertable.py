@@ -2,8 +2,20 @@
 
 __doc__ = 'Interface to select which wrapper to run'
 
+import importlib
 from PyQt4.QtGui import QApplication, QTableWidget, QTableWidgetItem, QHeaderView, QFont, QPushButton, QShortcut, QKeySequence
 import wrappers
+
+
+def get_wrappers():
+    """Return the names of available wrappers
+    """
+    return wrappers.__all__
+
+def load_wrapper(name):
+    """Load the wrapper with this name
+    """
+    return importlib.import_module('wrappers.{}'.format(name)).Wrapper()
 
 
 
@@ -25,31 +37,30 @@ class WrapperTable(QTableWidget):
         self.horizontalHeader().setFont(font)
         self.setVerticalHeaderLabels([])
 
-        for wrapper_name in dir(wrappers):
-            if not wrapper_name.startswith('_'):
-                wrapper = getattr(wrappers, wrapper_name)()
-                num_rows = self.rowCount()
-                self.insertRow(num_rows)
-                self.setItem(num_rows, 0, QTableWidgetItem(wrapper_name.replace('_', ' ').title()))
-                for i, attr in enumerate(['http_method', 'response_format', 'category', 'notes']):
-                    try:
-                        value = getattr(wrapper, attr)
-                    except AttributeError:
-                        pass
-                    else:
-                        self.setItem(num_rows, i + 1, QTableWidgetItem(value))
-                # add button to activate wrapper
-                button = QPushButton('Go')
-                button.clicked.connect(self.select_wrapper(wrapper))
-                self.setCellWidget(num_rows, len(header) - 1, button)
-                self.setVerticalHeaderItem(num_rows, QTableWidgetItem(''))
+        for wrapper_name in get_wrappers():
+            wrapper = load_wrapper(wrapper_name)
+            num_rows = self.rowCount()
+            self.insertRow(num_rows)
+            self.setItem(num_rows, 0, QTableWidgetItem(wrapper_name.replace('_', ' ').title()))
+            for i, attr in enumerate(['http_method', 'response_format', 'category', 'notes']):
+                try:
+                    value = getattr(wrapper, attr)
+                except AttributeError:
+                    pass
+                else:
+                    self.setItem(num_rows, i + 1, QTableWidgetItem(value))
+            # add button to activate wrapper
+            button = QPushButton('Go')
+            button.clicked.connect(self.select_wrapper(wrapper_name))
+            self.setCellWidget(num_rows, len(header) - 1, button)
+            self.setVerticalHeaderItem(num_rows, QTableWidgetItem(''))
         self.horizontalHeader().setResizeMode(QHeaderView.ResizeToContents)
         self.showMaximized()
         self.setSortingEnabled(True)
         self.raise_()
 
-    def select_wrapper(self, wrapper):
+    def select_wrapper(self, wrapper_name):
         def _select_wrapper():
-            self.wrapper = wrapper
+            self.wrapper_name = wrapper_name
             self.close()
         return _select_wrapper
