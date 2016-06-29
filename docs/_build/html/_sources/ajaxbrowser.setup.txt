@@ -1,7 +1,0 @@
-ajaxbrowser.setup module
-========================
-
-.. automodule:: ajaxbrowser.setup
-    :members:
-    :undoc-members:
-    :show-inheritance:

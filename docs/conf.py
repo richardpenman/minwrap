@@ -20,13 +20,20 @@ parent_dir = os.path.abspath('../..')
 if parent_dir not in sys.path:
     sys.path.append(parent_dir)
 
+"""
 from mock import MagicMock
 class Mock(MagicMock):
     @classmethod
-    def __getattr__(cls, name):
+    def __getattr__(cls, name, *argv, **kwargs):
         return Mock()
-MOCK_MODULES = ['sip', 'PyQt4', 'PyQt4.QtGui', 'PyQt4.QtCore', 'PyQt4.QtWebKit', 'PyQt4.QtNetwork', 'demjson', 'xmltodict', 'templater', 'gdbm', 'anydbm']
-sys.modules.update((mod_name, MagicMock()) for mod_name in MOCK_MODULES)
+"""
+#from mock import Mock as MagicMock
+import mock
+MOCK_MODULES = ['sip', 'PyQt4', 'PyQt4.QtGui', 'PyQt4.QtCore', 'PyQt4.QtWebKit', 'PyQt4.QtNetwork', 'PyQt4.QtGui.QWidget', 'demjson', 'xmltodict', 'templater', 'gdbm', 'anydbm']
+for mod_name in MOCK_MODULES:
+    sys.modules[mod_name] = mock.Mock()
+#sys.modules.update((mod_name, Mock()) for mod_name in MOCK_MODULES)
+#sys.modules.update((mod_name, MagicMock()) for mod_name in MOCK_MODULES)
 
 
 # If extensions (or modules to document with autodoc) are in another directory,
@@ -64,8 +71,8 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'ajaxbrowser'
-copyright = u'2016, Author'
-author = u'Author'
+copyright = u'2016'
+author = u''
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the

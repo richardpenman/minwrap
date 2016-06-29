@@ -117,10 +117,17 @@ And here is an implementation for Lexus from *wrappers/lexus.py*:
                 yield output_values
 
 
-AjaxBrowser
+WebKit
 ===========
 
-The AjaxBrowser class is a wrapper around WebKit's *QWebView* class for rendering web pages, which is documented at http://doc.qt.io/qt-4.8/qwebview.html. Some helper methods have been defined
+The AjaxBrowser class is a wrapper around WebKit's *QWebView* class for rendering web pages, which is documented at http://doc.qt.io/qt-4.8/qwebview.html. Some helper methods have been defined in webkit.Browser:
+
+- click(pattern): Click all elements that match the CSS pattern. Returns number of elements clicked.
+- keys(pattern, text): Simulate typing by focusing on elements that match the CSS pattern and triggering key events. Returns number of elements set
+- attr(pattern, name, value): Set attribute of matching CSS pattern to value. Returns number of elements set.
+- fill(pattern, value): Set text of the form elements that match this CSS pattern to value. Returns number of elements set.
+- find(pattern): Returns the elements matching this CSS pattern.
+- wait_load(pattern, timeout=60): Wait for this content to be loaded up to maximum timeout. Returns True if pattern was loaded before the timeout.
 
 
 Run

@@ -10,7 +10,7 @@ from PyQt4.QtCore import QUrl, Qt
 from PyQt4.QtGui import QApplication
 
 import argparse, sys, re, os, collections, pprint
-import ajaxbrowser, common, model, wrappertable
+import webkit, common, model, wrappertable
 app = QApplication(sys.argv)
 
 
@@ -43,7 +43,7 @@ def main():
 def run_wrapper(wrapper):
     """execute the selected wrapper 
     """
-    browser = ajaxbrowser.AjaxBrowser(app=app, gui=True, use_cache=False, load_images=False, load_java=False, load_plugins=False)
+    browser = webkit.Browser(app=app, gui=True, use_cache=False, load_images=False, load_java=False, load_plugins=False)
     QApplication.setOverrideCursor(Qt.WaitCursor)
     execution = wrapper.run(browser)
 

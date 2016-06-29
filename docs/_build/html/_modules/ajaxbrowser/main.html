@@ -50,12 +50,12 @@
 <span class="kn">from</span> <span class="nn">PyQt4.QtGui</span> <span class="kn">import</span> <span class="n">QApplication</span>
 
 <span class="kn">import</span> <span class="nn">argparse</span><span class="o">,</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">re</span><span class="o">,</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">collections</span><span class="o">,</span> <span class="nn">pprint</span>
-<span class="kn">import</span> <span class="nn">ajaxbrowser</span><span class="o">,</span> <span class="nn">common</span><span class="o">,</span> <span class="nn">model</span><span class="o">,</span> <span class="nn">wrappertable</span>
+<span class="kn">import</span> <span class="nn">webkit</span><span class="o">,</span> <span class="nn">common</span><span class="o">,</span> <span class="nn">model</span><span class="o">,</span> <span class="nn">wrappertable</span>
 <span class="n">app</span> <span class="o">=</span> <span class="n">QApplication</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
 
 
 
-<div class="viewcode-block" id="main"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.main.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<div class="viewcode-block" id="main"><a class="viewcode-back" href="../../ajaxbrowser.main.html#ajaxbrowser.main.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;Process command line arguments to select the wrapper</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">ap</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
@@ -80,10 +80,10 @@
             <span class="n">run_wrapper</span><span class="p">(</span><span class="n">wrapper</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="run_wrapper"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.main.run_wrapper">[docs]</a><span class="k">def</span> <span class="nf">run_wrapper</span><span class="p">(</span><span class="n">wrapper</span><span class="p">):</span>
+<div class="viewcode-block" id="run_wrapper"><a class="viewcode-back" href="../../ajaxbrowser.main.html#ajaxbrowser.main.run_wrapper">[docs]</a><span class="k">def</span> <span class="nf">run_wrapper</span><span class="p">(</span><span class="n">wrapper</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;execute the selected wrapper </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">browser</span> <span class="o">=</span> <span class="n">ajaxbrowser</span><span class="o">.</span><span class="n">AjaxBrowser</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">,</span> <span class="n">gui</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">use_cache</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">load_images</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">load_java</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">load_plugins</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">browser</span> <span class="o">=</span> <span class="n">webkit</span><span class="o">.</span><span class="n">Browser</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">,</span> <span class="n">gui</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">use_cache</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">load_images</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">load_java</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">load_plugins</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
     <span class="n">QApplication</span><span class="o">.</span><span class="n">setOverrideCursor</span><span class="p">(</span><span class="n">Qt</span><span class="o">.</span><span class="n">WaitCursor</span><span class="p">)</span>
     <span class="n">execution</span> <span class="o">=</span> <span class="n">wrapper</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">browser</span><span class="p">)</span>
 
@@ -149,7 +149,7 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2016, Author.
+      &copy;2016.
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.3</a>

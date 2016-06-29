@@ -45,7 +45,7 @@
 <span class="kn">import</span> <span class="nn">common</span>
 
 
-<div class="viewcode-block" id="Transition"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.transition.Transition">[docs]</a><span class="k">class</span> <span class="nc">Transition</span><span class="p">:</span>
+<div class="viewcode-block" id="Transition"><a class="viewcode-back" href="../../ajaxbrowser.transition.html#ajaxbrowser.transition.Transition">[docs]</a><span class="k">class</span> <span class="nc">Transition</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Wrapper around a single transition using the QNetworkReply,</span>
 <span class="sd">    which will be deleted by Qt so a local copy of details is necessary</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -80,7 +80,7 @@
         <span class="k">return</span> <span class="nb">hash</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">host</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">),</span> <span class="n">get_keys</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">qs</span><span class="p">),</span> <span class="n">get_keys</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)))</span>
 
 
-<div class="viewcode-block" id="Transition.matches"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.transition.Transition.matches">[docs]</a>    <span class="k">def</span> <span class="nf">matches</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expected_output</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Transition.matches"><a class="viewcode-back" href="../../ajaxbrowser.transition.html#ajaxbrowser.transition.Transition.matches">[docs]</a>    <span class="k">def</span> <span class="nf">matches</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expected_output</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return whether the expected output is found in this transition</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">num_found</span> <span class="o">=</span> <span class="mi">0</span>
@@ -99,7 +99,7 @@
 
 
 
-<div class="viewcode-block" id="generate_path"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.transition.generate_path">[docs]</a><span class="k">def</span> <span class="nf">generate_path</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">goal</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="generate_path"><a class="viewcode-back" href="../../ajaxbrowser.transition.html#ajaxbrowser.transition.generate_path">[docs]</a><span class="k">def</span> <span class="nf">generate_path</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">goal</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Find the path to the goal in this data structure</span>
 
 <span class="sd">    &gt;&gt;&gt; js = [{&#39;person&#39;: &#39;richard&#39;, &#39;location&#39;: &#39;oxford&#39;}, {&#39;person&#39;: &#39;tim&#39;, &#39;location&#39;: &#39;oxford&#39;}]</span>
@@ -125,7 +125,7 @@
 
 
 
-<div class="viewcode-block" id="JsonPath"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.transition.JsonPath">[docs]</a><span class="k">class</span> <span class="nc">JsonPath</span><span class="p">:</span>
+<div class="viewcode-block" id="JsonPath"><a class="viewcode-back" href="../../ajaxbrowser.transition.html#ajaxbrowser.transition.JsonPath">[docs]</a><span class="k">class</span> <span class="nc">JsonPath</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Wrapper to iterate through a dictionary given a list of indices / keys</span>
 
 <span class="sd">    &gt;&gt;&gt; jp = JsonPath([0, &#39;person&#39;])</span>
@@ -162,7 +162,7 @@
 
     
 
-<div class="viewcode-block" id="json_values"><a class="viewcode-back" href="../../reference.html#ajaxbrowser.transition.json_values">[docs]</a><span class="k">def</span> <span class="nf">json_values</span><span class="p">(</span><span class="n">es</span><span class="p">):</span>
+<div class="viewcode-block" id="json_values"><a class="viewcode-back" href="../../ajaxbrowser.transition.html#ajaxbrowser.transition.json_values">[docs]</a><span class="k">def</span> <span class="nf">json_values</span><span class="p">(</span><span class="n">es</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Recursively parse values from this json dict</span>
 
 <span class="sd">    &gt;&gt;&gt; list(json_values({&#39;name&#39;: &#39;bob&#39;, &#39;children&#39;: [&#39;alice&#39;, &#39;sarah&#39;]}))</span>
@@ -217,7 +217,7 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2016, Author.
+      &copy;2016.
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.3</a>

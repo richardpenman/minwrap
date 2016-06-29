@@ -39,35 +39,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="module-ajaxbrowser.ajaxbrowser">
-<span id="ajaxbrowser-ajaxbrowser-module"></span><h1>ajaxbrowser.ajaxbrowser module<a class="headerlink" href="#module-ajaxbrowser.ajaxbrowser" title="Permalink to this headline">¶</a></h1>
-<p>Interface to run the ajax browser</p>
-<dl class="class">
-<dt id="ajaxbrowser.ajaxbrowser.AjaxBrowser">
-<em class="property">class </em><code class="descclassname">ajaxbrowser.ajaxbrowser.</code><code class="descname">AjaxBrowser</code><span class="sig-paren">(</span><em>**argv</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ajaxbrowser/ajaxbrowser.html#AjaxBrowser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ajaxbrowser.ajaxbrowser.AjaxBrowser" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="reference.html#ajaxbrowser.webkit.Browser" title="ajaxbrowser.webkit.Browser"><code class="xref py py-class docutils literal"><span class="pre">ajaxbrowser.webkit.Browser</span></code></a></p>
-<p>Extend webkit.Browser to add some specific functionality for abstracting AJAX requests</p>
-<dl class="method">
-<dt id="ajaxbrowser.ajaxbrowser.AjaxBrowser.find_transitions">
-<code class="descname">find_transitions</code><span class="sig-paren">(</span><em>examples</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ajaxbrowser/ajaxbrowser.html#AjaxBrowser.find_transitions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ajaxbrowser.ajaxbrowser.AjaxBrowser.find_transitions" title="Permalink to this definition">¶</a></dt>
-<dd><p>Find transitions that have the example data we are after at the same JSON path</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="ajaxbrowser.ajaxbrowser.AjaxBrowser.finished">
-<code class="descname">finished</code><span class="sig-paren">(</span><em>reply</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ajaxbrowser/ajaxbrowser.html#AjaxBrowser.finished"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ajaxbrowser.ajaxbrowser.AjaxBrowser.finished" title="Permalink to this definition">¶</a></dt>
-<dd><p>Override the reply finished signal to check the result of each request</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="ajaxbrowser.ajaxbrowser.AjaxBrowser.run_models">
-<code class="descname">run_models</code><span class="sig-paren">(</span><em>models</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ajaxbrowser/ajaxbrowser.html#AjaxBrowser.run_models"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ajaxbrowser.ajaxbrowser.AjaxBrowser.run_models" title="Permalink to this definition">¶</a></dt>
-<dd><p>Recieves a list of potential models for the execution. 
-Executes them in order, shortest first, until find one that successfully executes.</p>
-</dd></dl>
-
-</dd></dl>
-
+  <div class="section" id="ajaxbrowser-ajaxbrowser-module">
+<h1>ajaxbrowser.ajaxbrowser module<a class="headerlink" href="#ajaxbrowser-ajaxbrowser-module" title="Permalink to this headline">¶</a></h1>
 </div>
 
 
@@ -111,7 +84,7 @@ Executes them in order, shortest first, until find one that successfully execute
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2016, Author.
+      &copy;2016.
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.3</a>

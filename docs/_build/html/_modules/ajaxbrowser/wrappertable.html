@@ -59,7 +59,7 @@
 
 
 
-<div class="viewcode-block" id="WrapperTable"><a class="viewcode-back" href="../../ajaxbrowser.wrappertable.html#ajaxbrowser.wrappertable.WrapperTable">[docs]</a><span class="k">class</span> <span class="nc">WrapperTable</span><span class="p">(</span><span class="n">QTableWidget</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">WrapperTable</span><span class="p">(</span><span class="n">QTableWidget</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Display details about the available wrappers from their meta data and select one to execute</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -99,11 +99,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">setSortingEnabled</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">raise_</span><span class="p">()</span>
 
-<div class="viewcode-block" id="WrapperTable.select_wrapper"><a class="viewcode-back" href="../../ajaxbrowser.wrappertable.html#ajaxbrowser.wrappertable.WrapperTable.select_wrapper">[docs]</a>    <span class="k">def</span> <span class="nf">select_wrapper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wrapper_name</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">select_wrapper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wrapper_name</span><span class="p">):</span>
         <span class="k">def</span> <span class="nf">_select_wrapper</span><span class="p">():</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">wrapper_name</span> <span class="o">=</span> <span class="n">wrapper_name</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">_select_wrapper</span></div></div>
+        <span class="k">return</span> <span class="n">_select_wrapper</span>
 </pre></div>
 
           </div>
@@ -137,7 +137,7 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2016, Author.
+      &copy;2016.
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.3</a>
