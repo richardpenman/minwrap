@@ -120,7 +120,7 @@ And here is an implementation for Lexus from *wrappers/lexus.py*:
 AjaxBrowser
 ===========
 
-The AjaxBrowser class is a wrapper around WebKit's **QWebView** class for rendering web pages, which is documented at http://doc.qt.io/qt-4.8/qwebview.html. Some helper methods have been defined
+The AjaxBrowser class is a wrapper around WebKit's *QWebView* class for rendering web pages, which is documented at http://doc.qt.io/qt-4.8/qwebview.html. Some helper methods have been defined
 
 
 Run

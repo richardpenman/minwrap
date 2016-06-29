@@ -20,6 +20,15 @@ parent_dir = os.path.abspath('../..')
 if parent_dir not in sys.path:
     sys.path.append(parent_dir)
 
+from mock import MagicMock
+class Mock(MagicMock):
+    @classmethod
+    def __getattr__(cls, name):
+        return Mock()
+MOCK_MODULES = ['sip', 'PyQt4', 'PyQt4.QtGui', 'PyQt4.QtCore', 'PyQt4.QtWebKit', 'PyQt4.QtNetwork', 'demjson', 'xmltodict', 'templater', 'gdbm', 'anydbm']
+sys.modules.update((mod_name, MagicMock()) for mod_name in MOCK_MODULES)
+
+
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
