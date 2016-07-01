@@ -2,7 +2,7 @@
 
 __doc__ = 'Interface to qt webkit for loading and interacting with JavaScript dependent webpages'
 
-import sys, os, re, urllib2, random, itertools, csv
+import sys, os, re, urllib2, random, itertools
 reload(sys)
 sys.setdefaultencoding('utf-8')
 from time import time, sleep
@@ -11,8 +11,8 @@ from datetime import datetime
 # for using native Python strings
 import sip
 sip.setapi('QString', 2)
-from PyQt4.QtGui import QApplication, QDesktopServices, QImage, QPainter, QVBoxLayout, QLineEdit, QWidget, QWidget, QShortcut, QKeySequence, QTableWidget, QTableWidgetItem
-from PyQt4.QtCore import QByteArray, QUrl, QTimer, QEventLoop, QIODevice, QObject, Qt
+from PyQt4.QtGui import QApplication, QDesktopServices, QImage, QPainter
+from PyQt4.QtCore import QByteArray, QUrl, QTimer, QEventLoop, QIODevice, QObject
 from PyQt4.QtWebKit import QWebFrame, QWebView, QWebElement, QWebPage, QWebSettings, QWebInspector
 from PyQt4.QtNetwork import QNetworkAccessManager, QNetworkProxy, QNetworkRequest, QNetworkReply, QNetworkDiskCache
 
@@ -260,89 +260,10 @@ class WebPage(QWebPage):
 
 
 
-class WebView(QWebView):
-    def __init__(self, page, load_images, load_javascript, load_java, load_plugins):
-        """Override QWebView to set which plugins to load
-        """
-        super(WebView, self).__init__()
-        self.setPage(page)
-        # set whether to enable plugins, images, and java
-        self.settings().setAttribute(QWebSettings.AutoLoadImages, load_images)
-        self.settings().setAttribute(QWebSettings.JavascriptEnabled, load_javascript)
-        self.settings().setAttribute(QWebSettings.JavaEnabled, load_java)
-        self.settings().setAttribute(QWebSettings.PluginsEnabled, load_plugins)
-        self.settings().setAttribute(QWebSettings.DeveloperExtrasEnabled, True)
-
-
-
-class UrlInput(QLineEdit):
-    """Address URL input widget
-    """
-    def __init__(self, view):
-        super(UrlInput, self).__init__()
-        self.view = view
-        # add event listener on "enter" pressed
-        self.returnPressed.connect(self._return_pressed)
-
-
-    def _return_pressed(self):
-        url = QUrl(self.text())
-        # load url into browser frame
-        self.view.load(url)
-
-
-
-class ResultsTable(QTableWidget):
-    def __init__(self):
-        """A table to display results from the scraping
-        """
-        super(ResultsTable, self).__init__()
-        # also save data to a CSV file
-        self.hide()
-        self.clear()
-
-    def clear(self):
-        # avoid displaying duplicate rows
-        self.row_hashes = set()
-        self.fields = None
-        self.writer = csv.writer(open(os.path.join(OUTPUT_DIR, 'data.csv'), 'w'))
-        super(ResultsTable, self).clear()
-
-    def add_records(self, records):
-        """Add these rows to the table and initialize fields if not already
-        """
-        for record in records:
-            if self.fields is None:
-                self.fields = sorted(record.keys())
-                self.setColumnCount(len(self.fields))
-                header = [field.title() for field in self.fields]
-                self.setHorizontalHeaderLabels(header)
-                self.writer.writerow(header)
-                self.show()
-            # filter to fields in the header
-            filtered_row = [record.get(field) for field in self.fields]
-            if any(filtered_row):
-                self.add_row(filtered_row)
-
-    def add_row(self, cols):
-        """Add this row to the table if is not duplicate
-        """
-        key = hash(tuple(cols))
-        if key not in self.row_hashes:
-            self.row_hashes.add(key)
-            num_rows = self.rowCount()
-            self.insertRow(num_rows)
-            for i, col in enumerate(cols):
-                self.setItem(num_rows, i, QTableWidgetItem(col))
-            self.writer.writerow(cols)
-
-
-
-class Browser(QWidget):
-    def __init__(self, gui=False, user_agent='WebKit', proxy=None, load_images=True, load_javascript=True, load_java=True, load_plugins=True, timeout=20, delay=5, app=None, use_cache=False):
+class Browser(QWebView):
+    def __init__(self, user_agent='WebKit', proxy=None, load_images=True, load_javascript=True, load_java=True, load_plugins=True, timeout=20, delay=5, app=None, use_cache=False):
         """Widget class that contains the address bar, webview for rendering webpages, and a table for displaying results
 
-        gui: whether to show webkit window or run headless
         user_agent: the user-agent when downloading content
         proxy: a QNetworkProxy to download through
         load_images: whether to download images
@@ -357,60 +278,26 @@ class Browser(QWidget):
         # must instantiate the QApplication object before any other Qt objects
         self.app = app or QApplication(sys.argv)
         super(Browser, self).__init__()
-        self.running = True
-        manager = NetworkAccessManager(proxy, use_cache)
-        manager.finished.connect(self.finished)
+
         page = WebPage(user_agent)
+        manager = NetworkAccessManager(proxy, use_cache)
         page.setNetworkAccessManager(manager)
-        self.view = WebView(page, load_images, load_javascript, load_java, load_plugins)
+        self.setPage(page)
+        # set whether to enable plugins, images, and java
+        self.settings().setAttribute(QWebSettings.AutoLoadImages, load_images)
+        self.settings().setAttribute(QWebSettings.JavascriptEnabled, load_javascript)
+        self.settings().setAttribute(QWebSettings.JavaEnabled, load_java)
+        self.settings().setAttribute(QWebSettings.PluginsEnabled, load_plugins)
+        self.settings().setAttribute(QWebSettings.DeveloperExtrasEnabled, True)
         self.timeout = timeout
         self.delay = delay
-
-        # use grid layout to hold widgets
-        self.grid = QVBoxLayout()
-        self.url_input = UrlInput(self.view)
-        self.grid.addWidget(self.url_input)
-        self.grid.addWidget(self.view)
-        self.table = ResultsTable()
-        self.grid.addWidget(self.table)
-        self.setLayout(self.grid)
-        self.add_shortcuts()
-        if gui: 
-            self.show()
-            self.raise_() # give focus to this browser window
-
-
-    def __del__(self):
-        # not sure why, but to avoid seg fault need to release the QWebPage manually
-        self.view.setPage(None)
-
-
-    def add_shortcuts(self):
-        """Define shortcuts for convenient interaction
-        """
-        QShortcut(QKeySequence.Close, self, self.close)
-        QShortcut(QKeySequence.Quit, self, self.close)
-        QShortcut(QKeySequence.Back, self, self.view.back)
-        QShortcut(QKeySequence.Forward, self, self.view.forward)
-        QShortcut(QKeySequence.Save, self, self.save)
-        QShortcut(QKeySequence.New, self, self.home)
-        QShortcut(QKeySequence(Qt.CTRL + Qt.Key_F), self, self.fullscreen)
 
 
     def home(self):
         """Go back to initial page in history
         """
-        history = self.view.history()
+        history = self.history()
         history.goToItem(history.itemAt(0))
-
-
-    def fullscreen(self):
-        """Alternate fullscreen mode
-        """
-        if self.isMaximized():
-            self.showNormal()
-        else:
-            self.showMaximized() 
 
 
     def save(self):
@@ -428,28 +315,28 @@ class Browser(QWidget):
     def set_proxy(self, proxy):
         """Shortcut to set the proxy
         """
-        self.view.page().networkAccessManager().setProxy(proxy)
+        self.page().networkAccessManager().setProxy(proxy)
 
 
     def current_url(self):
         """Return current URL
         """
-        return str(self.view.url().toString())
+        return str(self.url().toString())
 
 
     def current_html(self):
         """Return current rendered HTML
         """
-        return common.to_unicode(str(self.view.page().mainFrame().toHtml()))
+        return common.to_unicode(str(self.page().mainFrame().toHtml()))
 
 
     def current_text(self):
         """Return text from the current rendered HTML
         """
-        return common.to_unicode(str(self.view.page().mainFrame().toPlainText()))
+        return common.to_unicode(str(self.page().mainFrame().toPlainText()))
 
 
-    def load(self, url, html=None, headers=None, data=None):
+    def get(self, url, html=None, headers=None, data=None):
         """Load given url in webkit and return html when loaded
 
         url: the URL to load
@@ -457,32 +344,30 @@ class Browser(QWidget):
         headers: the headers to attach to the request
         data: the data to POST
         """
-        if not self.running:
-            return
         if isinstance(url, basestring):
             # convert string to Qt's URL object
             url = QUrl(url)
-        self.update_address(url)
         if html:
             # load pre downloaded HTML
-            self.view.setContent(html, baseUrl=url)
+            self.setContent(html, baseUrl=url)
             return html
 
         t1 = time()
         loop = QEventLoop()
-        self.view.loadFinished.connect(loop.quit)
+        self.loadFinished.connect(loop.quit)
         # need to make network request
         request = QNetworkRequest(url)
         if headers:
             # add headers to request when defined
             for header, value in headers:
                 request.setRawHeader(header, value)
+        fn = super(Browser, self)
         if data:
             # POST request
-            self.view.load(request, QNetworkAccessManager.PostOperation, data)
+            fn.load(request, QNetworkAccessManager.PostOperation, data)
         else:
             # GET request
-            self.view.load(request)
+            fn.load(request)
 
         # set a timeout on the download loop
         timer = QTimer()
@@ -518,7 +403,7 @@ class Browser(QWidget):
         """
         self.app.processEvents()
         deadline = time() + timeout
-        manager = self.view.page().networkAccessManager()
+        manager = self.page().networkAccessManager()
         while time() < deadline and manager.active_requests:
             sleep(0)
             self.app.processEvents()
@@ -528,7 +413,7 @@ class Browser(QWidget):
 
     def wait_load(self, pattern, timeout=60):
         """Wait for this content to be loaded up to maximum timeout.
-        Returns True if pattern was loaded in the time limit.
+        Returns True if pattern was loaded before the timeout.
         """
         deadline = time() + timeout
         while time() < deadline:
@@ -543,7 +428,7 @@ class Browser(QWidget):
         """Shortcut to execute javascript on current document and return result
         """
         self.app.processEvents()
-        return self.view.page().mainFrame().evaluateJavaScript(script).toString()
+        return self.page().mainFrame().evaluateJavaScript(script).toString()
 
 
     def click(self, pattern='input'):
@@ -577,7 +462,7 @@ class Browser(QWidget):
         """
         if value is None:
             # want to get attribute
-            return str(self.view.page().mainFrame().findFirstElement(pattern).attribute(name))
+            return str(self.page().mainFrame().findFirstElement(pattern).attribute(name))
         else:
             es = self.find(pattern)
             for e in es:
@@ -586,7 +471,7 @@ class Browser(QWidget):
 
 
     def fill(self, pattern, value):
-        """Set text of the matching elements to value, and return the number of elements matched.
+        """Set text of the matching form elements to value, and return the number of elements matched.
         """
         es = self.find(pattern)
         for e in es:
@@ -603,7 +488,7 @@ class Browser(QWidget):
         """Returns the elements matching this CSS pattern.
         """
         if isinstance(pattern, basestring):
-            matches = self.view.page().mainFrame().findAllElements(pattern).toList()
+            matches = self.page().mainFrame().findAllElements(pattern).toList()
         elif isinstance(pattern, list):
             matches = pattern
         elif isinstance(pattern, QWebElement):
@@ -614,44 +499,18 @@ class Browser(QWidget):
         return matches
 
 
-    def run(self):
-        """Run the Qt event loop so can interact with the browser
-        """
-        self.app.exec_() # start GUI thread
-
-
-    def finished(self, reply):
-        """Override this method in subclasses to process downloaded urls
-        """
-        if reply.url() == self.view.url():
-            self.update_address(reply.url())
-
-
-    def update_address(self, url):
-        """Set address of the URL text field
-        """
-        self.url_input.setText(url.toString())
-        
-
     def screenshot(self, output_file):
         """Take screenshot of current webpage and save results
         """
-        frame = self.view.page().mainFrame()
-        self.view.page().setViewportSize(frame.contentsSize())
-        image = QImage(self.view.page().viewportSize(), QImage.Format_ARGB32)
+        frame = self.page().mainFrame()
+        self.page().setViewportSize(frame.contentsSize())
+        image = QImage(self.page().viewportSize(), QImage.Format_ARGB32)
         painter = QPainter(image)
         frame.render(painter)
         painter.end()
         common.logger.debug('saving: ' + output_file)
         image.save(output_file)
 
-
-    def closeEvent(self, event):
-        """Catch the close window event and stop the script
-        """
-        self.app.quit()
-        self.running = False
-        self.view.page().networkAccessManager().shutdown()
 
 
 
@@ -660,7 +519,7 @@ if __name__ == '__main__':
     # once script is working you can disable the gui
     w = Browser(gui=True) 
     # load webpage
-    w.load('http://duckduckgo.com')
+    w.get('http://duckduckgo.com')
     # fill search textbox 
     w.fill('input[id=search_form_input_homepage]', 'web scraping')
     # take screenshot of webpage

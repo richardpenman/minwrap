@@ -26,7 +26,7 @@ class WrapperTable(QTableWidget):
         super(WrapperTable, self).__init__()
         QShortcut(QKeySequence.Close, self, self.close)
         QShortcut(QKeySequence.Quit, self, self.close)
-        self.wrapper = None
+        self.wrapper_name = None
 
         header = 'Website', 'HTTP method', 'Response format', 'Category', 'Notes', 'Run'
         font = QFont('Times New Roman', 16)

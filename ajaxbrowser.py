@@ -5,20 +5,59 @@ __doc__ = 'Interface to run the ajax browser'
 import sip
 sip.setapi('QString', 2)
 from PyQt4.QtNetwork import QNetworkRequest
+from PyQt4.QtGui import QWidget, QVBoxLayout, QLineEdit, QShortcut, QKeySequence, QTableWidget, QTableWidgetItem
+from PyQt4.QtCore import Qt
 
-import re, collections
+import csv, os, re, collections
 import webkit, common, model, parser, transition
 
 
 
-class AjaxBrowser(webkit.Browser):
+class AjaxBrowser(QWidget):
     """Extend webkit.Browser to add some specific functionality for abstracting AJAX requests
     """
-    def __init__(self, **argv):
-        super(AjaxBrowser, self).__init__(**argv)
+    def __init__(self, gui=True, **argv):
+        """
+        gui: whether to show webkit window or run headless
+        """
+        super(AjaxBrowser, self).__init__()
+        self.view = webkit.Browser(**argv)
         self.view.page().mainFrame().loadFinished.connect(self._load_finish)
+        self.view.page().networkAccessManager().finished.connect(self.finished)
+
+        # use grid layout to hold widgets
+        self.grid = QVBoxLayout()
+        self.url_input = UrlInput(self.view)
+        self.grid.addWidget(self.url_input)
+        self.grid.addWidget(self.view)
+        self.table = ResultsTable()
+        self.grid.addWidget(self.table)
+        self.setLayout(self.grid)
+        self.add_shortcuts()
+        if gui:
+            self.show()
+            self.raise_() # give focus to this browser window
         # transitions found so far
         self.transitions = []
+        self.running = True
+
+
+    def __del__(self):
+        # not sure why, but to avoid seg fault need to release the QWebPage instance manually
+        self.view.setPage(None)
+
+
+    def __getattr__(self, name):
+        """Pass unknown methods through to the view
+        """
+        def method(*args):
+            #print 'child method', name, args
+            return getattr(self.view, name)(*args)
+        return method
+
+
+    def find(self, pattern):
+        return self.view.find(pattern)
 
 
     def _load_finish(self, ok):
@@ -27,12 +66,12 @@ class AjaxBrowser(webkit.Browser):
         if ok:
             # a webpage has loaded successfully
             common.logger.info('loaded: {} {}'.format(ok, self.current_url()))
- 
+            self.update_address(self.current_url())
+
 
     def finished(self, reply):
         """Override the reply finished signal to check the result of each request
         """
-        super(AjaxBrowser, self).finished(reply)
         if not reply.content:
             return # no response so reply is not of interest
 
@@ -52,49 +91,100 @@ class AjaxBrowser(webkit.Browser):
             self.transitions.append(transition.Transition(reply, js))
 
 
-    def run_models(self, models):
-        """Recieves a list of potential models for the execution. 
-        Executes them in order, shortest first, until find one that successfully executes.
+    def add_shortcuts(self):
+        """Define shortcuts for convenient interaction
         """
-        for final_model in sorted(models.values(), key=lambda m: len(m), reverse=True): # XXX reverse sort to test geocode
-            event_i = None
-            for event_i, _ in enumerate(final_model.run(self)):
-                if event_i == 0:
-                    # initialize the result table with the already known transition records
-                    self.table.clear()
-                    self.table.add_records(final_model.records)
-                # model has generated an AJAX request
-                if self.running:
-                    js = parser.parse(self.current_text())
-                    if js:
-                        self.table.add_records(parser.json_to_records(js))
-                else:
-                    break
-            if event_i is not None:
-                break # sucessfully executed a model so can exit
+        QShortcut(QKeySequence.Close, self, self.close)
+        QShortcut(QKeySequence.Quit, self, self.close)
+        QShortcut(QKeySequence.Back, self, self.view.back)
+        QShortcut(QKeySequence.Forward, self, self.view.forward)
+        QShortcut(QKeySequence.Save, self, self.view.save)
+        QShortcut(QKeySequence.New, self, self.view.home)
+        QShortcut(QKeySequence(Qt.CTRL + Qt.Key_F), self, self.fullscreen)
 
 
-    def find_transitions(self, examples):
-        """Find transitions that have the example data we are after at the same JSON path
+    def fullscreen(self):
+        """Alternate fullscreen mode
         """
-        path_transitions = collections.defaultdict(list)
-        for example in examples:
-            for t in self.transitions:
-                if example in t.values:
-                    # data exists in this transition
-                    for path in transition.generate_path(t.js, example):
-                        path_transitions[path].append(t)
+        if self.isMaximized():
+            self.showNormal()
+        else:
+            self.showMaximized()
 
-        # check if any of these matches can be modelled
-        for path, ts in path_transitions.items():
-            if len(ts) == len(examples):
-                # found a path that satisfies all conditions
-                common.logger.info('Found a path: {}'.format(path))
-                success = False
-                for _ in model.Model(ts).run(self):
-                    js = parser.parse(self.current_text())
-                    if js:
-                        success = True
-                        yield path(js)
-                if success:
-                    break # this model was successful so can exit
+
+    def update_address(self, url):
+        """Set address of the URL text field
+        """
+        self.url_input.setText(url)
+
+
+    def closeEvent(self, event):
+        """Catch the close window event and stop the script
+        """
+        self.app.quit()
+        self.running = False
+        self.page().networkAccessManager().shutdown()
+
+
+
+class UrlInput(QLineEdit):
+    """Address URL input widget
+    """
+    def __init__(self, view):
+        super(UrlInput, self).__init__()
+        self.view = view
+        # add event listener on "enter" pressed
+        self.returnPressed.connect(self._return_pressed)
+
+
+    def _return_pressed(self):
+        url = QUrl(self.text())
+        # load url into browser frame
+        self.view.get(url)
+
+
+
+class ResultsTable(QTableWidget):
+    def __init__(self):
+        """A table to display results from the scraping
+        """
+        super(ResultsTable, self).__init__()
+        # also save data to a CSV file
+        self.hide()
+        self.clear()
+
+    def clear(self):
+        # avoid displaying duplicate rows
+        self.row_hashes = set()
+        self.fields = None
+        self.writer = csv.writer(open(os.path.join(webkit.OUTPUT_DIR, 'data.csv'), 'w'))
+        super(ResultsTable, self).clear()
+
+    def add_records(self, records):
+        """Add these rows to the table and initialize fields if not already
+        """
+        for record in records:
+            if self.fields is None:
+                self.fields = sorted(record.keys())
+                self.setColumnCount(len(self.fields))
+                header = [field.title() for field in self.fields]
+                self.setHorizontalHeaderLabels(header)
+                self.writer.writerow(header)
+                self.show()
+            # filter to fields in the header
+            filtered_row = [record.get(field) for field in self.fields]
+            if any(filtered_row):
+                self.add_row(filtered_row)
+
+    def add_row(self, cols):
+        """Add this row to the table if is not duplicate
+        """
+        key = hash(tuple(cols))
+        if key not in self.row_hashes:
+            self.row_hashes.add(key)
+            num_rows = self.rowCount()
+            self.insertRow(num_rows)
+            for i, col in enumerate(cols):
+                self.setItem(num_rows, i, QTableWidgetItem(col))
+            self.writer.writerow(cols)
+

@@ -36,6 +36,8 @@ Wrappers are classes defined in the *wrappers* directory and are structured like
             self.data = [
                 (input value1, [expected output values1]),
                 (input value2, [expected output values2]),
+                (input value3, [expected output values3]),
+                (input value4, [expected output values4]),
             ]
             self.website = 'http://...'
             self.category = 'autocomplete/car dealer/etc'
@@ -43,19 +45,15 @@ Wrappers are classes defined in the *wrappers* directory and are structured like
             self.response_format = 'XML/JSON/JSONP/HTML/JavaScript/etc'
             self.notes = '...'
 
-        def run(self, browser):
-            for input_value, output_values in self.data:
-                browser.load(self.website)
-                # interact with browser - there are some shortcuts defined in webkit.py such as click() / fill() / wait_load() / etc
-                ...
-                # pass output values back to parent execution                
-                yield output_values
+        def run(self, browser, input_value):
+            browser.load(self.website)
+            # interact with browser to perform execution for this input value
 
 
 A wrapper defines a class called Wrapper with several required attributes:
 
-- data: a list of tuples defining the input and expected output strings ('London': ['...', '...'])
-- run(): this method takes an AjaxBrowser instance and performs each execution on the browser, calling yield after each iteration to relinquish control to the parent thread so that network traffic from the execution path can be analysed.
+- data: a list of tuples defining the input and expected output strings ('London': ['...', '...']). A minimum of 3 cases are needed, though the more the better - half will be used for training and half for testing.
+- run(): this method performs the browser execution for the given input value 
 
 There are also several optional attributes that are used for displaying a summary in the start window:
 
@@ -82,12 +80,11 @@ Here is an implementation for Lufthunsa from *wrappers/lufthunsa.py*:
             self.response_format = 'JSON'
             self.notes = 'AJAX callback triggered on KeyUp event'
 
-        def run(self, browser):
-            for input_value, output_values in self.data:
-                browser.load(self.website)
-                browser.keys('input#flightmanagerFlightsFormOrigin', input_value)
-                browser.wait_load('div.rw-popup')
-                yield output_values
+        def run(self, browser, input_value):
+            browser.load(self.website)
+            browser.keys('input#flightmanagerFlightsFormOrigin', input_value)
+            browser.wait_load('div.rw-popup')
+            yield output_values
 
 
 And here is an implementation for Lexus from *wrappers/lexus.py*:
@@ -107,27 +104,29 @@ And here is an implementation for Lexus from *wrappers/lexus.py*:
             self.response_format = 'JSON'
             self.notes = 'Uses variables in the URL path and requires a geocoding intermediary step'
 
-        def run(self, browser):
-            for input_value, output_values in self.data:
-                browser.load(self.website)
-                browser.click('span[class="icon icon--base icon-close"]') # accept cookies
-                browser.wait_load('div.form-control__item__postcode')
-                browser.fill('div.form-control__item__postcode input', input_value)
-                browser.click('div.form-control__item__postcode button')
-                yield output_values
+        def run(self, browser, input_value):
+            browser.load(self.website)
+            browser.click('span[class="icon icon--base icon-close"]') # accept cookies
+            browser.wait_load('div.form-control__item__postcode')
+            browser.fill('div.form-control__item__postcode input', input_value)
+            browser.click('div.form-control__item__postcode button')
 
 
 WebKit
-===========
+======
 
 The AjaxBrowser class is a wrapper around WebKit's *QWebView* class for rendering web pages, which is documented at http://doc.qt.io/qt-4.8/qwebview.html. Some helper methods have been defined in webkit.Browser:
 
+- get(url): Load the given URL and waits until loadFinished event called, then returns the loaded content.
+- js(script): Execute this JavaScript script on the currently loaded webpage.
 - click(pattern): Click all elements that match the CSS pattern. Returns number of elements clicked.
-- keys(pattern, text): Simulate typing by focusing on elements that match the CSS pattern and triggering key events. Returns number of elements set
+- keys(pattern, text): Simulate typing by focusing on elements that match the CSS pattern and triggering key events. Returns number of elements set.
 - attr(pattern, name, value): Set attribute of matching CSS pattern to value. Returns number of elements set.
 - fill(pattern, value): Set text of the form elements that match this CSS pattern to value. Returns number of elements set.
 - find(pattern): Returns the elements matching this CSS pattern.
-- wait_load(pattern, timeout=60): Wait for this content to be loaded up to maximum timeout. Returns True if pattern was loaded before the timeout.
+- wait_load(pattern, timeout=60): Wait for this content to be loaded up to maximum timeout, by default 60 seconds. Returns True if pattern was loaded before the timeout.
+- wait_quiet(timeout=20): Wait for all outstanding requests to complete up to the given timeout, by default 20 seconds. Returns whether outstanding requests completed in this time.
+- wait(delay): Wait for the specified delay (in seconds).
 
 
 Run

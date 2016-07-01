@@ -17,7 +17,9 @@ PATH, GET, POST = 0, 1, 2
 class Model:
     """Build a model for these transitions and extend to all known cases 
     """
-    def __init__(self, transitions=None):
+    def __init__(self, input_values, transitions=None):
+        # the input values used to generate this model
+        self.input_values = input_values
         # the data extracted from these transitions
         self.records = []
         # the field names for the extracted data
@@ -28,6 +30,8 @@ class Model:
         self.used = False 
         # which parameters can be ignored
         self.ignored = []
+        # the input values that triggered the transitions of this model
+        self.data = []
         # the example transitions that follow this template
         self.transitions = []
         for transition in transitions or []:
@@ -44,7 +48,6 @@ class Model:
         """Add transition to model
         """
         self.transitions.append(transition)
-        self.build()
         if transition.js:
             for record in parser.json_to_records(transition.js):
                 self.records.append(record)
@@ -58,7 +61,7 @@ class Model:
         """
         if self.used:
             return
-        if self.ready():
+        if self.build():
             # remove redundant parameters that do not change the result, such as counters
             for transition in self.transitions:
                 if transition.output and (transition.qs or transition.data):
@@ -68,7 +71,7 @@ class Model:
                     for (key, _), method in self.params:
                         ignore = key, method
                         if method in (GET, POST) and ignore not in self.ignored:
-                            test_html = browser.load(**self.gen_request(ignored=self.ignored + [ignore], transition=transition))
+                            test_html = browser.view.get(**self.gen_request(ignored=self.ignored + [ignore], transition=transition))
                             if transition.matches(transition.output, test_html):
                                 common.logger.info('Can ignore key: {}'.format(ignore))
                                 self.ignored.append(ignore)
@@ -89,16 +92,16 @@ class Model:
                 self.used = True
                 download_params = self.gen_request(override_params)
                 common.logger.debug('Calling abstraction: {url} {data}'.format(**download_params))
-                yield browser.load(**download_params)
+                yield browser.view.get(**download_params)
 
         else:
-            
             # check whether multiple identical requests returned the same data
             unique_outputs = set([id(t.output) for t in self.transitions if t.output])
             if len(unique_outputs) > 1:
                 common.logger.debug('Single request matches multiple outputs: {}'.format(str(self.transitions[-1])))
                 self.used = True
-                yield browser.load(**self.gen_request())
+                html = None#self.transitions[0].content
+                yield browser.view.get(html=html, **self.gen_request())
 
 
     def gen_request(self, override_params=None, ignored=None, transition=None):
@@ -149,9 +152,11 @@ class Model:
             if get_diffs or post_diffs or path_diffs:
                 self.params = [(diff, PATH) for diff in path_diffs] + [(diff, GET) for diff in get_diffs] + [(diff, POST) for diff in post_diffs] 
                 common.logger.info('Model built: {}'.format(self.params))
+                return True
             else:
                 # found a duplicate transition
                 common.logger.debug('Duplicate requests: {}'.format(self.transitions[-1]))
+        return False
 
 
     def path_to_dict(self, path):
@@ -175,55 +180,96 @@ class Model:
         return model
 
 
+    def extend_inputs(self, examples):
+        for example in examples:
+            if example not in self.input_values:
+                return []
+        # matches all examples
+        print 'extended inputs:', examples, self.input_values
+        return [value for value in self.input_values if value not in examples]
+
+
     def abstract(self, browser, examples):
         """Attempt abstacting these examples and if successful return a list of similar entities else None
         """
         if examples is not None:
-            similar_cases = verticals.extend(examples)
-            if similar_cases is not None:
-                common.logger.info('Abstracted: {}'.format(examples))
-                for case in similar_cases:
-                    yield case
+            # check if examples are in the input values
+            matches = self.extend_inputs(examples)
+            if matches:
+                common.logger.info('Uses input values: {}'.format(matches))
+                for input_value in matches:
+                    yield input_value
+
             else:
-                success = False
-                for case in browser.find_transitions(examples):
+                # try extending from known vertical data
+                similar_cases = verticals.extend(examples)
+                if similar_cases is not None:
+                    common.logger.info('Abstracted: {}'.format(examples))
+                    for case in similar_cases:
+                        if case not in examples:
+                            yield case
+                else:
+                    success = False
+                    # check if examples are located at common location in a transition
+                    for case in self.find_transitions(browser, examples):
+                        if not success:
+                            success = True
+                            common.logger.info('Examples match previous transitions')
+                        if case not in examples:
+                            yield case
+
                     if not success:
-                        success = True
-                        common.logger.info('Examples match previous transitions')
-                        yield case
+                        # no known data for these exact examples
+                        # interesting data may just be a subset so generate a template of static components
+                        template = Templater()
+                        for text in examples:
+                            template.learn(text)
+                        common.logger.info('Trained template: {}'.format(template._template))
 
-                if not success:
-                    # no known data for these exact examples
-                    # interesting data may just be a subset so generate a template of static components
-                    template = Templater()
-                    for text in examples:
-                        template.learn(text)
-                    common.logger.info('Trained template: {}'.format(template._template))
-
-                    # and now check whether dynamic components can be abstracted
-                    parsed_examples = [template.parse(text) for text in examples]
-                    similar_cases = []
-                    for examples in zip(*parsed_examples):
-                        if any(examples):
-                            similar_cases.append(verticals.extend(examples) or [])
-                            if similar_cases[-1]:
-                                common.logger.info('Abstracted: {}'.format(examples))
+                        # and now check whether dynamic components can be abstracted
+                        parsed_examples = [template.parse(text) for text in examples]
+                        similar_cases = []
+                        for examples in zip(*parsed_examples):
+                            if any(examples):
+                                similar_cases.append(self.extend_inputs(examples) or verticals.extend(examples) or [])
+                                if similar_cases[-1]:
+                                    common.logger.info('Abstracted: {}'.format(examples))
+                                else:
+                                    common.logger.info('Failed to abstract: {}'.format(examples))
                             else:
-                                common.logger.info('Failed to abstract: {}'.format(examples))
-                        else:
-                            # create iterator of empty strings
-                            similar_cases.append('' for _ in itertools.count())
+                                # create iterator of empty strings
+                                similar_cases.append('' for _ in itertools.count())
 
-                    if similar_cases:
-                        for vector in zip(*similar_cases):
-                            yield template.join(vector)
-                    # XXX add support for partial matches over dependencies - need to find example
-                    #else:
-                    #    for result in self.navigate_dependencies(browser, examples):
-                    #        yield template.join(result)
+                        if similar_cases:
+                            for vector in zip(*similar_cases):
+                                yield template.join(vector)
+                        # XXX add support for partial matches over dependencies - need to find example
+                        #else:
+                        #    for result in self.navigate_dependencies(browser, examples):
+                        #        yield template.join(result)
 
 
-    def ready(self):
-        """Whether this model is ready to be used
+    def find_transitions(self, browser, examples):
+        """Find transitions that have the example data we are after at the same JSON path
         """
-        return self.params is not None
+        path_transitions = collections.defaultdict(list)
+        for example in examples:
+            for t in browser.transitions:
+                if example in t.values:
+                    # data exists in this transition
+                    for path in transition.generate_path(t.js, example):
+                        path_transitions[path].append(t)
+
+        # check if any of these matches can be modelled
+        for path, ts in path_transitions.items():
+            if len(ts) == len(examples):
+                # found a path that satisfies all conditions
+                common.logger.info('Found a path: {}'.format(path))
+                success = False
+                for _ in model.Model(self.data, ts).run(browser):
+                    js = parser.parse(self.current_text())
+                    if js:
+                        success = True
+                        yield path(js)
+                if success:
+                    break # this model was successful so can exit
