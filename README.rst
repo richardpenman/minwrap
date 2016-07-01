@@ -73,6 +73,8 @@ Here is an implementation for Lufthunsa from *wrappers/lufthunsa.py*:
             self.data = [
                 ('lon', ['United Kingdom', 'London, all airports', 'London City Airport', 'London Gatwick', 'London Heathrow', 'London-Stansted', 'Southampton', 'London, Canada', 'Sarnia', 'Windsor', 'Londrina', 'Long Beach', 'Burbank', 'Oxnard/Ventura', 'Norway', 'Longyearbyen']),
                 ('par', ['France', 'Paris - Charles De Gaulle', 'Parkersburg/Marietta', 'Clarksburg']),
+                ('bri', ['Brindisi', 'Brisbane', 'bds', 'bne', 'Brisbane area airports', 'Gold Coast, Queensland', 'Bristol', 'brs', 'Bristol - Tennessee', 'tri', 'Britton', 'Britton area airports']),
+                ('new', ['New Bern','ewn','New Orleans','msy','New York, all airports',"nyc","New York area airports","New York - JFK International, NY","jfk","New York - La Guardia","lga","New York - Newark International, NJ","ewr","Allentown/Bethl","abe"]),
             ]
             self.website = 'http://www.lufthansa.com/uk/en/Homepage'
             self.category = 'autocomplete'
@@ -97,6 +99,7 @@ And here is an implementation for Lexus from *wrappers/lexus.py*:
                 ('paris', ['58, Boulevard Saint Marcel', '75005', '01 55 43 55 00', '3, rue des Ardennes', '75019', '01 40 03 16 00', '4, avenue de la Grande Armée', '75017', '01 40 55 40 00']),
                 ('toulouse', ['123, Rue Nicolas', 'Vauquelin', '31100', '05 61 61 84 29', '4 rue Pierre-Gilles de Gennes', '64140', '05 59 72 29 00']),
                 ('marseille', ['36 Boulevard Jean Moulin', '13005', '04 91 229 229', 'ZAC Aix La Pioline', 'Les Milles', '13290', '04 42 95 28 78', 'Rue Charles Valente', 'ZAC de la Castelette', 'Montfavet', '84143', '04 90 87 47 00']),
+                ('nice', ['1 AVENUE EUGÈNE DONADEÏ', 'SAINT LAURENT DU VAR', '04 83 32 22 11', '(RÉPARATEUR AGRÉÉ LEXUS) Lexus Monaco', '31-39 avenue Hector Otto', 'Monaco', '98000', '00 377 93 30 10 05']),
             ]
             self.website = 'http://www.lexus.fr/forms/find-a-retailer'
             self.category = 'car dealer'
@@ -117,16 +120,16 @@ WebKit
 
 The AjaxBrowser class is a wrapper around WebKit's *QWebView* class for rendering web pages, which is documented at http://doc.qt.io/qt-4.8/qwebview.html. Some helper methods have been defined in webkit.Browser:
 
-- get(url): Load the given URL and waits until loadFinished event called, then returns the loaded content.
-- js(script): Execute this JavaScript script on the currently loaded webpage.
-- click(pattern): Click all elements that match the CSS pattern. Returns number of elements clicked.
-- keys(pattern, text): Simulate typing by focusing on elements that match the CSS pattern and triggering key events. Returns number of elements set.
-- attr(pattern, name, value): Set attribute of matching CSS pattern to value. Returns number of elements set.
-- fill(pattern, value): Set text of the form elements that match this CSS pattern to value. Returns number of elements set.
-- find(pattern): Returns the elements matching this CSS pattern.
-- wait_load(pattern, timeout=60): Wait for this content to be loaded up to maximum timeout, by default 60 seconds. Returns True if pattern was loaded before the timeout.
-- wait_quiet(timeout=20): Wait for all outstanding requests to complete up to the given timeout, by default 20 seconds. Returns whether outstanding requests completed in this time.
-- wait(delay): Wait for the specified delay (in seconds).
+- **get(url)**: Load the given URL and waits until loadFinished event called, then returns the loaded content.
+- **js(script)**: Execute this JavaScript script on the currently loaded webpage.
+- **click(pattern)**: Click all elements that match the CSS pattern. Returns number of elements clicked.
+- **keys(pattern, text)**: Simulate typing by focusing on elements that match the CSS pattern and triggering key events. Returns number of elements set.
+- **attr(pattern, name, value)**: Set attribute of matching CSS pattern to value. Returns number of elements set.
+- **fill(pattern, value)**: Set text of the form elements that match this CSS pattern to value. Returns number of elements set.
+- **find(pattern)**: Returns the elements matching this CSS pattern.
+- **wait_load(pattern, timeout=60)**: Wait for this content to be loaded up to maximum timeout, by default 60 seconds. Returns True if pattern was loaded before the timeout.
+- **wait_quiet(timeout=20)**: Wait for all outstanding requests to complete up to the given timeout, by default 20 seconds. Returns whether outstanding requests completed in this time.
+- **wait(delay)**: Wait for the specified delay (in seconds).
 
 
 Run
