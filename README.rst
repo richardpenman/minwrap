@@ -118,7 +118,7 @@ And here is an implementation for Lexus from *wrappers/lexus.py*:
 WebKit
 ======
 
-The AjaxBrowser class is a wrapper around WebKit's *QWebView* class for rendering web pages, which is documented at http://doc.qt.io/qt-4.8/qwebview.html. Some helper methods have been defined in webkit.Browser:
+The Browser class is a wrapper around WebKit's *QWebView* class for rendering web pages, which is documented at http://doc.qt.io/qt-4.8/qwebview.html. Some shortcut methods have been defined in webkit.Browser:
 
 - **get(url)**: Load the given URL and waits until loadFinished event called, then returns the loaded content.
 - **js(script)**: Execute this JavaScript script on the currently loaded webpage.

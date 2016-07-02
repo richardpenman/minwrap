@@ -65,7 +65,7 @@ def run_wrapper(wrapper):
             QApplication.restoreOverrideCursor()
             executed_model = run_models(browser, models)
             num_passed = evaluate_model(browser, test_cases)
-            common.logger.info('Model success: {} / {}'.format(num_passed, len(test_cases)))
+            browser.add_status('Model success: {}% (from {} test cases)'.format(100 * num_passed / len(test_cases), len(test_cases)))
             app.exec_()
             break
         app.processEvents() 
@@ -83,6 +83,16 @@ def run_wrapper(wrapper):
                         m = models[hash(t)] = model.Model(input_values)
                     m.add(t)
                     browser.transitions.remove(t)
+                    browser.add_status('Found matching reply for training data: {}'.format(summarize_list(expected_output)))
+
+
+def summarize_list(l, max_length=5):
+    """If list is too long then just display the initial and final items
+    """
+    if len(l) > max_length:
+        return '{}, ..., {}'.format(', '.join(l[:max_length/2]), ', '.join(l[-max_length/2:]))
+    else:
+        return ', '.join(l)
 
 
 
@@ -97,18 +107,18 @@ def run_models(browser, models):
         for event_i, _ in enumerate(final_model.run(browser)):
             if event_i == 0:
                 # initialize the result table with the already known transition records
-                browser.table.clear()
-                browser.table.add_records(final_model.records)
+                browser.add_records(final_model.records)
+                browser.add_status('Built model of requests: {}'.format(final_model.params))
             # model has generated an AJAX request
             if browser.running:
                 js = parser.parse(browser.current_text())
                 if js:
-                    browser.table.add_records(parser.json_to_records(js))
+                    browser.add_records(parser.json_to_records(js))
             else:
                 break
         if event_i is not None:
             # sucessfully executed a model so can ignore others
-            return model
+            return final_model
 
 
 def evaluate_model(browser, test_cases):
@@ -118,7 +128,7 @@ def evaluate_model(browser, test_cases):
     for _, expected_output in test_cases:
         for t in browser.transitions:
             if t.matches(expected_output):
-                print 'found:', expected_output
+                browser.add_status('Found test data: {}'.format(summarize_list(expected_output)))
                 num_passed += 1
                 break
     return num_passed

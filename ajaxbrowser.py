@@ -5,7 +5,7 @@ __doc__ = 'Interface to run the ajax browser'
 import sip
 sip.setapi('QString', 2)
 from PyQt4.QtNetwork import QNetworkRequest
-from PyQt4.QtGui import QWidget, QVBoxLayout, QLineEdit, QShortcut, QKeySequence, QTableWidget, QTableWidgetItem
+from PyQt4.QtGui import QWidget, QVBoxLayout, QHBoxLayout, QLineEdit, QShortcut, QKeySequence, QTableWidget, QTableWidgetItem, QListWidget, QListWidgetItem, QFont
 from PyQt4.QtCore import Qt
 
 import csv, os, re, collections
@@ -30,8 +30,13 @@ class AjaxBrowser(QWidget):
         self.url_input = UrlInput(self.view)
         self.grid.addWidget(self.url_input)
         self.grid.addWidget(self.view)
-        self.table = ResultsTable()
-        self.grid.addWidget(self.table)
+        # create status box
+        self.status_table = StatusTable()
+        self.grid.addWidget(self.status_table)
+        # create results table
+        self.records_table = ResultsTable()
+        self.grid.addWidget(self.records_table)
+        # set the grid
         self.setLayout(self.grid)
         self.add_shortcuts()
         if gui:
@@ -51,12 +56,11 @@ class AjaxBrowser(QWidget):
         """Pass unknown methods through to the view
         """
         def method(*args):
-            #print 'child method', name, args
             return getattr(self.view, name)(*args)
         return method
 
-
     def find(self, pattern):
+        # need to override builtin QWebkit function
         return self.view.find(pattern)
 
 
@@ -112,6 +116,17 @@ class AjaxBrowser(QWidget):
             self.showMaximized()
 
 
+    def add_status(self, text):
+        """Add status message to text box
+        """
+        common.logger.info(text)
+        self.status_table.add(text)
+
+    
+    def add_records(self, records):
+        self.records_table.add_records(records)
+
+
     def update_address(self, url):
         """Set address of the URL text field
         """
@@ -121,7 +136,7 @@ class AjaxBrowser(QWidget):
     def closeEvent(self, event):
         """Catch the close window event and stop the script
         """
-        self.app.quit()
+        self.view.app.quit()
         self.running = False
         self.page().networkAccessManager().shutdown()
 
@@ -141,6 +156,22 @@ class UrlInput(QLineEdit):
         url = QUrl(self.text())
         # load url into browser frame
         self.view.get(url)
+
+
+
+class StatusTable(QListWidget):
+    def __init__(self):
+        super(StatusTable, self).__init__()
+        font = QFont('Times New Roman', 16)
+        font.setBold(True)
+        header = QListWidgetItem('Status')
+        header.setFont(font)
+        self.addItem(header)
+        self.hide()
+
+    def add(self, message):
+        self.show()
+        self.addItem(message)
 
 
 

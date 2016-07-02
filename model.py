@@ -196,7 +196,7 @@ class Model:
             # check if examples are in the input values
             matches = self.extend_inputs(examples)
             if matches:
-                common.logger.info('Uses input values: {}'.format(matches))
+                browser.add_status('Abstraction uses input values: {}'.format(matches))
                 for input_value in matches:
                     yield input_value
 
@@ -204,7 +204,7 @@ class Model:
                 # try extending from known vertical data
                 similar_cases = verticals.extend(examples)
                 if similar_cases is not None:
-                    common.logger.info('Abstracted: {}'.format(examples))
+                    browser.add_status('Abstraction uses known vertical data: {}'.format(examples))
                     for case in similar_cases:
                         if case not in examples:
                             yield case
@@ -214,7 +214,7 @@ class Model:
                     for case in self.find_transitions(browser, examples):
                         if not success:
                             success = True
-                            common.logger.info('Examples match previous transitions')
+                            browser.add_status('Abstraction uses previous transition: {}'.format(examples))
                         if case not in examples:
                             yield case
 
@@ -233,7 +233,7 @@ class Model:
                             if any(examples):
                                 similar_cases.append(self.extend_inputs(examples) or verticals.extend(examples) or [])
                                 if similar_cases[-1]:
-                                    common.logger.info('Abstracted: {}'.format(examples))
+                                    browser.add_status('Abstraction uses partial match: {}'.format(examples))
                                 else:
                                     common.logger.info('Failed to abstract: {}'.format(examples))
                             else:
