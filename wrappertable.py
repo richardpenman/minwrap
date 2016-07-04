@@ -48,6 +48,9 @@ class WrapperTable(QTableWidget):
                 except AttributeError:
                     pass
                 else:
+                    if attr == 'notes':
+                        # add line breaks
+                        value = value.replace('.', '.\n')
                     self.setItem(num_rows, i + 1, QTableWidgetItem(value))
             # add button to activate wrapper
             button = QPushButton('Go')
@@ -57,6 +60,7 @@ class WrapperTable(QTableWidget):
         self.horizontalHeader().setResizeMode(QHeaderView.ResizeToContents)
         self.showMaximized()
         self.setSortingEnabled(True)
+        self.sortItems(0)
         self.raise_()
 
     def select_wrapper(self, wrapper_name):
