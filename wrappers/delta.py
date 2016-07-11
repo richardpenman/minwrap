@@ -11,7 +11,7 @@ class Wrapper:
             ('bei', ['Beihai, China (BHY)', 'Beihai Arpt', 'Beijing/Peking, China (PEK)', 'Peking, China (PEK)', 'Beirut, Lebanon (BEY)', 'Beirut Rafic Hariri Airport', 'Beijing Capital Int.']),
         ]
         self.website = 'http://www.delta.com/'
-        self.category = 'autocomplete'
+        self.category = 'flight'
         self.http_method = 'POST'
         self.response_format = 'JavaScript'
         self.notes = 'Request has 2 parameters - the prefix and a query counter. Each time loaded generates a different session ID.'
@@ -20,5 +20,5 @@ class Wrapper:
     def run(self, browser, input_value):
         if self.counter == 0:
             browser.get(self.website) # XXX each time loaded generates different session ID
-        self.counter += 1
+            self.counter += 1
         browser.keys('input#originCity', input_value)

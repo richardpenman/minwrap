@@ -401,7 +401,7 @@ class Browser(QWebView):
         """Wait until all requests have completed up to a maximum timeout.
         Returns True if all requests complete before the timeout.
         """
-        self.app.processEvents()
+        self.wait()
         deadline = time() + timeout
         manager = self.page().networkAccessManager()
         while time() < deadline and manager.active_requests:
@@ -424,6 +424,20 @@ class Browser(QWebView):
         return False
 
 
+    def wait_steady(self, timeout=60):
+        """Wait for the DOM to be steady, defined as no changes over a 1 second period
+        Returns True if DOM is steady before timeout, else False
+        """
+        deadline = time() + timeout
+        while time() < deadline:
+            orig_html = self.current_html()
+            self.wait(1)
+            cur_html = self.current_html()
+            if orig_html == cur_html:
+                return True # DOM is steady
+        return False
+
+
     def js(self, script):
         """Shortcut to execute javascript on current document and return result
         """
@@ -431,7 +445,7 @@ class Browser(QWebView):
         return self.page().mainFrame().evaluateJavaScript(script).toString()
 
 
-    def click(self, pattern='input'):
+    def click(self, pattern='input', full_simulation=False):
         """Click all elements that match the pattern.
 
         Uses standard CSS pattern matching: http://www.w3.org/TR/CSS2/selector.html
@@ -439,7 +453,10 @@ class Browser(QWebView):
         """
         es = self.find(pattern)
         for e in es:
-            e.evaluateJavaScript("var evObj = document.createEvent('MouseEvents'); evObj.initEvent('click', true, true); this.dispatchEvent(evObj);")
+            if full_simulation:
+                self.click_by_user_event_simulation(e)
+            else:
+                e.evaluateJavaScript("var evObj = document.createEvent('MouseEvents'); evObj.initEvent('click', true, true); this.dispatchEvent(evObj);")
         return len(es)
 
 
@@ -452,8 +469,9 @@ class Browser(QWebView):
             e.evaluateJavaScript("this.focus()")
         self.fill(pattern, text)
         for e in es:
-            for event_type in ('keydown', 'keyup', 'keypress'):
+            for event_type in ('keydown', 'keyup', 'keypress', 'change'):
                 e.evaluateJavaScript("var evObj = document.createEvent('Event'); evObj.initEvent('{}', true, true); this.dispatchEvent(evObj);".format(event_type))
+            e.evaluateJavaScript("this.blur()")
         return len(es)
 
 
@@ -477,9 +495,10 @@ class Browser(QWebView):
         for e in es:
             tag = str(e.tagName()).lower()
             if tag == 'input':
+                #e.evaluateJavaScript('this.value = "{}"'.format(value))
                 e.setAttribute('value', value)
-                #e.evaluateJavaScript('this.value = "%s"' % value)
             else:
+                print 'fill tag:', tag
                 e.setPlainText(value)
         return len(es)
 
@@ -511,6 +530,46 @@ class Browser(QWebView):
         common.logger.debug('saving: ' + output_file)
         image.save(output_file)
 
+
+
+    def trigger_js_event(self, element, event_name):
+        """Triggers a JavaScript level event on an element.
+        
+        Takes a QWebElement as input, and a string name of the event (e.g. "click").
+        
+        Implementation is taken from Artemis:
+        https://github.com/cs-au-dk/Artemis/blob/720f051c4afb4cd69e560f8658ebe29465c59362/artemis-code/src/runtime/input/forms/formfieldinjector.cpp#L294
+        """
+        
+        # TODO: Strictly we should create an appropriate event type as listed in:
+        # https://developer.mozilla.org/en-US/docs/Web/Events
+        # https://developer.mozilla.org/en-US/docs/Web/API/Document/createEvent#Notes
+        # For now we use generic "Event".
+        event_type = "Event";
+        event_init_method = "initEvent";
+        bubbles = "true";
+        cancellable = "true";
+        
+        injection = "var event = document.createEvent('{}'); event.{}('{}', {}, {}); this.dispatchEvent(event);".format(event_type, event_init_method, event_name, bubbles, cancellable);
+        element.evaluateJavaScript(injection);
+    
+    def click_by_user_event_simulation(self, element):
+        """Uses JS-level events to simulate a full user click.
+        
+        Takes a QWebElement as input.
+        
+        Implementation is taken from Artemis:
+        https://github.com/cs-au-dk/Artemis/blob/720f051c4afb4cd69e560f8658ebe29465c59362/artemis-code/src/runtime/input/clicksimulator.cpp#L42
+        """
+        self.trigger_js_event(element, "mouseover");
+        self.trigger_js_event(element, "mousemove");
+        self.trigger_js_event(element, "mousedown");
+        self.trigger_js_event(element, "focus");
+        self.trigger_js_event(element, "mouseup");
+        self.trigger_js_event(element, "click");        # TODO: Maybe should call self.click() instead?
+        self.trigger_js_event(element, "mousemove");
+        self.trigger_js_event(element, "mouseout");
+        self.trigger_js_event(element, "blur");         # TODO: Might need a 'noblur' option?
 
 
 

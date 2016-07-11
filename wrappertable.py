@@ -39,6 +39,12 @@ class WrapperTable(QTableWidget):
 
         for wrapper_name in get_wrappers():
             wrapper = load_wrapper(wrapper_name)
+            try:
+                if not wrapper.enabled:
+                    continue # ignore this disabled wrapper
+            except AttributeError:
+                pass
+
             num_rows = self.rowCount()
             self.insertRow(num_rows)
             self.setItem(num_rows, 0, QTableWidgetItem(wrapper_name.replace('_', ' ').title()))

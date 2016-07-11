@@ -61,6 +61,7 @@ class Model:
         """
         if self.used:
             return
+        print 'run'
         if self.build():
             # remove redundant parameters that do not change the result, such as counters
             for transition in self.transitions:
@@ -145,6 +146,7 @@ class Model:
     def build(self):
         """Build model of these transitions
         """
+        print self.transitions
         if len(self.transitions) > 1:
             path_diffs = self.find_diffs([self.path_to_dict(t.path).items() for t in self.transitions])
             get_diffs = self.find_diffs([t.qs for t in self.transitions])
@@ -193,6 +195,7 @@ class Model:
         """Attempt abstacting these examples and if successful return a list of similar entities else None
         """
         if examples is not None:
+            common.logger.info('Attempting abstraction of: {}'.format(examples))
             # check if examples are in the input values
             matches = self.extend_inputs(examples)
             if matches:
@@ -224,29 +227,33 @@ class Model:
                         template = Templater()
                         for text in examples:
                             template.learn(text)
-                        common.logger.info('Trained template: {}'.format(template._template))
 
-                        # and now check whether dynamic components can be abstracted
-                        parsed_examples = [template.parse(text) for text in examples]
-                        similar_cases = []
-                        for examples in zip(*parsed_examples):
-                            if any(examples):
-                                similar_cases.append(self.extend_inputs(examples) or verticals.extend(examples) or [])
-                                if similar_cases[-1]:
-                                    browser.add_status('Abstraction uses partial match: {}'.format(examples))
+                        # only allow template if has at most 2 parameters (+2 for start and end)
+                        if template._template.count(None) <= 4:
+                            common.logger.info('Trained template: {}'.format(template._template))
+                            # and now check whether dynamic components can be abstracted
+                            parsed_examples = [template.parse(text) for text in examples]
+                            similar_cases = []
+                            for examples in zip(*parsed_examples):
+                                if any(examples):
+                                    similar_cases.append(self.extend_inputs(examples) or verticals.extend(examples) or [])
+                                    if similar_cases[-1]:
+                                        browser.add_status('Abstraction uses partial match: {}'.format(examples))
+                                    else:
+                                        common.logger.info('Failed to abstract: {}'.format(examples))
                                 else:
-                                    common.logger.info('Failed to abstract: {}'.format(examples))
-                            else:
-                                # create iterator of empty strings
-                                similar_cases.append('' for _ in itertools.count())
+                                    # create iterator of empty strings
+                                    similar_cases.append('' for _ in itertools.count())
 
-                        if similar_cases:
-                            for vector in zip(*similar_cases):
-                                yield template.join(vector)
-                        # XXX add support for partial matches over dependencies - need to find example
-                        #else:
-                        #    for result in self.navigate_dependencies(browser, examples):
-                        #        yield template.join(result)
+                            if similar_cases:
+                                for vector in zip(*similar_cases):
+                                    yield template.join(vector)
+                            # XXX add support for partial matches over dependencies - need to find example
+                            #else:
+                            #    for result in self.navigate_dependencies(browser, examples):
+                            #        yield template.join(result)
+                        else:
+                            common.logger.debug('Too many components in template: {}'.format(template._template))
 
 
     def find_transitions(self, browser, examples):
@@ -266,7 +273,7 @@ class Model:
                 # found a path that satisfies all conditions
                 common.logger.info('Found a path: {}'.format(path))
                 success = False
-                for _ in model.Model(self.data, ts).run(browser):
+                for _ in Model(self.data, ts).run(browser):
                     js = parser.parse(self.current_text())
                     if js:
                         success = True

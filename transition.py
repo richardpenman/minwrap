@@ -33,16 +33,20 @@ class Transition:
         return False
 
 
-    def __hash__(self):
-        """A unique key to represent this transition
+    def key(self, abstract_path):
+        """A key to represent this type of transition, which will be identical to other transitions with the same properties.
+        If abstract_path is False then transitions must have the same URL path to match, else just the same number of components.
         """
         get_keys = lambda es: tuple(k for (k,v) in es)
-        return hash((self.host, self.path.count('/'), get_keys(self.qs), get_keys(self.data)))
+        path = self.path.count('/') if abstract_path else self.path
+        return hash((self.host, path, get_keys(self.qs), get_keys(self.data)))
 
 
     def matches(self, expected_output, content=None):
         """Return whether the expected output is found in this transition
         """
+        if not expected_output:
+            return False
         num_found = 0
         for e in expected_output:
             if e in (content or self.content):
@@ -54,7 +58,7 @@ class Transition:
             self.output = expected_output
             return True
         else:
-            #common.logger.debug('Transition does not match expected output: {} {} {} / {}'.format(self.url.toString(), self.data, num_found, len(expected_output)))
+            common.logger.debug('Transition does not match expected output: {} {} {} / {}'.format(self.url.toString(), self.data, num_found, len(expected_output)))
             return False
 
 

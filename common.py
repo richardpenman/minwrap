@@ -74,6 +74,17 @@ def to_unicode(obj, encoding='utf-8'):
     return obj
 
 
+def average(l):
+    """Returns average of a list, or None if empty
+
+    >>> average([])
+    >>> average([1, 2, 3, 4])
+    2.5
+    """
+    if l:
+        return sum(l) / float(len(l))
+
+
 def most_common(l):
     """Returns the most common element in this list
 
@@ -88,18 +99,18 @@ def parse_proxy(proxy):
     Returns a dict with username, password, host, and port
 
     >>> f = parse_proxy('login:pw@66.197.208.200:8080')
-    >>> f.username
+    >>> f['username']
     'login'
-    >>> f.password
+    >>> f['password']
     'pw'
-    >>> f.host
+    >>> f['host']
     '66.197.208.200'
-    >>> f.port
+    >>> f['port']
     '8080'
     >>> f = parse_proxy('66.197.208.200')
-    >>> f.username == f.password == f.port == ''
+    >>> f['username'] == f['password'] == f['port'] == ''
     True
-    >>> f.host
+    >>> f['host']
     '66.197.208.200'
     """
     fragments = {}

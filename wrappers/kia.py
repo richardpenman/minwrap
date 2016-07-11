@@ -18,6 +18,5 @@ class Wrapper:
 
     def run(self, browser, input_value):
         browser.get(self.website)
-        browser.fill('input#ds-searchinput', input_value) # XXX why not inserted
         browser.keys('input#ds-searchinput', input_value) # XXX why not inserted
         browser.wait(5)

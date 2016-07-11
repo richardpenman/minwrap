@@ -9,7 +9,7 @@ class Wrapper:
             ('new', ['New York, New York (All Airports) (NYC), USA', 'New York, John F Kennedy (NY) (JFK), USA', 'New York, La Guardia (NY) (LGA), USA', 'New York, Newark Liberty International (NJ) (EWR), USA', 'New Delhi, Indira Gandhi Intl (DEL), India', 'New Orleans, Louis Armstrong International (LA) (MSY), USA', 'Newcastle, Newcastle International (NCL), United Kingdom', 'Newquay, Newquay Cornwall Airport (NQY), United Kingdom']),
         ]
         self.website = 'http://www.britishairways.com/travel/home/public/en_gb'
-        self.category = 'autocomplete'
+        self.category = 'flight'
         self.http_method = 'GET'
         self.response_format = 'JavaScript'
         self.notes = 'JavaScript results use content-type text/plain and then modified before being inserted into document. On subsequent page loads the input box is not filled.'
@@ -19,7 +19,7 @@ class Wrapper:
         # XXX why does not autofill properly when reload homepage for each input?
         if self.counter == 0:
             browser.get(self.website)
-        self.counter += 1
+            self.counter += 1
         browser.find('input#planTripFlightDestination')
         browser.keys('input#planTripFlightDestination', input_value)
         print browser.attr('input#planTripFlightDestination', 'value')

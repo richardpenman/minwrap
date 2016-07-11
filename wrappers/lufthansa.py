@@ -9,7 +9,7 @@ class Wrapper:
             ('new', ['New Bern','ewn','New Orleans','msy','New York, all airports',"nyc","New York area airports","New York - JFK International, NY","jfk","New York - La Guardia","lga","New York - Newark International, NJ","ewr","Allentown/Bethl","abe"]),
         ]
         self.website = 'http://www.lufthansa.com/uk/en/Homepage'
-        self.category = 'autocomplete'
+        self.category = 'flight'
         self.http_method = 'POST'
         self.response_format = 'JSON'
         self.notes = 'AJAX callback triggered on KeyUp event'

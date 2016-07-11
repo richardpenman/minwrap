@@ -53,7 +53,7 @@ Wrappers are classes defined in the *wrappers* directory and are structured like
 A wrapper defines a class called Wrapper with several required attributes:
 
 - data: a list of tuples defining the input and expected output strings ('London': ['...', '...']). A minimum of 3 cases are needed, though the more the better - half will be used for training and half for testing.
-- run(): this method performs the browser execution for the given input value 
+- run(): this method performs the browser execution for the given input value. It can optionally return the expected output values if this is not known until run time.
 
 There are also several optional attributes that are used for displaying a summary in the start window:
 
@@ -86,7 +86,6 @@ Here is an implementation for Lufthunsa from *wrappers/lufthunsa.py*:
             browser.load(self.website)
             browser.keys('input#flightmanagerFlightsFormOrigin', input_value)
             browser.wait_load('div.rw-popup')
-            yield output_values
 
 
 And here is an implementation for Lexus from *wrappers/lexus.py*:
@@ -129,6 +128,7 @@ The Browser class is a wrapper around WebKit's *QWebView* class for rendering we
 - **find(pattern)**: Returns the elements matching this CSS pattern.
 - **wait_load(pattern, timeout=60)**: Wait for this content to be loaded up to maximum timeout, by default 60 seconds. Returns True if pattern was loaded before the timeout.
 - **wait_quiet(timeout=20)**: Wait for all outstanding requests to complete up to the given timeout, by default 20 seconds. Returns whether outstanding requests completed in this time.
+- **wait_steady(timeout=60)**: Wait for the DOM to be steady, defined as no changes over a 1 second period. Returns True if DOM is steady before the given timeout.
 - **wait(delay)**: Wait for the specified delay (in seconds).
 
 
@@ -158,6 +158,8 @@ Files
 
 output/browser.log - a log generated when running the wrappers
 
-output/cache.db - a cache of network traffic
+output/cache.db - an optional cache of network traffic
 
 verticals/ - training data to abstract inputs, which currently only cover locations
+
+wrappers/ - definitions of how to interact with each website are defined here
