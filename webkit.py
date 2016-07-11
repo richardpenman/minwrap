@@ -498,7 +498,6 @@ class Browser(QWebView):
                 #e.evaluateJavaScript('this.value = "{}"'.format(value))
                 e.setAttribute('value', value)
             else:
-                print 'fill tag:', tag
                 e.setPlainText(value)
         return len(es)
 

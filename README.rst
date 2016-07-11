@@ -62,6 +62,7 @@ There are also several optional attributes that are used for displaying a summar
 - http_method: the HTTP method used for downloading the key data (GET/POST)
 - response_format: the content type of the key data (JSON/JSONP/XML/HTML/etc)
 - notes: any further notes about this website
+- enabled: True/False flag for whether this wrapper is visible 
 
 
 Here is an implementation for Lufthunsa from *wrappers/lufthunsa.py*:

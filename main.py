@@ -44,7 +44,7 @@ def main():
 def run_wrapper(wrapper):
     """execute the selected wrapper 
     """
-    browser = ajaxbrowser.AjaxBrowser(app=app, gui=True, use_cache=False, load_images=True, load_java=True, load_plugins=True, delay=0)
+    browser = ajaxbrowser.AjaxBrowser(app=app, gui=True, use_cache=False, load_images=False, load_java=False, load_plugins=False, delay=0)
     QApplication.setOverrideCursor(Qt.WaitCursor)
     # divide wrapper cases into training and testing
     num_cases = len(wrapper.data)
@@ -110,8 +110,6 @@ def summarize_list(l, max_length=5):
 
 
 
-
-
 def run_models(browser, wrapper, final_transitions):
     """Recieves a list of potential models for the execution.
     Executes them in order, shortest first, until find one that successfully executes.
@@ -130,7 +128,7 @@ def run_models(browser, wrapper, final_transitions):
                 if event_i == 0:
                     # initialize the result table with the already known transition records
                     browser.add_records(final_model.records)
-                    browser.add_status('Built model of requests: {}'.format(final_model.params))
+                    browser.add_status('Built model of requests: {}'.format(str(final_model)))
                 # model has generated an AJAX request
                 if browser.running:
                     js = parser.parse(browser.current_text())

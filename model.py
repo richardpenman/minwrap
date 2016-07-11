@@ -44,6 +44,14 @@ class Model:
         return len(set([t.url.toString() for t in self.transitions]))
 
 
+    def __str__(self):
+        if self.params:
+            return str(self.params)
+        for t in self.transitions:
+            return str(t)
+        return ''
+
+
     def add(self, transition):
         """Add transition to model
         """
@@ -61,7 +69,6 @@ class Model:
         """
         if self.used:
             return
-        print 'run'
         if self.build():
             # remove redundant parameters that do not change the result, such as counters
             for transition in self.transitions:
@@ -146,7 +153,6 @@ class Model:
     def build(self):
         """Build model of these transitions
         """
-        print self.transitions
         if len(self.transitions) > 1:
             path_diffs = self.find_diffs([self.path_to_dict(t.path).items() for t in self.transitions])
             get_diffs = self.find_diffs([t.qs for t in self.transitions])
@@ -187,7 +193,6 @@ class Model:
             if example not in self.input_values:
                 return []
         # matches all examples
-        print 'extended inputs:', examples, self.input_values
         return [value for value in self.input_values if value not in examples]
 
 

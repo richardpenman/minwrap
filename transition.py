@@ -24,7 +24,7 @@ class Transition:
 
 
     def __str__(self):
-        return '{} {}'.format(self.url.toString(), self.data)
+        return '{} {}'.format(self.url.toString(), self.data or '')
 
 
     def __eq__(self, other):
