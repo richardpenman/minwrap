@@ -44,6 +44,8 @@ class AjaxBrowser(QWidget):
             self.raise_() # give focus to this browser window
         # transitions found so far
         self.transitions = []
+        # models of each step
+        self.models = []
         self.running = True
 
 

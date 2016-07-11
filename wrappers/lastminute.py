@@ -22,6 +22,8 @@ class Wrapper:
         # XXX set input but still invisible
         print browser.attr('input#flights-search-from', 'value')
         browser.keys('input#flights-search-to', input_value)
+        for e in browser.find('input#flights-search-to'):
+            e.evaluateJavaScript('this.blur();')
         #browser.js('document.getElementById("flights-search-from").value = "{}";'.format(input_value))
         browser.click('form[name="flights_search"] button[type="submit"]')
         browser.wait_steady(120)

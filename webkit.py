@@ -16,6 +16,8 @@ from PyQt4.QtCore import QByteArray, QUrl, QTimer, QEventLoop, QIODevice, QObjec
 from PyQt4.QtWebKit import QWebFrame, QWebView, QWebElement, QWebPage, QWebSettings, QWebInspector
 from PyQt4.QtNetwork import QNetworkAccessManager, QNetworkProxy, QNetworkRequest, QNetworkReply, QNetworkDiskCache
 
+# default user agent uses a common browser to minimize chance of blocking
+USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36'
 # maximum number of bytes to read from a POST request
 MAX_POST_SIZE = 2 ** 25
 # output directory where to save generated files
@@ -261,7 +263,7 @@ class WebPage(QWebPage):
 
 
 class Browser(QWebView):
-    def __init__(self, user_agent='WebKit', proxy=None, load_images=True, load_javascript=True, load_java=True, load_plugins=True, timeout=20, delay=5, app=None, use_cache=False):
+    def __init__(self, user_agent=None, proxy=None, load_images=True, load_javascript=True, load_java=True, load_plugins=True, timeout=20, delay=5, app=None, use_cache=False):
         """Widget class that contains the address bar, webview for rendering webpages, and a table for displaying results
 
         user_agent: the user-agent when downloading content
@@ -279,7 +281,7 @@ class Browser(QWebView):
         self.app = app or QApplication(sys.argv)
         super(Browser, self).__init__()
 
-        page = WebPage(user_agent)
+        page = WebPage(user_agent or USER_AGENT)
         manager = NetworkAccessManager(proxy, use_cache)
         page.setNetworkAccessManager(manager)
         self.setPage(page)

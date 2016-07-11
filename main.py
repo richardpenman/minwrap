@@ -11,6 +11,7 @@ from PyQt4.QtGui import QApplication
 
 import argparse, sys, re, os, collections, pprint
 from time import time
+import threading, SimpleHTTPServer, SocketServer
 import ajaxbrowser, common, model, parser, wrappertable
 app = QApplication(sys.argv)
 
@@ -20,6 +21,7 @@ def main():
     """Process command line arguments to select the wrapper
     """
     ap = argparse.ArgumentParser()
+    ap.add_argument('-p', '--port', type=int, help='the port to run local server at', default=8000)
     ap.add_argument('-s', '--show-wrappers', action='store_true', help='display a list of available wrappers')
     ap.add_argument('-w', '--wrapper', help='the wrapper to execute')
     args = ap.parse_args()
@@ -38,7 +40,25 @@ def main():
             ap.error('This wrapper does not exist. Available wrappers are: {}'.format(wrapper_names))
         if wrapper_name is not None:
             wrapper = wrappertable.load_wrapper(wrapper_name)
+            start_local_server(args.port)
             run_wrapper(wrapper)
+
+
+
+def start_local_server(port):
+    """start local HTTP server on this port to serve local example web applications
+    """
+    class Handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
+        def log_message(self, format, *args):
+            pass # prevent error messages
+    server = SocketServer.TCPServer(('', port), Handler, bind_and_activate=False)
+    server.allow_reuse_address = True # allow reusing port, otherwise often get address in use error
+    server.server_bind()
+    server.server_activate()
+    thread = threading.Thread(target=server.serve_forever, args=())
+    thread.daemon = True # daemonize thread so responds to ctrl-c
+    thread.start()
+
 
 
 def run_wrapper(wrapper):
@@ -48,11 +68,11 @@ def run_wrapper(wrapper):
     QApplication.setOverrideCursor(Qt.WaitCursor)
     # divide wrapper cases into training and testing
     num_cases = len(wrapper.data)
-    min_cases = 3
+    min_cases = 2
     if num_cases < min_cases:
-        raise Exception('Wrapper needs at least 3 cases to run training and tests'.format(min_cases))
-    test_cases = wrapper.data[:num_cases / 2]
-    training_cases = wrapper.data[num_cases / 2:]
+        raise Exception('Wrapper needs at least {} cases to abstract'.format(min_cases))
+    training_cases = wrapper.data[:]
+    test_cases = []
 
     full_execution_times = [] # time taken for each execution time when run the full wrapper during training
     expected_output = None # the output that the current execution should produce
@@ -67,6 +87,7 @@ def run_wrapper(wrapper):
             if scraped_data is not None:
                 # set dynamic expected output
                 expected_output = scraped_data
+            test_cases.append((input_value, expected_output))
 
             browser.wait_quiet()
             while transition_offset < len(browser.transitions):
@@ -84,7 +105,8 @@ def run_wrapper(wrapper):
             # completed running the wrapper for training
             expected_output = execution = None
             QApplication.restoreOverrideCursor()
-            opt_execution_times = run_models(browser, wrapper, final_transitions)
+            input_values = [v for v, _ in wrapper.data]
+            opt_execution_times = run_models(browser, final_transitions, input_values)
             if opt_execution_times:
                 # display results of optimized execution
                 num_passed = evaluate_model(browser, test_cases)
@@ -110,12 +132,11 @@ def summarize_list(l, max_length=5):
 
 
 
-def run_models(browser, wrapper, final_transitions):
+def run_models(browser, final_transitions, input_values):
     """Recieves a list of potential models for the execution.
     Executes them in order, shortest first, until find one that successfully executes.
     Returns a list of execution times, or None if failed.
     """
-    input_values = [v for v, _ in wrapper.data]
     # first try matching transitions on full paths, then allow abstracting paths
     for abstract_path in (False, True):
         models = build_models(final_transitions, abstract_path, input_values)
@@ -128,7 +149,9 @@ def run_models(browser, wrapper, final_transitions):
                 if event_i == 0:
                     # initialize the result table with the already known transition records
                     browser.add_records(final_model.records)
-                    browser.add_status('Built model of requests: {}'.format(str(final_model)))
+                    browser.add_status('Built model of requests:')
+                    for m in browser.models:
+                        browser.add_status(str(m))
                 # model has generated an AJAX request
                 if browser.running:
                     js = parser.parse(browser.current_text())

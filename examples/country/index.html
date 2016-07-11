@@ -1,0 +1,30 @@
+<html>
+<head>
+<script src="jquery.min.js"></script>
+</head>
+<body>
+
+Country: <input id="country" />
+<button id="search">Search</button>
+<ul id="results"></ul>
+
+<script>
+$(function() {
+    var results = $("#results");
+    $("#search").click(function() {
+        results.empty();
+        var country = $("#country").val();
+        $.getJSON("api/countries/" + country + ".json", function(data) {
+            var cc = data.id;
+            $.getJSON("api/cities/" + cc + ".json", function(data) {
+                data.cities.map(function(city) {
+                    results.append("<li>" + city + "</li>");
+                });
+            });
+        });
+    });
+});
+</script>
+
+</body>
+</html>
