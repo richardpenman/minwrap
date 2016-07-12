@@ -54,10 +54,10 @@ A wrapper defines a class called Wrapper with several required attributes:
 
 - data: a list of tuples defining the input and expected output strings ('London': ['...', '...']). A minimum of 3 cases are needed, though the more the better - half will be used for training and half for testing.
 - run(): this method performs the browser execution for the given input value. It can optionally return the expected output values if this is not known until run time.
+- website: the website this wrapper is for
 
 There are also several optional attributes that are used for displaying a summary in the start window:
 
-- website: the website this wrapper is for
 - category: the category of website (autocomplete, car dealers, etc)
 - http_method: the HTTP method used for downloading the key data (GET/POST)
 - response_format: the content type of the key data (JSON/JSONP/XML/HTML/etc)
@@ -149,6 +149,8 @@ Run
 
 
 A wrapper to execute can be passed from the command line. If no wrapper is passed then a window with details of each defined wrapper will be displayed and the *Go* button can be clicked to execute one of them.
+
+
 
 
 Documentation

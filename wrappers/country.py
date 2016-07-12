@@ -15,5 +15,6 @@ class Wrapper:
 
     def run(self, browser, input_value):
         browser.get(self.website)
+        browser.wait_steady()
         browser.fill('input#country', input_value)
         browser.click('button')

@@ -228,64 +228,66 @@ class Model:
 
             else:
                 # try extending from known vertical data
+                """
                 similar_cases = verticals.extend(examples)
                 if similar_cases is not None:
                     browser.add_status('Abstraction uses known vertical data: {}'.format(examples))
                     for case in similar_cases:
                         yield case
                 else:
-                    success = False
-                    # check if examples are located at common location in a transition
-                    for case in self.find_transitions(browser, examples):
-                        if not success:
-                            success = True
-                            browser.add_status('Abstraction uses previous transition: {}'.format(examples))
-                        yield case
-
+                """
+                success = False
+                # check if examples are located at common location in a transition
+                for case in self.find_transitions(browser, examples):
                     if not success:
-                        # no known data for these exact examples
-                        # interesting data may just be a subset so generate a template of static components
-                        template = Templater()
-                        for text in examples:
-                            template.learn(text)
+                        success = True
+                        browser.add_status('Abstraction uses previous transition: {}'.format(examples))
+                    yield case
 
-                        # only allow template if has at most 2 parameters (+2 for start and end)
-                        if template._template.count(None) <= 4:
-                            common.logger.info('Trained template: {}'.format(template._template))
-                            # and now check whether dynamic components can be abstracted
-                            parsed_examples = [template.parse(text) for text in examples]
+                if not success:
+                    # no known data for these exact examples
+                    # interesting data may just be a subset so generate a template of static components
+                    template = Templater()
+                    for text in examples:
+                        template.learn(text)
+
+                    # only allow template if has at most 2 parameters (+2 for start and end)
+                    if template._template.count(None) <= 4:
+                        common.logger.info('Trained template: {}'.format(template._template))
+                        # and now check whether dynamic components can be abstracted
+                        parsed_examples = [template.parse(text) for text in examples]
+                        similar_cases = []
+                        for template_examples in zip(*parsed_examples):
+                            if any(template_examples):
+                                similar_cases.append(self.extend_inputs(template_examples) or [])
+                                if similar_cases[-1]:
+                                    browser.add_status('Abstraction uses partial match on inputs: {}'.format(template_examples))
+                            else:
+                                # create iterator of empty strings for the empty parts of the template
+                                similar_cases.append('' for _ in itertools.count())
+
+                        success = False
+                        for vector in zip(*similar_cases):
+                            success = True
+                            yield template.join(vector)
+                        if not success:
                             similar_cases = []
-                            for template_examples in zip(*parsed_examples):
+                            # try partial matches over previous transitions
+                            for template_examples in zip(*parsed_examples): 
                                 if any(template_examples):
-                                    similar_cases.append(self.extend_inputs(template_examples) or verticals.extend(template_examples) or [])
-                                    if similar_cases[-1]:
-                                        browser.add_status('Abstraction uses partial match: {}'.format(template_examples))
+                                    similar_cases.append(self.find_transitions(browser, template_examples))
                                 else:
-                                    # create iterator of empty strings for the empty parts of the template
                                     similar_cases.append('' for _ in itertools.count())
-
                             success = False
                             for vector in zip(*similar_cases):
                                 success = True
                                 yield template.join(vector)
-                            if not success:
-                                similar_cases = []
-                                # support for partial matches over dependencies 
-                                for template_examples in zip(*parsed_examples): 
-                                    if any(template_examples):
-                                        similar_cases.append(self.find_transitions(browser, template_examples))
-                                    else:
-                                        similar_cases.append('' for _ in itertools.count())
-                                success = False
-                                for vector in zip(*similar_cases):
-                                    success = True
-                                    yield template.join(vector)
-                                if success:
-                                    browser.add_status('Abstraction uses partial match on past transitions: {}'.format(parsed_examples))
-                                else:
-                                    common.logger.info('Failed to abstract partial match: {}'.format(parsed_examples))
-                        else:
-                            common.logger.debug('Too many components in template: {}'.format(template._template))
+                            if success:
+                                browser.add_status('Abstraction uses partial match on past transitions: {}'.format(parsed_examples))
+                            else:
+                                common.logger.info('Failed to abstract partial match: {}'.format(parsed_examples))
+                    else:
+                        common.logger.debug('Too many components in template: {}'.format(template._template))
 
 
     def find_transitions(self, browser, examples):

@@ -21,7 +21,8 @@ def main():
     """Process command line arguments to select the wrapper
     """
     ap = argparse.ArgumentParser()
-    ap.add_argument('-p', '--port', type=int, help='the port to run local server at', default=8000)
+    ap.add_argument('-a', '--all-wrappers', action='store_true', help='execute all wrappers sequentially')
+    ap.add_argument('-p', '--port', type=int, help='the port to run local HTTP server at', default=8000)
     ap.add_argument('-s', '--show-wrappers', action='store_true', help='display a list of available wrappers')
     ap.add_argument('-w', '--wrapper', help='the wrapper to execute')
     args = ap.parse_args()
@@ -29,20 +30,39 @@ def main():
     if args.show_wrappers:
         print 'Available wrappers:', wrapper_names
     else:
-        if args.wrapper is None:
+        if args.all_wrappers:
+            # select all wrappers
+            selected_wrapper_names = wrapper_names
+        elif args.wrapper is None:
             # let user choose wrapper to execute 
             wt = wrappertable.WrapperTable()
             app.exec_()
-            wrapper_name = wt.wrapper_name
+            if not wt.wrapper_name:
+                return
+            selected_wrapper_names = [wt.wrapper_name]
         elif args.wrapper in wrapper_names:
-            wrapper_name = args.wrapper
+            # select just this wrapper
+            selected_wrapper_names = [args.wrapper]
         else:
             ap.error('This wrapper does not exist. Available wrappers are: {}'.format(wrapper_names))
-        if wrapper_name is not None:
-            wrapper = wrappertable.load_wrapper(wrapper_name)
-            start_local_server(args.port)
-            run_wrapper(wrapper)
+            return
 
+        start_local_server(args.port)
+        # execute selected wrappers
+        browser = ajaxbrowser.AjaxBrowser(app=app, gui=True, use_cache=False, load_images=False, load_java=False, load_plugins=False, delay=0)
+        for wrapper_name in selected_wrapper_names:
+            wrapper = wrappertable.load_wrapper(wrapper_name)
+            try:
+                if not wrapper.enabled:
+                    browser.stats.writer.writerow(['Broken', wrapper.website])
+                    continue
+            except AttributeError:
+                pass
+            browser.clear()
+            run_wrapper(browser, wrapper)
+        browser.add_status('Done')
+        app.exec_() # wait until window closed
+    
 
 
 def start_local_server(port):
@@ -61,35 +81,34 @@ def start_local_server(port):
 
 
 
-def run_wrapper(wrapper):
+def run_wrapper(browser, wrapper):
     """execute the selected wrapper 
     """
-    browser = ajaxbrowser.AjaxBrowser(app=app, gui=True, use_cache=False, load_images=False, load_java=False, load_plugins=False, delay=0)
     QApplication.setOverrideCursor(Qt.WaitCursor)
-    # divide wrapper cases into training and testing
-    num_cases = len(wrapper.data)
+    training_cases = wrapper.data[:]
+    num_cases = len(training_cases)
     min_cases = 2
     if num_cases < min_cases:
         raise Exception('Wrapper needs at least {} cases to abstract'.format(min_cases))
-    training_cases = wrapper.data[:]
     test_cases = []
 
-    full_execution_times = [] # time taken for each execution time when run the full wrapper during training
     expected_output = None # the output that the current execution should produce
     final_transitions = [] # transitions that contain the expected output at the end of an execution
     transition_offset = 0 # how many transitions have processed
     while browser.running:
         if training_cases:
+            if len(training_cases) < len(wrapper.data):
+                browser.stats.start(wrapper.website, 'Training')
             input_value, expected_output = training_cases.pop(0)
-            start_ms = time()
             scraped_data = wrapper.run(browser, input_value)
-            full_execution_times.append(time() - start_ms)
+            browser.wait_quiet()
+            browser.stats.stop()
             if scraped_data is not None:
                 # set dynamic expected output
                 expected_output = scraped_data
+            # save the expected output for checking test cases later
             test_cases.append((input_value, expected_output))
 
-            browser.wait_quiet()
             while transition_offset < len(browser.transitions):
                 # have more transitions to check
                 # check whether the transitions that were discovered contain the expected output
@@ -105,16 +124,10 @@ def run_wrapper(wrapper):
             # completed running the wrapper for training
             expected_output = execution = None
             QApplication.restoreOverrideCursor()
-            input_values = [v for v, _ in wrapper.data]
-            opt_execution_times = run_models(browser, final_transitions, input_values)
-            if opt_execution_times:
+            if run_models(browser, final_transitions, wrapper):
                 # display results of optimized execution
                 num_passed = evaluate_model(browser, test_cases)
                 browser.add_status('Evaluation: {}% accuracy (from {} test cases)'.format(100 * num_passed / len(test_cases), len(test_cases)))
-                ave_opt = common.average(opt_execution_times)
-                ave_full = common.average(full_execution_times)
-                browser.add_status('Performance: {:.2f} times faster (ave {:.2f} vs {:.2f})'.format(ave_full / ave_opt, ave_opt, ave_full))
-                app.exec_()
             else:
                 browser.add_status('Failed to train model') 
             break
@@ -132,20 +145,20 @@ def summarize_list(l, max_length=5):
 
 
 
-def run_models(browser, final_transitions, input_values):
+def run_models(browser, final_transitions, wrapper):
     """Recieves a list of potential models for the execution.
     Executes them in order, shortest first, until find one that successfully executes.
     Returns a list of execution times, or None if failed.
     """
+    input_values = [v for v, _ in wrapper.data]
     # first try matching transitions on full paths, then allow abstracting paths
     for abstract_path in (False, True):
         models = build_models(final_transitions, abstract_path, input_values)
         for final_model in sorted(models.values(), key=lambda m: len(m)):#, reverse=True): # XXX reverse sort to test geocode
             event_i = None
-            execution_times = []
-            start_ms = time()
+            #browser.stats.start(wrapper.website, False)
             for event_i, _ in enumerate(final_model.run(browser)):
-                execution_times.append(time() - start_ms)
+                browser.stats.stop()
                 if event_i == 0:
                     # initialize the result table with the already known transition records
                     browser.add_records(final_model.records)
@@ -159,10 +172,11 @@ def run_models(browser, final_transitions, input_values):
                         browser.add_records(parser.json_to_records(js))
                 else:
                     break
-                start_ms = time()
+                browser.stats.start(wrapper.website, 'Test')
             if event_i is not None:
                 # sucessfully executed a model so can ignore others
-                return execution_times
+                return True
+    return False
 
 
 

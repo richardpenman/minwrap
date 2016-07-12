@@ -6,9 +6,6 @@ class Wrapper:
             ('33520', ['ADRESSE DU CENTRE', '469, Route du Médoc', 'Bruges', '33520', 'INFINITI BORDEAUX', 'INFINITI SERVICE PARTNER BAYONNE', '22, bis, rue Ernest Lannebère', 'Anglet', '64600']),
             ('06110', ['INFINITI CANNES', '50 Avenue du Campon', 'Le Cannet', '06110', 'INFINITI SERVICE PARTNER NICE- OUVERTURE PROCHAINE', '79, Boulevard Gambetta - Palais de Porta', 'Nice', '06000']),
             ('63000', ['INFINITI CLERMONT-FERRAND', '8, Rue Louis Blériot', 'Clermont-Ferrand', '63000', 'INFINITI LYON', '45 Avenue Foch', 'Lyon', '69006']),
-            ('33520', ['ADRESSE DU CENTRE', '469, Route du Médoc', 'Bruges', '33520', 'INFINITI BORDEAUX', 'INFINITI SERVICE PARTNER BAYONNE', '22, bis, rue Ernest Lannebère', 'Anglet', '64600']),
-            ('06110', ['INFINITI CANNES', '50 Avenue du Campon', 'Le Cannet', '06110', 'INFINITI SERVICE PARTNER NICE- OUVERTURE PROCHAINE', '79, Boulevard Gambetta - Palais de Porta', 'Nice', '06000']),
-            ('63000', ['INFINITI CLERMONT-FERRAND', 'Clermont-Ferrand', '63000', 'INFINITI LYON', '45 Avenue Foch', 'Lyon', '69006']),
         ]
         self.website = 'https://www.infiniti.fr/centre-locator.html'
         self.category = 'car dealer'

@@ -9,7 +9,7 @@ from PyQt4.QtGui import QWidget, QVBoxLayout, QHBoxLayout, QLineEdit, QShortcut,
 from PyQt4.QtCore import Qt
 
 import csv, os, re, collections
-import webkit, common, model, parser, transition
+import webkit, common, model, parser, transition, stats
 
 
 
@@ -46,11 +46,12 @@ class AjaxBrowser(QWidget):
         self.transitions = []
         # models of each step
         self.models = []
+        self.stats = stats.RenderStats()
         self.running = True
 
 
     def __del__(self):
-        # not sure why, but to avoid seg fault need to release the QWebPage instance manually
+        # not sure why, but to avoid segmentation fault need to release the QWebPage instance manually
         self.view.setPage(None)
 
 
@@ -73,6 +74,8 @@ class AjaxBrowser(QWidget):
             # a webpage has loaded successfully
             common.logger.info('loaded: {} {}'.format(ok, self.current_url()))
             self.update_address(self.current_url())
+            #print 'Bytes:', self.current_url(), self.view.page().totalBytes(), self.view.page().bytesReceived()
+            self.stats.rendered()
 
 
     def finished(self, reply):
@@ -81,10 +84,10 @@ class AjaxBrowser(QWidget):
         if not reply.content:
             return # no response so reply is not of interest
 
+        self.stats.add_response(reply.content)
         content_type = reply.header(QNetworkRequest.ContentTypeHeader).toString().lower()
-        # main page has loaded
         if re.match('(image|audio|video|model|message)/', content_type) or content_type == 'text/css':
-            pass # ignore these irrelevant content types
+            pass # ignore irrelevant content types such as media and CSS
         else:
             common.logger.debug('Response: {} {}'.format(reply.url().toString(), reply.data))
             # have found a response that can potentially be parsed for useful content
@@ -98,7 +101,7 @@ class AjaxBrowser(QWidget):
 
 
     def add_shortcuts(self):
-        """Define shortcuts for convenient interaction
+        """Define keyboard shortcuts for convenient interaction
         """
         QShortcut(QKeySequence.Close, self, self.close)
         QShortcut(QKeySequence.Quit, self, self.close)
@@ -110,7 +113,7 @@ class AjaxBrowser(QWidget):
 
 
     def fullscreen(self):
-        """Alternate fullscreen mode
+        """Toggle fullscreen mode
         """
         if self.isMaximized():
             self.showNormal()
@@ -125,7 +128,9 @@ class AjaxBrowser(QWidget):
         self.status_table.add(text)
 
     
-    def add_records(self, records):
+    def add_records(self, records): 
+        """Add these records to the results table
+        """
         self.records_table.add_records(records)
 
 
@@ -133,6 +138,13 @@ class AjaxBrowser(QWidget):
         """Set address of the URL text field
         """
         self.url_input.setText(url)
+
+
+    def clear(self):
+        """Clear the outputs
+        """
+        self.status_table.clear()
+        self.records_table.clear()
 
 
     def closeEvent(self, event):
@@ -176,7 +188,6 @@ class StatusTable(QListWidget):
         self.addItem(message)
 
 
-
 class ResultsTable(QTableWidget):
     def __init__(self):
         """A table to display results from the scraping
@@ -188,6 +199,8 @@ class ResultsTable(QTableWidget):
 
     def clear(self):
         # avoid displaying duplicate rows
+        self.setRowCount(0)
+        self.setColumnCount(0)
         self.row_hashes = set()
         self.fields = None
         self.writer = csv.writer(open(os.path.join(webkit.OUTPUT_DIR, 'data.csv'), 'w'))
