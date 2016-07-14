@@ -13,7 +13,6 @@ import argparse, sys, re, os, collections, pprint
 from time import time
 import threading, SimpleHTTPServer, SocketServer
 import ajaxbrowser, common, model, parser, wrappertable
-app = QApplication(sys.argv)
 
 
 
@@ -48,19 +47,27 @@ def main():
             return
 
         start_local_server(args.port)
+        app = QApplication(sys.argv)
         # execute selected wrappers
-        browser = ajaxbrowser.AjaxBrowser(app=app, gui=True, use_cache=False, load_images=False, load_java=False, load_plugins=False, delay=0)
         for wrapper_name in selected_wrapper_names:
+            browser = ajaxbrowser.AjaxBrowser(app=app, gui=True, use_cache=False, load_images=False, load_java=False, load_plugins=False, delay=0)
             wrapper = wrappertable.load_wrapper(wrapper_name)
             try:
-                if not wrapper.enabled:
-                    browser.stats.writer.writerow(['Broken', wrapper.website])
+                if args.all_wrappers and not wrapper.enabled:
+                    #browser.stats.writer.writerow(['Broken', wrapper.website])
                     continue
             except AttributeError:
                 pass
-            browser.clear()
-            run_wrapper(browser, wrapper)
-        browser.add_status('Done')
+            test_cases, final_transitions = run_wrapper(browser, wrapper)
+            # completed running the wrapper for training
+            model = examine_transitions(browser, wrapper, final_transitions)
+            if model is not None:
+                # display results of optimized execution
+                num_passed = evaluate_model(browser, wrapper, model, test_cases)
+                browser.add_status('Evaluation: {}% accuracy (from {} test cases)'.format(100 * num_passed / len(test_cases), len(test_cases)))
+            else:
+                browser.add_status('Failed to train model') 
+        common.logger.info('Done')
         app.exec_() # wait until window closed
     
 
@@ -84,6 +91,7 @@ def start_local_server(port):
 def run_wrapper(browser, wrapper):
     """execute the selected wrapper 
     """
+    # create a browser instance
     QApplication.setOverrideCursor(Qt.WaitCursor)
     training_cases = wrapper.data[:]
     num_cases = len(training_cases)
@@ -95,43 +103,49 @@ def run_wrapper(browser, wrapper):
     expected_output = None # the output that the current execution should produce
     final_transitions = [] # transitions that contain the expected output at the end of an execution
     transition_offset = 0 # how many transitions have processed
-    while browser.running:
-        if training_cases:
-            if len(training_cases) < len(wrapper.data):
-                browser.stats.start(wrapper.website, 'Training')
-            input_value, expected_output = training_cases.pop(0)
-            scraped_data = wrapper.run(browser, input_value)
-            browser.wait_quiet()
-            browser.stats.stop()
-            if scraped_data is not None:
-                # set dynamic expected output
-                expected_output = scraped_data
-            # save the expected output for checking test cases later
-            test_cases.append((input_value, expected_output))
+    while browser.running and training_cases:
+        browser.stats.start(wrapper.website, 'Training')
+        input_value, expected_output = training_cases.pop(0)
+        scraped_data = wrapper.run(browser, input_value)
+        browser.wait_quiet()
+        browser.stats.stop()
+        if scraped_data is not None:
+            # set dynamic expected output
+            expected_output = scraped_data
+        # save the expected output for checking test cases later
+        test_cases.append((input_value, expected_output))
 
-            while transition_offset < len(browser.transitions):
-                # have more transitions to check
-                # check whether the transitions that were discovered contain the expected output
-                for t in browser.transitions[transition_offset:]:
-                    transition_offset += 1
-                    if t.matches(expected_output):
-                        # found a transition that matches the expected output so add it to model
-                        final_transitions.append(t)
-                        browser.add_status('Found matching reply for training data: {}'.format(summarize_list(expected_output)))
-                browser.wait_quiet()
-                
-        else:
-            # completed running the wrapper for training
-            expected_output = execution = None
-            QApplication.restoreOverrideCursor()
-            if run_models(browser, final_transitions, wrapper):
-                # display results of optimized execution
-                num_passed = evaluate_model(browser, test_cases)
-                browser.add_status('Evaluation: {}% accuracy (from {} test cases)'.format(100 * num_passed / len(test_cases), len(test_cases)))
-            else:
-                browser.add_status('Failed to train model') 
-            break
-        app.processEvents() 
+        while transition_offset < len(browser.transitions):
+            # have more transitions to check
+            # check whether the transitions that were discovered contain the expected output
+            for t in browser.transitions[transition_offset:]:
+                transition_offset += 1
+                if model.content_matches(t.url.toString(), t.content, expected_output):
+                    t.output = expected_output
+                    # found a transition that matches the expected output so add it to model
+                    final_transitions.append(t)
+                    browser.add_status('Found matching reply for training data: {}'.format(summarize_list(expected_output)))
+            browser.wait_quiet()
+    QApplication.restoreOverrideCursor()
+    return test_cases, final_transitions
+
+
+
+def examine_transitions(browser, wrapper, final_transitions):
+    """Recieves a list of transitions containing the expected output data.
+    """
+    input_values = [v for v, _ in wrapper.data]
+    # first try matching transitions on full paths, then allow abstracting paths
+    for abstract_path in (False, True):
+        for transition_group in group_transitions(final_transitions, abstract_path):
+            wrapper_model = model.build(browser, transition_group, input_values)
+            if wrapper_model is not None:
+                common.logger.info('Built model of requests:\n{}'.format(str(wrapper_model)))
+                # initialize the result table with the already known transition records
+                for t in transition_group:
+                    if t.js:
+                        browser.add_records(parser.json_to_records(t.js))
+                return wrapper_model
 
 
 
@@ -145,67 +159,37 @@ def summarize_list(l, max_length=5):
 
 
 
-def run_models(browser, final_transitions, wrapper):
-    """Recieves a list of potential models for the execution.
-    Executes them in order, shortest first, until find one that successfully executes.
-    Returns a list of execution times, or None if failed.
+def group_transitions(transitions, abstract_path):
+    """Organize these transitions into groups with the same properties
+    Returns a list of these groups, sorted by the number of unique URLs in each group
     """
-    input_values = [v for v, _ in wrapper.data]
-    # first try matching transitions on full paths, then allow abstracting paths
-    for abstract_path in (False, True):
-        models = build_models(final_transitions, abstract_path, input_values)
-        for final_model in sorted(models.values(), key=lambda m: len(m)):#, reverse=True): # XXX reverse sort to test geocode
-            event_i = None
-            #browser.stats.start(wrapper.website, False)
-            for event_i, _ in enumerate(final_model.run(browser)):
-                browser.stats.stop()
-                if event_i == 0:
-                    # initialize the result table with the already known transition records
-                    browser.add_records(final_model.records)
-                    browser.add_status('Built model of requests:')
-                    for m in browser.models:
-                        browser.add_status(str(m))
-                # model has generated an AJAX request
-                if browser.running:
-                    js = parser.parse(browser.current_text())
-                    if js:
-                        browser.add_records(parser.json_to_records(js))
-                else:
-                    break
-                browser.stats.start(wrapper.website, 'Test')
-            if event_i is not None:
-                # sucessfully executed a model so can ignore others
-                return True
-    return False
-
-
-
-def build_models(ts, abstract_path, input_values):
-    """Organize these transitions into models with the same properties
-    """
-    models = {}
-    for t in ts:
+    groups = collections.defaultdict(list)
+    for t in transitions:
         key = t.key(abstract_path)
-        try:
-            m = models[key]
-        except KeyError:
-            m = models[key] = model.Model(input_values)
-        m.add(t)
-    return models
+        groups[key].append(t)
+    return sorted(groups.values(), key=lambda ts: len(set([t.url.toString() for t in ts])))
 
 
 
-def evaluate_model(browser, test_cases):
-    """Check how many of test cases were successfully parsed
+def evaluate_model(browser, wrapper, wrapper_model, test_cases):
+    """Run the model and check how many of test cases were successfully parsed
     """
     num_passed = 0
-    for _, expected_output in test_cases:
-        for t in browser.transitions:
-            if t.matches(expected_output):
-                browser.add_status('Found test data: {}'.format(summarize_list(expected_output)))
-                num_passed += 1
-                break
+    for input_value, expected_output in test_cases:
+        if not browser.running:
+            break
+        browser.stats.start(wrapper.website, False)
+        wrapper_model.execute(browser, input_value)
+        browser.stats.stop()
+        content = browser.current_text()
+        if model.content_matches(browser.current_url(), content, expected_output):
+            browser.add_status('Found test data: {}'.format(summarize_list(expected_output)))
+            num_passed += 1
+        js = parser.parse(content)
+        if js:
+            browser.add_records(parser.json_to_records(js))
     return num_passed
+
 
 
 if __name__ == '__main__':

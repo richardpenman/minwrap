@@ -22,5 +22,4 @@ class Wrapper:
             self.counter += 1
         browser.find('input#planTripFlightDestination')
         browser.keys('input#planTripFlightDestination', input_value)
-        print browser.attr('input#planTripFlightDestination', 'value')
         browser.click('input#planTripFlightDestination')

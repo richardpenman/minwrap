@@ -11,7 +11,7 @@ class Wrapper:
         self.category = ''
         self.http_method = 'GET'
         self.response_format = 'JSON'
-        self.notes = 'Uses local custom website'
+        self.notes = 'Uses local custom website to demonstrate a multi-step wrapper'
 
     def run(self, browser, input_value):
         browser.get(self.website)

@@ -24,6 +24,22 @@ OSX:
 
 
 
+Module documentation
+====================
+
+The module documentation relies on Sphinx:
+
+.. sourcecode:: bash
+
+    pip install Sphinx
+
+It can be generated locally by running this command:
+
+.. sourcecode:: bash
+
+    cd docs && make html
+
+
 Wrappers
 ========
 
@@ -52,7 +68,7 @@ Wrappers are classes defined in the *wrappers* directory and are structured like
 
 A wrapper defines a class called Wrapper with several required attributes:
 
-- data: a list of tuples defining the input and expected output strings ('London': ['...', '...']). A minimum of 3 cases are needed, though the more the better - half will be used for training and half for testing.
+- data: a list of tuples defining the input and expected output strings ('London': ['...', '...']). A minimum of 2 cases are needed, though the more the better.
 - run(): this method performs the browser execution for the given input value. It can optionally return the expected output values if this is not known until run time.
 - website: the website this wrapper is for
 
@@ -133,40 +149,122 @@ The Browser class is a wrapper around WebKit's *QWebView* class for rendering we
 - **wait(delay)**: Wait for the specified delay (in seconds).
 
 
-Run
-===
+Algorithm
+=========
+
+#. The training cases for a wrapper are executed.
+#. Network traffic is monitored and the required features (URL, content, headers, etc) from each generated request/response are stored in a Transition object.
+#. The transitions are found that contain the expected output from each execution path.
+#. These transitions are divided into groups with the same domain, path, querystring keys, and POST keys. 
+
+    * If the subsequent steps fail to build a model then the path criteria is changed to just needing the same number of segments (parts of path separated by /). This is necessary when the input data is contained within the path like this:
+      http://www.lexus.fr/api/dealer/nearest/2.3522219/48.856614/10/
+      http://www.lexus.fr/api/dealer/nearest/4.835659/45.764043/10/
+
+#. These transition groups are iterated until a model is successfully built.
+
+    * Groups with a smaller number of unique URL's are checked first in case there is a single URL that contains all expected data, such as this one:
+      http://www.lexus.fr/api/dealers/all
+
+#. To build a model the transitions are compared for differences in path segments, querystring values, and POST values. For example given these two URL's:
+   http://dealerlocator.fiat.com/geocall/RestServlet?jsonp=callback&serv=sales&mkt=3112&brand=00&func=finddealerxml&address=OX1&rad=100
+   http://dealerlocator.fiat.com/geocall/RestServlet?jsonp=callback&serv=sales&mkt=3112&brand=00&func=finddealerxml&address=CB2&rad=100
+   The only difference is with the values for *address*. 
+#. A list of these differences is formed using this format:
+   [(POST|GET|PATH, key|index, [example1, example2, ...]), ...]
+
+    * For the above examples this would be: [(GET, 'address', ['OX1', 'CB2'])]
+    * If the difference is a path segment then a 1-based index of the segment is used.
+
+#. For each of the GET/POST keys in this list a modified request is made without this key. If the response still contains the expected data then this key is removed from the model.
+
+    * This is particularly relevant for session ID's, such as this for Dacia: __fp=GUFQeOFjGNBhWWMMKKgneiF9p-reJ13npCfnQQDvQmE%3D
+
+#. If the list of differences is empty then there is nothing to abstract. 
+
+    * In this case the content of a transition is checked to see whether it contains all of the expected data. If so then a convenient API has been discovered that covers all cases, such as the Lexus example above. Otherwise the model generation fails for this group of transitions.
+
+#. If there are differences then it needs to be determined where they came from. For each difference the following are checked:
+
+    #. Whether the examples correspond to input values defined in the wrapper. In this case the model is complete and we know how to get from the input values to the expected data.
+    #. Whether the examples are found in previous transitions. 
+    
+        * This is achieved by checking each *structured* transition (JSON/JSONP/XML) and building a path to the data of interest.
+        
+            * The path is a list of indices and keys to follow from the root.
+            * HTML could be supported using XPath but I have not found such an example yet - typically this dynamic intermediary data would be structured.
+
+        * If the same path can be used in different transitions to reach all the examples then we recursively build a model of these parent transitions, and continue until have reached the initial input values.
+
+#. If these checks fail then any common prefix and suffix is removed from the examples and the above criteria are checked again. For example with Delta the parameters include a prefix:
+   c0-param0=string:washington
+   c0-param0=string:london
+   c0-param0=string:paris
+#. If these checks still fail then we do not understand how a parameter is formed in this model and so need to try the next group of transitions. This commonly happens when a parameter is constructed dynamically with JavaScript and so is not found in any response content.
+
+#. If a model is successfully built then it is executed over the input values from the wrapper.
+
+    * Here is the representation of the model for Dacia that has some POST keys that can be ignored and a location key for the input parameter:
+
+    .. sourcecode::
+
+        {
+            "data": [
+                [ "search", "" ],
+                ...
+                [ "location", "{}" ],
+                [ "search", "" ]
+            ],
+            "ignored": [
+                [ "POST", "_sourcePage" ],
+                [ "POST", "__fp" ]
+            ],
+            "override": [
+                [ "POST", "location", "{}", null ]
+            ],
+            "url": "http://dacia.at/dealerlocator/search.action"
+        }
+
+    * And this model for the local country website is an example with multiple steps:
+
+    .. sourcecode::
+
+        {
+            "override": [
+                [ "PATH", 5, "{}.json", 
+                    {
+                        "override": [
+                            [ "PATH", 5, "{}.json", null ]
+                        ],
+                        "selector": "(u'id',)",
+                        "url": "http://localhost:8000/examples/country/api/countries/{}"
+                    }
+                ]
+            ],
+            "url": "http://localhost:8000/examples/country/api/cities/{}"
+        }
+
+#. To evaluate correctness the model is executed over the test data and checked how many execution paths contain the same expected output as defined in the wrapper.
+#. Measurements of performance (time, bandwidth) of the initial wrapper and the optimized wrapper are saved in output/stats.csv.
+
+
+Command line interface
+======================
 
 .. sourcecode:: bash
-
+    
     $ python main.py -h
-    usage: main.py [-h] [-s] [-w WRAPPER]
+    usage: main.py [-h] [-a] [-p PORT] [-s] [-w WRAPPER]
 
     optional arguments:
       -h, --help            show this help message and exit
+      -a, --all-wrappers    execute all wrappers sequentially
+      -p PORT, --port PORT  the port to run local HTTP server at
       -s, --show-wrappers   display a list of available wrappers
       -w WRAPPER, --wrapper WRAPPER
                             the wrapper to execute
 
-
 A wrapper to execute can be passed from the command line. If no wrapper is passed then a window with details of each defined wrapper will be displayed and the *Go* button can be clicked to execute one of them.
-
-
-
-
-Documentation
-=============
-
-The module documentation can be generated by installing Sphinx:
-
-.. sourcecode:: bash
-
-    pip install Sphinx
-
-And then running this command:
-
-.. sourcecode:: bash
-
-    cd docs && make html
 
 
 
@@ -174,6 +272,8 @@ Directories
 ===========
 
 output/ - files generated during operation such as the log and cache
+
+examples/ - static websites that wrappers can execute reliably locally
 
 verticals/ - training data to abstract inputs, which currently only cover locations
 

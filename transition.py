@@ -42,57 +42,38 @@ class Transition:
         return hash((self.host, path, get_keys(self.qs), get_keys(self.data)))
 
 
-    def matches(self, expected_output, content=None):
-        """Return whether the expected output is found in this transition
-        """
-        if not expected_output:
-            return False
-        num_found = 0
-        for e in expected_output:
-            if e in (content or self.content):
-                # found a value we are after in this response
-                num_found += 1
-        # XXX adjust this threshold for each website?
-        if num_found > len(expected_output) / 2:
-            common.logger.info('Transition matches expected output: {} {} / {}'.format(str(self), num_found, len(expected_output)))
-            self.output = expected_output
-            return True
-        else:
-            common.logger.debug('Transition does not match expected output: {} {} {} / {}'.format(self.url.toString(), self.data, num_found, len(expected_output)))
-            return False
 
 
-
-def generate_path(data, goal, parents=None):
-    """Find the path to the goal in this data structure
+def generate_selector(data, goal, parents=None):
+    """Find the selector to the goal in this data structure
 
     >>> js = [{'person': 'richard', 'location': 'oxford'}, {'person': 'tim', 'location': 'oxford'}]
-    >>> [jp.steps for jp in generate_path(js, 'richard')]
+    >>> [jp.steps for jp in generate_selector(js, 'richard')]
     [(0, 'person')]
-    >>> [jp.steps for jp in generate_path(js, 'oxford')]
+    >>> [jp.steps for jp in generate_selector(js, 'oxford')]
     [(0, 'location'), (1, 'location')]
-    >>> [jp.steps for jp in generate_path(js, 'cambridge')]
+    >>> [jp.steps for jp in generate_selector(js, 'cambridge')]
     []
 
     """
     parents = [] if parents is None else parents 
     if isinstance(data, dict):
         for key, record in data.items():
-            for result in generate_path(record, goal, parents[:] + [key]):
+            for result in generate_selector(record, goal, parents[:] + [key]):
                 yield result
     elif isinstance(data, list):
         for index, record in enumerate(data):
-            for result in generate_path(record, goal, parents[:] + [index]):
+            for result in generate_selector(record, goal, parents[:] + [index]):
                 yield result
     elif data == goal or unicode(data) == goal:
-        yield JsonPath(parents)
+        yield JsonSelector(parents)
 
 
 
-class JsonPath:
+class JsonSelector:
     """Wrapper to iterate through a dictionary given a list of indices / keys
 
-    >>> jp = JsonPath([0, 'person'])
+    >>> jp = JsonSelector([0, 'person'])
     >>> jp([{'person': 'richard'}, {'person': 'tim'}])
     'richard'
     >>> jp([])

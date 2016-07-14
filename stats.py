@@ -1,13 +1,18 @@
-import csv
+import csv, os
 from time import time
 
 
 class RenderStats:
     """Keep track of rendering statistics
     """
-    def __init__(self):
-        self.writer = csv.writer(open('output/stats.csv', 'w'))
-        self.writer.writerow(['Status', 'Website', 'Time (sec)', 'Bandwidth (bytes)', 'Num requests'])#, 'Num renders'])
+    def __init__(self, output_file='output/stats.csv'):
+        if os.path.exists(output_file):
+            # append to existing stats file
+            self.writer = csv.writer(open('output/stats.csv', 'a'))
+        else:
+            # create new stats file with header
+            self.writer = csv.writer(open('output/stats.csv', 'w'))
+            self.writer.writerow(['Status', 'Website', 'Time (sec)', 'Bandwidth (bytes)', 'Num requests'])#, 'Num renders'])
         self.reset()
     
     def reset(self):

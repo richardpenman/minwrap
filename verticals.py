@@ -25,7 +25,7 @@ def load_data():
                     vertical_data['{}-field{}'.format(filename, i)][hash_key(v)] = common.to_unicode(v)
     common.logger.debug('Completed loading verticals data')
 # load vertical data in background thread to avoid having to wait
-threading.Thread(target=load_data, args=()).start()
+#threading.Thread(target=load_data, args=()).start()
 
 
 

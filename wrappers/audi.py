@@ -12,7 +12,7 @@ class Wrapper:
         self.category = 'car dealer'
         self.http_method = 'POST'
         self.response_format = 'JSON'
-        self.notes = 'All data pre-loaded in single AJAX request. Request error.'
+        self.notes = 'All data pre-loaded in single AJAX request'
         self.counter = 0
 
     def run(self, browser, input_value):
