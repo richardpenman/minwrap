@@ -5,7 +5,7 @@ __doc__ = 'Interface to run the ajax browser'
 # for using native Python strings
 import sip
 sip.setapi('QString', 2)
-from PyQt4.QtNetwork import QNetworkRequest
+from PyQt4.QtNetwork import QNetworkRequest, QNetworkCookieJar
 from PyQt4.QtCore import QUrl, Qt
 from PyQt4.QtGui import QApplication
 
@@ -19,6 +19,7 @@ import ajaxbrowser, common, model, parser, wrappertable
 def main():
     """Process command line arguments to select the wrapper
     """
+    app = QApplication(sys.argv)
     ap = argparse.ArgumentParser()
     ap.add_argument('-a', '--all-wrappers', action='store_true', help='execute all wrappers sequentially')
     ap.add_argument('-p', '--port', type=int, help='the port to run local HTTP server at', default=8000)
@@ -47,7 +48,6 @@ def main():
             return
 
         start_local_server(args.port)
-        app = QApplication(sys.argv)
         # execute selected wrappers
         for wrapper_name in selected_wrapper_names:
             browser = ajaxbrowser.AjaxBrowser(app=app, gui=True, use_cache=False, load_images=False, load_java=False, load_plugins=False, delay=0)
@@ -104,6 +104,8 @@ def run_wrapper(browser, wrapper):
     final_transitions = [] # transitions that contain the expected output at the end of an execution
     transition_offset = 0 # how many transitions have processed
     while browser.running and training_cases:
+        # clear browser cookies
+        browser.view.page().networkAccessManager().setCookieJar(QNetworkCookieJar())
         browser.stats.start(wrapper.website, 'Training')
         input_value, expected_output = training_cases.pop(0)
         scraped_data = wrapper.run(browser, input_value)
@@ -178,7 +180,7 @@ def evaluate_model(browser, wrapper, wrapper_model, test_cases):
     for input_value, expected_output in test_cases:
         if not browser.running:
             break
-        browser.stats.start(wrapper.website, False)
+        browser.stats.start(wrapper.website, 'Testing')
         wrapper_model.execute(browser, input_value)
         browser.stats.stop()
         content = browser.current_text()

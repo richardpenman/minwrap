@@ -149,64 +149,69 @@ The Browser class is a wrapper around WebKit's *QWebView* class for rendering we
 - **wait(delay)**: Wait for the specified delay (in seconds).
 
 
-Algorithm
-=========
+Implementation details
+======================
 
 #. The training cases for a wrapper are executed.
 #. Network traffic is monitored and the required features (URL, content, headers, etc) from each generated request/response are stored in a Transition object.
 #. The transitions are found that contain the expected output from each execution path.
 #. These transitions are divided into groups with the same domain, path, querystring keys, and POST keys. 
 
-    * If the subsequent steps fail to build a model then the path criteria is changed to just needing the same number of segments (parts of path separated by /). This is necessary when the input data is contained within the path like this:
+   * If the subsequent steps fail to build a model then the path criteria is changed to just needing the same number of segments (parts of path separated by /). This is necessary when the input data is contained within the path like this:
+   
       http://www.lexus.fr/api/dealer/nearest/2.3522219/48.856614/10/
       http://www.lexus.fr/api/dealer/nearest/4.835659/45.764043/10/
 
 #. These transition groups are iterated until a model is successfully built.
 
-    * Groups with a smaller number of unique URL's are checked first in case there is a single URL that contains all expected data, such as this one:
+   * Groups with a smaller number of unique URL's are checked first in case there is a single URL that contains all expected data, such as this one:
+   
       http://www.lexus.fr/api/dealers/all
 
 #. To build a model the transitions are compared for differences in path segments, querystring values, and POST values. For example given these two URL's:
-   http://dealerlocator.fiat.com/geocall/RestServlet?jsonp=callback&serv=sales&mkt=3112&brand=00&func=finddealerxml&address=OX1&rad=100
-   http://dealerlocator.fiat.com/geocall/RestServlet?jsonp=callback&serv=sales&mkt=3112&brand=00&func=finddealerxml&address=CB2&rad=100
+
+    http://dealerlocator.fiat.com/geocall/RestServlet?jsonp=callback&serv=sales&mkt=3112&brand=00&func=finddealerxml&address=OX1&rad=100
+    http://dealerlocator.fiat.com/geocall/RestServlet?jsonp=callback&serv=sales&mkt=3112&brand=00&func=finddealerxml&address=CB2&rad=100
    The only difference is with the values for *address*. 
 #. A list of these differences is formed using this format:
    [(POST|GET|PATH, key|index, [example1, example2, ...]), ...]
 
-    * For the above examples this would be: [(GET, 'address', ['OX1', 'CB2'])]
-    * If the difference is a path segment then a 1-based index of the segment is used.
+   * For the above examples this would be: [(GET, 'address', ['OX1', 'CB2'])]
+   * If the difference is a path segment then a 1-based index of the segment is used.
 
 #. For each of the GET/POST keys in this list a modified request is made without this key. If the response still contains the expected data then this key is removed from the model.
 
-    * This is particularly relevant for session ID's, such as this for Dacia: __fp=GUFQeOFjGNBhWWMMKKgneiF9p-reJ13npCfnQQDvQmE%3D
+   * This is particularly relevant for session ID's, such as this for Dacia: __fp=GUFQeOFjGNBhWWMMKKgneiF9p-reJ13npCfnQQDvQmE%3D
 
 #. If the list of differences is empty then there is nothing to abstract. 
 
-    * In this case the content of a transition is checked to see whether it contains all of the expected data. If so then a convenient API has been discovered that covers all cases, such as the Lexus example above. Otherwise the model generation fails for this group of transitions.
+   * In this case the content of a transition is checked to see whether it contains all of the expected data. If so then a convenient API has been discovered that covers all cases, such as the Lexus example above. Otherwise the model generation fails for this group of transitions.
 
 #. If there are differences then it needs to be determined where they came from. For each difference the following are checked:
 
-    #. Whether the examples correspond to input values defined in the wrapper. In this case the model is complete and we know how to get from the input values to the expected data.
-    #. Whether the examples are found in previous transitions. 
+   #. Whether the examples correspond to input values defined in the wrapper. In this case the model is complete and we know how to get from the input values to the expected data.
+   #. Whether the examples are found in previous transitions. 
     
-        * This is achieved by checking each *structured* transition (JSON/JSONP/XML) and building a path to the data of interest.
+      * This is achieved by checking each *structured* transition (JSON/JSONP/XML) and building a path to the data of interest.
         
-            * The path is a list of indices and keys to follow from the root.
-            * HTML could be supported using XPath but I have not found such an example yet - typically this dynamic intermediary data would be structured.
+        * The path is a list of indices and keys to follow from the root.
+        * HTML could be supported using XPath but I have not found such an example yet - typically this dynamic intermediary data would be structured.
 
-        * If the same path can be used in different transitions to reach all the examples then we recursively build a model of these parent transitions, and continue until have reached the initial input values.
+      * If the same path can be used in different transitions to reach all the examples then we recursively build a model of these parent transitions, and continue until have reached the initial input values.
 
 #. If these checks fail then any common prefix and suffix is removed from the examples and the above criteria are checked again. For example with Delta the parameters include a prefix:
-   c0-param0=string:washington
-   c0-param0=string:london
-   c0-param0=string:paris
+
+   * c0-param0=string:washington
+   * c0-param0=string:london
+   * c0-param0=string:paris
+   
 #. If these checks still fail then we do not understand how a parameter is formed in this model and so need to try the next group of transitions. This commonly happens when a parameter is constructed dynamically with JavaScript and so is not found in any response content.
 
 #. If a model is successfully built then it is executed over the input values from the wrapper.
 
-    * Here is the representation of the model for Dacia that has some POST keys that can be ignored and a location key for the input parameter:
+   * Here is the model for Dacia that has some POST keys that can be ignored and a location key for the input parameter:
 
-    .. sourcecode::
+   .. sourcecode::
 
         {
             "data": [
@@ -225,9 +230,9 @@ Algorithm
             "url": "http://dacia.at/dealerlocator/search.action"
         }
 
-    * And this model for the local country website is an example with multiple steps:
+   * And this model for the local country website is an example with multiple steps:
 
-    .. sourcecode::
+   .. sourcecode::
 
         {
             "override": [

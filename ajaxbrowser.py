@@ -6,7 +6,7 @@ import sip
 sip.setapi('QString', 2)
 from PyQt4.QtNetwork import QNetworkRequest
 from PyQt4.QtGui import QWidget, QVBoxLayout, QHBoxLayout, QLineEdit, QShortcut, QKeySequence, QTableWidget, QTableWidgetItem, QListWidget, QListWidgetItem, QFont
-from PyQt4.QtCore import Qt
+from PyQt4.QtCore import Qt, QUrl
 
 import csv, os, re, collections
 import webkit, common, model, parser, transition, stats
