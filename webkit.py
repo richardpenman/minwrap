@@ -2,7 +2,7 @@
 
 __doc__ = 'Interface to qt webkit for loading and interacting with JavaScript dependent webpages'
 
-import sys, os, re, urllib2, random, itertools
+import sys, os, re, urllib2, random, itertools, json
 reload(sys)
 sys.setdefaultencoding('utf-8')
 from time import time, sleep
@@ -79,7 +79,7 @@ class NetworkAccessManager(QNetworkAccessManager):
             common.logger.debug('Blocking: {}'.format(url))
             request.setUrl(QUrl())
 
-        data = self.parse_data(post)
+        data = post if post is None else post.peek(MAX_POST_SIZE)
         key = '{} {}'.format(url, data)
         use_cache = not url.startswith('file')
         if self.cache is not None and use_cache and key in self.cache:
@@ -98,7 +98,7 @@ class NetworkAccessManager(QNetworkAccessManager):
             if self.cache is not None and use_cache:
                 reply.finished.connect(self._cache_content(reply, key))
         reply.orig_request = request
-        reply.data = data
+        reply.data = self.parse_data(data)
         return reply
     
     
@@ -130,11 +130,21 @@ class NetworkAccessManager(QNetworkAccessManager):
     def parse_data(self, data):
         """Parse this posted data into a list of key/value pairs
         """
-        if data is not None:
-            url = QUrl('')
-            url.setEncodedQuery(data.peek(MAX_POST_SIZE))
-            return url.queryItems()
-        return []
+        if data is None:
+            result = []
+        else:
+            try:
+                result = json.loads(unicode(data))
+                if isinstance(result, dict):
+                    result = result.items()
+                if not isinstance(result, list):
+                    common.logger.info('Unexpected data format: {}'.format(result))
+                    result = []
+            except ValueError:
+                url = QUrl('')
+                url.setEncodedQuery(data)
+                result = url.queryItems()
+        return result
 
 
     def catch_error(self, eid):
@@ -471,9 +481,9 @@ class Browser(QWebView):
             e.evaluateJavaScript("this.focus()")
         self.fill(pattern, text)
         for e in es:
-            for event_type in ('keydown', 'keyup', 'keypress', 'change'):
+            for event_type in ('keydown', 'keyup', 'keypress'):#, 'change'):
                 e.evaluateJavaScript("var evObj = document.createEvent('Event'); evObj.initEvent('{}', true, true); this.dispatchEvent(evObj);".format(event_type))
-            e.evaluateJavaScript("this.blur()")
+            #e.evaluateJavaScript("this.blur()")
         return len(es)
 
 
@@ -497,7 +507,7 @@ class Browser(QWebView):
         for e in es:
             tag = str(e.tagName()).lower()
             if tag == 'input':
-                #e.evaluateJavaScript('this.value = "{}"'.format(value))
+                e.evaluateJavaScript('this.value = "{}"'.format(value))
                 e.setAttribute('value', value)
             else:
                 e.setPlainText(value)

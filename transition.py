@@ -21,6 +21,7 @@ class Transition:
         self.values = [value for value in json_values(js) or [] if value] # XXX need to convert unicode?
         request = reply.orig_request
         self.headers = [(header, request.rawHeader(header)) for header in request.rawHeaderList()]
+        self.content_type = reply.content_type
 
 
     def __str__(self):

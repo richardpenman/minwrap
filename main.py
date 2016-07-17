@@ -49,8 +49,9 @@ def main():
 
         start_local_server(args.port)
         # execute selected wrappers
+        load_media = True
         for wrapper_name in selected_wrapper_names:
-            browser = ajaxbrowser.AjaxBrowser(app=app, gui=True, use_cache=False, load_images=False, load_java=False, load_plugins=False, delay=0)
+            browser = ajaxbrowser.AjaxBrowser(app=app, gui=True, use_cache=False, load_images=load_media, load_java=load_media, load_plugins=load_media, delay=0)
             wrapper = wrappertable.load_wrapper(wrapper_name)
             try:
                 if args.all_wrappers and not wrapper.enabled:

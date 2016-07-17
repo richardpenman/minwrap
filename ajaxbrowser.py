@@ -85,15 +85,15 @@ class AjaxBrowser(QWidget):
             return # no response so reply is not of interest
 
         self.stats.add_response(reply.content)
-        content_type = reply.header(QNetworkRequest.ContentTypeHeader).toString().lower()
-        if re.match('(image|audio|video|model|message)/', content_type) or content_type == 'text/css':
+        reply.content_type = reply.header(QNetworkRequest.ContentTypeHeader).toString().lower()
+        if re.match('(image|audio|video|model|message)/', reply.content_type) or reply.content_type == 'text/css':
             pass # ignore irrelevant content types such as media and CSS
         else:
             common.logger.debug('Response: {} {}'.format(reply.url().toString(), reply.data))
             # have found a response that can potentially be parsed for useful content
             content = common.to_unicode(str(reply.content))
-            if re.match('(application|text)/', content_type):
-                js = parser.parse(content, content_type)
+            if re.match('(application|text)/', reply.content_type):
+                js = parser.parse(content, reply.content_type)
             else:
                 js = None
             # save for checking later once interface has been updated

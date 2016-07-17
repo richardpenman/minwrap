@@ -20,7 +20,6 @@ def build(browser, transitions, input_values):
     diffs = find_differences(transitions)
     if diffs:
         ignored = filter_redundant_params(browser, transitions, diffs)
-        print 'ignored:', ignored
 
         override = []
         for param_type, key, examples in diffs:
@@ -156,18 +155,22 @@ def gen_request(transition, override_params=None, ignored=None):
     qs_items = [(key, urllib.quote_plus(get_dict[key].encode('utf-8')) if key in get_dict else value) for (key, value) in qs_items if (GET, key) not in ignored]
     url.setEncodedQueryItems(qs_items)
     data_items = [(key, post_dict[key] if key in post_dict else value) for (key, value) in data_items if (POST, key) not in ignored]
-    return dict(url=url, headers=transition.headers, data=encode_data(data_items))
+    return dict(url=url, headers=transition.headers, data=encode_data(data_items, transition.content_type))
 
 
-def encode_data(items):
+def encode_data(items, content_type):
     """Convert these querystring items into a string of data
     """
     if items:
-        url = QUrl('')
-        url.setEncodedQueryItems(items)
-        return str(url.toString())[1:]
+        if 'json' in content_type:
+            result = json.dumps(dict(items))
+        else:
+            url = QUrl('')
+            url.setEncodedQueryItems(items)
+            result = str(url.toString())[1:]
     else:
-        return ''
+        result = ''
+    return result
 
 
 def all_in(l1, l2):
@@ -208,10 +211,10 @@ def content_matches(url, content, expected_output):
             num_found += 1
     # XXX adjust this threshold for each website?
     if num_found > len(expected_output) / 2:
-        common.logger.info('Transition matches expected output: {} {} / {}'.format(url, num_found, len(expected_output)))
+        common.logger.info('Content matches expected output: {} {} / {}'.format(url, num_found, len(expected_output)))
         return True
     else:
-        common.logger.debug('Transition does not match expected output: {} {} / {}'.format(url, num_found, len(expected_output)))
+        common.logger.debug('Content does not match expected output: {} {} / {}'.format(url, num_found, len(expected_output)))
         return False
 
 
@@ -287,6 +290,7 @@ class Model:
             output['ignored'] = [(param_map[param_type], value) for (param_type, value) in self.ignored]
         if self.selector is not None:
             output['selector'] = str(self.selector)
+        output['headers'] = [(str(key), str(value)) for (key, value) in self.transition.headers if str(key).lower() not in ('content-length', )]
         return output
 
 

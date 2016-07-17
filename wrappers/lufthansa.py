@@ -12,7 +12,7 @@ class Wrapper:
         self.category = 'flight'
         self.http_method = 'POST'
         self.response_format = 'JSON'
-        self.notes = 'AJAX callback triggered on KeyUp event'
+        self.notes = 'AJAX callback triggered on KeyUp event. Currently error triggering autocomplete.'
 
     def run(self, browser, input_value):
         browser.get(self.website)
