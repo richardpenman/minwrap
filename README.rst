@@ -217,15 +217,22 @@ Implementation details
             "data": [
                 [ "search", "" ],
                 ...
-                [ "location", "{}" ],
-                [ "search", "" ]
+            ],
+            "headers": [
+                [ "Origin", "http://dacia.at" ],
+                ...
             ],
             "ignored": [
                 [ "POST", "_sourcePage" ],
                 [ "POST", "__fp" ]
             ],
             "override": [
-                [ "POST", "location", "{}", null ]
+                {
+                    "dependency": null,
+                    "key": "location",
+                    "template": "{}",
+                    "type": "POST"
+                }
             ],
             "url": "http://dacia.at/dealerlocator/search.action"
         }
@@ -235,16 +242,32 @@ Implementation details
    .. sourcecode::
 
         {
+            "headers": [
+                [ "X-Requested-With", "XMLHttpRequest" ],
+                ...
+            ],
             "override": [
-                [ "PATH", 5, "{}.json", 
-                    {
+                {
+                    "dependency": {
+                        "headers": [
+                            [ "X-Requested-With", "XMLHttpRequest" ],
+                            ...
+                        ],
                         "override": [
-                            [ "PATH", 5, "{}.json", null ]
+                            {
+                                "dependency": null,
+                                "key": 5,
+                                "template": "{}.json",
+                                "type": "PATH"
+                            }
                         ],
                         "selector": "(u'id',)",
                         "url": "http://localhost:8000/examples/country/api/countries/{}"
-                    }
-                ]
+                    },
+                    "key": 5,
+                    "template": "{}.json",
+                    "type": "PATH"
+                }
             ],
             "url": "http://localhost:8000/examples/country/api/cities/{}"
         }

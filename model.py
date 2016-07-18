@@ -272,7 +272,11 @@ class Model:
             output['override'] = []
             for param_type, key, template, parent_model in self.override:
                 parent = None if parent_model is None else parent_model.data()
-                output['override'].append((param_map[param_type], key, template, parent))
+                output['override'].append({
+                    'type': param_map[param_type], 
+                    'key': key, 
+                    'template': template, 
+                    'dependency': parent})
                 if param_type == PATH:
                     path_dict[key] = empty_template
                 elif param_type == GET:
