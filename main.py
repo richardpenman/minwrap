@@ -11,7 +11,7 @@ from PyQt4.QtGui import QApplication
 
 import argparse, sys, re, os, collections, pprint
 from time import time
-import threading, SimpleHTTPServer, SocketServer
+import socket, threading, SimpleHTTPServer, SocketServer
 import ajaxbrowser, common, model, parser, wrappertable
 
 
@@ -81,11 +81,15 @@ def start_local_server(port):
             pass # prevent error messages
     server = SocketServer.TCPServer(('', port), Handler, bind_and_activate=False)
     server.allow_reuse_address = True # allow reusing port, otherwise often get address in use error
-    server.server_bind()
-    server.server_activate()
-    thread = threading.Thread(target=server.serve_forever, args=())
-    thread.daemon = True # daemonize thread so responds to ctrl-c
-    thread.start()
+    try:
+        server.server_bind()
+    except socket.error:
+        pass # server already running
+    else:
+        server.server_activate()
+        thread = threading.Thread(target=server.serve_forever, args=())
+        thread.daemon = True # daemonize thread so responds to ctrl-c
+        thread.start()
 
 
 
@@ -181,10 +185,12 @@ def evaluate_model(browser, wrapper, wrapper_model, test_cases):
     for input_value, expected_output in test_cases:
         if not browser.running:
             break
+        browser.view.page().networkAccessManager().setCookieJar(QNetworkCookieJar())
         browser.stats.start(wrapper.website, 'Testing')
         wrapper_model.execute(browser, input_value)
+        browser.wait_quiet()
         browser.stats.stop()
-        content = browser.current_text()
+        content = browser.current_html()
         if model.content_matches(browser.current_url(), content, expected_output):
             browser.add_status('Found test data: {}'.format(summarize_list(expected_output)))
             num_passed += 1

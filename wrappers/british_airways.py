@@ -17,6 +17,6 @@ class Wrapper:
     def run(self, browser, input_value):
         # need to clear cookies 
         browser.get(self.website)
-        browser.click('div#accept_ba_cookies')
+        browser.click('div#accept_ba_cookies a', True)
         browser.keys('input#planTripFlightDestination', input_value)
-        browser.click('input#planTripFlightDestination')
+        browser.click('input#planTripFlightDestination', False)

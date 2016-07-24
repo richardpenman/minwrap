@@ -13,10 +13,10 @@ class Wrapper:
         self.category = 'car dealer'
         self.http_method = 'GET'
         self.response_format = 'JSON'
-        self.notes = 'Website was restructured after initial wrapper and new version combines coordinates at same key'
+        self.notes = 'Website was restructured after initial wrapper and new version combines coordinates at same key, so fails to abstract'
         self.enabled = False
 
     def run(self, browser, input_value):
         browser.get(self.website)
-        browser.keys('input#search-loc-input', input_value)
-        browser.click('form#form_search_dealer input[type="submit"]')
+        print browser.keys('input#search-loc-input', input_value)
+        print browser.click('form#form_search_dealer input[type="submit"]')

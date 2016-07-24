@@ -18,9 +18,11 @@ class Wrapper:
     def run(self, browser, input_value):
         browser.get(self.website)
         # XXX input not visible
-        browser.keys('input#ml-searchboxinput', input_value)
+        print browser.keys('input#ml-searchboxinput', input_value, True)
+        print browser.keys('div#gs_lc50', input_value, True)
         print browser.attr('input#ml-searchboxinput', 'value')
         #print browser.click('div.ml-searchbox-directions-button-filler', True)
+        print browser.click('button.searchbox-searchbutton', True)
         browser.wait_load('h3.widget-pane-section-result-title span')
         es = browser.find('h3.widget-pane-section-result-title span')
         vs = [e.toPlainText() for e in es]

@@ -15,6 +15,7 @@ class Wrapper:
         self.notes = 'AJAX callback triggered on KeyUp event. Currently error triggering autocomplete.'
 
     def run(self, browser, input_value):
+        # XXX currently unable to trigger autocomplete
         browser.get(self.website)
-        browser.keys('input#flightmanagerFlightsFormOrigin', input_value)
+        browser.keys('input#flightmanagerFlightsFormOrigin', input_value, True)
         browser.wait_load('div.rw-popup')

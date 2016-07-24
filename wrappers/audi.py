@@ -13,12 +13,9 @@ class Wrapper:
         self.http_method = 'POST'
         self.response_format = 'JSON'
         self.notes = 'All data pre-loaded in single AJAX request'
-        self.counter = 0
 
     def run(self, browser, input_value):
-        #if self.counter == 0:
         browser.get(self.website)
-        self.counter += 1
         browser.keys('input#addressinput', input_value)
         browser.click('span#lnk_search')
         browser.wait(1)

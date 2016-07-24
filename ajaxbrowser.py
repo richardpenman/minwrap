@@ -58,8 +58,8 @@ class AjaxBrowser(QWidget):
     def __getattr__(self, name):
         """Pass unknown methods through to the view
         """
-        def method(*args):
-            return getattr(self.view, name)(*args)
+        def method(*args, **kwargs):
+            return getattr(self.view, name)(*args, **kwargs)
         return method
 
     def find(self, pattern):

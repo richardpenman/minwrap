@@ -11,10 +11,11 @@ from datetime import datetime
 # for using native Python strings
 import sip
 sip.setapi('QString', 2)
-from PyQt4.QtGui import QApplication, QDesktopServices, QImage, QPainter
-from PyQt4.QtCore import QByteArray, QUrl, QTimer, QEventLoop, QIODevice, QObject
+from PyQt4.QtGui import QApplication, QDesktopServices, QImage, QPainter, QMouseEvent, QKeyEvent, QKeySequence
+from PyQt4.QtCore import Qt, QByteArray, QUrl, QTimer, QEventLoop, QIODevice, QObject, QPoint, QEvent
 from PyQt4.QtWebKit import QWebFrame, QWebView, QWebElement, QWebPage, QWebSettings, QWebInspector
 from PyQt4.QtNetwork import QNetworkAccessManager, QNetworkProxy, QNetworkRequest, QNetworkReply, QNetworkDiskCache
+from PyQt4.QtTest import QTest
 
 # default user agent uses a common browser to minimize chance of blocking
 USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36'
@@ -457,7 +458,7 @@ class Browser(QWebView):
         return self.page().mainFrame().evaluateJavaScript(script).toString()
 
 
-    def click(self, pattern='input', full_simulation=False):
+    def click(self, pattern='input', native=False):
         """Click all elements that match the pattern.
 
         Uses standard CSS pattern matching: http://www.w3.org/TR/CSS2/selector.html
@@ -465,26 +466,50 @@ class Browser(QWebView):
         """
         es = self.find(pattern)
         for e in es:
-            if full_simulation:
-                self.click_by_user_event_simulation(e)
+            if native:
+                self.click_by_gui_simulation(e)
+                """
+                # get position of element
+                e_pos = e.geometry().center()
+                # scroll to element position
+                self.page().mainFrame().setScrollPosition(e_pos)  
+                scr_pos = self.page().mainFrame().scrollPosition()
+                point_to_click = e_pos - scr_pos
+                # create click on absolute coordinates
+                press = QMouseEvent(QMouseEvent.MouseButtonPress, point_to_click, Qt.LeftButton, Qt.LeftButton, Qt.NoModifier)
+                release = QMouseEvent(QMouseEvent.MouseButtonRelease, point_to_click, Qt.LeftButton, Qt.LeftButton, Qt.NoModifier)
+                QApplication.postEvent(self, press)  
+                QApplication.postEvent(self, release)
+                """
             else:
-                e.evaluateJavaScript("var evObj = document.createEvent('MouseEvents'); evObj.initEvent('click', true, true); this.dispatchEvent(evObj);")
+                self.click_by_user_event_simulation(e)
         return len(es)
 
 
-    def keys(self, pattern, text):
+    def keys(self, pattern, text, native=False, blur=False):
         """Simulate typing by focusing on elements that match the pattern and triggering key events.
+        If native is True then will use GUI key event simulation, else JavaScript.
+        If blur is True then will blur focus at the end of typing.
         Returns the number of elements matched.
         """
         es = self.find(pattern)
         for e in es:
             e.evaluateJavaScript("this.focus()")
-        self.fill(pattern, text)
-        for e in es:
-            for event_type in ('keydown', 'keyup', 'keypress'):#, 'change'):
-                e.evaluateJavaScript("var evObj = document.createEvent('Event'); evObj.initEvent('{}', true, true); this.dispatchEvent(evObj);".format(event_type))
-            #e.evaluateJavaScript("this.blur()")
+            if native:
+                for c in text:
+                    key = QKeySequence(c)[0]
+                    press = QKeyEvent(QEvent.KeyPress, key, Qt.NoModifier)
+                    release = QKeyEvent(QEvent.KeyRelease, key, Qt.NoModifier)
+                    QApplication.postEvent(self, press)  
+                    QApplication.postEvent(self, release)
+            else:
+                self.fill(pattern, text, es=[e])
+                for event_type in ('keydown', 'keyup', 'keypress'):#, 'change'):
+                    e.evaluateJavaScript("var evObj = document.createEvent('Event'); evObj.initEvent('{}', true, true); this.dispatchEvent(evObj);".format(event_type))
+            if blur:
+                e.evaluateJavaScript("this.blur()")
         return len(es)
+
 
 
     def attr(self, pattern, name, value=None):
@@ -500,13 +525,13 @@ class Browser(QWebView):
             return len(es)
 
 
-    def fill(self, pattern, value):
+    def fill(self, pattern, value, es=None):
         """Set text of the matching form elements to value, and return the number of elements matched.
         """
-        es = self.find(pattern)
+        es = es or self.find(pattern)
         for e in es:
             tag = str(e.tagName()).lower()
-            if tag == 'input':
+            if tag == 'input' or tag == "select":
                 e.evaluateJavaScript('this.value = "{}"'.format(value))
                 e.setAttribute('value', value)
             else:
@@ -581,6 +606,91 @@ class Browser(QWebView):
         self.trigger_js_event(element, "mousemove");
         self.trigger_js_event(element, "mouseout");
         self.trigger_js_event(element, "blur");         # TODO: Might need a 'noblur' option?
+    
+    def click_by_gui_simulation(self, element):
+        """Uses Qt GUI-level events to simulate a full user click.
+        
+        Takes a QWebElement as input.
+        
+        Implementation taken from Artemis:
+        https://github.com/cs-au-dk/Artemis/blob/720f051c4afb4cd69e560f8658ebe29465c59362/artemis-code/src/runtime/input/clicksimulator.cpp#L73
+        
+        Method:
+            * Find coordinates of the centre of the element.
+            * Scroll viewport to show element.
+            * Generate a GUI click at those coordinates.
+        
+        N.B. This will be different from click(..., full_simulation=True) in cases where the target element is
+        obscured. In these cases the click will go at the centre coordinates of the taregt element, whether that means
+        we click the target or the obscuring element.
+        """
+        
+        verbose = False
+        
+        # We can avoid pulling the position from JavaScript (as Artemis needs to) because we allow the browser to process events all the time, so it should respond to position updates OK.
+        targetCoordsInPage = element.geometry().center()
+        targetCoords = QPoint(targetCoordsInPage.x() - self.page().mainFrame().scrollBarValue(Qt.Horizontal),
+                              targetCoordsInPage.y() - self.page().mainFrame().scrollBarValue(Qt.Vertical))
+        viewportSize = self.page().viewportSize()
+        
+        if verbose:
+            print "click_by_gui_simulation: Clicking viewport coordinates ({}, {})".format(targetCoords.x(), targetCoords.y())
+            print "click_by_gui_simulation:", element.toOuterXml()
+            print "click_by_gui_simulation: Dimensions of web view are X: {} Y: {}".format(viewportSize.width(), viewportSize.height())
+        
+        if ((viewportSize.width() + self.page().mainFrame().scrollBarValue(Qt.Horizontal)) < targetCoords.x() or
+            self.page().mainFrame().scrollBarValue(Qt.Horizontal) > targetCoords.x() or
+            (viewportSize.height() + self.page().mainFrame().scrollBarValue(Qt.Vertical)) < targetCoords.y() or
+            self.page().mainFrame().scrollBarValue(Qt.Vertical) > targetCoords.y() ):
+            
+            if verbose:
+                print "click_by_gui_simulation: Target outside viewport, repositioning"
+            
+            xScroll = min(
+                self.page().mainFrame().contentsSize().width() - viewportSize.width(), # Scroll to the far right
+                max(
+                    0, # Don't scroll / Scroll to the far left
+                    targetCoords.x() - (viewportSize.width() / 2) # Put the target in the middle
+                )
+            )
+            
+            self.page().mainFrame().setScrollBarValue(Qt.Horizontal, xScroll)
+            
+            yScroll = min(
+                self.page().mainFrame().contentsSize().height() - viewportSize.height(), # Scroll to the bottom
+                max(
+                    0, # Don't scroll / Scroll to the top
+                    targetCoords.y() - (viewportSize.height() / 2)
+                )
+            )
+            
+            self.page().mainFrame().setScrollBarValue(Qt.Vertical, yScroll)
+            
+            targetCoords = QPoint(targetCoords.x() - xScroll, targetCoords.y() - yScroll);
+            
+            if verbose:
+                print "click_by_gui_simulation: Changed coordinates to ({}, {})".format(targetCoords.x(), targetCoords.y())
+            
+        
+        #element.setFocus(); # This is already implied by the browser handling the click.
+
+        # Click the target element's coordinates.
+        
+        mouseButtonPress = QMouseEvent(QEvent.MouseButtonPress, targetCoords, Qt.LeftButton, Qt.LeftButton, Qt.NoModifier)
+        QApplication.sendEvent(self.page(), mouseButtonPress)
+
+        mouseButtonRelease = QMouseEvent(QEvent.MouseButtonRelease, targetCoords, Qt.LeftButton, Qt.LeftButton, Qt.NoModifier)
+        QApplication.sendEvent(self.page(), mouseButtonRelease);  
+        
+    
+    def click_by_gui_simulation_via_selector(self, selector):
+        """A wrapper around click_by_gui_simulation() to match the behaviour of click().
+        
+        Takes a CSS selectr as input.
+        """
+        for x in self.find(selector):
+            self.click_by_gui_simulation(x)
+    
 
 
 
