@@ -21,33 +21,55 @@ class AjaxBrowser(QWidget):
         gui: whether to show webkit window or run headless
         """
         super(AjaxBrowser, self).__init__()
-        self.view = webkit.Browser(**argv)
-        self.view.page().mainFrame().loadFinished.connect(self._load_finish)
-        self.view.page().networkAccessManager().finished.connect(self.finished)
-
+        self.argv = argv
+        self.stats = stats.RenderStats()
         # use grid layout to hold widgets
         self.grid = QVBoxLayout()
         self.url_input = UrlInput(self.view)
         self.grid.addWidget(self.url_input)
-        self.grid.addWidget(self.view)
+        self.view = None
         # create status box
         self.status_table = StatusTable()
         self.grid.addWidget(self.status_table)
         # create results table
         self.records_table = ResultsTable()
         self.grid.addWidget(self.records_table)
-        # set the grid
         self.setLayout(self.grid)
-        self.add_shortcuts()
+
+        # Define keyboard shortcuts for convenient interaction
+        QShortcut(QKeySequence.Close, self, self.close)
+        QShortcut(QKeySequence.Quit, self, self.close)
+        QShortcut(QKeySequence(Qt.CTRL + Qt.Key_F), self, self.fullscreen)
+
         if gui:
-            self.show()
+            self.showMaximized()
             self.raise_() # give focus to this browser window
+
+
+    def new_wrapper(self):
         # transitions found so far
         self.transitions = []
         # models of each step
         self.models = []
-        self.stats = stats.RenderStats()
         self.running = True
+
+    
+    def new_execution(self):
+        #self.url_input.clear()
+        self.records_table.clear()
+        if self.view is not None:
+            self.grid.removeWidget(self.view)
+            self.view.hide()
+            self.view.page().networkAccessManager().shutdown()
+            del self.view
+        self.view = webkit.Browser(**self.argv)
+        self.view.page().mainFrame().loadFinished.connect(self._load_finished)
+        self.view.page().networkAccessManager().finished.connect(self.finished)
+        self.grid.insertWidget(1, self.view)
+        QShortcut(QKeySequence.Back, self, self.view.back)
+        QShortcut(QKeySequence.Forward, self, self.view.forward)
+        QShortcut(QKeySequence.Save, self, self.view.save)
+        QShortcut(QKeySequence.New, self, self.view.home)
 
 
     def __del__(self):
@@ -67,7 +89,7 @@ class AjaxBrowser(QWidget):
         return self.view.find(pattern)
 
 
-    def _load_finish(self, ok):
+    def _load_finished(self, ok):
         """Finished loading a page so store the initial state
         """
         if ok:
@@ -81,15 +103,15 @@ class AjaxBrowser(QWidget):
     def finished(self, reply):
         """Override the reply finished signal to check the result of each request
         """
+        common.logger.debug('Response: {} {}'.format(reply.url().toString(), reply.data))
         if not reply.content:
             return # no response so reply is not of interest
-
         self.stats.add_response(reply.content)
+
         reply.content_type = reply.header(QNetworkRequest.ContentTypeHeader).toString().lower()
         if re.match('(image|audio|video|model|message)/', reply.content_type) or reply.content_type == 'text/css':
             pass # ignore irrelevant content types such as media and CSS
         else:
-            common.logger.debug('Response: {} {}'.format(reply.url().toString(), reply.data))
             # have found a response that can potentially be parsed for useful content
             content = common.to_unicode(str(reply.content))
             if re.match('(application|text)/', reply.content_type):
@@ -99,17 +121,6 @@ class AjaxBrowser(QWidget):
             # save for checking later once interface has been updated
             self.transitions.append(transition.Transition(reply, js))
 
-
-    def add_shortcuts(self):
-        """Define keyboard shortcuts for convenient interaction
-        """
-        QShortcut(QKeySequence.Close, self, self.close)
-        QShortcut(QKeySequence.Quit, self, self.close)
-        QShortcut(QKeySequence.Back, self, self.view.back)
-        QShortcut(QKeySequence.Forward, self, self.view.forward)
-        QShortcut(QKeySequence.Save, self, self.view.save)
-        QShortcut(QKeySequence.New, self, self.view.home)
-        QShortcut(QKeySequence(Qt.CTRL + Qt.Key_F), self, self.fullscreen)
 
 
     def fullscreen(self):
@@ -138,13 +149,6 @@ class AjaxBrowser(QWidget):
         """Set address of the URL text field
         """
         self.url_input.setText(url)
-
-
-    def clear(self):
-        """Clear the outputs
-        """
-        self.status_table.clear()
-        self.records_table.clear()
 
 
     def closeEvent(self, event):

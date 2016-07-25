@@ -11,6 +11,7 @@ class Wrapper:
         self.http_method = 'POST'
         self.response_format = 'JSON'
         self.notes = 'Uses JSON for payload'
+        self.enabled = False
 
     def run(self, browser, input_value):
         # XXX unable to submit form

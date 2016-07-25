@@ -11,7 +11,7 @@ class Wrapper:
         self.http_method = 'GET'
         self.response_format = 'XML'
         self.notes = 'Geocodes the location but then rounds the latitude/longitude before querying API'
-        self.enabled = False
+        #self.enabled = False
 
     def run(self, browser, input_value):
         browser.get(self.website)

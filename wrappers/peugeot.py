@@ -14,7 +14,7 @@ class Wrapper:
         self.http_method = 'GET'
         self.response_format = 'JSON'
         self.notes = 'Website was restructured after initial wrapper and new version combines coordinates at same key, so fails to abstract'
-        self.enabled = False
+        #self.enabled = False
 
     def run(self, browser, input_value):
         browser.get(self.website)

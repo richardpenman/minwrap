@@ -50,12 +50,11 @@ def main():
         start_local_server(args.port)
         # execute selected wrappers
         load_media = True
+        browser = ajaxbrowser.AjaxBrowser(app=app, gui=True, use_cache=False, load_images=load_media, load_java=load_media, load_plugins=load_media, delay=0)
         for wrapper_name in selected_wrapper_names:
-            browser = ajaxbrowser.AjaxBrowser(app=app, gui=True, use_cache=False, load_images=load_media, load_java=load_media, load_plugins=load_media, delay=0)
             wrapper = wrappertable.load_wrapper(wrapper_name)
             try:
                 if args.all_wrappers and not wrapper.enabled:
-                    #browser.stats.writer.writerow(['Broken', wrapper.website])
                     continue
             except AttributeError:
                 pass
@@ -98,6 +97,7 @@ def run_wrapper(browser, wrapper):
     """
     # create a browser instance
     QApplication.setOverrideCursor(Qt.WaitCursor)
+    browser.new_wrapper()
     training_cases = wrapper.data[:]
     num_cases = len(training_cases)
     min_cases = 2
@@ -110,7 +110,8 @@ def run_wrapper(browser, wrapper):
     transition_offset = 0 # how many transitions have processed
     while browser.running and training_cases:
         # clear browser cookies
-        browser.view.page().networkAccessManager().setCookieJar(QNetworkCookieJar())
+        browser.new_execution()
+        #view.page().networkAccessManager().setCookieJar(QNetworkCookieJar())
         browser.stats.start(wrapper.website, 'Training')
         input_value, expected_output = training_cases.pop(0)
         scraped_data = wrapper.run(browser, input_value)
@@ -181,11 +182,13 @@ def group_transitions(transitions, abstract_path):
 def evaluate_model(browser, wrapper, wrapper_model, test_cases):
     """Run the model and check how many of test cases were successfully parsed
     """
+    browser.new_wrapper()
     num_passed = 0
     for input_value, expected_output in test_cases:
         if not browser.running:
             break
-        browser.view.page().networkAccessManager().setCookieJar(QNetworkCookieJar())
+        browser.new_execution()
+        #browser.view.page().networkAccessManager().setCookieJar(QNetworkCookieJar())
         browser.stats.start(wrapper.website, 'Testing')
         wrapper_model.execute(browser, input_value)
         browser.wait_quiet()

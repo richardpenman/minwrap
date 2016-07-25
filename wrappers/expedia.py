@@ -16,6 +16,7 @@ class Wrapper:
         self.http_method = 'GET'
         self.response_format = 'JSON'
         self.notes = 'Uses dynamic results for expected output. Discovers the correct URLs but unable to abstract IDs (1f91f5fd-e9c1-4d43-9418-d23cd9843fce)'
+        self.enabled = False
 
     def run(self, browser, input_value):
         # XXX executes but model fails because uses session ID
