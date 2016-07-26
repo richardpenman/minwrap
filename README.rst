@@ -50,10 +50,9 @@ Wrappers are classes defined in the *wrappers* directory and are structured like
     class Wrapper:
         def __init__(self):
             self.data = [
-                (input value1, [expected output values1]),
-                (input value2, [expected output values2]),
-                (input value3, [expected output values3]),
-                (input value4, [expected output values4]),
+                ({param1: input1, param2: input2, ...}, [expected output values1]),
+                ({'city': 'London', 'date': '1/1/2016'}, [expected output values2]),
+                ...
             ]
             self.website = 'http://...'
             self.category = 'autocomplete/car dealer/etc'
@@ -61,14 +60,14 @@ Wrappers are classes defined in the *wrappers* directory and are structured like
             self.response_format = 'XML/JSON/JSONP/HTML/JavaScript/etc'
             self.notes = '...'
 
-        def run(self, browser, input_value):
+        def run(self, browser, inputs):
             browser.load(self.website)
             # interact with browser to perform execution for this input value
 
 
 A wrapper defines a class called Wrapper with several required attributes:
 
-- data: a list of tuples defining the input and expected output strings ('London': ['...', '...']). A minimum of 2 cases are needed, though the more the better.
+- data: a list of tuples defining the input parameters and expected output strings ({'city': 'London'}, ['...', '...']). A minimum of 2 cases are needed, though the more the better.
 - run(): this method performs the browser execution for the given input value. It can optionally return the expected output values if this is not known until run time.
 - website: the website this wrapper is for
 
@@ -88,20 +87,23 @@ Here is an implementation for Lufthunsa from *wrappers/lufthunsa.py*:
     class Wrapper:
         def __init__(self):
             self.data = [
-                ('lon', ['United Kingdom', 'London, all airports', 'London City Airport', 'London Gatwick', 'London Heathrow', 'London-Stansted', 'Southampton', 'London, Canada', 'Sarnia', 'Windsor', 'Londrina', 'Long Beach', 'Burbank', 'Oxnard/Ventura', 'Norway', 'Longyearbyen']),
-                ('par', ['France', 'Paris - Charles De Gaulle', 'Parkersburg/Marietta', 'Clarksburg']),
-                ('bri', ['Brindisi', 'Brisbane', 'bds', 'bne', 'Brisbane area airports', 'Gold Coast, Queensland', 'Bristol', 'brs', 'Bristol - Tennessee', 'tri', 'Britton', 'Britton area airports']),
-                ('new', ['New Bern','ewn','New Orleans','msy','New York, all airports',"nyc","New York area airports","New York - JFK International, NY","jfk","New York - La Guardia","lga","New York - Newark International, NJ","ewr","Allentown/Bethl","abe"]),
+                ({'prefix': 'lon'}, ['United Kingdom', 'London, all airports', 'London City Airport', 'London Gatwick', 'London Heathrow', 'London-Stansted', 'Southampton', 'London, Canada', 'Sarnia', 'Windsor', 'Londrina', 'Long Beach', 'Burbank', 'Oxnard/Ventura', 'Norway', 'Longyearbyen']),
+                ({'prefix': 'par'}, ['France', 'Paris - Charles De Gaulle', 'Parkersburg/Marietta', 'Clarksburg']),
+                ({'prefix': 'bri'}, ['Brindisi', 'Brisbane', 'bds', 'bne', 'Brisbane area airports', 'Gold Coast, Queensland', 'Bristol', 'brs', 'Bristol - Tennessee', 'tri', 'Britton', 'Britton area airports']),
+                ({'prefix': 'new'}, ['New Bern','ewn','New Orleans','msy','New York, all airports',"nyc","New York area airports","New York - JFK International, NY","jfk","New York - La Guardia","lga","New York - Newark International, NJ","ewr","Allentown/Bethl","abe"]),
             ]
             self.website = 'http://www.lufthansa.com/uk/en/Homepage'
-            self.category = 'autocomplete'
+            self.category = 'flight'
             self.http_method = 'POST'
             self.response_format = 'JSON'
-            self.notes = 'AJAX callback triggered on KeyUp event'
+            self.notes = 'AJAX callback triggered on KeyUp event. Currently error triggering autocomplete.'
+            self.enabled = False
 
-        def run(self, browser, input_value):
-            browser.load(self.website)
-            browser.keys('input#flightmanagerFlightsFormOrigin', input_value)
+        def run(self, browser, inputs):
+            # XXX currently unable to trigger autocomplete
+            browser.get(self.website)
+            browser.keys('input#flightmanagerFlightsFormOrigin', inputs['prefix'])
+            browser.keys('input#flightmanagerFlightsFormOrigin', ['DOWN'], True)
             browser.wait_load('div.rw-popup')
 
 
@@ -112,10 +114,10 @@ And here is an implementation for Lexus from *wrappers/lexus.py*:
     class Wrapper:
         def __init__(self):
             self.data = [
-                ('paris', ['58, Boulevard Saint Marcel', '75005', '01 55 43 55 00', '3, rue des Ardennes', '75019', '01 40 03 16 00', '4, avenue de la Grande Armée', '75017', '01 40 55 40 00']),
-                ('toulouse', ['123, Rue Nicolas', 'Vauquelin', '31100', '05 61 61 84 29', '4 rue Pierre-Gilles de Gennes', '64140', '05 59 72 29 00']),
-                ('marseille', ['36 Boulevard Jean Moulin', '13005', '04 91 229 229', 'ZAC Aix La Pioline', 'Les Milles', '13290', '04 42 95 28 78', 'Rue Charles Valente', 'ZAC de la Castelette', 'Montfavet', '84143', '04 90 87 47 00']),
-                ('nice', ['1 AVENUE EUGÈNE DONADEÏ', 'SAINT LAURENT DU VAR', '04 83 32 22 11', '(RÉPARATEUR AGRÉÉ LEXUS) Lexus Monaco', '31-39 avenue Hector Otto', 'Monaco', '98000', '00 377 93 30 10 05']),
+                ({'city': 'paris'}, ['58, Boulevard Saint Marcel', '75005', '01 55 43 55 00', '3, rue des Ardennes', '75019', '01 40 03 16 00', '4, avenue de la Grande Armée', '75017', '01 40 55 40 00']),
+                ({'city': 'toulouse'}, ['123, Rue Nicolas', 'Vauquelin', '31100', '05 61 61 84 29', '4 rue Pierre-Gilles de Gennes', '64140', '05 59 72 29 00']),
+                ({'city': 'marseille'}, ['36 Boulevard Jean Moulin', '13005', '04 91 229 229', 'ZAC Aix La Pioline', 'Les Milles', '13290', '04 42 95 28 78', 'Rue Charles Valente', 'ZAC de la Castelette', 'Montfavet', '84143', '04 90 87 47 00']),
+                ({'city': 'nice'}, ['1 AVENUE EUGÈNE DONADEÏ', 'SAINT LAURENT DU VAR', '04 83 32 22 11', '(RÉPARATEUR AGRÉÉ LEXUS) Lexus Monaco', '31-39 avenue Hector Otto', 'Monaco', '98000', '00 377 93 30 10 05']),
             ]
             self.website = 'http://www.lexus.fr/forms/find-a-retailer'
             self.category = 'car dealer'
@@ -123,13 +125,12 @@ And here is an implementation for Lexus from *wrappers/lexus.py*:
             self.response_format = 'JSON'
             self.notes = 'Uses variables in the URL path and requires a geocoding intermediary step'
 
-        def run(self, browser, input_value):
-            browser.load(self.website)
+        def run(self, browser, inputs):
+            browser.get(self.website)
             browser.click('span[class="icon icon--base icon-close"]') # accept cookies
             browser.wait_load('div.form-control__item__postcode')
-            browser.fill('div.form-control__item__postcode input', input_value)
+            browser.fill('div.form-control__item__postcode input', inputs['city'])
             browser.click('div.form-control__item__postcode button')
-
 
 WebKit
 ======
@@ -138,8 +139,8 @@ The Browser class is a wrapper around WebKit's *QWebView* class for rendering we
 
 - **get(url)**: Load the given URL and waits until loadFinished event called, then returns the loaded content.
 - **js(script)**: Execute this JavaScript script on the currently loaded webpage.
-- **click(pattern)**: Click all elements that match the CSS pattern. Returns number of elements clicked.
-- **keys(pattern, text)**: Simulate typing by focusing on elements that match the CSS pattern and triggering key events. Returns number of elements set.
+- **click(pattern, native=False)**: Click all elements that match the CSS pattern. If native then will try GUI level click. Returns number of elements clicked.
+- **keys(pattern, text, native=False)**: Simulate typing by focusing on elements that match the CSS pattern and triggering key events. If native then will try GUI level typing. Returns number of elements set.
 - **attr(pattern, name, value)**: Set attribute of matching CSS pattern to value. Returns number of elements set.
 - **fill(pattern, value)**: Set text of the form elements that match this CSS pattern to value. Returns number of elements set.
 - **find(pattern)**: Returns the elements matching this CSS pattern.
@@ -209,7 +210,7 @@ Implementation details
 
 #. If a model is successfully built then it is executed over the input values from the wrapper.
 
-   * Here is the model for Dacia that has some POST keys that can be ignored and a location key for the input parameter:
+   * Here is the model for Dacia that has some POST keys that can be ignored and the city input for the location parameter:
 
    .. sourcecode::
 
@@ -228,16 +229,17 @@ Implementation details
             ],
             "override": [
                 {
-                    "dependency": null,
+                    "dependency": 'city',
                     "key": "location",
                     "template": "{}",
                     "type": "POST"
                 }
             ],
-            "url": "http://dacia.at/dealerlocator/search.action"
+            "url": "http://dacia.at/dealerlocator/search.action",
+            "verb": "POST"
         }
 
-   * And this model for the local country website is an example with multiple steps:
+   * And this model for the local country website is an example with multiple steps, where the second step uses the country input in the path:
 
    .. sourcecode::
 
@@ -255,7 +257,7 @@ Implementation details
                         ],
                         "override": [
                             {
-                                "dependency": null,
+                                "dependency": "country",
                                 "key": 5,
                                 "template": "{}.json",
                                 "type": "PATH"
@@ -269,7 +271,8 @@ Implementation details
                     "type": "PATH"
                 }
             ],
-            "url": "http://localhost:8000/examples/country/api/cities/{}"
+            "url": "http://localhost:8000/examples/country/api/cities/{}",
+            "verb": "GET"
         }
 
 #. To evaluate correctness the model is executed over the test data and checked how many execution paths contain the same expected output as defined in the wrapper.

@@ -15,7 +15,6 @@ from PyQt4.QtGui import QApplication, QDesktopServices, QImage, QPainter, QMouse
 from PyQt4.QtCore import Qt, QByteArray, QUrl, QTimer, QEventLoop, QIODevice, QObject, QPoint, QEvent
 from PyQt4.QtWebKit import QWebFrame, QWebView, QWebElement, QWebPage, QWebSettings, QWebInspector
 from PyQt4.QtNetwork import QNetworkAccessManager, QNetworkProxy, QNetworkRequest, QNetworkReply, QNetworkDiskCache
-from PyQt4.QtTest import QTest
 
 # default user agent uses a common browser to minimize chance of blocking
 USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36'
@@ -494,15 +493,19 @@ class Browser(QWebView):
         """
         es = self.find(pattern)
         for e in es:
-            e.evaluateJavaScript("this.focus()")
             if native:
+                key_map = {'\t': Qt.Key_Tab, '\n': Qt.Key_Enter, 'DOWN': Qt.Key_Down, 'UP': Qt.Key_Up}
+                self.click_by_gui_simulation(e)
+                self.wait(0.1)
                 for c in text:
-                    key = QKeySequence(c)[0]
+                    key = key_map.get(c, QKeySequence(c)[0])
                     press = QKeyEvent(QEvent.KeyPress, key, Qt.NoModifier)
                     release = QKeyEvent(QEvent.KeyRelease, key, Qt.NoModifier)
                     QApplication.postEvent(self, press)  
                     QApplication.postEvent(self, release)
             else:
+                e.evaluateJavaScript("this.focus()")
+                #self.click_by_user_event_simulation(e)
                 self.fill(pattern, text, es=[e])
                 for event_type in ('keydown', 'keyup', 'keypress'):#, 'change'):
                     e.evaluateJavaScript("var evObj = document.createEvent('Event'); evObj.initEvent('{}', true, true); this.dispatchEvent(evObj);".format(event_type))

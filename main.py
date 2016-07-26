@@ -68,7 +68,8 @@ def main():
             else:
                 browser.add_status('Failed to train model') 
         common.logger.info('Done')
-        app.exec_() # wait until window closed
+        if browser.running:
+            app.exec_() # wait until window closed
     
 
 
@@ -188,7 +189,6 @@ def evaluate_model(browser, wrapper, wrapper_model, test_cases):
         if not browser.running:
             break
         browser.new_execution()
-        #browser.view.page().networkAccessManager().setCookieJar(QNetworkCookieJar())
         browser.stats.start(wrapper.website, 'Testing')
         wrapper_model.execute(browser, input_value)
         browser.wait_quiet()

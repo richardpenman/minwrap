@@ -22,8 +22,8 @@ def build(browser, transitions, input_values):
         ignored = filter_redundant_params(browser, transitions, diffs)
 
         override = []
-        for param_type, key, examples in diffs:
-            if (param_type, key) not in ignored:
+        for param_type, param_key, examples in diffs:
+            if (param_type, param_key) not in ignored:
                 common.logger.info('Attempting abstraction of: {}'.format(examples))
                 model = abstract(browser, input_values, examples)
                 if model is None:
@@ -36,9 +36,7 @@ def build(browser, transitions, input_values):
                         return # abstraction failed
                 else:
                     template = '{}'
-                if model == input_values:
-                    model = None
-                override.append((param_type, key, template, model))
+                override.append((param_type, param_key, template, model))
         return Model(transitions[0], override, ignored)
 
     else:
@@ -185,17 +183,19 @@ def all_in(l1, l2):
 def abstract(browser, input_values, examples):
     """Attempt abstacting these example
     """
-    # check if examples are in the input values
-    if all_in(examples, input_values):
-        browser.add_status('Abstraction uses input values: {}'.format(input_values))
-        return input_values
+    for input_key in input_values[0].keys():
+        key_values = [input_value[input_key] for input_value in input_values if input_key in input_value]
+        # check if examples are in the input values
+        if all_in(examples, key_values):
+            browser.add_status('Abstraction uses input values: {}'.format(key_values))
+            return input_key
 
-    # check if examples are located at common location in a transition
-    for parent_transitions, selector in find_matching_transitions(browser.transitions, examples):
-        model = build(browser, parent_transitions, input_values)
-        if model is not None:
-            model.selector = selector
-            return model
+        # check if examples are located at common location in a transition
+        for parent_transitions, selector in find_matching_transitions(browser.transitions, examples):
+            model = build(browser, parent_transitions, input_values)
+            if model is not None:
+                model.selector = selector
+                return model
 
 
 
@@ -271,7 +271,7 @@ class Model:
         if self.override:
             output['override'] = []
             for param_type, key, template, parent_model in self.override:
-                parent = None if parent_model is None else parent_model.data()
+                parent = parent_model if isinstance(parent_model, basestring) else parent_model.data()
                 output['override'].append({
                     'type': param_map[param_type], 
                     'key': key, 
@@ -295,15 +295,16 @@ class Model:
         if self.selector is not None:
             output['selector'] = str(self.selector)
         output['headers'] = [(str(key), str(value)) for (key, value) in self.transition.headers if str(key).lower() not in ('content-length', )]
+        output['verb'] = self.transition.verb
         return output
 
 
     def execute(self, browser, input_value):
         override_params = []
         for param_type, key, template, parent_model in self.override:
-            if parent_model is None:
+            if isinstance(parent_model, basestring):
                 # have reached the base case and can use input value
-                value = input_value
+                value = input_value[parent_model]
             else:
                 # recursively execute this dependency model
                 parent_model.execute(browser, input_value)

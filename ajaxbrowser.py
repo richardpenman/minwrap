@@ -63,6 +63,7 @@ class AjaxBrowser(QWidget):
             self.view.page().networkAccessManager().shutdown()
             del self.view
         self.view = webkit.Browser(**self.argv)
+        self.view.page().mainFrame().loadStarted.connect(self._load_started)
         self.view.page().mainFrame().loadFinished.connect(self._load_finished)
         self.view.page().networkAccessManager().finished.connect(self.finished)
         self.grid.insertWidget(1, self.view)
@@ -89,6 +90,12 @@ class AjaxBrowser(QWidget):
         return self.view.find(pattern)
 
 
+    def _load_started(self):
+        pass
+        # XXX how to get URL when start load?
+        #self.update_address(self.current_url())
+    
+    
     def _load_finished(self, ok):
         """Finished loading a page so store the initial state
         """

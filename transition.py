@@ -3,6 +3,7 @@
 
 import numbers
 import common
+from PyQt4.QtNetwork import QNetworkAccessManager
 
 
 class Transition:
@@ -22,6 +23,16 @@ class Transition:
         request = reply.orig_request
         self.headers = [(header, request.rawHeader(header)) for header in request.rawHeaderList()]
         self.content_type = reply.content_type
+        # map of Qt verbs
+        verbs = {
+            QNetworkAccessManager.HeadOperation: 'HEAD',
+            QNetworkAccessManager.GetOperation: 'GET',
+            QNetworkAccessManager.PutOperation: 'PUT',
+            QNetworkAccessManager.PostOperation: 'POST',
+            QNetworkAccessManager.DeleteOperation: 'DELETE',
+            QNetworkAccessManager.CustomOperation: 'CUSTOM',
+        }
+        self.verb = verbs[reply.operation()]
 
 
     def __str__(self):

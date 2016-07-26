@@ -3,10 +3,10 @@
 class Wrapper:
     def __init__(self):
         self.data = [
-            ('supermarket near Oxford', None),
-            ('libraries near Oxford', None),
-            ('parks near Oxford', None),
-            ('colleges near Oxford', None),
+            ({'search': 'supermarket near Oxford'}, None),
+            ({'search': 'libraries near Oxford'}, None),
+            ({'search': 'parks near Oxford'}, None),
+            ({'search': 'colleges near Oxford'}, None),
         ]
         self.website = 'http://maps.google.com'
         self.category = 'maps'
@@ -15,9 +15,10 @@ class Wrapper:
         self.notes = 'Uses dynamic results for expected output. '
         self.enabled = False
 
-    def run(self, browser, input_value):
+    def run(self, browser, inputs):
         browser.get(self.website)
         # XXX input not visible
+        input_value = inputs['search']
         print browser.keys('input#ml-searchboxinput', input_value, True)
         print browser.keys('div#gs_lc50', input_value, True)
         print browser.attr('input#ml-searchboxinput', 'value')
