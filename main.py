@@ -53,6 +53,7 @@ def main():
         browser = ajaxbrowser.AjaxBrowser(app=app, gui=True, use_cache=False, load_images=load_media, load_java=load_media, load_plugins=load_media, delay=0)
         for wrapper_name in selected_wrapper_names:
             wrapper = wrappertable.load_wrapper(wrapper_name)
+            if wrapper is None: continue
             try:
                 if args.all_wrappers and not wrapper.enabled:
                     continue

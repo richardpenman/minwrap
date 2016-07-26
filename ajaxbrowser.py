@@ -164,8 +164,7 @@ class AjaxBrowser(QWidget):
         self.view.app.quit()
         self.running = False
         self.page().networkAccessManager().shutdown()
-
-
+    
 
 class UrlInput(QLineEdit):
     """Address URL input widget
