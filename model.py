@@ -174,8 +174,9 @@ def encode_data(items, content_type):
 def all_in(l1, l2):
     """Returns True if all values in l1 are found in l2
     """
+    l2 = [v.lower() for v in l2]
     for v in l1:
-        if v not in l2:
+        if v.lower() not in l2:
             return False
     return True
 

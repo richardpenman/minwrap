@@ -11,17 +11,10 @@ class Wrapper:
         self.http_method = 'POST'
         self.response_format = 'JSON'
         self.notes = 'Uses JSON for payload'
-        self.enabled = False
 
     def run(self, browser, inputs):
-        # XXX unable to submit form
         browser.get(self.website)
+        browser.wait_load('div.main-search')
+        browser.keys('input[name="bylocation"]', inputs['city'] + '\n', True)
+        #print browser.click('div.main-search > button')
         browser.wait_quiet()
-        print browser.keys('input[name="bylocation"]', inputs['city'])
-        print browser.click('div.main-search > button', True)
-        #for form in browser.find('form#aspnetForm'):
-        #    print form
-        #    form.evaluateJavaScript('this.submit();')
-        browser.wait(5)
-        browser.wait_quiet()
-        browser.wait_steady()

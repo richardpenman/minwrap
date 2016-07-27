@@ -18,10 +18,10 @@ class Wrapper:
     def run(self, browser, inputs):
         browser.get(self.website)
         browser.wait_steady()
-        print browser.keys('input#flights-search-from', 'London', True, True)
+        print browser.keys('input#flights-search-from', 'London')#, True, True)
         # XXX set input but still invisible
         #print browser.attr('input#flights-search-from', 'value')
-        print browser.keys('input#flights-search-to', inputs['city'], True, True)
+        print browser.keys('input#flights-search-to', inputs['city'])#, True, True)
         #for e in browser.find('input#flights-search-to'):
         #    e.evaluateJavaScript('this.blur();')
         #browser.js('document.getElementById("flights-search-from").value = "{}";'.format(input_value))

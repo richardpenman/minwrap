@@ -25,9 +25,9 @@ class AjaxBrowser(QWidget):
         self.stats = stats.RenderStats()
         # use grid layout to hold widgets
         self.grid = QVBoxLayout()
-        self.url_input = UrlInput(self.view)
+        self.url_input = UrlInput(self.load_url)
         self.grid.addWidget(self.url_input)
-        self.view = None
+        self._view = None
         # create status box
         self.status_table = StatusTable()
         self.grid.addWidget(self.status_table)
@@ -46,6 +46,19 @@ class AjaxBrowser(QWidget):
             self.raise_() # give focus to this browser window
 
 
+    def __del__(self):
+        # not sure why, but to avoid segmentation fault need to release the QWebPage instance manually
+        self._view.setPage(None)
+
+
+    def __getattr__(self, name):
+        """Pass unknown methods through to the view
+        """
+        def method(*args, **kwargs):
+            return getattr(self._view, name)(*args, **kwargs)
+        return method
+
+
     def new_wrapper(self):
         # transitions found so far
         self.transitions = []
@@ -57,43 +70,30 @@ class AjaxBrowser(QWidget):
     def new_execution(self):
         #self.url_input.clear()
         self.records_table.clear()
-        if self.view is not None:
-            self.grid.removeWidget(self.view)
-            self.view.hide()
-            self.view.page().networkAccessManager().shutdown()
-            del self.view
-        self.view = webkit.Browser(**self.argv)
-        self.view.page().mainFrame().loadStarted.connect(self._load_started)
-        self.view.page().mainFrame().loadFinished.connect(self._load_finished)
-        self.view.page().networkAccessManager().finished.connect(self.finished)
-        self.grid.insertWidget(1, self.view)
-        QShortcut(QKeySequence.Back, self, self.view.back)
-        QShortcut(QKeySequence.Forward, self, self.view.forward)
-        QShortcut(QKeySequence.Save, self, self.view.save)
-        QShortcut(QKeySequence.New, self, self.view.home)
+        if self._view is not None:
+            self.grid.removeWidget(self._view)
+            self._view.hide()
+            self._view.page().networkAccessManager().shutdown()
+            del self._view
+        self._view = webkit.Browser(**self.argv)
+        self._view.page().mainFrame().loadStarted.connect(self._load_started)
+        self._view.page().mainFrame().loadFinished.connect(self._load_finished)
+        self._view.page().networkAccessManager().finished.connect(self.finished)
+        self.grid.insertWidget(1, self._view)
+        QShortcut(QKeySequence.Back, self, self._view.back)
+        QShortcut(QKeySequence.Forward, self, self._view.forward)
+        QShortcut(QKeySequence.Save, self, self._view.save)
+        QShortcut(QKeySequence.New, self, self._view.home)
 
-
-    def __del__(self):
-        # not sure why, but to avoid segmentation fault need to release the QWebPage instance manually
-        self.view.setPage(None)
-
-
-    def __getattr__(self, name):
-        """Pass unknown methods through to the view
-        """
-        def method(*args, **kwargs):
-            return getattr(self.view, name)(*args, **kwargs)
-        return method
 
     def find(self, pattern):
         # need to override builtin QWebkit function
-        return self.view.find(pattern)
+        return self._view.find(pattern)
 
 
     def _load_started(self):
-        pass
         # XXX how to get URL when start load?
-        #self.update_address(self.current_url())
+        pass #self.update_address(self.current_url())
     
     
     def _load_finished(self, ok):
@@ -103,7 +103,7 @@ class AjaxBrowser(QWidget):
             # a webpage has loaded successfully
             common.logger.info('loaded: {} {}'.format(ok, self.current_url()))
             self.update_address(self.current_url())
-            #print 'Bytes:', self.current_url(), self.view.page().totalBytes(), self.view.page().bytesReceived()
+            #print 'Bytes:', self.current_url(), self._view.page().totalBytes(), self._view.page().bytesReceived()
             self.stats.rendered()
 
 
@@ -158,20 +158,27 @@ class AjaxBrowser(QWidget):
         self.url_input.setText(url)
 
 
+    def load_url(self, url):
+        """Load view with given URL
+        """
+        self._view.get(url)
+
+
     def closeEvent(self, event):
         """Catch the close window event and stop the script
         """
-        self.view.app.quit()
+        self._view.app.quit()
         self.running = False
         self.page().networkAccessManager().shutdown()
     
 
 class UrlInput(QLineEdit):
     """Address URL input widget
+    Callback takes a QUrl of the url to load
     """
-    def __init__(self, view):
+    def __init__(self, callback):
         super(UrlInput, self).__init__()
-        self.view = view
+        self.cb = callback
         # add event listener on "enter" pressed
         self.returnPressed.connect(self._return_pressed)
 
@@ -179,7 +186,7 @@ class UrlInput(QLineEdit):
     def _return_pressed(self):
         url = QUrl(self.text())
         # load url into browser frame
-        self.view.get(url)
+        self.cb(url)
 
 
 
