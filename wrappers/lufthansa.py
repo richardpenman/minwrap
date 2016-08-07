@@ -19,5 +19,5 @@ class Wrapper:
         # XXX currently unable to trigger autocomplete
         browser.get(self.website)
         browser.keys('input#flightmanagerFlightsFormOrigin', inputs['prefix'])
-        browser.keys('input#flightmanagerFlightsFormOrigin', ['DOWN'], True)
+        #browser.keys('input#flightmanagerFlightsFormOrigin', ['DOWN'], True)
         browser.wait_load('div.rw-popup')

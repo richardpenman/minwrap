@@ -504,10 +504,10 @@ class Browser(QWebView):
                     QApplication.postEvent(self, press)  
                     QApplication.postEvent(self, release)
             else:
-                e.evaluateJavaScript("this.focus()")
+                #e.evaluateJavaScript("this.focus()")
                 #self.click_by_user_event_simulation(e)
                 self.fill(pattern, text, es=[e])
-                for event_type in ('keydown', 'keyup', 'keypress'):#, 'change'):
+                for event_type in ('focus', 'keydown', 'change', 'keyup', 'keypress'):
                     e.evaluateJavaScript("var evObj = document.createEvent('Event'); evObj.initEvent('{}', true, true); this.dispatchEvent(evObj);".format(event_type))
             if blur:
                 e.evaluateJavaScript("this.blur()")

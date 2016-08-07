@@ -44,10 +44,6 @@ def build(browser, transitions, input_values):
         unique_outputs = set([id(t.output) for t in transitions if t.output])
         if len(unique_outputs) > 1:
             common.logger.debug('Single request matches multiple outputs: {}'.format(str(transitions[0])))
-            #if not self.used:
-            #    self.used = True
-            #    browser.models.append(self)
-            #yield browser.view.get(**gen_request())
             return Model(transitions[0])
 
 
@@ -64,7 +60,7 @@ def filter_redundant_params(browser, transitions, diffs):
             for param_type, key, _ in diffs:
                 ignore = param_type, key
                 if param_type in (GET, POST) and ignore not in ignored:
-                    test_html = browser.view.get(**gen_request(transition, ignored=ignored + [ignore]))
+                    test_html = browser.get(**gen_request(transition, ignored=ignored + [ignore]))
                     if content_matches(browser.current_url(), test_html, transition.output):
                         common.logger.info('Can ignore key: {}'.format(ignore))
                         ignored.append(ignore)
@@ -270,14 +266,15 @@ class Model:
         get_keys, post_keys = set(), set()
         output = {}
         if self.override:
-            output['override'] = []
+            output['variables'] = []
             for param_type, key, template, parent_model in self.override:
                 parent = parent_model if isinstance(parent_model, basestring) else parent_model.data()
-                output['override'].append({
-                    'type': param_map[param_type], 
+                output['variables'].append({
                     'key': key, 
+                    'origin': param_map[param_type], 
+                    'source': parent,
                     'template': template, 
-                    'dependency': parent})
+                })
                 if param_type == PATH:
                     path_dict[key] = empty_template
                 elif param_type == GET:
@@ -288,11 +285,11 @@ class Model:
         qs_items = [(key, empty_template if key in get_keys else value) for (key, value) in url.queryItems() if (GET, key) not in self.ignored]
         url.setEncodedQueryItems(qs_items)
         output['url'] = url.toString()
-        data = [(key, empty_template if key in post_keys else value) for (key, value) in self.transition.data if (POST, key) not in self.ignored]
+        data = dict([(key, empty_template if key in post_keys else value) for (key, value) in self.transition.data if (POST, key) not in self.ignored])
         if data:
             output['data'] = data
-        if self.ignored:
-            output['ignored'] = [(param_map[param_type], value) for (param_type, value) in self.ignored]
+        #if self.ignored:
+        #    output['ignored'] = [(param_map[param_type], value) for (param_type, value) in self.ignored]
         if self.selector is not None:
             output['selector'] = str(self.selector)
         output['headers'] = [(str(key), str(value)) for (key, value) in self.transition.headers if str(key).lower() not in ('content-length', )]
@@ -317,5 +314,4 @@ class Model:
                     continue
             override_params.append((param_type, key, template.format(value)))
         download_params = gen_request(self.transition, override_params=override_params, ignored=self.ignored)
-        browser.view.get(**download_params)
-        
+        browser.get(**download_params)

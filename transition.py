@@ -78,23 +78,30 @@ def generate_selector(data, goal, parents=None):
             for result in generate_selector(record, goal, parents[:] + [index]):
                 yield result
     elif data == goal or unicode(data) == goal:
-        yield JsonSelector(parents)
+        yield JsonPath(parents)
 
 
 
-class JsonSelector:
+class JsonPath:
     """Wrapper to iterate through a dictionary given a list of indices / keys
 
-    >>> jp = JsonSelector([0, 'person'])
+    >>> jp = JsonPath([0, 'person'])
+    >>> str(jp)
+    "[0]['person']"
     >>> jp([{'person': 'richard'}, {'person': 'tim'}])
     'richard'
     >>> jp([])
+    >>> jp = JsonPath(['universities', 0, 'name'])
+    >>> str(jp)
+    "['universities'][0]['name']"
+    >>> jp({'universities': [{'name': 'Oxford', 'year': 1096}, {'name': 'Cambridge', 'year': 1209}]})
+    'Oxford'
     """
     def __init__(self, steps):
         self.steps = tuple(steps)
 
     def __str__(self):
-        return str(self.steps)
+        return ''.join('[{}]'.format(repr(step)) for step in self.steps)
 
     def __eq__(self, other):
         if type(other) is type(self):

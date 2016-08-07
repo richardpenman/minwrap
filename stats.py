@@ -12,22 +12,23 @@ class RenderStats:
         else:
             # create new stats file with header
             self.writer = csv.writer(open('output/stats.csv', 'w'))
-            self.writer.writerow(['Status', 'Website', 'Time (sec)', 'Bandwidth (bytes)', 'Num requests'])#, 'Num renders'])
+            self.writer.writerow(['Status', 'Wrapper', 'Website', 'Time (sec)', 'Bandwidth (bytes)', 'Num requests'])#, 'Num renders'])
         self.reset()
     
     def reset(self):
-        self.website = self.status = self.start_time = None
+        self.wrapper = self.status = self.start_time = None
         self.response_size = self.num_requests = self.num_renders = 0
 
-    def start(self, website, status):
+    def start(self, wrapper, status):
         self.reset()
-        self.website, self.status = website, status
+        self.wrapper, self.status = wrapper, status
         self.start_time = time()
 
     def stop(self):
         if self.status != None:
             total_time = time() - self.start_time
-            row = self.status, self.website, total_time, self.response_size, self.num_requests#, self.num_renders
+            name = self.wrapper.__name__ if hasattr(self.wrapper, '__name__') else self.wrapper.__module__
+            row = self.status, name, self.wrapper.website, '{:.2f}'.format(total_time), self.response_size, self.num_requests#, self.num_renders
             self.writer.writerow(row)
             self.reset()
 

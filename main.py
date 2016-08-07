@@ -113,8 +113,7 @@ def run_wrapper(browser, wrapper):
     while browser.running and training_cases:
         # clear browser cookies
         browser.new_execution()
-        #view.page().networkAccessManager().setCookieJar(QNetworkCookieJar())
-        browser.stats.start(wrapper.website, 'Training')
+        browser.stats.start(wrapper, 'Training')
         input_value, expected_output = training_cases.pop(0)
         scraped_data = wrapper.run(browser, input_value)
         browser.wait_quiet()
@@ -190,7 +189,7 @@ def evaluate_model(browser, wrapper, wrapper_model, test_cases):
         if not browser.running:
             break
         browser.new_execution()
-        browser.stats.start(wrapper.website, 'Testing')
+        browser.stats.start(wrapper, 'Testing')
         wrapper_model.execute(browser, input_value)
         browser.wait_quiet()
         browser.stats.stop()
