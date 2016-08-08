@@ -35,6 +35,10 @@ class AjaxBrowser(QWidget):
         self.records_table = ResultsTable()
         self.grid.addWidget(self.records_table)
         self.setLayout(self.grid)
+        # log all responses
+        response_filename = os.path.join(webkit.OUTPUT_DIR, 'responses.csv')
+        self.response_writer = csv.writer(open(response_filename, 'w'))
+        self.response_writer.writerow(['URL', 'Content-Type', 'Referer', 'Size'])
 
         # Define keyboard shortcuts for convenient interaction
         QShortcut(QKeySequence.Close, self, self.close)
@@ -65,6 +69,7 @@ class AjaxBrowser(QWidget):
         # models of each step
         self.models = []
         self.running = True
+        self.response_writer.writerow(['New wrapper'])
 
     
     def new_execution(self):
@@ -84,6 +89,7 @@ class AjaxBrowser(QWidget):
         QShortcut(QKeySequence.Forward, self, self._view.forward)
         QShortcut(QKeySequence.Save, self, self._view.save)
         QShortcut(QKeySequence.New, self, self._view.home)
+        self.response_writer.writerow(['New execution'])
 
 
     def find(self, pattern):
@@ -116,6 +122,8 @@ class AjaxBrowser(QWidget):
         self.stats.add_response(reply.content)
 
         reply.content_type = reply.header(QNetworkRequest.ContentTypeHeader).toString().lower()
+        referrer = reply.orig_request.rawHeader("Referer")
+        self.response_writer.writerow([reply.url().toString(), reply.content_type, referrer, len(reply.content)])
         if re.match('(image|audio|video|model|message)/', reply.content_type) or reply.content_type == 'text/css':
             pass # ignore irrelevant content types such as media and CSS
         else:
