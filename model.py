@@ -9,7 +9,7 @@ from PyQt4.QtCore import QUrl
 import parser, transition
 
 # constants for type of parameter
-PATH, GET, POST = 0, 1, 2
+PATH, GET, POST, COOKIE = 0, 1, 2, 3
 
 
 
@@ -33,6 +33,7 @@ def build(browser, transitions, input_values):
                         common.logger.info('Attemping abstraction of partial matches: {}'.format(partial_examples))
                         model = abstract(browser, input_values, partial_examples)
                     if model is None:
+                        common.logger.info('Failed to abstract: {}'.format(examples))
                         return # abstraction failed
                 else:
                     template = '{}'
@@ -226,7 +227,12 @@ def find_matching_transitions(transitions, examples):
                 # data exists in this transition
                 for selector in transition.generate_selector(t.js, example):
                     selector_transitions[selector].append(t)
-
+            for cookie in t.cookies:
+                #print 'cookie', cookie.name(), cookie.value()
+                if str(cookie.value()) == example:
+                    print 'Found cookie example: {} {}'.format(cookie.name(), cookie.value())
+                    selector_transitions[CookieName(cookie.name())].append(t)
+                
     # check if any of these matches can be modelled
     for selector, parent_transitions in selector_transitions.items():
         if len(parent_transitions) == len(examples):
@@ -255,12 +261,24 @@ class Model:
         """
         return json.dumps(self.data(), sort_keys=True, indent=4)
 
+    
+    def __len__(self):
+        def size(d):
+            """Recursively calculate the number of requests required in this model
+            """
+            count = 1
+            for variable in d['variables']:
+                if isinstance(variable['source'], dict):
+                    count += size(variable['source'])
+            return count
+        return size(self.data())
 
+    
     def data(self):
         """Return all the data for this model (including dependencies) in a structured dict
         """
         empty_template = '{}'
-        param_map = {PATH: 'PATH', GET: 'GET', POST: 'POST'}
+        param_map = {PATH: 'Path', GET: 'GET', POST: 'POST', COOKIE: 'Cookie'}
         url = QUrl(self.transition.url)
         path_dict = path_to_dict(url.path())
         get_keys, post_keys = set(), set()
@@ -306,10 +324,9 @@ class Model:
             else:
                 # recursively execute this dependency model
                 parent_model.execute(browser, input_value)
-                js = parser.parse(browser.current_text())
-                if js:
-                    value = parent_model.selector(js)
-                else:
+                try:
+                    value = parent_model.selector.get(browser)
+                except transition.NotFoundError:
                     common.logger.info('Failed to extract content from dependency model: {}'.format(browser.current_url()))
                     continue
             override_params.append((param_type, key, template.format(value)))

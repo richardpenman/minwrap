@@ -309,3 +309,13 @@ examples/ - static websites that wrappers can execute reliably locally
 verticals/ - training data to abstract inputs, which currently only cover locations
 
 wrappers/ - definitions of how to interact with each website are defined here
+
+
+Model Visualisation
+===================
+
+``output/model.gv`` contains a GraphViz graph showing how the resuired transitions and parameters in the final optimised model.
+
+It can be viewed interactively with ``xdot output/model.gv`` or as an image with ``dot -Tpng -O output/model.gv``.
+
+

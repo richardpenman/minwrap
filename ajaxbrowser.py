@@ -9,7 +9,7 @@ from PyQt4.QtGui import QWidget, QVBoxLayout, QHBoxLayout, QLineEdit, QShortcut,
 from PyQt4.QtCore import Qt, QUrl
 
 import csv, os, re, collections
-import webkit, common, model, parser, transition, stats
+import webkit, common, model, parser, transition, stats, visualisation
 
 
 
@@ -70,6 +70,7 @@ class AjaxBrowser(QWidget):
         self.models = []
         self.running = True
         self.response_writer.writerow(['New wrapper'])
+        visualisation.WrapperLog.new_wrapper()
 
     
     def new_execution(self):
@@ -90,6 +91,8 @@ class AjaxBrowser(QWidget):
         QShortcut(QKeySequence.Save, self, self._view.save)
         QShortcut(QKeySequence.New, self, self._view.home)
         self.response_writer.writerow(['New execution'])
+        visualisation.WrapperLog.new_execution()
+
 
 
     def find(self, pattern):
@@ -124,6 +127,7 @@ class AjaxBrowser(QWidget):
         reply.content_type = reply.header(QNetworkRequest.ContentTypeHeader).toString().lower()
         referrer = reply.orig_request.rawHeader("Referer")
         self.response_writer.writerow([reply.url().toString(), reply.content_type, referrer, len(reply.content)])
+        visualisation.WrapperLog.new_edge(reply.url().toString(), reply.content_type, referrer, len(reply.content))
         if re.match('(image|audio|video|model|message)/', reply.content_type) or reply.content_type == 'text/css':
             pass # ignore irrelevant content types such as media and CSS
         else:

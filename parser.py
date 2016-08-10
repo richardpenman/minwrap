@@ -2,6 +2,7 @@
 
 import re, json, numbers, collections
 import xml.etree.ElementTree as ET
+from xml.parsers.expat import ExpatError
 import xmltodict
 import demjson
 import common
@@ -41,7 +42,10 @@ def parse_jsonp(t):
 def parse_xml(t):
     """Parse this XML into a dict
     """
-    return xmltodict.parse(t)
+    try:
+        return xmltodict.parse(t)
+    except ExpatError:
+        return {}
 
 
 def parse_js(t):

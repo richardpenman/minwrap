@@ -2,8 +2,8 @@
 
 
 import numbers
-import common
-from PyQt4.QtNetwork import QNetworkAccessManager
+import common, parser
+from PyQt4.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkCookie
 
 
 class Transition:
@@ -20,9 +20,10 @@ class Transition:
         self.output = None
         self.js = js
         self.values = [value for value in json_values(js) or [] if value] # XXX need to convert unicode?
+        self.cookies = QNetworkCookie.parseCookies(reply.rawHeader('Set-Cookie'))
+        self.content_type = reply.content_type
         request = reply.orig_request
         self.headers = [(header, request.rawHeader(header)) for header in request.rawHeaderList()]
-        self.content_type = reply.content_type
         # map of Qt verbs
         verbs = {
             QNetworkAccessManager.HeadOperation: 'HEAD',
@@ -82,7 +83,45 @@ def generate_selector(data, goal, parents=None):
 
 
 
-class JsonPath:
+class NotFoundError(Exception):
+    pass
+
+
+
+class HashBase:
+    """Define a base class that supports hash comparisons
+    """
+    def __eq__(self, other):
+        if type(other) is type(self):
+            return self.__dict__ == other.__dict__
+        return False
+
+    def __hash__(self):
+        return hash(str(self))
+
+
+class CookieName(HashBase):
+    """Wrapper around cookie key
+    """
+    def __init__(self, name):
+        self.name = name
+
+    def __str__(self):
+        return 'cookie:{}'.format(self.name)
+
+    def __call__(self, cookies):
+        for cookie in cookies:
+            if cookie.name() == self.name:
+                return cookie.value()
+        raise NotFoundError()
+
+    def get(self, browser):
+        cj = browser.page().networkAccessManager().cookieJar()
+        cookies = cj.cookiesForUrl(browser.url())
+        return self(cookies)
+
+
+class JsonPath(HashBase):
     """Wrapper to iterate through a dictionary given a list of indices / keys
 
     >>> jp = JsonPath([0, 'person'])
@@ -101,15 +140,7 @@ class JsonPath:
         self.steps = tuple(steps)
 
     def __str__(self):
-        return ''.join('[{}]'.format(repr(step)) for step in self.steps)
-
-    def __eq__(self, other):
-        if type(other) is type(self):
-            return self.__dict__ == other.__dict__
-        return False
-
-    def __hash__(self):
-        return hash(str(self))
+        return 'jsonpath:' + ''.join('[{}]'.format(repr(step)) for step in self.steps)
 
     def __call__(self, js, steps=None):
         steps = list(self.steps) if steps is None else steps
@@ -118,13 +149,17 @@ class JsonPath:
             try:
                 js = js[step]
             except (KeyError, IndexError):
-                return None
+                raise NotFoundError()
             else:
                 return self(js, steps)
         else:
             return js
 
-    
+    def get(self, browser):
+        js = parser.parse(browser.current_text())
+        return self(js)
+   
+
 
 def json_values(es):
     """Recursively parse values from this json dict

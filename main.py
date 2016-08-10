@@ -12,7 +12,7 @@ from PyQt4.QtGui import QApplication
 import argparse, sys, re, os, collections, pprint
 from time import time
 import socket, threading, SimpleHTTPServer, SocketServer
-import ajaxbrowser, common, model, parser, wrappertable
+import ajaxbrowser, common, model, parser, wrappertable, visualisation
 
 
 
@@ -60,15 +60,18 @@ def main():
             except AttributeError:
                 pass
             test_cases, final_transitions = run_wrapper(browser, wrapper)
-            # completed running the wrapper for training
-            model = examine_transitions(browser, wrapper, final_transitions)
-            if model is not None:
+            # completed running the wrapper for training, so now try to build a model of the generated transitions
+            models = build_models(browser, wrapper, final_transitions)
+            if models:
+                model = models[0]
                 # display results of optimized execution
+                visualisation.ModelLog.log_model("Final Model", model)
                 num_passed = evaluate_model(browser, wrapper, model, test_cases)
                 browser.add_status('Evaluation: {}% accuracy (from {} test cases)'.format(100 * num_passed / len(test_cases), len(test_cases)))
             else:
                 browser.add_status('Failed to train model') 
         common.logger.info('Done')
+        visualisation.WrapperLog.save()
         if browser.running:
             app.exec_() # wait until window closed
     
@@ -81,7 +84,8 @@ def start_local_server(port):
         def log_message(self, format, *args):
             pass # prevent error messages
     server = SocketServer.TCPServer(('', port), Handler, bind_and_activate=False)
-    server.allow_reuse_address = True # allow reusing port, otherwise often get address in use error
+    # allow reusing port, otherwise will get address in use error if running multiple instances simultaneously
+    server.allow_reuse_address = True 
     try:
         server.server_bind()
     except socket.error:
@@ -123,9 +127,10 @@ def run_wrapper(browser, wrapper):
             expected_output = scraped_data
         # save the expected output for checking test cases later
         test_cases.append((input_value, expected_output))
+        visualisation.TransitionLog.finished_training_case(input_value, expected_output, browser.transitions[transition_offset:]) # These are only the transitions from the most recent wrapper execution.
 
         while transition_offset < len(browser.transitions):
-            # have more transitions to check
+            # have more transitions to check from the execution path
             # check whether the transitions that were discovered contain the expected output
             for t in browser.transitions[transition_offset:]:
                 transition_offset += 1
@@ -135,14 +140,17 @@ def run_wrapper(browser, wrapper):
                     final_transitions.append(t)
                     browser.add_status('Found matching reply for training data: {}'.format(summarize_list(expected_output)))
             browser.wait_quiet()
+
     QApplication.restoreOverrideCursor()
     return test_cases, final_transitions
 
 
 
-def examine_transitions(browser, wrapper, final_transitions):
-    """Recieves a list of transitions containing the expected output data.
+def build_models(browser, wrapper, final_transitions):
+    """Build a list of possible models from these transitions that satisfy the expected output data.
+    Sort models by the number of requests required.
     """
+    models = []
     input_values = [v for v, _ in wrapper.data]
     # first try matching transitions on full paths, then allow abstracting paths
     for abstract_path in (False, True):
@@ -154,7 +162,10 @@ def examine_transitions(browser, wrapper, final_transitions):
                 for t in transition_group:
                     if t.js:
                         browser.add_records(parser.json_to_records(t.js))
-                return wrapper_model
+                models.append(wrapper_model)
+        if models:
+            break # already have models without abstracting path, so exit now
+    return sorted(models, key=lambda m: len(m))
 
 
 
@@ -189,7 +200,7 @@ def evaluate_model(browser, wrapper, wrapper_model, test_cases):
         if not browser.running:
             break
         browser.new_execution()
-        browser.stats.start(wrapper, 'Testing')
+        browser.stats.start(wrapper, 'Testing', str(wrapper_model))
         wrapper_model.execute(browser, input_value)
         browser.wait_quiet()
         browser.stats.stop()

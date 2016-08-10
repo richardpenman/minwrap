@@ -15,7 +15,7 @@ class Wrapper:
         self.category = 'flight'
         self.http_method = 'GET'
         self.response_format = 'JSON'
-        self.notes = 'Uses dynamic results for expected output. Discovers the correct URLs but unable to abstract IDs (1f91f5fd-e9c1-4d43-9418-d23cd9843fce)'
+        self.notes = 'Uses dynamic results for expected output. Discovers the correct URLs but unable to abstract IDs, which do not appear exactly in cookies'
 
     def run(self, browser, inputs):
         # XXX executes but model fails because uses session ID

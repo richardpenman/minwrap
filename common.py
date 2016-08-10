@@ -220,7 +220,7 @@ class ConsoleHandler(logging.StreamHandler):
         logging.StreamHandler.emit(self, record)
 
 
-def get_logger(output_file, level=logging.INFO, maxbytes=0):
+def get_logger(output_file, level=logging.INFO, maxbytes=0, truncate=False, console_logging=True):
     """Create a logger instance
 
     output_file:
@@ -234,19 +234,29 @@ def get_logger(output_file, level=logging.INFO, maxbytes=0):
     # avoid duplicate handlers
     if not logger.handlers:
         logger.setLevel(logging.DEBUG)
+        file_mode = 'w' if truncate else 'a'
         try:
             if not maxbytes:
-                file_handler = logging.FileHandler(output_file)
+                file_handler = logging.FileHandler(output_file, mode=file_mode)
             else:
-                file_handler = logging.handlers.RotatingFileHandler(output_file, maxBytes=maxbytes)
+                file_handler = logging.handlers.RotatingFileHandler(output_file, maxBytes=maxbytes, mode=file_mode)
         except IOError:
             pass # can not write file
         else:
             file_handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)s %(message)s'))
             logger.addHandler(file_handler)
 
-        console_handler = ConsoleHandler()
-        console_handler.setLevel(level)
-        logger.addHandler(console_handler)
+        if console_logging:
+            console_handler = ConsoleHandler()
+            console_handler.setLevel(level)
+            logger.addHandler(console_handler)
+
     return logger
+
 logger = get_logger('output/browser.log', maxbytes=2*1024*1024*1024)
+
+def write_to_file(filename, content):
+    """Writes a string into a file, overwriting the existing contents if any."""
+    with open(filename, "w") as f:
+        f.write(content)
+

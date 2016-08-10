@@ -14,7 +14,7 @@ class Wrapper:
         self.category = 'flight'
         self.http_method = 'POST'
         self.response_format = 'JavaScript'
-        self.notes = 'Request has 2 parameters - the prefix and a query counter. Each time loaded generates a different session ID.'
+        self.notes = 'Request has 2 parameters - the prefix and a query counter. Each time loaded generates a different session ID which is in JSESSIONID cookie.'
 
     def run(self, browser, inputs):
         browser.get(self.website) # XXX each time loaded generates different session ID

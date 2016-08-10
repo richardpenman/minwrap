@@ -8,9 +8,9 @@ from browser_wrapper import BrowserWrapper
 class Wrapper():
     def __init__(self):
         self.data = [
-            ({'from': 'Vienna', 'to': 'Moscow'}, None),
-            ({'from': 'Vienna', 'to': 'London'}, None),
-            ({'from': 'London', 'to': 'Vienna'}, None)
+            ({'from': 'Moscow', 'to': 'London'}, None),
+            ({'from': 'Moscow', 'to': 'Beijing'}, None),
+            ({'from': 'Moscow', 'to': 'Paris'}, None)
         ]
         self.website = 'http://www.s7.ru/'
         self.category = 'flight search (s7)'
@@ -19,7 +19,7 @@ class Wrapper():
         self.notes = ''
 
     def run(self, browser, inputs):
-        origin_airport, destination_airport = inputs['from'], inputs['to']
+        origin_airport, destination_airport = inputs['to'], inputs['from']
         
         bw = BrowserWrapper(browser)
         bw.get(self.website)
@@ -41,7 +41,7 @@ class Wrapper():
         # Select date
         # Select dates (Always the first day in the second week of the next month)
         bw.userClick('form#aviaBot .ui-datepicker-next.ui-corner-all')
-        bw.userClick('form#aviaBot #datepicker>div>table>tbody>tr:nth-of-type(2)>td:nth-of-type(1)>a')
+        bw.userClick('form#aviaBot #datepicker>div>table>tbody>tr:nth-of-type(4)>td:nth-of-type(1)>a')
 #         browser.wait(10)
         
         # Search!

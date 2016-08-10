@@ -17,8 +17,9 @@ class BrowserWrapper:
         raise ValueError('Cannot get DOM steady')
 
     def userClick(self, pattern='input'):
-        self.browser.click(pattern, True)
+        result = self.browser.click(pattern, False)#True)
         self.wait_steady_go()
+        return result
         
     def userKeys(self, pattern, text):
         """Simulate typing by clicking and focusing on elements that match the pattern and triggering key events.
