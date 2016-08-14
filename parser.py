@@ -1,51 +1,188 @@
 # -*- coding: utf-8 -*-
 
 import re, json, numbers, collections
+from difflib import SequenceMatcher
 import xml.etree.ElementTree as ET
 from xml.parsers.expat import ExpatError
-import xmltodict
+import lxml.html, lxml.etree
+#import xmltodict
 import demjson
-import common
+import common, selector
+
+
+
+class Document:
+    pass
+
+
+class JsonTree(Document):
+    """
+    >>> tree = JsonTree([{'person': 'richard', 'location': 'oxford'}, {'person': 'tim', 'location': 'oxford'}])
+    >>> [str(path) for _, path in tree.find(['richard'])]
+    ["[0]['person']"]
+    >>> [str(path) for _, path in tree.find(['oxford'])]
+    ["[0]['location']", "[1]['location']"]
+    >>> [str(path) for _, path in tree.find(['cambridge'])]
+    []
+    """
+    def __init__(self, js):
+        self.js = js
+
+    def get(self):
+        return self.js
+
+    def find(self, goals, data=None, parents=None):
+        """Find all selectors to strings in the goals list
+        """
+        data = self.js if data is None else data
+        parents = [] if parents is None else parents
+        if isinstance(data, dict):
+            for key, record in data.items():
+                for result in self.find(goals, record, parents[:] + [key]):
+                    yield result
+        elif isinstance(data, (tuple, list)):
+            for index, record in enumerate(data):
+                for result in self.find(goals, record, parents[:] + [index]):
+                    yield result
+        else:
+            for goal in goals:
+                if similar(goal, data):
+                    yield goal, selector.JsonPathSelector(parents)
+                    break
+
+
+class XPathTree(Document):
+    """
+    >>> tree = parse_html('''
+    ... <html>
+    ...     <body>
+    ...         <div id="results">
+    ...             <span class="result">
+    ...                 <span>Oxford</span>
+    ...                 <span>UK</span>
+    ...             </span>
+    ...             <span class="result">
+    ...                 <span>Harvard</span>
+    ...                 <span>USA</span>
+    ...             </span>
+    ...             <span class="result">
+    ...                 <span>Sorbonne</span>
+    ...                 <span>France</span>
+    ...             </span>
+    ...         </div>
+    ...     </body>
+    ... </html>''')
+    >>> [str(path) for _, path in tree.find(['Oxford'])]
+    ['/html/body/div/span[1]/span[1]']
+    >>> [str(path) for _, path in tree.find(['USA', 'France'])]
+    ['/html/body/div/span[2]/span[2]', '/html/body/div/span[3]/span[2]']
+    """
+    def __init__(self, tree):
+        self.tree = tree
+        #raise Exception(str(dir(tree)))
+        self.root = tree.getroottree()
+
+    def get(self):
+        return self.tree
+
+    def find(self, goals):
+        for element in self.root.iter():
+            if isinstance(element.tag, basestring): 
+                # ignore comments and meta data
+                if element.text:
+                    path = None
+                    for goal in goals:
+                        if similar(goal, element.text):
+                            # XXX need a better XPath generation, builtin just uses indices
+                            path = path or self.root.getpath(element)
+                            yield goal, selector.XPathSelector(path)
+                            break
+
+
+
+
+def similar(goal, data):
+    """Define 2 inputs as similar if they are equal 
+    or have 95% string similarity after ignoring case and surrounding whitespace
+    """
+    if goal == data:
+        return True
+    elif isinstance(goal, basestring) and isinstance(data, basestring):
+        #goal = common.to_unicode(goal).strip().lower()
+        #data = common.to_unicode(data).strip().lower()
+        goal = goal.strip().lower()
+        data = data.strip().lower()
+        if goal in data:
+            return True
+        v = SequenceMatcher(None, goal, data).ratio()
+        #if v > 0.80:
+        #    print 'sm:', v, repr(goal), repr(data)
+        return SequenceMatcher(None, goal, data).ratio() > 0.95
+    return False
+
+
+
+def parse(html, content_type, text=None):
+    """Parse inputs based on content type
+    """
+    if 'html' in content_type:
+        # parse HTML DOM tree
+        return parse_html(html)
+    elif 'xml' in content_type:
+        return parse_xml(html)
+    elif re.match('(application|text)/', content_type):
+        # interpret json format if possible
+        return parse_json(text or html)
+
 
 
 def parse_json(s):
-    """Parse this string into a dict if json else return None
+    """Parse this string into a dict if json or jsonp else return None
 
     >>> parse_json('')
-    >>> parse_json('{"a":3}')
+    >>> parse_json('{"a":3}').get()
     {u'a': 3}
-    >>> parse_json('{a:3}')
+    >>> parse_json('{a:3}').get()
+    {u'a': 3}
+    >>> parse_json('callback({"a":3}) ').get()
     {u'a': 3}
     """
+    if isinstance(s, dict):
+        return s
+    match = re.compile('\s*\w*\(({.*?})\)\s*$', flags=re.DOTALL).match(s)
+    if match:
+        # try parsing the internal json
+        s = match.groups()[0]
     try:
-        return json.loads(s)
+        js = json.loads(s)
     except ValueError:
         # try a more relaxed parser for JavaScript
         try:
-            return demjson.decode(s)
+            js = demjson.decode(s)
         except demjson.JSONDecodeError:
-            pass
-       
-
-def parse_jsonp(t):
-    """Parse this string into a dict if jsonp else return None
-    
-    >>> parse_jsonp('callback({"a":3}) ')
-    {u'a': 3}
-    """
-    match = re.compile('\s*\w*\(({.*?})\)\s*$', flags=re.DOTALL).match(t)
-    if match:
-        # try parsing the internal json
-        return parse_json(match.groups()[0])
+            return
+    return JsonTree(js)
 
 
-def parse_xml(t):
+def parse_html(s):
+    try:
+        tree = lxml.html.fromstring(s)
+    except lxml.etree.LxmlError:
+        pass
+    else:
+        return XPathTree(tree)
+
+
+
+def parse_xml(s):
     """Parse this XML into a dict
     """
     try:
-        return xmltodict.parse(t)
-    except ExpatError:
-        return {}
+        tree = lxml.etree.fromstring(s)
+    except lxml.etree.LxmlError:
+        pass
+    else:
+        return XPathTree(tree)
 
 
 def parse_js(t):
@@ -62,18 +199,6 @@ def parse_js(t):
     js = [{key : value.strip()} for (key, value) in matches if value.strip()]
     return js or None
 
-
-def parse(text, content_type=''):
-    """Try all parsers on this input
-    """
-    if content_type == 'text/xml':
-        return parse_xml(text)
-    for fn in parse_json, parse_jsonp:
-        result = fn(text)
-        if result is not None:
-            return result
-    if 'html' not in content_type:
-        return parse_js(text)
 
 
 def json_counter(es, result=None):

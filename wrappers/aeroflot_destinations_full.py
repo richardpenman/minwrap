@@ -8,9 +8,9 @@ from browser_wrapper import BrowserWrapper
 class Wrapper():
     def __init__(self):
         self.data = [
-            ({'from': 'Vienna', 'to': 'Moscow', 'date': '30.10.2016'}, None),
-            ({'from': 'Vienna', 'to': 'London', 'date': '30.10.2016'}, None),
-            ({'from': 'London', 'to': 'Vienna', 'date': '30.10.2016'}, None)
+            {'from': 'Vienna', 'to': 'Moscow', 'date': '30.10.2016'}, 
+            {'from': 'Vienna', 'to': 'London', 'date': '30.10.2016'},
+            {'from': 'London', 'to': 'Vienna', 'date': '30.10.2016'},
         ]
         self.website = 'http://www.aeroflot.ru/ru-en'
         self.category = 'flight search (aeroflot)'
@@ -56,4 +56,4 @@ class Wrapper():
                    ],
                     None)
         print 'outputs:', outputs
-        return outputs
+        return {'prices': outputs}

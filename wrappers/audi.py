@@ -3,10 +3,10 @@
 class Wrapper:
     def __init__(self):
         self.data = [
-            ({'city': 'Antwerpen'}, ['Auto Natie', 'info@autonatie.audi.be', '+32 3 231 59 30', 'Groenendaallaan, 397 ANTWERPEN 3', 'Garage Thuy n.v.', 'Lakborslei, 81 DEURNE (ANTWERPEN)', '+32 3 326 11 22', 'info@thuy.audi.be']),
-            ({'city': 'Bruxelles'}, ['D\'Ieteren Mail', 'Rue Du Mail, 50 IXELLES', '+32 2 536 55 11', 'info@dmail.audi.be', 'Audi Center Brussels', 'Bemptstraat, 38 DROGENBOS', '+32 2 371 27 11', 'info@ddrogenbos.audi.be']),
-            ({'city': 'Brugge'}, ['Garage Raes Brugge nv', 'Oostendse Steenweg, 115 BRUGGE', '+32 50 45 80 20', 'info@raesbrugge.audi.be']),
-            ({'city': 'Ostend'}, ['Phlips Oostende(d.Fre-Kar bvba', 'Brugsesteenweg, 53 BREDENE', '+32 59 55 20 10', 'info@phlipso.audi.be']),
+            {'city': 'Antwerpen'},
+            {'city': 'Bruxelles'},
+            {'city': 'Brugge'}, 
+            {'city': 'Ostend'},
         ]
         self.website = 'http://www.dealerlocator.audi.be/default.aspx'
         self.category = 'car dealer'
@@ -18,4 +18,10 @@ class Wrapper:
         browser.get(self.website)
         browser.keys('input#addressinput', inputs['city'])
         browser.click('span#lnk_search')
-        browser.wait(1)
+        browser.wait_quiet()
+        return {
+            'name': browser.text('h2.ddealername'),
+            #'latitude': browser.attr('ul#accordion li', 'gpslat'), # period changed to comma
+            #'longitude': browser.attr('ul#accordion li', 'gpslong'),
+            #'address': browser.text('ul#accordion li a p'), # sub text
+        }

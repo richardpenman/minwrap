@@ -5,7 +5,7 @@ Install modules for parsing JSON and HTML:
 
 .. sourcecode:: bash
 
-    pip install demjson templater xmltodict
+    pip install demjson templater xmltodict lxml
 
 
 Install Qt and Python bindings for Webkit
@@ -50,8 +50,8 @@ Wrappers are classes defined in the *wrappers* directory and are structured like
     class Wrapper:
         def __init__(self):
             self.data = [
-                ({param1: input1, param2: input2, ...}, [expected output values1]),
-                ({'city': 'London', 'date': '1/1/2016'}, [expected output values2]),
+                ({param1: input1, param2: input2, ...}, {field1: values, field2: values}),
+                ({'city': 'London', 'date': '1/1/2016'}, {'price': [100, 101, 150, 94], 'locations': ['Paris', 'Berlin', 'Moscrow']},
                 ...
             ]
             self.website = 'http://...'
@@ -67,7 +67,7 @@ Wrappers are classes defined in the *wrappers* directory and are structured like
 
 A wrapper defines a class called Wrapper with several required attributes:
 
-- data: a list of tuples defining the input parameters and expected output strings ({'city': 'London'}, ['...', '...']). A minimum of 2 cases are needed, though the more the better.
+- data: a list of tuples defining the input parameters and expected output strings. A minimum of 2 cases are needed, though the more the better.
 - run(): this method performs the browser execution for the given input value. It can optionally return the expected output values if this is not known until run time.
 - website: the website this wrapper is for
 
@@ -80,74 +80,57 @@ There are also several optional attributes that are used for displaying a summar
 - enabled: True/False flag for whether this wrapper is visible 
 
 
-Here is an implementation for Lufthunsa from *wrappers/lufthunsa.py*:
+Here is an implementation for Fiat from *wrappers/fiat.py*:
 
 .. sourcecode:: python
 
     class Wrapper:
         def __init__(self):
             self.data = [
-                ({'prefix': 'lon'}, ['United Kingdom', 'London, all airports', 'London City Airport', 'London Gatwick', 'London Heathrow', 'London-Stansted', 'Southampton', 'London, Canada', 'Sarnia', 'Windsor', 'Londrina', 'Long Beach', 'Burbank', 'Oxnard/Ventura', 'Norway', 'Longyearbyen']),
-                ({'prefix': 'par'}, ['France', 'Paris - Charles De Gaulle', 'Parkersburg/Marietta', 'Clarksburg']),
-                ({'prefix': 'bri'}, ['Brindisi', 'Brisbane', 'bds', 'bne', 'Brisbane area airports', 'Gold Coast, Queensland', 'Bristol', 'brs', 'Bristol - Tennessee', 'tri', 'Britton', 'Britton area airports']),
-                ({'prefix': 'new'}, ['New Bern','ewn','New Orleans','msy','New York, all airports',"nyc","New York area airports","New York - JFK International, NY","jfk","New York - La Guardia","lga","New York - Newark International, NJ","ewr","Allentown/Bethl","abe"]),
+                ({'postcode': 'OX1'}, None),
+                ({'postcode': 'CB2'}, None),
+                ({'postcode': 'E1'}, None),
+                ({'postcode': 'BA1'}, None),
             ]
-            self.website = 'http://www.lufthansa.com/uk/en/Homepage'
-            self.category = 'flight'
-            self.http_method = 'POST'
-            self.response_format = 'JSON'
-            self.notes = 'AJAX callback triggered on KeyUp event. Currently error triggering autocomplete.'
-            self.enabled = False
-
-        def run(self, browser, inputs):
-            # XXX currently unable to trigger autocomplete
-            browser.get(self.website)
-            browser.keys('input#flightmanagerFlightsFormOrigin', inputs['prefix'])
-            browser.keys('input#flightmanagerFlightsFormOrigin', ['DOWN'], True)
-            browser.wait_load('div.rw-popup')
-
-
-And here is an implementation for Lexus from *wrappers/lexus.py*:
-
-.. sourcecode:: python
-
-    class Wrapper:
-        def __init__(self):
-            self.data = [
-                ({'city': 'paris'}, ['58, Boulevard Saint Marcel', '75005', '01 55 43 55 00', '3, rue des Ardennes', '75019', '01 40 03 16 00', '4, avenue de la Grande Armée', '75017', '01 40 55 40 00']),
-                ({'city': 'toulouse'}, ['123, Rue Nicolas', 'Vauquelin', '31100', '05 61 61 84 29', '4 rue Pierre-Gilles de Gennes', '64140', '05 59 72 29 00']),
-                ({'city': 'marseille'}, ['36 Boulevard Jean Moulin', '13005', '04 91 229 229', 'ZAC Aix La Pioline', 'Les Milles', '13290', '04 42 95 28 78', 'Rue Charles Valente', 'ZAC de la Castelette', 'Montfavet', '84143', '04 90 87 47 00']),
-                ({'city': 'nice'}, ['1 AVENUE EUGÈNE DONADEÏ', 'SAINT LAURENT DU VAR', '04 83 32 22 11', '(RÉPARATEUR AGRÉÉ LEXUS) Lexus Monaco', '31-39 avenue Hector Otto', 'Monaco', '98000', '00 377 93 30 10 05']),
-            ]
-            self.website = 'http://www.lexus.fr/forms/find-a-retailer'
+            self.website = 'http://www.fiat.co.uk/find-dealer'
             self.category = 'car dealer'
             self.http_method = 'GET'
-            self.response_format = 'JSON'
-            self.notes = 'Uses variables in the URL path and requires a geocoding intermediary step'
+            self.response_format = 'JSONP'
+            self.notes = 'Two potential AJAX requests by postcode and sales type'
 
         def run(self, browser, inputs):
             browser.get(self.website)
-            browser.click('span[class="icon icon--base icon-close"]') # accept cookies
-            browser.wait_load('div.form-control__item__postcode')
-            browser.fill('div.form-control__item__postcode input', inputs['city'])
-            browser.click('div.form-control__item__postcode button')
+            browser.fill('div.input_text input', inputs['postcode'])
+            browser.click('div.tab_dealer div.input_text button.search')
+            browser.wait_load('div.result')
+            return dict(
+                names = browser.text('div.result div.fn.org'),
+                addresses = browser.text('div.result span.street-address'),
+                cities = browser.text('div.result span.locality'),
+                postcodes = browser.text('div.result span.postal-code'),
+            )
+
+Further examples can be found in the wrappers directory.
+
 
 WebKit
 ======
 
 The Browser class is a wrapper around WebKit's *QWebView* class for rendering web pages, which is documented at http://doc.qt.io/qt-4.8/qwebview.html. Some shortcut methods have been defined in webkit.Browser:
 
-- **get(url)**: Load the given URL and waits until loadFinished event called, then returns the loaded content.
-- **js(script)**: Execute this JavaScript script on the currently loaded webpage.
-- **click(pattern, native=False)**: Click all elements that match the CSS pattern. If native then will try GUI level click. Returns number of elements clicked.
-- **keys(pattern, text, native=False)**: Simulate typing by focusing on elements that match the CSS pattern and triggering key events. If native then will try GUI level typing. Returns number of elements set.
+- **attr(pattern, name)**: Gets the given attribute for the matching elements.
 - **attr(pattern, name, value)**: Set attribute of matching CSS pattern to value. Returns number of elements set.
+- **click(pattern, native=False)**: Click all elements that match the CSS pattern. If native then will try GUI level click. Returns number of elements clicked.
 - **fill(pattern, value)**: Set text of the form elements that match this CSS pattern to value. Returns number of elements set.
 - **find(pattern)**: Returns the elements matching this CSS pattern.
+- **get(url)**: Load the given URL and waits until loadFinished event called, then returns the loaded content.
+- **js(script)**: Execute this JavaScript script on the currently loaded webpage.
+- **keys(pattern, text, native=False)**: Simulate typing by focusing on elements that match the CSS pattern and triggering key events. If native then will try GUI level typing. Returns number of elements set.
+- **text(pattern)**: Returns the text of the elements matching this CSS pattern.
+- **wait(delay)**: Wait for the specified delay (in seconds).
 - **wait_load(pattern, timeout=60)**: Wait for this content to be loaded up to maximum timeout, by default 60 seconds. Returns True if pattern was loaded before the timeout.
 - **wait_quiet(timeout=20)**: Wait for all outstanding requests to complete up to the given timeout, by default 20 seconds. Returns whether outstanding requests completed in this time.
 - **wait_steady(timeout=60)**: Wait for the DOM to be steady, defined as no changes over a 1 second period. Returns True if DOM is steady before the given timeout.
-- **wait(delay)**: Wait for the specified delay (in seconds).
 
 
 Implementation details
@@ -210,70 +193,112 @@ Implementation details
 
 #. If a model is successfully built then it is executed over the input values from the wrapper.
 
-   * Here is the model for Dacia that has some POST keys that can be ignored and the city input for the location parameter:
+   * Here is the model for Fiat that has a GET key from the address parameter and scrapes 4 columns:
 
    .. sourcecode::
 
         {
-            "data": [
-                [ "search", "" ],
-                ...
-            ],
+            "columns": {
+                "addresses": "[u'results'][*][u'ADDRESS']",
+                "cities": "[u'results'][*][u'TOWN']",
+                "names": "[u'results'][*][u'COMPANYNAM']",
+                "postcodes": "[u'results'][*][u'ZIPCODE']"
+            },
             "headers": [
-                [ "Origin", "http://dacia.at" ],
-                ...
+                [
+                    "User-Agent",
+                    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36"
+                ],
+                [
+                    "Accept",
+                    "*/*"
+                ],
+                [
+                    "Referer",
+                    "http://www.fiat.co.uk/find-dealer"
+                ]
             ],
-            "ignored": [
-                [ "POST", "_sourcePage" ],
-                [ "POST", "__fp" ]
-            ],
-            "override": [
+            "url": "http://dealerlocator.fiat.com/geocall/RestServlet?jsonp=callback&serv=sales&mkt=3112&brand=00&func=finddealerxml&address={}&rad=100",
+            "variables": [
                 {
-                    "dependency": 'city',
-                    "key": "location",
-                    "template": "{}",
-                    "type": "POST"
+                    "key": "address",
+                    "origin": "GET",
+                    "source": "postcode",
+                    "template": "{}"
                 }
             ],
-            "url": "http://dacia.at/dealerlocator/search.action",
-            "verb": "POST"
+            "verb": "GET"
         }
+
 
    * And this model for the local country website is an example with multiple steps, where the second step uses the country input in the path:
 
    .. sourcecode::
 
         {
+            "columns": {
+                "countries": "[u'cities'][*]"
+            },
             "headers": [
-                [ "X-Requested-With", "XMLHttpRequest" ],
-                ...
-            ],
-            "override": [
-                {
-                    "dependency": {
-                        "headers": [
-                            [ "X-Requested-With", "XMLHttpRequest" ],
-                            ...
-                        ],
-                        "override": [
-                            {
-                                "dependency": "country",
-                                "key": 5,
-                                "template": "{}.json",
-                                "type": "PATH"
-                            }
-                        ],
-                        "selector": "(u'id',)",
-                        "url": "http://localhost:8000/examples/country/api/countries/{}"
-                    },
-                    "key": 5,
-                    "template": "{}.json",
-                    "type": "PATH"
-                }
+                [
+                    "X-Requested-With",
+                    "XMLHttpRequest"
+                ],
+                [
+                    "User-Agent",
+                    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36"
+                ],
+                [
+                    "Accept",
+                    "application/json, text/javascript, */*; q=0.01"
+                ],
+                [
+                    "Referer",
+                    "http://localhost:8000/examples/country/"
+                ]
             ],
             "url": "http://localhost:8000/examples/country/api/cities/{}",
+            "variables": [
+                {
+                    "key": 5,
+                    "origin": "Path",
+                    "source": {
+                        "headers": [
+                            [
+                                "X-Requested-With",
+                                "XMLHttpRequest"
+                            ],
+                            [
+                                "User-Agent",
+                                "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36"
+                            ],
+                            [
+                                "Accept",
+                                "application/json, text/javascript, */*; q=0.01"
+                            ],
+                            [
+                                "Referer",
+                                "http://localhost:8000/examples/country/"
+                            ]
+                        ],
+                        "selector": "[u'id']",
+                        "url": "http://localhost:8000/examples/country/api/countries/{}",
+                        "variables": [
+                            {
+                                "key": 5,
+                                "origin": "Path",
+                                "source": "country",
+                                "template": "{}.json"
+                            }
+                        ],
+                        "verb": "GET"
+                    },
+                    "template": "{}.json"
+                }
+            ],
             "verb": "GET"
         }
+        
 
 #. To evaluate correctness the model is executed over the test data and checked how many execution paths contain the same expected output as defined in the wrapper.
 #. Measurements of performance (time, bandwidth) of the initial wrapper and the optimized wrapper are saved in output/stats.csv.

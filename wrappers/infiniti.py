@@ -3,9 +3,9 @@
 class Wrapper:
     def __init__(self):
         self.data = [
-            ({'zip': '33520'}, ['ADRESSE DU CENTRE', '469, Route du Médoc', 'Bruges', '33520', 'INFINITI BORDEAUX', 'INFINITI SERVICE PARTNER BAYONNE', '22, bis, rue Ernest Lannebère', 'Anglet', '64600']),
-            ({'zip': '06110'}, ['INFINITI CANNES', '50 Avenue du Campon', 'Le Cannet', '06110', 'INFINITI SERVICE PARTNER NICE- OUVERTURE PROCHAINE', '79, Boulevard Gambetta - Palais de Porta', 'Nice', '06000']),
-            ({'zip': '63000'}, ['INFINITI CLERMONT-FERRAND', '8, Rue Louis Blériot', 'Clermont-Ferrand', '63000', 'INFINITI LYON', '45 Avenue Foch', 'Lyon', '69006']),
+            {'zip': '33520'}, 
+            {'zip': '06110'}, 
+            {'zip': '63000'}, 
         ]
         self.website = 'https://www.infiniti.fr/centre-locator.html'
         self.category = 'car dealer'
@@ -15,8 +15,16 @@ class Wrapper:
 
     def run(self, browser, inputs):
         browser.get(self.website)
-        browser.keys('input.location-input', inputs['zip'])
+        browser.wait_quiet()
+        browser.click('div#psyma_close_link')
+        browser.keys('input.location-input', inputs['zip'] + '\n', True)
+        #browser.wait_load('span.autocomplete-suggestions button')
+        #print browser.click('span.autocomplete-suggestions button:nth-child(1)')
         #browser.click('button.btn-search', True)
-        # XXX button did not work so needed to submit form
-        for form in browser.find('form'):
-            form.evaluateJavaScript('this.submit();')
+        browser.wait_load('div.dealer-address')
+        return {
+            'name': browser.text('h2 span'),
+            'address': browser.text('div.dealer-address p:nth-child(2)'),
+            'city': browser.text('div.dealer-address p:nth-child(3)'),
+            'postcode': browser.text('div.dealer-address p:nth-child(4)'),
+        }

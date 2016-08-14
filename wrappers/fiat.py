@@ -3,10 +3,10 @@
 class Wrapper:
     def __init__(self):
         self.data = [
-            ({'postcode': 'OX1'}, ['OXON', '0051422', 'HARTWELL ABINGDON', '01235522822', 'OX14 5JU', 'David Ebsworth', 'david.ebsworth@hartwell.co.uk', '3112', 'hartwell-auto.co.uk/fiat/?locationcode=00000013&bannerid=DL&source=WCOR', '08448548198', '51.66387', '0870 909 5214', '-1.297952', 'ABINGDON', '6870.98', 'DRAYTON ROAD', 'BUCKS', '0060169', 'PERRYS', '08433939305', 'HP19_8BY', 'Lee Jackson', 'aylesfiatcontrol@perrys.co.uk', 'perrys-auto.co.uk/fiat/?locationcode=00000034&bannerid=DL&source=WCOR']),
-            ({'postcode': 'CB2'}, ['10 WHITTON ROAD', 'SURREY', '0046500', 'MOTOR VILLAGE CROYDON', '02086831000', 'CR0 3HH', 'Simon Wright', 'tim.keatinge@fiat.com', 'croydon-motorvillage.co.uk/fiat/?locationcode=00000256&bannerid=DL&source=WCOR', '0208 6831222', '51.385291', '02086831222', 'CROYDON', '89491.75', '121 CANTERBURY ROAD', 'BERKS', '0065920', 'THAMES MOTOR GROUP (SLOUGH) LTD.', '01753 325063', 'SL1 6BB', 'Tim Fennell', 'ss@thamesmotorgroup.co.uk', 'thames-auto.co.uk/fiat/?locationcode=00000819&bannerid=DL&source=WCOR', '01628559669', '51.520652', '-0.647828', '01753788000', '01753325063', 'SLOUGH', '90276.94', '470 BATH ROAD', '0047239', 'DESIRA GROUP PLC - NORWICH', '01603633222', 'NR2_4TG']),
-            ({'postcode': 'E1'}, ['MOTOR VILLAGE MARYLEBONE', '105 WIGMORE STREET', 'W1U 1QY', '02073996650', '02073996666', 'GLYN HOPKIN', '1021 ROMFORD ROAD', 'E12 5LH', '02080037912', '02080037912']),
-            ({'postcode': 'BA1'}, ['SIMONSTONE (BRISTOL) LTD', '803 / 805 BATH ROAD', 'BRISTOL', 'BS4 5NL', '08446621202', '08446625619', 'CHIPPING SODBURY MOTOR COMPANY', 'HATTERS LANE', 'BS37 6AA', '08446621853', '08446625728']),
+            {'postcode': 'OX1'},
+            {'postcode': 'CB2'},
+            {'postcode': 'E1'}, 
+            {'postcode': 'BA1'},
         ]
         self.website = 'http://www.fiat.co.uk/find-dealer'
         self.category = 'car dealer'
@@ -17,4 +17,11 @@ class Wrapper:
     def run(self, browser, inputs):
         browser.get(self.website)
         browser.fill('div.input_text input', inputs['postcode'])
-        browser.click('div.input_text button.search')
+        browser.click('div.tab_dealer div.input_text button.search')
+        browser.wait_load('div.result')
+        return dict(
+            names = browser.text('div.result div.fn.org'),
+            addresses = browser.text('div.result span.street-address'),
+            cities = browser.text('div.result span.locality'),
+            postcodes = browser.text('div.result span.postal-code'),
+        )

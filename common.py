@@ -85,6 +85,12 @@ def average(l):
         return sum(l) / float(len(l))
 
 
+def unique(l):
+    """Returns unique items from list - note, does not retain order
+    """
+    return list(set(l))
+
+
 def most_common(l):
     """Returns the most common element in this list
 

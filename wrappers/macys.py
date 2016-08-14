@@ -3,10 +3,10 @@
 class Wrapper:
     def __init__(self):
         self.data = [
-            ({'search': 'shirts'}, ["GUESS Shirts","Men's Shirts","Men's Dress Shirts","Kids' Shirts","Michael Kors Dress Shirts","Men's Polo Shirts","Shiseido Men's","Women's Shirts"]),
-            ({'search': 'pants'}, ["GUESS Pants","Pans","Corduroy Pants","Fleece Pants","Kids' Pants","Pants - Maternity","Pants - Plus Size","Women's Pants","Michael Kors Pants"]),
-            ({'search': 'hats'}, ["Michael Kors Hats","Charter Club Hats","Fleece Hats","Men's Hats","Women's Hats","Kids' Hats","August Hats Women's","Woolrich Hats","The North Face Hats"]),
-            ({'search': 'watches'}, ["GUESS Watches","Women's Watches","Men's Watches","Diesel Watches","Tommy Hilfiger Watches","G-Shock Watches","Vince Camuto Watches"]),
+            {'search': 'shirts'}, 
+            {'search': 'pants'}, 
+            {'search': 'hats'}, 
+            {'search': 'watches'},
         ]
         self.website = 'http://macys.com'
         self.category = 'fashion'
@@ -16,5 +16,9 @@ class Wrapper:
 
     def run(self, browser, inputs):
         browser.get(self.website)
-        print browser.click('a#closeButton')
-        print browser.keys('input#globalSearchInputField', inputs['search'])
+        browser.click('a#closeButton')
+        browser.keys('input#globalSearchInputField', inputs['search'])
+        browser.wait_load('ul.ui-autocomplete div.suggestion')
+        return {
+            'name': browser.text('ul.ui-autocomplete div.suggestion'),
+        }

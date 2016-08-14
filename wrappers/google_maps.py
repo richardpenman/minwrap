@@ -3,10 +3,10 @@
 class Wrapper:
     def __init__(self):
         self.data = [
-            ({'search': 'supermarket near Oxford'}, None),
-            ({'search': 'libraries near Oxford'}, None),
-            ({'search': 'parks near Oxford'}, None),
-            ({'search': 'colleges near Oxford'}, None),
+            {'search': 'supermarket near Oxford'}, 
+            {'search': 'libraries near Oxford'}, 
+            {'search': 'parks near Oxford'}, 
+            {'search': 'colleges near Oxford'}, 
         ]
         self.website = 'http://maps.google.com'
         self.category = 'maps'
@@ -25,6 +25,5 @@ class Wrapper:
         #print browser.click('div.ml-searchbox-directions-button-filler', True)
         print browser.click('button.searchbox-searchbutton', True)
         browser.wait_load('h3.widget-pane-section-result-title span')
-        es = browser.find('h3.widget-pane-section-result-title span')
-        vs = [e.toPlainText() for e in es]
-        return vs
+        vs = browser.text('h3.widget-pane-section-result-title span')
+        return {'names': vs}

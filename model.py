@@ -6,7 +6,7 @@ import common, verticals
 import sip
 sip.setapi('QString', 2)
 from PyQt4.QtCore import QUrl
-import parser, transition
+import parser, scrape, selector, transition
 
 # constants for type of parameter
 PATH, GET, POST, COOKIE = 0, 1, 2, 3
@@ -20,7 +20,6 @@ def build(browser, transitions, input_values):
     diffs = find_differences(transitions)
     if diffs:
         ignored = filter_redundant_params(browser, transitions, diffs)
-
         override = []
         for param_type, param_key, examples in diffs:
             if (param_type, param_key) not in ignored:
@@ -29,7 +28,7 @@ def build(browser, transitions, input_values):
                 if model is None:
                     # try partial matches
                     template, partial_examples = find_overlap(examples)
-                    if partial_examples != examples:
+                    if partial_examples != examples and all(partial_examples):
                         common.logger.info('Attemping abstraction of partial matches: {}'.format(partial_examples))
                         model = abstract(browser, input_values, partial_examples)
                     if model is None:
@@ -38,14 +37,20 @@ def build(browser, transitions, input_values):
                 else:
                     template = '{}'
                 override.append((param_type, param_key, template, model))
-        return Model(transitions[0], override, ignored)
+        return Model(transitions[0], override=override, ignored=ignored)
 
     else:
-        # check whether multiple identical requests returned the same data
-        unique_outputs = set([id(t.output) for t in transitions if t.output])
-        if len(unique_outputs) > 1:
-            common.logger.debug('Single request matches multiple outputs: {}'.format(str(transitions[0])))
+        # check whether this request satisfied multiple expected data
+        print 'Result:', len(transitions)
+        for t in transitions:
+            print t
+            print t.output
+        print 'end'
+        if any(transitions[0].output != t.output for t in transitions[1:]):
+            common.logger.info('Single request matches multiple outputs: {}'.format(str(transitions[0])))
             return Model(transitions[0])
+        else:
+            common.logger.debug('Single request does not match all cases: {}'.format(str(transitions[0])))
 
 
 
@@ -54,18 +59,21 @@ def filter_redundant_params(browser, transitions, diffs):
     """
     ignored = []
     for transition in transitions:
-        if transition.output and (transition.qs or transition.data):
-            # found a transition that matches a known output
-            # check which parameters can be removed while still producing the same result
+        if transition.columns and (transition.qs or transition.data):
+            # found a transition that matches a known output and uses querystring or data
+            # check which variable parameters can be removed while still producing the same result
             common.logger.info('Check whether any parameters in the model are redundant')
             for param_type, key, _ in diffs:
                 ignore = param_type, key
                 if param_type in (GET, POST) and ignore not in ignored:
-                    test_html = browser.get(**gen_request(transition, ignored=ignored + [ignore]))
-                    if content_matches(browser.current_url(), test_html, transition.output):
-                        common.logger.info('Can ignore key: {}'.format(ignore))
-                        ignored.append(ignore)
-            break # just need to test a single transition
+                    content = browser.get(**gen_request(transition, ignored=ignored + [ignore]))
+                    # XXX to avoid duplicate strip headers that WebKit adds?
+                    document = parser.parse(content, transition.content_type, text=browser.current_text())
+                    if document is not None:
+                        if scrape.extract_columns(document, transition.columns):
+                            common.logger.info('Can ignore key: {}'.format(ignore))
+                            ignored.append(ignore)
+            break # just need to test redundant parameters on a single transition
     return ignored
 
 
@@ -119,7 +127,7 @@ def find_diffs(kvs):
     diffs = []
     kvdicts = [dict(kv) for kv in kvs]
     for key, _ in kvs[0]:
-        values = [kvdict[key] for kvdict in kvdicts if kvdict[key]]
+        values = [kvdict[key] for kvdict in kvdicts if kvdict.get(key)] # XXX why was key missing for fiat?
         if not all(value == values[0] for value in values):
             # found a key with differing values
             diffs.append((key, values))
@@ -153,6 +161,7 @@ def gen_request(transition, override_params=None, ignored=None):
     return dict(url=url, headers=transition.headers, data=encode_data(data_items, transition.content_type))
 
 
+
 def encode_data(items, content_type):
     """Convert these querystring items into a string of data
     """
@@ -168,6 +177,7 @@ def encode_data(items, content_type):
     return result
 
 
+
 def all_in(l1, l2):
     """Returns True if all values in l1 are found in l2
     """
@@ -176,6 +186,7 @@ def all_in(l1, l2):
         if v.lower() not in l2:
             return False
     return True
+
 
 
 def abstract(browser, input_values, examples):
@@ -189,56 +200,34 @@ def abstract(browser, input_values, examples):
             return input_key
 
         # check if examples are located at common location in a transition
-        for parent_transitions, selector in find_matching_transitions(browser.transitions, examples):
+        for parent_transitions, path in find_matching_transitions(browser.transitions, examples):
             model = build(browser, parent_transitions, input_values)
             if model is not None:
-                model.selector = selector
+                model.selector = path
                 return model
 
 
 
-def content_matches(url, content, expected_output):
-    """Return whether the expected output is found in this transition
-    """
-    if not expected_output:
-        return False
-    num_found = 0
-    for e in expected_output:
-        if e in content:
-            # found a value we are after in this response
-            num_found += 1
-    # XXX adjust this threshold for each website?
-    if num_found > len(expected_output) / 2:
-        common.logger.info('Content matches expected output: {} {} / {}'.format(url, num_found, len(expected_output)))
-        return True
-    else:
-        common.logger.debug('Content does not match expected output: {} {} / {}'.format(url, num_found, len(expected_output)))
-        return False
-
-
-
 def find_matching_transitions(transitions, examples):
-    """Find transitions that have the example data we are after at the same JSON selector
+    """Find transitions that have the list of example data we are after at the same JsonPath selector
     """
     selector_transitions = collections.defaultdict(list)
-    for example in examples:
-        for t in transitions:
-            if example in t.values:
-                # data exists in this transition
-                for selector in transition.generate_selector(t.js, example):
-                    selector_transitions[selector].append(t)
-            for cookie in t.cookies:
-                #print 'cookie', cookie.name(), cookie.value()
-                if str(cookie.value()) == example:
-                    print 'Found cookie example: {} {}'.format(cookie.name(), cookie.value())
-                    selector_transitions[CookieName(cookie.name())].append(t)
-                
+    for t in transitions:
+        # data exists in this transition
+        if t.parsed_content:
+            for _, path in t.parsed_content.find(examples):
+                selector_transitions[path].append(t)
+        for cookie in t.cookies:
+            if cookie.value() in examples:
+                print 'Found cookie example: {} {}'.format(cookie.name(), cookie.value())
+                selector_transitions[transition.CookieName(cookie.name())].append(t)
+            
     # check if any of these matches can be modelled
-    for selector, parent_transitions in selector_transitions.items():
+    for path, parent_transitions in selector_transitions.items():
         if len(parent_transitions) == len(examples):
             # found a selector that satisfies all conditions
-            common.logger.info('Found a selector to input parameter: {}'.format(selector))
-            yield parent_transitions, selector
+            #common.logger.info('Found a selector to input parameter: {}'.format(selector))
+            yield parent_transitions, path
 
 
 
@@ -254,6 +243,8 @@ class Model:
         self.ignored = ignored or []
         # the selector of content that will be extracted
         self.selector = selector
+        # the columns to select
+        self.columns = transition.columns
 
 
     def __str__(self):
@@ -267,7 +258,7 @@ class Model:
             """Recursively calculate the number of requests required in this model
             """
             count = 1
-            for variable in d['variables']:
+            for variable in d.get('variables', []):
                 if isinstance(variable['source'], dict):
                     count += size(variable['source'])
             return count
@@ -309,7 +300,9 @@ class Model:
         #if self.ignored:
         #    output['ignored'] = [(param_map[param_type], value) for (param_type, value) in self.ignored]
         if self.selector is not None:
-            output['selector'] = str(self.selector)
+            output['columns'] = {'data': str(self.selector)}
+        elif self.columns is not None:
+            output['columns'] = {field:str(selector) for (field, selector) in self.columns.items()}
         output['headers'] = [(str(key), str(value)) for (key, value) in self.transition.headers if str(key).lower() not in ('content-length', )]
         output['verb'] = self.transition.verb
         return output
@@ -325,7 +318,7 @@ class Model:
                 # recursively execute this dependency model
                 parent_model.execute(browser, input_value)
                 try:
-                    value = parent_model.selector.get(browser)
+                    value = parent_model.selector(browser.current_html())
                 except transition.NotFoundError:
                     common.logger.info('Failed to extract content from dependency model: {}'.format(browser.current_url()))
                     continue

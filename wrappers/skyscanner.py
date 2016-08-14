@@ -6,10 +6,10 @@ from datetime import datetime, timedelta
 class Wrapper:
     def __init__(self):
         self.data = [
-            ({'city': 'Paris'}, None),
-            ({'city': 'New York'}, None),
-            ({'city': 'Berlin'}, None),
-            ({'city': 'Rome'}, None),
+            {'city': 'Paris'}, 
+            {'city': 'New York'},
+            {'city': 'Berlin'}, 
+            {'city': 'Rome'}, 
         ]
         self.website = 'https://www.skyscanner.net/'
         self.category = 'flight'
@@ -43,4 +43,4 @@ class Wrapper:
                 break
 
         prices = [e.toPlainText().strip() for e in browser.find('div.cba-price > div > a')]
-        return prices
+        return {'prices': prices}

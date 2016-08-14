@@ -6,10 +6,10 @@ from datetime import datetime, timedelta
 class Wrapper:
     def __init__(self):
         self.data = [
-            ({'city': 'Paris'}, None),
-            ({'city': 'New York'}, None),
-            ({'city': 'Berlin'}, None),
-            ({'city': 'Rome'}, None),
+            {'city': 'Paris'}, 
+            {'city': 'New York'},
+            {'city': 'Berlin'}, 
+            {'city': 'Rome'}, 
         ]
         self.website = 'https://www.google.co.uk/flights/'
         self.category = 'flight'
@@ -25,4 +25,4 @@ class Wrapper:
         print 'keys2:', browser.keys('input#FCS5SWB-Db-g', inputs['city'], native=True)
         print 'click3', browser.click('#search-button', native=True)
         browser.wait_steady(120)
-        return [e.toPlainText().strip() for e in browser.find('div.offer-price > span.visuallyhidden')]
+        return {'prices': browser.text('div.offer-price > span.visuallyhidden')}

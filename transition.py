@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-import numbers
+import re, numbers
 import common, parser
 from PyQt4.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkCookie
 
@@ -10,20 +10,22 @@ class Transition:
     """Wrapper around a single transition using the QNetworkReply,
     which will be deleted by Qt so a local copy of details is necessary
     """
-    def __init__(self, reply, js):
+    def __init__(self, reply):
+        # save shortcuts to URL details
         self.url = reply.url()
         self.host = self.url.host()
         self.path = self.url.path()
         self.qs = self.url.queryItems()
         self.data = reply.data
-        self.content = common.to_unicode(str(reply.content))
-        self.output = None
-        self.js = js
-        self.values = [value for value in json_values(js) or [] if value] # XXX need to convert unicode?
-        self.cookies = QNetworkCookie.parseCookies(reply.rawHeader('Set-Cookie'))
         self.content_type = reply.content_type
-        request = reply.orig_request
-        self.headers = [(header, request.rawHeader(header)) for header in request.rawHeaderList()]
+        self.content = common.to_unicode(str(reply.content))
+        try:
+            self.parsed_content = parser.parse(self.content, self.content_type)
+        except Exception as e:
+            print 'Error parsing URL with lxml: {}'.format(self.url.toString())
+            raise e
+        self.columns = None
+        self.cookies = QNetworkCookie.parseCookies(reply.rawHeader('Set-Cookie'))
         # map of Qt verbs
         verbs = {
             QNetworkAccessManager.HeadOperation: 'HEAD',
@@ -34,6 +36,9 @@ class Transition:
             QNetworkAccessManager.CustomOperation: 'CUSTOM',
         }
         self.verb = verbs[reply.operation()]
+        # save request details
+        request = reply.orig_request
+        self.headers = [(header, request.rawHeader(header)) for header in request.rawHeaderList()]
 
 
     def __str__(self):
@@ -54,111 +59,6 @@ class Transition:
         path = self.path.count('/') if abstract_path else self.path
         return hash((self.host, path, get_keys(self.qs), get_keys(self.data)))
 
-
-
-
-def generate_selector(data, goal, parents=None):
-    """Find the selector to the goal in this data structure
-
-    >>> js = [{'person': 'richard', 'location': 'oxford'}, {'person': 'tim', 'location': 'oxford'}]
-    >>> [jp.steps for jp in generate_selector(js, 'richard')]
-    [(0, 'person')]
-    >>> [jp.steps for jp in generate_selector(js, 'oxford')]
-    [(0, 'location'), (1, 'location')]
-    >>> [jp.steps for jp in generate_selector(js, 'cambridge')]
-    []
-
-    """
-    parents = [] if parents is None else parents 
-    if isinstance(data, dict):
-        for key, record in data.items():
-            for result in generate_selector(record, goal, parents[:] + [key]):
-                yield result
-    elif isinstance(data, list):
-        for index, record in enumerate(data):
-            for result in generate_selector(record, goal, parents[:] + [index]):
-                yield result
-    elif data == goal or unicode(data) == goal:
-        yield JsonPath(parents)
-
-
-
-class NotFoundError(Exception):
-    pass
-
-
-
-class HashBase:
-    """Define a base class that supports hash comparisons
-    """
-    def __eq__(self, other):
-        if type(other) is type(self):
-            return self.__dict__ == other.__dict__
-        return False
-
-    def __hash__(self):
-        return hash(str(self))
-
-
-class CookieName(HashBase):
-    """Wrapper around cookie key
-    """
-    def __init__(self, name):
-        self.name = name
-
-    def __str__(self):
-        return 'cookie:{}'.format(self.name)
-
-    def __call__(self, cookies):
-        for cookie in cookies:
-            if cookie.name() == self.name:
-                return cookie.value()
-        raise NotFoundError()
-
-    def get(self, browser):
-        cj = browser.page().networkAccessManager().cookieJar()
-        cookies = cj.cookiesForUrl(browser.url())
-        return self(cookies)
-
-
-class JsonPath(HashBase):
-    """Wrapper to iterate through a dictionary given a list of indices / keys
-
-    >>> jp = JsonPath([0, 'person'])
-    >>> str(jp)
-    "[0]['person']"
-    >>> jp([{'person': 'richard'}, {'person': 'tim'}])
-    'richard'
-    >>> jp([])
-    >>> jp = JsonPath(['universities', 0, 'name'])
-    >>> str(jp)
-    "['universities'][0]['name']"
-    >>> jp({'universities': [{'name': 'Oxford', 'year': 1096}, {'name': 'Cambridge', 'year': 1209}]})
-    'Oxford'
-    """
-    def __init__(self, steps):
-        self.steps = tuple(steps)
-
-    def __str__(self):
-        return 'jsonpath:' + ''.join('[{}]'.format(repr(step)) for step in self.steps)
-
-    def __call__(self, js, steps=None):
-        steps = list(self.steps) if steps is None else steps
-        if steps:
-            step = steps.pop(0)
-            try:
-                js = js[step]
-            except (KeyError, IndexError):
-                raise NotFoundError()
-            else:
-                return self(js, steps)
-        else:
-            return js
-
-    def get(self, browser):
-        js = parser.parse(browser.current_text())
-        return self(js)
-   
 
 
 def json_values(es):

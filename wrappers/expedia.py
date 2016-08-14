@@ -6,10 +6,10 @@ from datetime import datetime, timedelta
 class Wrapper:
     def __init__(self):
         self.data = [
-            ({'city': 'Paris'}, None),
-            ({'city': 'New York'}, None),
-            ({'city': 'Berlin'}, None),
-            ({'city': 'Rome'}, None),
+            {'city': 'Paris'},
+            {'city': 'New York'}, 
+            {'city': 'Berlin'}, 
+            {'city': 'Rome'}, 
         ]
         self.website = 'https://www.expedia.co.uk/Flights'
         self.category = 'flight'
@@ -27,4 +27,4 @@ class Wrapper:
         browser.keys('input#flight-returning', (now + timedelta(days=5)).strftime('%d/%m/%Y'))
         browser.click('#search-button')
         browser.wait_steady(120)
-        return [e.toPlainText().strip() for e in browser.find('div.offer-price > span.visuallyhidden')]
+        return {'prices': browser.text('div.offer-price > span.visuallyhidden')}

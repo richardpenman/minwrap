@@ -8,9 +8,9 @@ from browser_wrapper import BrowserWrapper
 class Wrapper():
     def __init__(self):
         self.data = [
-            ({'from': 'Moscow', 'to': 'London'}, None),
-            ({'from': 'Moscow', 'to': 'Beijing'}, None),
-            ({'from': 'Moscow', 'to': 'Paris'}, None)
+            {'from': 'Moscow', 'to': 'London'}, 
+            {'from': 'Moscow', 'to': 'Beijing'},
+            {'from': 'Moscow', 'to': 'Paris'}, 
         ]
         self.website = 'http://www.s7.ru/'
         self.category = 'flight search (s7)'
@@ -61,5 +61,4 @@ class Wrapper():
                    ],
                     None)
         outputs = [output.replace(u'\xa0', '&nbsp;') for output in outputs]
-        print 'outputs:', outputs
-        return outputs
+        return {'prices': outputs}

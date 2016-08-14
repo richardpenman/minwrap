@@ -6,10 +6,10 @@ from datetime import datetime, timedelta
 class Wrapper:
     def __init__(self):
         self.data = [
-            ({'city': 'Paris'}, None),
-            ({'city': 'New York'}, None),
-            ({'city': 'Berlin'}, None),
-            ({'city': 'Rome'}, None),
+            {'city': 'Paris'}, 
+            {'city': 'New York'},
+            {'city': 'Berlin'}, 
+            {'city': 'Rome'}, 
         ]
         self.website = 'http://www.statravel.co.uk/cheap-flights.htm'
         self.category = 'flight'
@@ -29,4 +29,4 @@ class Wrapper:
         print browser.keys('input[class="date_pick flight_return_date hasDatepicker"]', (now + timedelta(days=5)).strftime('%d/%m/%Y'))
         #print browser.click('div.js_enabled fieldset[class="submit contain"] p.contain button[type=submit]')
         browser.wait_steady(120)
-        return [e.toPlainText().strip() for e in browser.find('div.offer-price > span.visuallyhidden')]
+        return {'prices': [e.toPlainText().strip() for e in browser.find('div.offer-price > span.visuallyhidden')]}

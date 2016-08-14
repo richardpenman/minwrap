@@ -113,7 +113,6 @@ class AjaxBrowser(QWidget):
             common.logger.info('loaded: {} {}'.format(ok, self.current_url()))
             self.update_address(self.current_url())
             #print 'Bytes:', self.current_url(), self._view.page().totalBytes(), self._view.page().bytesReceived()
-            self.stats.rendered()
 
 
     def finished(self, reply):
@@ -132,14 +131,8 @@ class AjaxBrowser(QWidget):
             pass # ignore irrelevant content types such as media and CSS
         else:
             # have found a response that can potentially be parsed for useful content
-            content = common.to_unicode(str(reply.content))
-            if re.match('(application|text)/', reply.content_type):
-                js = parser.parse(content, reply.content_type)
-            else:
-                js = None
             # save for checking later once interface has been updated
-            self.transitions.append(transition.Transition(reply, js))
-
+            self.transitions.append(transition.Transition(reply))
 
 
     def fullscreen(self):
@@ -238,18 +231,30 @@ class ResultsTable(QTableWidget):
     def add_records(self, records):
         """Add these rows to the table and initialize fields if not already
         """
-        for record in records:
+        if records:
             if self.fields is None:
-                self.fields = sorted(record.keys())
+                self.fields = sorted(records.keys())
                 self.setColumnCount(len(self.fields))
                 header = [field.title() for field in self.fields]
                 self.setHorizontalHeaderLabels(header)
                 self.writer.writerow(header)
                 self.show()
-            # filter to fields in the header
-            filtered_row = [record.get(field) for field in self.fields]
-            if any(filtered_row):
-                self.add_row(filtered_row)
+            while True:
+                row = []
+                for field in self.fields:
+                    value = ''
+                    try:
+                        value = records[field].pop(0)
+                    except IndexError:
+                        # field is empty
+                        del records[field]
+                    except KeyError:
+                        pass # field does not exist
+                    row.append(value)
+                if any(row):
+                    self.add_row(row)
+                else:
+                    break
 
     def add_row(self, cols):
         """Add this row to the table if is not duplicate

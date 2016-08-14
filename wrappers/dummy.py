@@ -5,10 +5,7 @@ class Wrapper:
     """Dummy wrapper that does nothing and then can interact with browser
     """
     def __init__(self):
-        self.data = [
-            (None, None),
-            (None, None),
-        ]
+        self.data = [None, None]
         self.website = ''
         self.enabled = False
 

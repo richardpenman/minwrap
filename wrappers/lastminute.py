@@ -4,10 +4,10 @@
 class Wrapper:
     def __init__(self):
         self.data = [
-            ({'city': 'Paris'}, None),
-            ({'city': 'New York'}, None),
-            ({'city': 'Berlin'}, None),
-            ({'city': 'Rome'}, None),
+            {'city': 'Paris'},
+            {'city': 'New York'},
+            {'city': 'Berlin'}, 
+            {'city': 'Rome'}, 
         ]
         self.website = 'http://www.lastminute.com/flights/'
         self.category = 'flight'
@@ -27,4 +27,4 @@ class Wrapper:
         #browser.js('document.getElementById("flights-search-from").value = "{}";'.format(input_value))
         print browser.click('form[name="flights_search"] div.col-xs-6 button.btn.btn-primary.lmn-icon.lmn-icon-angle-right.submit-cannonball')
         browser.wait_steady(120)
-        return [e.toPlainText().strip() for e in browser.find('div.offer-price > span.visuallyhidden')]
+        return {'prices': browser.text('div.offer-price > span.visuallyhidden')}

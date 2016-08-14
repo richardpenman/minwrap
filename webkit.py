@@ -52,6 +52,7 @@ class NetworkAccessManager(QNetworkAccessManager):
         for request in self.active_requests:
             request.abort()
             request.deleteLater()
+        self.cache = None
 
 
     def setProxy(self, proxy):
@@ -339,13 +340,13 @@ class Browser(QWebView):
     def current_html(self):
         """Return current rendered HTML
         """
-        return common.to_unicode(str(self.page().mainFrame().toHtml()))
+        return str(self.page().mainFrame().toHtml())
 
 
     def current_text(self):
         """Return text from the current rendered HTML
         """
-        return common.to_unicode(str(self.page().mainFrame().toPlainText()))
+        return str(self.page().mainFrame().toPlainText())
 
 
     def get(self, url, html=None, headers=None, data=None):
@@ -454,7 +455,9 @@ class Browser(QWebView):
         """Shortcut to execute javascript on current document and return result
         """
         self.app.processEvents()
-        return self.page().mainFrame().evaluateJavaScript(script).toString()
+        result = self.page().mainFrame().evaluateJavaScript(script).toString()
+        self.wait()
+        return result
 
 
     def click(self, pattern='input', native=False):
@@ -482,6 +485,7 @@ class Browser(QWebView):
                 """
             else:
                 self.click_by_user_event_simulation(e)
+        self.wait()
         return len(es)
 
 
@@ -511,18 +515,19 @@ class Browser(QWebView):
                     e.evaluateJavaScript("var evObj = document.createEvent('Event'); evObj.initEvent('{}', true, true); this.dispatchEvent(evObj);".format(event_type))
             if blur:
                 e.evaluateJavaScript("this.blur()")
+        self.wait()
         return len(es)
 
 
 
     def attr(self, pattern, name, value=None):
-        """For the elements that match this pattern, set attribute if value is defined, else return the value.
+        """For the elements that match this pattern, set attribute if value is defined, else return the values.
         """
+        es = self.find(pattern)
         if value is None:
             # want to get attribute
-            return str(self.page().mainFrame().findFirstElement(pattern).attribute(name))
+            return [str(e.attribute(name)) for e in es]
         else:
-            es = self.find(pattern)
             for e in es:
                 e.setAttribute(name, value)
             return len(es)
@@ -539,6 +544,7 @@ class Browser(QWebView):
                 e.setAttribute('value', value)
             else:
                 e.setPlainText(value)
+        self.wait()
         return len(es)
 
  
@@ -555,6 +561,12 @@ class Browser(QWebView):
             common.logger.warning('Unknown pattern: ' + str(pattern))
             matches = []
         return matches
+
+
+    def text(self, pattern):
+        """Returns the text of elements matching this CSS pattern
+        """
+        return [e.toPlainText().strip() for e in self.find(pattern)]
 
 
     def screenshot(self, output_file):

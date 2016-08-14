@@ -6,9 +6,9 @@ class Wrapper:
     def __init__(self):
         # The expected result data will be filled in by run().
         self.data = [
-            ({'from': 'LHR', 'to': 'VIE'}, None),
-            ({'from': 'LHR', 'to': 'MUC'}, None),
-            ({'from': 'LHR', 'to': 'BER'}, None)
+            {'from': 'LHR', 'to': 'VIE'}, 
+            {'from': 'LHR', 'to': 'MUC'},
+            {'from': 'LHR', 'to': 'BER'},
         ]
         self.website = 'http://www.lufthansa.com/uk/en/Homepage'
         self.category = ''
@@ -90,5 +90,5 @@ class Wrapper:
         #print extractions
         
         # Optinally return the scraped result data instead opf hard-coded result data set in __init__ above.
-        return extractions
+        return {'prices': extractions}
 

@@ -4,10 +4,10 @@ class Wrapper:
     def __init__(self):
         # The expected result data will be filled in by run()
         self.data = [
-            ({'country': "GB", 'airport': "LHR", 'prefix': "new"}, None),
-            ({'country': "GB", 'airport':"LGW", 'prefix': "edin"}, None),
-            ({'country': "US", 'airport': "JFK", 'prefix': "lond"}, None),
-            ({'country': "US", 'airport': "SFO", 'prefix': "new"}, None)
+            {'country': "GB", 'airport': "LHR", 'prefix': "new"}, 
+            {'country': "GB", 'airport':"LGW", 'prefix': "edin"},
+            {'country': "US", 'airport': "JFK", 'prefix': "lond"},
+            {'country': "US", 'airport': "SFO", 'prefix': "new"},
         ]
         self.website = 'http://www.britishairways.com/travel/home/public/en_gb'
         self.category = 'flight'
@@ -67,5 +67,5 @@ class Wrapper:
         extractions = [x.toInnerXml() for x in browser.find("table.flightList td:not(.hidden) span.time, table.flightList td:not(.hidden) span.date, table.flightList td:not(.hidden) span.priceSelection label:nth-of-type(2)")]
         #print extractions
         
-        return extractions
+        return {'prices': extractions}
         
