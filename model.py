@@ -13,7 +13,7 @@ PATH, GET, POST, COOKIE = 0, 1, 2, 3
 
 
 
-def build(browser, transitions, input_values):
+def build(browser, transitions, input_values, prev_transitions=None):
     """Build a model of these transitions. 
     Returns the model or None if failed to abstract transitions.
     """
@@ -24,13 +24,13 @@ def build(browser, transitions, input_values):
         for param_type, param_key, examples in diffs:
             if (param_type, param_key) not in ignored:
                 common.logger.info('Attempting abstraction of: {}'.format(examples))
-                model = abstract(browser, input_values, examples)
+                model = abstract(browser, input_values, examples, prev_transitions or [])
                 if model is None:
                     # try partial matches
                     template, partial_examples = find_overlap(examples)
                     if partial_examples != examples and all(partial_examples):
                         common.logger.info('Attemping abstraction of partial matches: {}'.format(partial_examples))
-                        model = abstract(browser, input_values, partial_examples)
+                        model = abstract(browser, input_values, partial_examples, prev_transitions or [])
                     if model is None:
                         common.logger.info('Failed to abstract: {}'.format(examples))
                         return # abstraction failed
@@ -189,8 +189,10 @@ def all_in(l1, l2):
 
 
 
-def abstract(browser, input_values, examples):
-    """Attempt abstacting these example
+def abstract(browser, input_values, examples, prev_transitions):
+    """Attempt abstacting these examples
+
+    prev_transitions are transitions that are used earlier in this model
     """
     for input_key in input_values[0].keys():
         key_values = [input_value[input_key] for input_value in input_values if input_key in input_value]
@@ -201,10 +203,14 @@ def abstract(browser, input_values, examples):
 
         # check if examples are located at common location in a transition
         for parent_transitions, path in find_matching_transitions(browser.transitions, examples):
-            model = build(browser, parent_transitions, input_values)
-            if model is not None:
-                model.selector = path
-                return model
+            if any(t in parent_transitions for t in prev_transitions):
+                print 'AVOID LOOP', parent_transitions
+                pass # avoid creating a loop in transitions
+            else:
+                model = build(browser, parent_transitions, input_values, prev_transitions + parent_transitions)
+                if model is not None:
+                    model.selector = path
+                    return model
 
 
 

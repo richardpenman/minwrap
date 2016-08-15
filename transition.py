@@ -21,9 +21,9 @@ class Transition:
         self.content = common.to_unicode(str(reply.content))
         try:
             self.parsed_content = parser.parse(self.content, self.content_type)
-        except Exception as e:
+        except ValueError as e:
             print 'Error parsing URL with lxml: {}'.format(self.url.toString())
-            raise e
+            self.parsed_content = None
         self.columns = None
         self.cookies = QNetworkCookie.parseCookies(reply.rawHeader('Set-Cookie'))
         # map of Qt verbs

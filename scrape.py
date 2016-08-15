@@ -13,6 +13,7 @@ def find_columns(url, parsed_content, expected_output):
         return
     columns = {}
     for field, values in expected_output.items():
+        values = common.unique(values)
         paths = collections.defaultdict(list)
         for e, path in parsed_content.find(values):
             # found a selector value we are after in this response

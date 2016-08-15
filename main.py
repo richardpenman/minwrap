@@ -163,6 +163,7 @@ def build_models(browser, wrapper, input_values, final_transitions):
     models = []
     # first try matching transitions on full paths, then allow abstracting paths
     for abstract_path in (False, True):
+        # XXX redundancy here of checking non-path models twice
         for transition_group in group_transitions(final_transitions, abstract_path):
             common.logger.debug('Building model for: {}'.format('|'.join(str(t) for t in transition_group)))
             wrapper_model = model.build(browser, transition_group, input_values)

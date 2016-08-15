@@ -3,9 +3,9 @@
 class Wrapper:
     def __init__(self):
         self.data = [
-            {'city': 'Paris'},
+            {'city': 'Cherbourg'},
             {'city': 'Orleans'},
-            {'city': 'Nice'}, 
+            {'city': 'Amiens'}, 
         ]
         self.website = 'https://www.renault.fr/trouver-un-concessionnaire.html'
         self.category = 'car dealer'
@@ -20,7 +20,7 @@ class Wrapper:
         #browser.click('button.btn-search', True)
         browser.wait_load('div.dealer-address')
         return {
-            'address': browser.text('div.dealer-address p:nth-child(2)'),
+            #'address': browser.text('div.dealer-address p:nth-child(2)'),
             'city': browser.text('div.dealer-address p:nth-child(3)'),
             'postcode': browser.text('div.dealer-address p:nth-child(4)'),
         }
