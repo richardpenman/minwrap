@@ -15,11 +15,20 @@ PATH, GET, POST, COOKIE = 0, 1, 2, 3
 
 def build(browser, transitions, input_values, prev_transitions=None):
     """Build a model of these transitions. 
+        A recursion via abstract(browser, input_values, examples).
+    
+    Parameters
+    ----------
+    browser: AjaxBrowser
+    transitions: group of transaction of the same kind (same step in interactive wrapper) to be analyzed
+    input_values: dictionary
+            input keys and values of the interactive wrapper
+        
     Returns the model or None if failed to abstract transitions.
     """
-    diffs = find_differences(transitions)
+    diffs = find_differences(transitions) # differing parameters can potentially be relevant parameters dependent on the input into the original wrapper.
     if diffs:
-        ignored = filter_redundant_params(browser, transitions, diffs)
+        ignored = filter_redundant_params(browser, transitions, diffs) # list of parameters which do not change the result, i.e. final page
         override = []
         for param_type, param_key, examples in diffs:
             if (param_type, param_key) not in ignored:
@@ -41,11 +50,6 @@ def build(browser, transitions, input_values, prev_transitions=None):
 
     else:
         # check whether this request satisfied multiple expected data
-        print 'Result:', len(transitions)
-        for t in transitions:
-            print t
-            print t.output
-        print 'end'
         if any(transitions[0].output != t.output for t in transitions[1:]):
             common.logger.info('Single request matches multiple outputs: {}'.format(str(transitions[0])))
             return Model(transitions[0])
@@ -55,7 +59,21 @@ def build(browser, transitions, input_values, prev_transitions=None):
 
 
 def filter_redundant_params(browser, transitions, diffs):
-    """remove redundant parameters that do not change the result, such as counters
+    """remove redundant parameters (GET, POST) that do not change the result, such as counters.
+        Assumption: "redundant" parameters are independent and can be removed in any order.
+        
+    Parameters
+    ----------
+    browser: AjaxBrowser
+    transitions: list of items of the type Transition
+    diffs: list of tuples (ParameterType, key, values)
+    
+    Returns
+    -------
+    ignored: list of (param_type, key)
+            Parameters which can be ignored. Key is the name of the parameter.
+            param_type, e.g. GET=1 or POST=2.
+    
     """
     ignored = []
     for transition in transitions:
@@ -68,7 +86,7 @@ def filter_redundant_params(browser, transitions, diffs):
                 if param_type in (GET, POST) and ignore not in ignored:
                     content = browser.get(**gen_request(transition, ignored=ignored + [ignore]))
                     # XXX to avoid duplicate strip headers that WebKit adds?
-                    document = parser.parse(content, transition.content_type, text=browser.current_text())
+                    document = parser.parse(content, transition.content_type)
                     if document is not None:
                         if scrape.extract_columns(document, transition.columns):
                             common.logger.info('Can ignore key: {}'.format(ignore))
@@ -79,7 +97,17 @@ def filter_redundant_params(browser, transitions, diffs):
 
 
 def find_differences(transitions):
-    """Build model of these transitions
+    """
+    For the list of transactions (HTTP requests-responses),
+    in different places of the HTTP request! (e.g. URL Query string, URL Path, POST's body),
+    it identifies changes in values for specific keys.
+    
+    Returns
+    -------
+    diffs: list of tuples (Location/ParameterType, key, values),
+            in which 'Location' is code for PATH=0/GET=1/POST=2,
+            key is the name of the parameter/key,
+            values is a list of values with at least 2 differing items.
     """
     if len(transitions) > 1:
         path_diffs = find_diffs([path_to_dict(t.path).items() for t in transitions])
@@ -113,6 +141,10 @@ def find_overlap(examples):
 
 
 def path_to_dict(path):
+    """
+    Convert the URL path into the dictionary with the key as index (starting from 1)
+    and the value as the component of the path, split by '/'
+    """
     return dict(enumerate(path.split('/')))
 
 def dict_to_path(d):
@@ -121,8 +153,15 @@ def dict_to_path(d):
 
 
 def find_diffs(kvs):
-    """Find keys with different values
-    kvs: list of (key, value) pairs
+    """Find keys with different values.
+    
+    Parameters
+    ----------
+    kvs: List of lists of (key, value) pairs.
+    
+    Returns
+    -------
+    diffs: List of (key, values) pairs, in which there for each key are at least 2 different values. 
     """
     diffs = []
     kvdicts = [dict(kv) for kv in kvs]
@@ -137,10 +176,19 @@ def find_diffs(kvs):
 
 def gen_request(transition, override_params=None, ignored=None):
     """Generate a request modifying the transitions for this model with the provided parameters
-
-    override_params: a list of ((key, value), param_type) pairs to override the parameters for this transition
-    ignored: a list of (key, param_type) pairs of parameters that can be left out
-    transition: a specific transition to use rather than the first one for this model
+    
+    Parameters
+    ----------
+    transition: Transition.
+            A specific transition to use rather than the first one for this model
+    override_params: a list of (param_type, key, value) pairs to override the parameters for this transition
+    ignored: list of (param_type, key)
+        a list of (param_type, key) pairs of parameters that can be left out
+    
+    Returns
+    -------
+        dictionary with data sufficient for sending a query in the web browser
+    
     """
     override_params = override_params or []
     ignored = ignored or []
@@ -155,9 +203,11 @@ def gen_request(transition, override_params=None, ignored=None):
     qs_items = transition.qs
     data_items = transition.data
 
-    qs_items = [(key, urllib.quote_plus(get_dict[key].encode('utf-8')) if key in get_dict else value) for (key, value) in qs_items if (GET, key) not in ignored]
+    qs_items = [(key, urllib.quote_plus(get_dict[key].encode('utf-8')) if key in get_dict else value)
+                for (key, value) in qs_items if (GET, key) not in ignored]
     url.setEncodedQueryItems(qs_items)
-    data_items = [(key, post_dict[key] if key in post_dict else value) for (key, value) in data_items if (POST, key) not in ignored]
+    data_items = [(key, post_dict[key] if key in post_dict else value)
+                for (key, value) in data_items if (POST, key) not in ignored]
     return dict(url=url, headers=transition.headers, data=encode_data(data_items, transition.content_type))
 
 
@@ -193,8 +243,27 @@ def abstract(browser, input_values, examples, prev_transitions):
     """Attempt abstacting these examples
 
     prev_transitions are transitions that are used earlier in this model
+        External recursion with build(browser, transitions, input_values).
+    
+    Parameters
+    ----------
+    browser: AjaxBrowser
+    input_values: dictionary of input parameters from the interactive wrapper
+    examples: list of values of differing a parameter, which can be sensitive to the input
+    
+    Returns
+    -------
+    input_key: String
+            the parameter from the input, all values of which are in the examples
+            (corresponding to the specific transaction, i.e. HTTP request),
+                i.e. this transaction can be the first transaction for this input_key.
+    OR
+    model: Model
     """
+    # Find a parameter in the input which is a subset of the values in the example parameter (which is a list of values)
+    print 'inputs:', input_values
     for input_key in input_values[0].keys():
+        # get all values from input_values for a specific key (input_key) from the input:
         key_values = [input_value[input_key] for input_value in input_values if input_key in input_value]
         # check if examples are in the input values
         if all_in(examples, key_values):
@@ -204,7 +273,6 @@ def abstract(browser, input_values, examples, prev_transitions):
         # check if examples are located at common location in a transition
         for parent_transitions, path in find_matching_transitions(browser.transitions, examples):
             if any(t in parent_transitions for t in prev_transitions):
-                print 'AVOID LOOP', parent_transitions
                 pass # avoid creating a loop in transitions
             else:
                 model = build(browser, parent_transitions, input_values, prev_transitions + parent_transitions)
@@ -216,6 +284,17 @@ def abstract(browser, input_values, examples, prev_transitions):
 
 def find_matching_transitions(transitions, examples):
     """Find transitions that have the list of example data we are after at the same JsonPath selector
+        # Find the first transition (HTTP request-response) which contains all input? in its response.
+
+    Parameters
+    ----------
+    transitions: list of items of the type Transition
+    examples: list of values to be found in relevant transitions
+    
+    Returns
+    -------
+        generator, a list of (parent_transitions, selector)
+            It is a list with transitions which contain all values (examples) and can be identified by the selector.
     """
     selector_transitions = collections.defaultdict(list)
     for t in transitions:
@@ -238,7 +317,22 @@ def find_matching_transitions(transitions, examples):
 
 
 class Model:
-    """Build a model for these transitions and extend to all known cases 
+    """It models all for the current transition.
+        Dependencies are represented as a dependency graph which models the parameter tracing.
+    
+    Fields (subset)
+    ---------- 
+    transition: Transition
+        HTTP request-response representing the current transition
+        override: List of (param_type, param_key, template, model).
+            List of direct dependencies, which provide this transition with all relevant "local" inputs.
+            param_type, e.g., GET=1, POST=2.
+            param_key is the name of the input parameter of the current transaction.
+            template: template, used to convert the incoming parameters (the original input from the interactive wrapper or another transaction) into the input of the current transaction.
+            model: Model of the corresponding transaction necessary to execute the current one or the name of the input parameter of the interactive wrapper.
+        ignored: List of (param_type, param_key)
+                List of ignored keys which can be omitted from the query.
+        selector: expression to extract data for the parent transaction.
     """
     def __init__(self, transition, override=None, ignored=None, selector=None):
         # the example transitions that follow this template
@@ -322,12 +416,13 @@ class Model:
                 value = input_value[parent_model]
             else:
                 # recursively execute this dependency model
-                parent_model.execute(browser, input_value)
+                parsed_content = parent_model.execute(browser, input_value)
                 try:
-                    value = parent_model.selector(browser.current_html())
-                except transition.NotFoundError:
+                    value = parent_model.selector(parsed_content.get())
+                except selector.NotFoundError:
                     common.logger.info('Failed to extract content from dependency model: {}'.format(browser.current_url()))
                     continue
             override_params.append((param_type, key, template.format(value)))
         download_params = gen_request(self.transition, override_params=override_params, ignored=self.ignored)
-        browser.get(**download_params)
+        current_html = browser.get(**download_params)
+        return parser.parse(current_html, browser.current_content_type())

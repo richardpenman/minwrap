@@ -31,24 +31,24 @@ class JsonTree(Document):
     def get(self):
         return self.js
 
-    def find(self, goals, data=None, parents=None):
+    def find(self, goals):
         """Find all selectors to strings in the goals list
         """
-        data = self.js if data is None else data
-        parents = [] if parents is None else parents
-        if isinstance(data, dict):
-            for key, record in data.items():
-                for result in self.find(goals, record, parents[:] + [key]):
-                    yield result
-        elif isinstance(data, (tuple, list)):
-            for index, record in enumerate(data):
-                for result in self.find(goals, record, parents[:] + [index]):
-                    yield result
-        else:
-            for goal in goals:
-                if similar(goal, data):
-                    yield goal, selector.JsonPathSelector(parents)
-                    break
+        def _find(data, parents):
+            if isinstance(data, dict):
+                for key, record in data.items():
+                    for result in _find(record, parents[:] + [key]):
+                        yield result
+            elif isinstance(data, (tuple, list)):
+                for index, record in enumerate(data):
+                    for result in _find(record, parents[:] + [index]):
+                        yield result
+            else:
+                for goal in goals:
+                    if similar(goal, data):
+                        yield goal, selector.JsonPathSelector(parents)
+                        break
+        return _find(self.js, [])
 
 
 class XPathTree(Document):
@@ -73,9 +73,9 @@ class XPathTree(Document):
     ...     </body>
     ... </html>''')
     >>> [str(path) for _, path in tree.find(['Oxford'])]
-    ['/html/body/div/span[1]/span[1]']
+    ["//div[@id='results']/span[1]/span[1]"]
     >>> [str(path) for _, path in tree.find(['USA', 'France'])]
-    ['/html/body/div/span[2]/span[2]', '/html/body/div/span[3]/span[2]']
+    ["//div[@id='results']/span[2]/span[2]", "//div[@id='results']/span[3]/span[2]"]
     """
     def __init__(self, tree):
         self.tree = tree
@@ -94,10 +94,52 @@ class XPathTree(Document):
                     for goal in goals:
                         if similar(goal, element.text):
                             # XXX need a better XPath generation, builtin just uses indices
-                            path = path or self.root.getpath(element)
+                            path = path or self.get_relative_path(element)
+                            #path = path or self.root.getpath(element)
                             yield goal, selector.XPathSelector(path)
                             break
 
+
+    def get_relative_path(self, e):
+        """Find XPath to this element around the closest parent with an ID.
+        Use class selectors when available else index
+        """
+        tags = []
+        while e is not None:
+            id_attr = e.get('id')
+            if id_attr:
+                tags.append("//{}[@id='{}']".format(e.tag, id_attr))
+                break
+            else:
+                unique_class = self.get_unique_class(e)
+                if unique_class:
+                    # can use a unique class to select
+                    tags.append("{}[@class='{}']".format(e.tag, unique_class))
+                else:
+                    # need to use index
+                    index = len(list(e.itersiblings(tag=e.tag, preceding=True)))
+                    #if index > 0:
+                    tags.append('{}[{}]'.format(e.tag, index + 1))
+                    #else:
+                    #    tags.append(e.tag)
+                e = e.getparent()
+        else:
+            # did not 'break' so have reached root node
+            # add blank tag so that XPath will start with /
+            tags.append('')
+        return '/'.join(reversed(tags))
+
+    
+    def get_unique_class(self, e):
+        """Return the class of this attribute if exists and no other siblings are using it
+        """
+        cls_attr = e.get('class')
+        if cls_attr:
+            for siblings in (e.itersiblings(tag=e.tag, preceding=True), e.itersiblings(tag=e.tag)):
+                for sibling in siblings:
+                    if sibling.get('class') == cls_attr:
+                        return
+            return cls_attr
 
 
 
@@ -122,7 +164,7 @@ def similar(goal, data):
 
 
 
-def parse(html, content_type, text=None):
+def parse(html, content_type):
     """Parse inputs based on content type
     """
     if 'html' in content_type:
@@ -132,7 +174,8 @@ def parse(html, content_type, text=None):
         return parse_xml(html)
     elif re.match('(application|text)/', content_type):
         # interpret json format if possible
-        return parse_json(text or html)
+        # note that WebKit wraps these HTML headers around non-HTML content 
+        return parse_json(html.replace('<html><head></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">', '').replace('</pre></body></html>', ''))
 
 
 
@@ -149,7 +192,7 @@ def parse_json(s):
     """
     if isinstance(s, dict):
         return s
-    match = re.compile('\s*\w*\(({.*?})\)\s*$', flags=re.DOTALL).match(s)
+    match = re.compile('\s*[\.\w]*\(({.*?})\)\s*$', flags=re.DOTALL).match(s)
     if match:
         # try parsing the internal json
         s = match.groups()[0]
@@ -173,7 +216,6 @@ def parse_html(s):
         return XPathTree(tree)
 
 
-
 def parse_xml(s):
     """Parse this XML into a dict
     """
@@ -195,8 +237,12 @@ def parse_js(t):
     >>> parse_js(text)
     [{'s1': 'Melbourne, Melbourne (MEL), Australia'}, {'s2': 'Melilla, Melilla (MLN), Spain'}]
     """
-    matches = re.findall('\W(\w+)\s*=\s*"([^<>\[\]{}=|@#^\*]*?)"', t) + re.findall("\W(\w+)\s*=\s*'(.*?)'", t)
-    js = [{key : value.strip()} for (key, value) in matches if value.strip()]
+    js = []
+    small = lambda es: [e for e in es if len(e) < 50]
+    for line in t.split(';'):
+        js.append([small(re.findall('"(.*?)"', line)), small(re.findall("'(.*?)'", line))])
+    #matches = re.findall('\W(\w+)\s*=\s*"([^<>\[\]{}=|@#^\*]*?)"', t) + re.findall("\W(\w+)\s*=\s*'(.*?)'", t)
+    #js = [{key : value.strip()} for (key, value) in matches if value.strip()]
     return js or None
 
 

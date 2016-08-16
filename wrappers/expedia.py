@@ -27,4 +27,4 @@ class Wrapper:
         browser.keys('input#flight-returning', (now + timedelta(days=5)).strftime('%d/%m/%Y'))
         browser.click('#search-button')
         browser.wait_steady(120)
-        return {'prices': browser.text('div.offer-price > span.visuallyhidden')}
+        return {'prices': [e.replace('\xa', '') for e in browser.text('div.offer-price > span.visuallyhidden')]}

@@ -12,7 +12,7 @@ class Wrapper:
         self.category = 'car dealer'
         self.http_method = 'GET'
         self.response_format = 'HTML'
-        self.notes = 'Includes redundant parameters _sourcePage and __fp. Final response is HTML and scraping this is not yet supported.'
+        self.notes = 'Includes redundant parameters _sourcePage and __fp.' 
 
     def run(self, browser, inputs):
         browser.get(self.website)

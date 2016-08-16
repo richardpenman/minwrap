@@ -9,6 +9,21 @@ from PyQt4.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkCook
 class Transition:
     """Wrapper around a single transition using the QNetworkReply,
     which will be deleted by Qt so a local copy of details is necessary
+    
+    Fields (subset)
+    ----------
+    url: URL used in the HTTP request (string)
+    host: host of the URL (string)
+    path: Path of the URL (string)
+    qs: parameters of the URL (dictionary)
+    data: parameters of the POST request (dictionary)
+    content: the content of the HTTP response (string)
+    js: parsed content of the HTTP response (dictionary)
+    values: list of values from js (values of the dictionary)
+    cookies: Cookies from the HTTP-response
+    content_type: content type of the HTTP response
+    headers: headers of the HTTP request ( list of pairs (key, value) )
+    verb: Type of the HTTP-response (HEAD, GET, PUT, POST, DELETE, or CUSTOM)
     """
     def __init__(self, reply):
         # save shortcuts to URL details

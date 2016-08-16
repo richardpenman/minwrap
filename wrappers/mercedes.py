@@ -16,8 +16,8 @@ class Wrapper:
         browser.get(self.website)
         browser.keys('input#mbDLCity', inputs['city'])
         browser.click('div.mbDLsearchformSubmit a.mbDLbuttonRightGrey')
-        browser.wait_load('div.padaddreass')
+        browser.wait_load('ul#dealerLocatorListResult div.padaddreass')
         return {
-            'address': browser.text('div.padaddreass p:nth-child(1)'),
-            'city': browser.text('div.padaddreass p:nth-child(4)'),
+            'address': browser.text('ul#dealerLocatorListResult div.padaddreass div:nth-child(1)'),
+            'city': browser.text('ul#dealerLocatorListResult div.padaddreass div:nth-child(4)'),
         }

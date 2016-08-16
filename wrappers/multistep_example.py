@@ -5,7 +5,7 @@ class Wrapper:
         self.data = [
             {'country': 'Australia'}, 
             {'country': 'Finland'}, 
-            {'country': 'Greece'},
+            #{'country': 'Greece'},
         ]
         self.website = 'http://localhost:8000/examples/country/'
         self.category = ''

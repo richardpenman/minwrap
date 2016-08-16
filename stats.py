@@ -42,7 +42,8 @@ class RenderStats:
         self.response_size += len(content)
 
     def wrapper_name(self):
-        return self.wrapper.__name__ if hasattr(self.wrapper, '__name__') else self.wrapper.__module__
+        # accessing name depends on how import
+        return (self.wrapper.__name__ if hasattr(self.wrapper, '__name__') else self.wrapper.__module__).replace('wrappers.', '')
 
     def save_models(self, wrapper, models, model_file='output/models.csv'):
         self.wrapper = wrapper

@@ -44,7 +44,6 @@ class AjaxBrowser(QWidget):
         QShortcut(QKeySequence.Close, self, self.close)
         QShortcut(QKeySequence.Quit, self, self.close)
         QShortcut(QKeySequence(Qt.CTRL + Qt.Key_F), self, self.fullscreen)
-
         if gui:
             self.showMaximized()
             self.raise_() # give focus to this browser window
@@ -101,8 +100,7 @@ class AjaxBrowser(QWidget):
 
 
     def _load_started(self):
-        # XXX how to get URL when start load?
-        pass #self.update_address(self.current_url())
+        pass
     
     
     def _load_finished(self, ok):
@@ -116,7 +114,8 @@ class AjaxBrowser(QWidget):
 
 
     def finished(self, reply):
-        """Override the reply finished signal to check the result of each request
+        """Override the reply finished signal to check the result of each request.
+            The function records statistics and keep data related to relevant HTTP requests (the transitions attribute).
         """
         common.logger.debug('Response: {} {}'.format(reply.url().toString(), reply.data))
         if not reply.content:

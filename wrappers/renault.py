@@ -4,6 +4,7 @@ class Wrapper:
     def __init__(self):
         self.data = [
             {'city': 'Cherbourg'},
+            {'city': 'Paris'},
             {'city': 'Orleans'},
             {'city': 'Amiens'}, 
         ]

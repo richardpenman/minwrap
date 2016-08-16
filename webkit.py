@@ -38,9 +38,11 @@ class NetworkAccessManager(QNetworkAccessManager):
         super(NetworkAccessManager, self).__init__()
         self.setProxy(proxy)
         self.sslErrors.connect(self.sslErrorHandler)
-        # the requests that are still active
-        self.active_requests = [] 
         self.cache = db.DbmDict(os.path.join(OUTPUT_DIR, 'cache.db')) if use_cache else None
+        self.active_requests = [] # the requests that are still active
+        self.render = True # whether to render web pages that are not the main url
+        self.main_url = None # the main url is the web page that is being rendered
+        self.content_type = '' # the content type of the web page
 
 
     def shutdown(self):
@@ -75,9 +77,12 @@ class NetworkAccessManager(QNetworkAccessManager):
         """Override creating a network request
         """
         url = request.url().toString()
+        # block fonts, which can cause webkit to crash
         if str(request.url().path()).endswith('.ttf'):
-            # block fonts, which can cause webkit to crash
             common.logger.debug('Blocking: {}'.format(url))
+            request.setUrl(QUrl())
+        elif not self.render and request.url() != self.main_url:
+            common.logger.debug('No render: {}'.format(url))
             request.setUrl(QUrl())
 
         data = post if post is None else post.peek(MAX_POST_SIZE)
@@ -88,7 +93,7 @@ class NetworkAccessManager(QNetworkAccessManager):
             content, headers, attributes = self.cache[key]
             reply = CachedNetworkReply(self, request.url(), content, headers, attributes)
         else:
-            common.logger.debug('Request: {} {}'.format(url, post or ''))
+            common.logger.debug('Request: {} {}'.format(str(request.url()), post or ''))
             reply = QNetworkAccessManager.createRequest(self, operation, request, post)
             reply.error.connect(self.catch_error)
             self.active_requests.append(reply)
@@ -98,6 +103,8 @@ class NetworkAccessManager(QNetworkAccessManager):
             reply.readyRead.connect(self._save_content(reply))
             if self.cache is not None and use_cache:
                 reply.finished.connect(self._cache_content(reply, key))
+        if request.url() == self.main_url:
+            reply.finished.connect(self._save_content_type(reply))
         reply.orig_request = request
         reply.data = self.parse_data(data)
         return reply
@@ -126,6 +133,13 @@ class NetworkAccessManager(QNetworkAccessManager):
             #print 'save cache:', key, len(r.content), len(headers), attributes
             self.cache[key] = r.content, headers, attributes
         return cache_content
+
+    def _save_content_type(self, r):
+        """Save content type of main request
+        """
+        def save_content_type():
+            self.content_type = r.header(QNetworkRequest.ContentTypeHeader).toString().lower()
+        return save_content_type
 
 
     def parse_data(self, data):
@@ -304,6 +318,7 @@ class Browser(QWebView):
         self.settings().setAttribute(QWebSettings.DeveloperExtrasEnabled, True)
         self.timeout = timeout
         self.delay = delay
+        self.content_type = ''
 
 
     def home(self):
@@ -348,6 +363,9 @@ class Browser(QWebView):
         """
         return str(self.page().mainFrame().toPlainText())
 
+    def current_content_type(self):
+        return self.page().networkAccessManager().content_type
+
 
     def get(self, url, html=None, headers=None, data=None):
         """Load given url in webkit and return html when loaded
@@ -374,13 +392,14 @@ class Browser(QWebView):
             # add headers to request when defined
             for header, value in headers:
                 request.setRawHeader(header, value)
-        fn = super(Browser, self)
+        self.page().networkAccessManager().main_url = url
+        request.setOriginatingObject(self)
         if data:
             # POST request
-            fn.load(request, QNetworkAccessManager.PostOperation, data)
+            super(Browser, self).load(request, QNetworkAccessManager.PostOperation, data)
         else:
             # GET request
-            fn.load(request)
+            super(Browser, self).load(request)
 
         # set a timeout on the download loop
         timer = QTimer()
@@ -547,7 +566,7 @@ class Browser(QWebView):
         self.wait()
         return len(es)
 
- 
+
     def find(self, pattern):
         """Returns the elements matching this CSS pattern.
         """
@@ -562,6 +581,48 @@ class Browser(QWebView):
             matches = []
         return matches
 
+    def findSingleElementByXPath(self, xpath):
+        """
+        Returns the single element matching this XPath expression.
+        
+        Implementation adapted from Artemis:
+        https://github.com/cs-au-dk/Artemis/blob/720f051c4afb4cd69e560f8658ebe29465c59362/artemis-code/src/runtime/browser/artemiswebpage.cpp#L81-L125
+        """
+        
+        allMatches = self.findByXPath(xpath)
+        assert(len(allMatches) == 1)
+        return allMatches[0]
+
+    def findByXPath(self, xpath):
+        """
+        Returns the list of elements matching this XPath expression.
+        
+        Implementation adapted from Artemis:
+        https://github.com/cs-au-dk/Artemis/blob/720f051c4afb4cd69e560f8658ebe29465c59362/artemis-code/src/runtime/browser/artemiswebpage.cpp#L81-L125
+        """
+        
+        # To use QXmlQuery for XPath lookups we would need to parse the DOM as XML, and it will typically be invalid.
+        # Instead we will inject some JavaScript to do the XPath lookup and then look up those elements from here.
+        
+        escapedXPath = xpath.replace("\"", "\\\"")
+        
+        document = self.page().mainFrame().documentElement()
+        jsInjection = ("var XPathSearchElts = document.evaluate(\"{}\", document, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);"
+                       "for (var i=0; i < XPathSearchElts.snapshotLength; i++) {{"
+                       "    XPathSearchElts.snapshotItem(i).setAttribute('xpathsearch', 'true');"
+                       "}};"
+                       "XPathSearchElts.snapshotLength;").format(escapedXPath)
+        eltCount, wasInt = document.evaluateJavaScript(jsInjection).toInt()
+        assert(wasInt and eltCount >= 0)
+        
+        searchedElts = document.findAll("*[xpathsearch]")
+        assert(len(searchedElts) == eltCount)
+        
+        # Remove the 'xpathsearch' marker so we can re-use it and avoid polluting the DOM more than necessary.
+        for elt in searchedElts:
+            elt.removeAttribute("xpathsearch")
+        
+        return searchedElts
 
     def text(self, pattern):
         """Returns the text of elements matching this CSS pattern
@@ -591,10 +652,6 @@ class Browser(QWebView):
         Implementation is taken from Artemis:
         https://github.com/cs-au-dk/Artemis/blob/720f051c4afb4cd69e560f8658ebe29465c59362/artemis-code/src/runtime/input/forms/formfieldinjector.cpp#L294
         """
-        
-        # TODO: Strictly we should create an appropriate event type as listed in:
-        # https://developer.mozilla.org/en-US/docs/Web/Events
-        # https://developer.mozilla.org/en-US/docs/Web/API/Document/createEvent#Notes
         # For now we use generic "Event".
         event_type = "Event";
         event_init_method = "initEvent";
@@ -617,10 +674,10 @@ class Browser(QWebView):
         self.trigger_js_event(element, "mousedown");
         self.trigger_js_event(element, "focus");
         self.trigger_js_event(element, "mouseup");
-        self.trigger_js_event(element, "click");        # TODO: Maybe should call self.click() instead?
+        self.trigger_js_event(element, "click");        
         self.trigger_js_event(element, "mousemove");
         self.trigger_js_event(element, "mouseout");
-        self.trigger_js_event(element, "blur");         # TODO: Might need a 'noblur' option?
+        self.trigger_js_event(element, "blur");        
     
     def click_by_gui_simulation(self, element):
         """Uses Qt GUI-level events to simulate a full user click.

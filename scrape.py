@@ -24,7 +24,7 @@ def find_columns(url, parsed_content, expected_output):
             for e in paths:
                 common.logger.debug('{} {}'.format(e, [str(path) for path in paths[e]]))
         # XXX adjust this threshold for each website?
-        if len(paths) > len(values) / 2:
+        if paths and len(paths) > len(values) / 2:
             # found enough matches
             common.logger.info('Content matches expected output: {} {} ({} / {})'.format(url, field, len(paths), len(values)))
             column = common_selector(paths.values())

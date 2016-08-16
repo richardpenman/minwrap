@@ -66,12 +66,12 @@ def main():
             models = build_models(browser, wrapper, input_values, final_transitions)
             if models:
                 browser.stats.save_models(wrapper, models)
-                model = models[0]
-                # display results of optimized execution
-                # XXX commented out until fixed
-                #visualisation.ModelLog.log_model("Final Model", model)
-                num_passed = evaluate_model(browser, wrapper, model, test_cases)
-                browser.add_status('Evaluation: {}% accuracy (from {} test cases)'.format(100 * num_passed / len(test_cases), len(test_cases)))
+                for model in models:
+                    # display results of optimized execution
+                    # XXX commented out until types fixed for Audi
+                    #visualisation.ModelLog.log_model("Final Model", model)
+                    num_passed = evaluate_model(browser, wrapper, model, test_cases)
+                    browser.add_status('Evaluation: {}% accuracy (from {} test cases)'.format(100 * num_passed / len(test_cases), len(test_cases)))
             else:
                 browser.add_status('Failed to train model') 
         common.logger.info('Done')
@@ -103,7 +103,20 @@ def start_local_server(port):
 
 
 def run_wrapper(browser, wrapper):
-    """execute the selected wrapper 
+    """
+    Execute the selected wrapper.
+    
+    Parameters
+    ----------
+    browser: AjaxBrowser
+    wrapper: Wrapper
+    
+    Returns
+    -------
+    test_cases: List.
+            List of test cases with (input_value, expected_output) items.
+    final_transitions: List.
+            List of transitions of type Transition with the expected output in its content.
     """
     # create a browser instance
     QApplication.setOverrideCursor(Qt.WaitCursor)
@@ -143,6 +156,7 @@ def run_wrapper(browser, wrapper):
                 transition_offset += 1
                 if t.parsed_content is not None:
                     columns = scrape.find_columns(t.url.toString(), t.parsed_content, expected_output)
+                    #print 'parsed', t.url.toString(), len(t.content), columns
                     if columns:
                         t.columns = columns
                         t.output = expected_output
@@ -158,7 +172,12 @@ def run_wrapper(browser, wrapper):
 
 def build_models(browser, wrapper, input_values, final_transitions):
     """Build a list of possible models from these transitions that satisfy the expected output data.
-    Sort models by the number of requests required.
+        Sort models by the number of requests required in ascending order.
+        
+        Returns
+        -------
+        results: List.
+            Returns a list of models, sorted by the number of requests (transactions) in ascending order.
     """
     models = []
     # first try matching transitions on full paths, then allow abstracting paths
@@ -171,7 +190,7 @@ def build_models(browser, wrapper, input_values, final_transitions):
                 common.logger.debug('Failed to build model for transition group')
             else:
                 common.logger.info('Built model of requests:\n{}'.format(str(wrapper_model)))
-                # initialize the result table with the already known transition records
+                # initialize the result table with the already known transition records (extracted variables)
                 for t in transition_group:
                     if t.columns:
                         browser.add_records(scrape.extract_columns(t.parsed_content, t.columns))
@@ -199,8 +218,20 @@ def pretty_list(l, max_length=5):
 
 
 def group_transitions(transitions, abstract_path):
-    """Organize these transitions into groups with the same properties (host, path, querystring keys, post keys)
-    Returns a list of these groups, sorted by the number of unique URLs in each group
+    """Organize these transitions into groups with the similar properties.
+        The similarity is defined by the equality of sets of the names of parameters and the path of the URL.
+    
+    Parameters
+    ----------
+    transitions: List.
+            List of transition to be grouped.
+    abstract_path: boolean.
+            True, if only number of the URL's components (together with other parameters of transitions) should be considered for grouping.
+    
+    Returns
+    -------
+        results: List.
+            Returns a list of transition groups, sorted by the number of unique URLs in each group.
     """
     groups = collections.defaultdict(list)
     for t in transitions:
@@ -222,25 +253,21 @@ def evaluate_model(browser, wrapper, wrapper_model, test_cases):
         if not browser.running:
             break
         browser.new_execution()
+        #browser.page().networkAccessManager().render = False
         browser.stats.start(wrapper, 'Testing')
-        wrapper_model.execute(browser, input_value)
+        parsed_content = wrapper_model.execute(browser, input_value)
         browser.wait_quiet()
         browser.stats.stop()
 
-        found_columns = False
-        for t in browser.transitions[transition_offset:]:
-            transition_offset += 1
-            if not found_columns and wrapper_model.transition.url == t.url:
-                #print 'same URL:', browser.current_url()
-                # found transition matching current URL
-                if t.parsed_content:
-                    records = scrape.extract_columns(t.parsed_content, wrapper_model.columns)
-                    if records:
-                        print 'found:', browser.current_url(), t.url.toString(), wrapper_model.transition.url.toString()
-                        found_columns = True
-                        browser.add_status('Found test data: {}'.format(pretty_dict(records)))
-                        num_passed += 1
-                        browser.add_records(records)
+        records = scrape.extract_columns(parsed_content, wrapper_model.columns)
+        if records:
+            #print 'found:', browser.current_url(), t.url.toString(), wrapper_model.transition.url.toString()
+            found_columns = True
+            browser.add_status('Found test data: {}'.format(pretty_dict(records)))
+            num_passed += 1
+            browser.add_records(records)
+        else:
+            print 'no records', records
     return num_passed
 
 

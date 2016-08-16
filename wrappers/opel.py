@@ -3,8 +3,8 @@
 class Wrapper:
     def __init__(self):
         self.data = [
-            ({'city': 'Rome'}, ['Via Veturia 39/49/51/53/55', '00181', 'Roma (RM)', '06/784601', 'Via Oderisi da Gubbio 207/209/211/233', '00146', 'Roma (RM)', '06/5566044', 'AUTOIMPORT']),
-            ({'city': 'Venice'}, ['Via Giustizia 25/27', '30171', 'Mestre (VE)', '041/926722', 'V. Roma, 163/A', '30030', 'Salzano (VE)', '041/437833', 'AUTOSANLORENZO srl', 'AUTOSANLORENZO SRL']),
+            {'city': 'Rome'}, 
+            {'city': 'Venice'}, 
         ]
         self.website = 'https://www.opel.it/tools/opel-locate-dealer.html'
         self.category = 'car dealer'
@@ -14,5 +14,13 @@ class Wrapper:
 
     def run(self, browser, inputs):
         browser.get(self.website)
+        browser.wait_quiet()
         browser.keys('input#field_city', inputs['city'])
-        browser.click('button[type="submit"]')
+        browser.click('div.modDl_search_1 button[type="submit"]')
+        browser.wait_load('dd.dealer-contact')
+        return {
+            'name': browser.text('dd.dealer-contact > h3 > a'),
+            'address': browser.text('dd.dealer-contact div.dealer-address p:nth-child(1)'),
+            'postcode': browser.text('dd.dealer-contact div.dealer-address p:nth-child(2) span:nth-child(1)'),
+            'city': browser.text('dd.dealer-contact div.dealer-address p:nth-child(2) span:nth-child(2)'),
+        }
