@@ -23,7 +23,7 @@ def main():
     ap.add_argument('-a', '--all-wrappers', action='store_true', help='execute all wrappers sequentially')
     ap.add_argument('-p', '--port', type=int, help='the port to run local HTTP server at', default=8000)
     ap.add_argument('-s', '--show-wrappers', action='store_true', help='display a list of available wrappers')
-    ap.add_argument('-w', '--wrapper', help='the wrapper to execute')
+    ap.add_argument('-w', '--wrapper', action='append', help='the wrapper to execute')
     ap.add_argument('-c', '--cache', help='enable caching of downloads', action='store_true')
     args = ap.parse_args()
     wrapper_names = wrappertable.get_wrappers()
@@ -35,19 +35,20 @@ def main():
         if args.all_wrappers:
             # select all wrappers
             selected_wrapper_names = wrapper_names
-        elif args.wrapper is None:
+        elif not args.wrapper:
             # let user choose wrapper to execute 
             wt = wrappertable.WrapperTable()
             app.exec_()
             if not wt.wrapper_name:
                 return
             selected_wrapper_names = [wt.wrapper_name]
-        elif args.wrapper in wrapper_names:
-            # select just this wrapper
-            selected_wrapper_names = [args.wrapper]
         else:
-            ap.error('This wrapper does not exist. Available wrappers are: {}'.format(wrapper_names))
-            return
+            # use selected wrappers
+            for wrapper_name in args.wrapper:
+                if wrapper_name not in wrapper_names:
+                    ap.error('This wrapper "{}" does not exist. Available wrappers are: {}'.format(wrapper_name, wrapper_names))
+                    return
+            selected_wrapper_names = args.wrapper
 
         # execute selected wrappers
         load_media = True

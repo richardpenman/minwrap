@@ -70,7 +70,9 @@ class Transition:
         """A key to represent this type of transition, which will be identical to other transitions with the same properties.
         If abstract_path is False then transitions must have the same URL path to match, else just the same number of components.
         """
-        get_keys = lambda es: tuple(k for (k,v) in es)
+        # find the keys used in this list of key,value pairs
+        # recursively calls itself in the case of dictionaries
+        get_keys = lambda es: tuple((k, get_keys(sorted(v.items())) if isinstance(v, dict) else None) for (k,v) in es)
         path = self.path.count('/') if abstract_path else self.path
         return hash((self.host, path, get_keys(self.qs), get_keys(self.data)))
 

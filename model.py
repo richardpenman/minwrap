@@ -31,7 +31,10 @@ def build(browser, transitions, input_values, prev_transitions=None):
         ignored = filter_redundant_params(browser, transitions, diffs) # list of parameters which do not change the result, i.e. final page
         override = []
         for param_type, param_key, examples in diffs:
-            if (param_type, param_key) not in ignored:
+            if any(isinstance(e, dict) for e in examples):
+                common.logger.debug('No support for difference between dicts: {}'.format(examples))
+                return
+            elif (param_type, param_key) not in ignored:
                 common.logger.info('Attempting abstraction of: {}'.format(examples))
                 model = abstract(browser, input_values, examples, prev_transitions or [])
                 if model is None:
@@ -85,12 +88,14 @@ def filter_redundant_params(browser, transitions, diffs):
                 ignore = param_type, key
                 if param_type in (GET, POST) and ignore not in ignored:
                     content = browser.get(**gen_request(transition, ignored=ignored + [ignore]))
-                    # XXX to avoid duplicate strip headers that WebKit adds?
                     document = parser.parse(content, transition.content_type)
                     if document is not None:
-                        if scrape.extract_columns(document, transition.columns):
-                            common.logger.info('Can ignore key: {}'.format(ignore))
-                            ignored.append(ignore)
+                        try:
+                            if scrape.extract_columns(document, transition.columns):
+                                common.logger.info('Can ignore key: {}'.format(ignore))
+                                ignored.append(ignore)
+                        except selector.NotFoundError:
+                            pass
             break # just need to test redundant parameters on a single transition
     return ignored
 
@@ -263,8 +268,11 @@ def abstract(browser, input_values, examples, prev_transitions):
     # Find a parameter in the input which is a subset of the values in the example parameter (which is a list of values)
     print 'inputs:', input_values
     for input_key in input_values[0].keys():
+        print 'input key:', input_key
         # get all values from input_values for a specific key (input_key) from the input:
         key_values = [input_value[input_key] for input_value in input_values if input_key in input_value]
+        print 'key values:', key_values
+        print 'examples:', examples
         # check if examples are in the input values
         if all_in(examples, key_values):
             browser.add_status('Abstraction uses input values: {}'.format(key_values))

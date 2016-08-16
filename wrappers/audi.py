@@ -5,8 +5,8 @@ class Wrapper:
         self.data = [
             {'city': 'Antwerpen'},
             {'city': 'Bruxelles'},
-            #{'city': 'Brugge'}, 
-            #{'city': 'Ostend'},
+            {'city': 'Brugge'}, 
+            {'city': 'Ostend'},
         ]
         self.website = 'http://www.dealerlocator.audi.be/default.aspx'
         self.category = 'car dealer'
