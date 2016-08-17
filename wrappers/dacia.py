@@ -10,7 +10,7 @@ class Wrapper:
         ]
         self.website = 'http://dacia.at/'
         self.category = 'car dealer'
-        self.http_method = 'GET'
+        self.http_method = 'POST'
         self.response_format = 'HTML'
         self.notes = 'Includes redundant parameters _sourcePage and __fp.' 
 

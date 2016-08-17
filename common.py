@@ -100,6 +100,23 @@ def most_common(l):
     return max(set(l), key=l.count)
 
 
+def pretty_dict(d):
+    """Generate pretty form of this dictionary
+    """
+    return {key:pretty_list(value) for (key, value) in d.items()}
+
+def pretty_list(l, max_length=5):
+    """If list is longer than max_length then just display the initial and final items
+    """
+    if len(l) > max_length:
+        to_strs = lambda vs: [repr(v) for v in vs]
+        offset = max_length // 2
+        return l[:offset] + ['...'] + l[-offset:]
+        #'[{}, ..., {}]'.format(', '.join(to_strs(l[:offset])), ', '.join(to_strs(l[-offset:])))
+    else:
+        return repr(l)
+
+
 def parse_proxy(proxy):
     """Parse a proxy into its fragments
     Returns a dict with username, password, host, and port

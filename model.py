@@ -171,7 +171,7 @@ def find_diffs(kvs):
     diffs = []
     kvdicts = [dict(kv) for kv in kvs]
     for key, _ in kvs[0]:
-        values = [kvdict[key] for kvdict in kvdicts if kvdict.get(key)] # XXX why was key missing for fiat?
+        values = [kvdict[key] for kvdict in kvdicts if kvdict.get(key)] 
         if not all(value == values[0] for value in values):
             # found a key with differing values
             diffs.append((key, values))
@@ -266,13 +266,9 @@ def abstract(browser, input_values, examples, prev_transitions):
     model: Model
     """
     # Find a parameter in the input which is a subset of the values in the example parameter (which is a list of values)
-    print 'inputs:', input_values
     for input_key in input_values[0].keys():
-        print 'input key:', input_key
         # get all values from input_values for a specific key (input_key) from the input:
         key_values = [input_value[input_key] for input_value in input_values if input_key in input_value]
-        print 'key values:', key_values
-        print 'examples:', examples
         # check if examples are in the input values
         if all_in(examples, key_values):
             browser.add_status('Abstraction uses input values: {}'.format(key_values))
@@ -317,6 +313,7 @@ def find_matching_transitions(transitions, examples):
             
     # check if any of these matches can be modelled
     for path, parent_transitions in selector_transitions.items():
+        #print path, [str(t) for t in parent_transitions], len(parent_transitions), len(examples)
         if len(parent_transitions) == len(examples):
             # found a selector that satisfies all conditions
             #common.logger.info('Found a selector to input parameter: {}'.format(selector))

@@ -145,7 +145,7 @@ def run_wrapper(browser, wrapper):
         if scraped_data is not None:
             # set dynamic expected output
             expected_output = {k:[e for e in vs if e] for (k,vs) in scraped_data.items()}
-            common.logger.info('Scraped: {}'.format(pretty_dict(expected_output)))
+            common.logger.info('Scraped: {}'.format(common.pretty_dict(expected_output)))
         # save the expected output for checking test cases later
         test_cases.append((input_value, expected_output))
         visualisation.TransitionLog.finished_training_case(input_value, expected_output, browser.transitions[transition_offset:]) # These are only the transitions from the most recent wrapper execution.
@@ -157,13 +157,12 @@ def run_wrapper(browser, wrapper):
                 transition_offset += 1
                 if t.parsed_content is not None:
                     columns = scrape.find_columns(t.url.toString(), t.parsed_content, expected_output)
-                    #print 'parsed', t.url.toString(), len(t.content), columns
                     if columns:
                         t.columns = columns
                         t.output = expected_output
                         # found a transition that matches the expected output so add it to model
                         final_transitions.append(t)
-                        browser.add_status('Found matching reply for training data: {}'.format(pretty_dict(expected_output)))
+                        browser.add_status('Found matching reply for training data: {}'.format(common.pretty_dict(expected_output)))
             browser.wait_quiet()
 
     QApplication.restoreOverrideCursor()
@@ -199,22 +198,6 @@ def build_models(browser, wrapper, input_values, final_transitions):
         if models:
             break # already have models without abstracting path, so exit now
     return sorted(models, key=lambda m: len(m))
-
-
-
-def pretty_dict(d):
-    return {key:pretty_list(value) for (key, value) in d.items()}
-
-def pretty_list(l, max_length=5):
-    """If list is longer than max_length then just display the initial and final items
-    """
-    if len(l) > max_length:
-        to_strs = lambda vs: [repr(v) for v in vs]
-        offset = max_length // 2
-        return l[:offset] + ['...'] + l[-offset:]
-        #'[{}, ..., {}]'.format(', '.join(to_strs(l[:offset])), ', '.join(to_strs(l[-offset:])))
-    else:
-        return repr(l)
 
 
 
@@ -264,7 +247,7 @@ def evaluate_model(browser, wrapper, wrapper_model, test_cases):
         if records:
             #print 'found:', browser.current_url(), t.url.toString(), wrapper_model.transition.url.toString()
             found_columns = True
-            browser.add_status('Found test data: {}'.format(pretty_dict(records)))
+            browser.add_status('Found test data: {}'.format(common.pretty_dict(records)))
             num_passed += 1
             browser.add_records(records)
         else:

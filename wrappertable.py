@@ -15,6 +15,7 @@ def get_wrappers():
 def load_wrapper(name):
     """Load the wrapper with this name
     """
+    print name
     try:
         return importlib.import_module('wrappers.{}'.format(name)).Wrapper()
     except AttributeError:

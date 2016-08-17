@@ -58,22 +58,22 @@ class XPathTree(Document):
     ...     <body>
     ...         <div id="results">
     ...             <span class="result">
-    ...                 <span>Oxford</span>
+    ...                 <span class="city">Oxford</span>
     ...                 <span>UK</span>
     ...             </span>
     ...             <span class="result">
-    ...                 <span>Harvard</span>
+    ...                 <span class="city">Harvard</span>
     ...                 <span>USA</span>
     ...             </span>
     ...             <span class="result">
-    ...                 <span>Sorbonne</span>
+    ...                 <span class="city">Sorbonne</span>
     ...                 <span>France</span>
     ...             </span>
     ...         </div>
     ...     </body>
     ... </html>''')
     >>> [str(path) for _, path in tree.find(['Oxford'])]
-    ["//div[@id='results']/span[1]/span[1]"]
+    ["//div[@id='results']/span[1]/span[@class='city']"]
     >>> [str(path) for _, path in tree.find(['USA', 'France'])]
     ["//div[@id='results']/span[2]/span[2]", "//div[@id='results']/span[3]/span[2]"]
     """
@@ -149,11 +149,14 @@ def similar(goal, data):
     """
     if goal == data:
         return True
-    elif isinstance(goal, basestring) and isinstance(data, basestring):
-        #goal = common.to_unicode(goal).strip().lower()
-        #data = common.to_unicode(data).strip().lower()
+    elif isinstance(goal, basestring):# and isinstance(data, basestring):
         goal = goal.strip().lower()
-        data = data.strip().lower()
+        if isinstance(data, (int, float)):
+            data = str(data)
+        elif isinstance(data, basestring):
+            data = data.strip().lower()
+        else:
+            return False
         if goal in data:
             return True
         v = SequenceMatcher(None, goal, data).ratio()
@@ -237,12 +240,12 @@ def parse_js(t):
     >>> parse_js(text)
     [{'s1': 'Melbourne, Melbourne (MEL), Australia'}, {'s2': 'Melilla, Melilla (MLN), Spain'}]
     """
-    js = []
-    small = lambda es: [e for e in es if len(e) < 50]
-    for line in t.split(';'):
-        js.append([small(re.findall('"(.*?)"', line)), small(re.findall("'(.*?)'", line))])
-    #matches = re.findall('\W(\w+)\s*=\s*"([^<>\[\]{}=|@#^\*]*?)"', t) + re.findall("\W(\w+)\s*=\s*'(.*?)'", t)
-    #js = [{key : value.strip()} for (key, value) in matches if value.strip()]
+    #js = []
+    #small = lambda es: [e for e in es if len(e) < 50]
+    #for line in t.split(';'):
+    #    js.append([small(re.findall('"(.*?)"', line)), small(re.findall("'(.*?)'", line))])
+    matches = re.findall('\W(\w+)\s*=\s*"([^<>\[\]{}=|@#^\*]*?)"', t) + re.findall("\W(\w+)\s*=\s*'(.*?)'", t)
+    js = [{key : value.strip()} for (key, value) in matches if value.strip()]
     return js or None
 
 
