@@ -213,7 +213,7 @@ def gen_request(transition, override_params=None, ignored=None):
     url.setEncodedQueryItems(qs_items)
     data_items = [(key, post_dict[key] if key in post_dict else value)
                 for (key, value) in data_items if (POST, key) not in ignored]
-    return dict(url=url, headers=transition.headers, data=encode_data(data_items, transition.content_type))
+    return dict(url=url, headers=transition.request_headers, data=encode_data(data_items, transition.content_type))
 
 
 
@@ -310,7 +310,10 @@ def find_matching_transitions(transitions, examples):
             if cookie.value() in examples:
                 print 'Found cookie example: {} {}'.format(cookie.name(), cookie.value())
                 selector_transitions[transition.CookieName(cookie.name())].append(t)
-            
+        for name, value in t.response_headers:
+            if value in examples:
+                common.logger.info('FOUND EXAMPLE IN HEADER: {}={}'.format(name, value))
+
     # check if any of these matches can be modelled
     for path, parent_transitions in selector_transitions.items():
         #print path, [str(t) for t in parent_transitions], len(parent_transitions), len(examples)
@@ -408,7 +411,7 @@ class Model:
             output['columns'] = {'data': str(self.selector)}
         elif self.columns is not None:
             output['columns'] = {field:str(selector) for (field, selector) in self.columns.items()}
-        output['headers'] = [(str(key), str(value)) for (key, value) in self.transition.headers if str(key).lower() not in ('content-length', )]
+        output['headers'] = [(str(key), str(value)) for (key, value) in self.transition.request_headers if str(key).lower() not in ('content-length', )]
         output['verb'] = self.transition.verb
         return output
 
@@ -427,6 +430,8 @@ class Model:
                 except selector.NotFoundError:
                     common.logger.info('Failed to extract content from dependency model: {}'.format(browser.current_url()))
                     continue
+            if isinstance(value, list):
+                value = value[0] # if many matches then just use first one
             override_params.append((param_type, key, template.format(value)))
         download_params = gen_request(self.transition, override_params=override_params, ignored=self.ignored)
         current_html = browser.get(**download_params)

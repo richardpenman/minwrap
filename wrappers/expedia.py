@@ -18,7 +18,6 @@ class Wrapper:
         self.notes = 'Uses dynamic results for expected output. Discovers the correct URLs but unable to abstract IDs, which do not appear exactly in cookies'
 
     def run(self, browser, inputs):
-        # XXX executes but model fails because uses session ID
         browser.get(self.website)
         browser.keys('input#flight-origin', 'London')
         browser.keys('input#flight-destination', inputs['city'])

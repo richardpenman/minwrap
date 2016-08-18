@@ -237,10 +237,10 @@ def evaluate_model(browser, wrapper, wrapper_model, test_cases):
         if not browser.running:
             break
         browser.new_execution()
-        #browser.page().networkAccessManager().render = False
+        browser.page().networkAccessManager().render = False
         browser.stats.start(wrapper, 'Testing')
         parsed_content = wrapper_model.execute(browser, input_value)
-        browser.wait_quiet()
+        #browser.wait_quiet()
         browser.stats.stop()
 
         records = scrape.extract_columns(parsed_content, wrapper_model.columns)

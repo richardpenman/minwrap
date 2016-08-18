@@ -4,7 +4,9 @@ class Wrapper:
     def __init__(self):
         self.data = [
             {'city': 'New Delhi'}, 
-            {'city': 'Mumbai'}, 
+            {'city': 'Mumbai'},
+            {'city': 'Bangalore'},
+            {'city': 'Pune'},
         ]
         self.website = 'http://dealersearch.mercedes-benz.com/mercedes-benz-in/sl/shoplocator/ANX-DLp'
         self.category = 'car dealer'

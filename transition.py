@@ -53,7 +53,11 @@ class Transition:
         self.verb = verbs[reply.operation()]
         # save request details
         request = reply.orig_request
-        self.headers = [(header, request.rawHeader(header)) for header in request.rawHeaderList()]
+        self.request_headers = [(header, request.rawHeader(header)) for header in request.rawHeaderList()]
+        self.response_headers = [(header, request.rawHeader(header)) for header in reply.rawHeaderList()]
+        #for key, value in self.response_headers:
+        #    if key == 'activity-id':
+        #        print key, value, str(self.url.toString())
 
 
     def __str__(self):
